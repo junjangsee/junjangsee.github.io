@@ -28,7 +28,7 @@ tags: Java
 * 순서없는1
 * 순서없는2
 
-[네이버](www.naver.com)
+[네이버](http://www.naver.com)
 
 **강조**
 
