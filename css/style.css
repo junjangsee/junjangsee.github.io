@@ -772,17 +772,7 @@ h2.article-head {
   background-position: center;
   background-size: cover;
   height: 350px;
-}
-#about-banner:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: '';
-  opacity: 0.25;
-  background: url("images/escheres.png");
-  background-color: rgba(0,0,0,0.05);
+  background: #80deea;
 }
 @media screen and (max-width: 480px) {
   #about-banner {
