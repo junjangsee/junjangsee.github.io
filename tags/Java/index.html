@@ -37,7 +37,7 @@
       
         <li class="list-item">
           
-            <a href="/" class="item-link active">Home</a>
+            <a href="/" class="item-link">Home</a>
           
         </li>
       
@@ -70,7 +70,7 @@
         
           <li class="menu-item">
             
-              <a href="/" class="menu-link mobile-active">Home</a>
+              <a href="/" class="menu-link">Home</a>
             
           </li>
         
@@ -97,54 +97,42 @@
   </div>
 </header>
 
-    <main class="app-body">
+    <div id="article-banner">
+  <h2>Archives</h2>
+</div>
+<main class="app-body" id="archives">
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/03/12/java/java_basic/">자바의 기본적인 개념 Part.1</a>
-      </h2>
-      <p class="article-date">March 12, 2019</p>
-      
-        
-  <a href="/tags#Java">
-    <span class="tag-code">Java</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          
-        
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2019
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2019/03/12/java/java_basic/" class="archive-title">자바의 기본적인 개념 Part.1</a>
+        <p class="archive-date">03-12</p>
       </div>
-      <a class="more" href="/2019/03/12/java/java_basic/">더 보기</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/02/10/notice/blogStart/">블로그를 시작하며</a>
-      </h2>
-      <p class="article-date">February 10, 2019</p>
-      
-        
-  <a href="/tags#Blog">
-    <span class="tag-code">Blog</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          블로그를 시작하며..
-블로그를 개설한 이유원래 기존에 운영하고 있던 블로그가 있습니다. 그래도 새롭게 블로그를 개설한이유는….기존 블로그는 사실 정보 전달보다는, 개발일지에 초점이 맞춰져 있었기 때문에제가 보기엔 상관이 없지만 개발일지를 보려고 들어온 분들 말고 ...
-        
+    
+      <div class="section-list-item">
+        <a href="/2019/02/10/notice/blogStart/" class="archive-title">블로그를 시작하며</a>
+        <p class="archive-date">02-10</p>
       </div>
-      <a class="more" href="/2019/02/10/notice/blogStart/">더 보기</a>
-    </article>
-  
-
+    
+  </div>
+</section>
   
 </main>
 
-
+<script>
+  (function () {
+    var url = 'http://yoursite.com/tags/Java/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
+  })();
+</script>
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
