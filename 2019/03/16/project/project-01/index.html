@@ -10,7 +10,7 @@
   
   <title>
     
-      자바의 기본적인 개념 Part.1 | Junjangsee&#39;s Blog
+      StudyRoom(sroom) 프로젝트 - 01(SpringBoot 생성하기) | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,8 +98,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>자바의 기본적인 개념 Part.1</h2>
-  <p class="post-date">2019-03-12</p>
+  <h2>StudyRoom(sroom) 프로젝트 - 01(SpringBoot 생성하기)</h2>
+  <p class="post-date">2019-03-16</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -107,14 +107,29 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"></section>
+    <section class="markdown-content"><h1 id="sroom-프로젝트"><a href="#sroom-프로젝트" class="headerlink" title="sroom 프로젝트"></a>sroom 프로젝트</h1><p><img src="/images/sroom/studyroom.jpg" alt="images"><br></p>
+<h2 id="sroom-프로젝트를-시작한-이유"><a href="#sroom-프로젝트를-시작한-이유" class="headerlink" title="sroom 프로젝트를 시작한 이유"></a>sroom 프로젝트를 시작한 이유</h2><p>개발을 학습하기 위해 스터디를 해오면서 SNS를 통해 의사소통을 하다보니<br>스터디에 대한 목표 공유나 일정 공유가 원활하게 이루어지지 않아서 불편함이 많았습니다.<br>그래서 이러한 고민을 없애보자는 취지에서 만들게 되었습니다.<br>처음으로 SpringBoot를 활용하여 만들다 보니 jojoldu님의 정보를 참고하여 제작할 예정입니다.<br><br></p>
+<h2 id="개발-환경"><a href="#개발-환경" class="headerlink" title="개발 환경"></a>개발 환경</h2><ul>
+<li>Mac OS</li>
+<li>IDE : IntelliJ IDEA Ultimate</li>
+<li>Gradle</li>
+<li>Terminal</li>
+<li>Java 8</li>
+<li>SpringBoot<br><br></li>
+</ul>
+<h2 id="SpringBoot-Module-Project-생성하기"><a href="#SpringBoot-Module-Project-생성하기" class="headerlink" title="SpringBoot Module(Project) 생성하기"></a>SpringBoot Module(Project) 생성하기</h2><p>SpringBoot &amp; Gradle을 사용하여 생성을 하였습니다.<br>Gradle을 사용한 이유는 4점대 이후로 대폭 상승한 빌드속도 때문</p>
+<p><img src="/images/sroom/start1.png" alt="spring"> Next를 클릭<br><br><img src="/images/sroom/start2.png" alt="spring"> sroom으로 선정하고 Gragle 타입으로 선택 후 자바 버전은 8을 선택하였습니다.<br><br><img src="/images/sroom/start3.png" alt="spring"> Lombok, Web, H2, JPA, MySql, Actuator를 선택<br>이번 프로젝트에서 JPA를 활용해볼 것이기 때문에 JPA까지 선택하였습니다.<br><br><img src="/images/sroom/start4.png" alt="spring"> 마지막으로 Finish를 눌러 생성합니다.<br><br></p>
+<h2 id="생성된-SpringBoot에-HelloWorld-출력하기"><a href="#생성된-SpringBoot에-HelloWorld-출력하기" class="headerlink" title="생성된 SpringBoot에 HelloWorld 출력하기"></a>생성된 SpringBoot에 HelloWorld 출력하기</h2><p><img src="/images/sroom/start5.png" alt="spring"> 생성이 되었다면 위와같은 폴더들이 있습니다. 저는 가독성을 위하여 Application으로 파일명을 바꾸었습니다.<br><br><img src="/images/sroom/hello.png" alt="spring"> 그리고 기존 Spring의 방식과 동일하게 Controller를 생성하는데 이 때 JSON으로 보내주기 위하여 RestController를 사용하였습니다.<br><br></p>
+<h2 id="org-apache-catalina-LifecycleException-Protocol-handler-start-failed-에러가-뜬다면"><a href="#org-apache-catalina-LifecycleException-Protocol-handler-start-failed-에러가-뜬다면" class="headerlink" title="org.apache.catalina.LifecycleException: Protocol handler start failed 에러가 뜬다면?"></a>org.apache.catalina.LifecycleException: Protocol handler start failed 에러가 뜬다면?</h2><p><img src="/images/sroom/error.png" alt="spring"> 이 에러는 내장된 Tomcat을 사용할 때 이미 사용된 port를 재사용 할 때 나타나는 오류입니다.<br><br>해결방법은 resource 폴더에 application.properties 파일 내에서 포트를 바꾸어주면 됩니다.<br><br><img src="/images/sroom/portchange.png" alt="spring"> server.port=’사용할 포트 번호’ 를 통해 바꾸어준 모습입니다.<br><br><br>그리고 띄워진 결과<br><img src="/images/sroom/end.png" alt="spring"><br></p>
+<h2 id="Git-Repository에-등록"><a href="#Git-Repository에-등록" class="headerlink" title="Git Repository에 등록"></a>Git Repository에 등록</h2><p><img src="/images/sroom/gitclone.png" alt="spring"> 새로운 Git Repository를 생성하여 Terminal 명령어를 통해 Push하였습니다.</p>
+<h2 id="다음-시간은-J"><a href="#다음-시간은-J" class="headerlink" title="다음 시간은 J"></a>다음 시간은 J</h2></section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Java">
-    <span class="tag-code">Java</span>
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
   </a>
 
       </div>
@@ -153,7 +168,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#sroom-프로젝트"><span class="toc-nav-text">sroom 프로젝트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#sroom-프로젝트를-시작한-이유"><span class="toc-nav-text">sroom 프로젝트를 시작한 이유</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#개발-환경"><span class="toc-nav-text">개발 환경</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SpringBoot-Module-Project-생성하기"><span class="toc-nav-text">SpringBoot Module(Project) 생성하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#생성된-SpringBoot에-HelloWorld-출력하기"><span class="toc-nav-text">생성된 SpringBoot에 HelloWorld 출력하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#org-apache-catalina-LifecycleException-Protocol-handler-start-failed-에러가-뜬다면"><span class="toc-nav-text">org.apache.catalina.LifecycleException: Protocol handler start failed 에러가 뜬다면?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Git-Repository에-등록"><span class="toc-nav-text">Git Repository에 등록</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#다음-시간은-J"><span class="toc-nav-text">다음 시간은 J</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -163,7 +178,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/03/12/java/java_basic/';
+    var url = 'http://yoursite.com/2019/03/16/project/project-01/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
