@@ -153,7 +153,7 @@
 <p><img src="/images/sroom/rds11-12.png" alt="rds"> 기존에 생성해준 EC2 서버로 ssh 접속합니다.<br><br><img src="/images/sroom/rds11-13.png" alt="rds">  그리고 MySQL을 EC2에서 커맨드 라인을 사용하기 위해 설치합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install mysql</span><br></pre></td></tr></table></figure></p>
 <p><br><br>설치가 다 되었다면 계정, 비밀번호, Host 주소를 입력하여 접속합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u 계정 -p -h Host주소</span><br></pre></td></tr></table></figure></p>
 <p><img src="/images/sroom/rds11-14.png" alt="rds"> 접속한 화면입니다.<br><br>생성한 RDS인지 확인하기 위해 아래 명령어를 입력합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/sroom/rds11-15.png" alt="rds"> 생성된 RDS가 있는 것을 확인할 수 있습니다.<br><br><br>다음 시간엔 EC2서버에 기존에 생성했던 SpringBoot를 배포하고 RDS에 접근해보겠습니다.</p>
+<p><img src="/images/sroom/rds11-15.png" alt="rds"> 생성된 RDS가 있는 것을 확인할 수 있습니다.<br><br><br>다음 시간엔 EC2서버에 Git 설치와 기존에 생성했던 SpringBoot를 Clone해보겠습니다.</p>
 </section>
     <!-- Tags START -->
     
@@ -179,6 +179,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/03/19/project/project-03/">
+        
+          StudyRoom(SRoom) 프로젝트 - 03(AWS EC2에 Git 설치 및 프로젝트 Clone 하기)
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
