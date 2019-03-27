@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      StudyRoom(SRoom) 프로젝트 - 05(운영 환경 설정하기) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>StudyRoom(SRoom) 프로젝트 - 05(운영 환경 설정하기)</h2>
+  <p class="post-date">2019-03-25</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="SRoom-프로젝트"><a href="#SRoom-프로젝트" class="headerlink" title="SRoom 프로젝트"></a>SRoom 프로젝트</h1><p><img src="/images/sroom/studyroom.jpg" alt="images"><br></p>
+<p>자동 배포까지 완료하였고 이제 SpringBoot에서 실제 운영 DB를 가지고 있지 않기 때문에 AWS, RDS와 프로젝트를 연동해야 합니다.<br>그래서 실제 운영 환경 설정을 하겠습니다.<br><br></p>
+<h3 id="운영-DB-의존성-추가하기"><a href="#운영-DB-의존성-추가하기" class="headerlink" title="운영 DB 의존성 추가하기"></a>운영 DB 의존성 추가하기</h3><p>Maria DB를 추가하기 위해 아래의 코드를 추가합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile(&quot;org.mariadb.jdbc:mariadb-java-client&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>위 코드를 추가했다면 의존성 추가는 끝입니다.<br><br></p>
+<h3 id="로컬-YAML-yml-파일-수정하기"><a href="#로컬-YAML-yml-파일-수정하기" class="headerlink" title="로컬 YAML(.yml) 파일 수정하기"></a>로컬 YAML(.yml) 파일 수정하기</h3><p>로컬 환경에서 DB를 다루기 위해 파일을 수정해야 합니다.<br>내부 환경은 application.yml에서 수정해야 하기 때문에 아래의 코드와 같이 변경합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    active: local # 기본 환경 선택</span><br><span class="line">  jpa:</span><br><span class="line">    properties:</span><br><span class="line">      hibernate:</span><br><span class="line">        dialect: org.hibernate.dialect.MySQL5InnoDBDialect</span><br><span class="line">        # MySQL 문법으로 출력시켜준다.</span><br><span class="line"># local 환경</span><br><span class="line">---</span><br><span class="line">spring:</span><br><span class="line">  profiles: local</span><br><span class="line">  jpa:</span><br><span class="line">    show-sql: true</span><br><span class="line">    hibernate:</span><br><span class="line">      ddl-auto: create-drop</span><br><span class="line">  h2:</span><br><span class="line">    console:</span><br><span class="line">      enabled: true</span><br><span class="line"># 운영 환경</span><br><span class="line">---</span><br><span class="line">spring.profiles: sroom-db</span><br><span class="line">spring.profiles.include: real-db</span><br><span class="line"></span><br><span class="line">server:</span><br><span class="line">  port: 9000</span><br></pre></td></tr></table></figure></p>
+<p>real-db는 운영 환경에서 다루는 db명입니다.(차후 추가하니 미리 작성했습니다.)<br><br><br></p>
+<h3 id="YAML-yml-파일-생성하기"><a href="#YAML-yml-파일-생성하기" class="headerlink" title="YAML(.yml) 파일 생성하기"></a>YAML(.yml) 파일 생성하기</h3><p>로컬 뿐만 아니라 운영 환경에서도 DB를 다루어야 하기 때문에 또 다른 작업이 필요합니다.<br>로컬 및 운영 환경에서 .yml파일을 생성하여 운영 환경을 설정합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir app/config/sroom/real-application.yml</span><br></pre></td></tr></table></figure></p>
+<p>위 코드로 로컬 및 EC2에 .yml파일을 생성합니다.(경로 동일)<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">spring:</span><br><span class="line">  profiles: real-db</span><br><span class="line">  datasource:</span><br><span class="line">        url: jdbc:mariadb://rds주소:포트명(기본은 3306)/database명</span><br><span class="line">        username: db계정</span><br><span class="line">        password: db계정 비밀번호</span><br><span class="line">        driver-class-name: org.mariadb.jdbc.Driver</span><br></pre></td></tr></table></figure></p>
+<p>위 코드를 기준으로 자신의 프로젝트에 맞게 입력합니다.<br>운영 파일에도 마찬가지 경로에 동일하게 작성합니다.<br><br><img src="/images/sroom/db1.png" alt="db"> 위를 입력한 .yml 파일입니다.<br><br><img src="/images/sroom/db2.png" alt="db"> 여기서 운영 환경의 spring.profiles.include는 해당 profiles를 실행 시킬 땐 특정 profiles를 포함시킨다는 뜻입니다.<br><br>이제 DB를 연동한 서버를 실행 시키면 아래와 같은 오류가 뜹니다.<br><img src="/images/sroom/db3.png" alt="db"> 이는 posts라는 테이블이 존재하지 않는다는 것인데 사실 테이블이 존재한다면 이 오류는 뜨지 않습니다.<br>저는 테스트를 위해서 jojoldu님의 JPA 세팅을 하여 테스트를 하였으나 필요 없다면 따로 테스트를 하지 않아도 됩니다.<br>필요하다면 jojoldu님의 블로그를 참고해 주시면 됩니다.<br><br><br><strong>Table com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table ‘DB명.hibernate_sequence’ doesn’t exist</strong> 라는 오류가 뜬다면 ? 하이버네이트 5버전의 문제이기 때문에<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@GeneratedValue(strategy = GenerationType.IDENTITY)</span><br></pre></td></tr></table></figure></p>
+<p>위 코드처럼 IDENTITY를 사용해야합니다.<br><br><img src="/images/sroom/db4.png" alt="db"> 최종적으로 테스트한 결과 값입니다.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#DB">
+    <span class="tag-code">DB</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/03/23/git/gitStart/">
+        <span class="nav-arrow">← </span>
+        
+          OSS개발자포럼 Git/Github 입문 행사 참석
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SRoom-프로젝트"><span class="toc-nav-text">SRoom 프로젝트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#운영-DB-의존성-추가하기"><span class="toc-nav-text">운영 DB 의존성 추가하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#로컬-YAML-yml-파일-수정하기"><span class="toc-nav-text">로컬 YAML(.yml) 파일 수정하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#YAML-yml-파일-생성하기"><span class="toc-nav-text">YAML(.yml) 파일 생성하기</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/03/25/project/project-05/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
