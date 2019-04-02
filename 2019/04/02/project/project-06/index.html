@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      StudyRoom(SRoom) 프로젝트 - 06(Kakao Rest API를 활용한 계정 연동하기) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>StudyRoom(SRoom) 프로젝트 - 06(Kakao Rest API를 활용한 계정 연동하기)</h2>
+  <p class="post-date">2019-04-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="SRoom-프로젝트"><a href="#SRoom-프로젝트" class="headerlink" title="SRoom 프로젝트"></a>SRoom 프로젝트</h1><p><img src="/images/sroom/studyroom.jpg" alt="images"><br></p>
+<p>운영 DB까지 연동이 된 것을 확인 했으니 이제 본격적으로 기능을 구현하겠습니다. 먼저 주요 기능들을 구현하기 전에 회원가입 및 로그인이 되어야겠습니다.<br><br>이번 프로젝트에서는 소셜네트워크의 API를 활용하여 계정을 연동하여 가입할 수 있도록 만들어보려고 합니다.<br>그래서 우리나라에서 제일 활성화된 카카오를 필두로 하여 점점 늘려나갈 계획입니다.<br><br></p>
+<h3 id="Kakao-developers-가입하기"><a href="#Kakao-developers-가입하기" class="headerlink" title="Kakao developers 가입하기"></a>Kakao developers 가입하기</h3><p>카카오 API를 사용하려면 Kakao Developers에 가입하여 절차를 거쳐야합니다.<br>먼저 <a href="https://developers.kakao.com/" target="_blank" rel="noopener">Kakao Developers 홈페이지</a> 에 들어가서 회원가입을 진행합니다.<br><br></p>
+<h3 id="앱-만들기"><a href="#앱-만들기" class="headerlink" title="앱 만들기"></a>앱 만들기</h3><p><img src="/images/oauth/ka1.png" alt="kakao"> 자신의 프로젝트 명과 회사명을 작성 후 계속 진행합니다.<br><br><img src="/images/oauth/ka2.png" alt="kakao"> 계속하기를 클릭합니다.<br><br><img src="/images/oauth/ka3.png" alt="kakao"> 위 사진이 출력되는데 여기서 REST API key를 확인 및 저장하고 개발가이드를 클릭합니다.<br><br><img src="/images/oauth/ka4.png" alt="kakao"> 사용자 관리 부분의 REST API 개발가이드를 클릭합니다.<br><br><img src="/images/oauth/ka5.png" alt="kakao"> 사용자 관리 중 먼저 로그인을 구현하겠습니다<br><br><img src="/images/oauth/ka6.png" alt="kakao"> Request 부분을 보면 GET 방식으로 요청을 해야하는 코드와 요청할 HOST가 있습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://kauth.kakao.com/oauth/authorize?client_id=&#123;app_key&#125;&amp;redirect_uri=&#123;redirect_uri&#125;&amp;response_type=code</span><br></pre></td></tr></table></figure></p>
+<p>최종적으로 위와 같은 경로로 요청하면 됩니다.<br>그러면 redirect_uri를 설정해봅시다.<br><br></p>
+<h3 id="redirect-uri-설정하기"><a href="#redirect-uri-설정하기" class="headerlink" title="redirect_uri 설정하기"></a>redirect_uri 설정하기</h3><p><img src="/images/oauth/ka7.png" alt="kakao"> 자신이 설정했던 프로젝트 이름을 클릭합니다<br><br><img src="/images/oauth/ka8.png" alt="kakao"> 카카오 로그인 부분이 활성화가 안된 부분인데 ‘사용자 관리’부분을 클릭합니다<br><br><img src="/images/oauth/ka9.png" alt="kakao"> 사용자 관리를 활성화 시킵니다<br><br><img src="/images/oauth/ka10.png" alt="kakao"> 수집할 대상을 선택하고 수집 목적을 작성합니다.<br>자신의 프로젝트에 맞는 항목을 활성화 시키고 저장을 누릅니다.<br><br><img src="/images/oauth/ka11.png" alt="kakao"> 일반 탭에서 플랫폼 추가를 클릭합니다.<br><br><img src="/images/oauth/ka12.png" alt="kakao"> 현재 제가 진행하는 프로젝트는 웹이기 때문에 선택하였습니다.<br>그리고 도메인이 아직 없기 때문에 localhost로 설정하였습니다.<br><br><img src="/images/oauth/ka13.png" alt="kakao"> Redirect Path는 자신의 최상위 폴더에서 default값인 oauth를 지정하였습니다.<br><br>이렇게 Kakao Developer 설정이 끝이났습니다.<br>다음엔 설정한 정보들을 가지고 리다이렉션을 구현해보겠습니다.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#OAuth">
+    <span class="tag-code">OAuth</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/03/25/project/project-05/">
+        <span class="nav-arrow">← </span>
+        
+          StudyRoom(SRoom) 프로젝트 - 05(운영 환경 설정하기)
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SRoom-프로젝트"><span class="toc-nav-text">SRoom 프로젝트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Kakao-developers-가입하기"><span class="toc-nav-text">Kakao developers 가입하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#앱-만들기"><span class="toc-nav-text">앱 만들기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#redirect-uri-설정하기"><span class="toc-nav-text">redirect_uri 설정하기</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/04/02/project/project-06/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
