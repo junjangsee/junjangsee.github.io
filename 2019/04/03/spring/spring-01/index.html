@@ -10,7 +10,7 @@
   
   <title>
     
-      StudyRoom(SRoom) 프로젝트 - 06(Kakao Rest API를 활용한 계정 연동하기 - Kakao Developer 가입 및 설정) | Junjangsee&#39;s Blog
+      SpringBoot 생성하기 | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,8 +98,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>StudyRoom(SRoom) 프로젝트 - 06(Kakao Rest API를 활용한 계정 연동하기 - Kakao Developer 가입 및 설정)</h2>
-  <p class="post-date">2019-04-02</p>
+  <h2>SpringBoot 생성하기</h2>
+  <p class="post-date">2019-04-03</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -107,20 +107,29 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h1 id="SRoom-프로젝트"><a href="#SRoom-프로젝트" class="headerlink" title="SRoom 프로젝트"></a>SRoom 프로젝트</h1><p><img src="/images/sroom/studyroom.jpg" alt="images"><br></p>
-<p>운영 DB까지 연동이 된 것을 확인 했으니 이제 본격적으로 기능을 구현하겠습니다. 먼저 주요 기능들을 구현하기 전에 회원가입 및 로그인이 되어야겠습니다.<br><br>이번 프로젝트에서는 소셜네트워크의 API를 활용하여 계정을 연동하여 가입할 수 있도록 만들어보려고 합니다.<br>그래서 우리나라에서 제일 활성화된 카카오를 필두로 하여 점점 늘려나갈 계획입니다.<br>참고한 블로그 : <a href="https://alpreah.tistory.com/121?category=844976" target="_blank" rel="noopener">Alpreah님의 블로그</a><br><br></p>
-<h3 id="Kakao-developers-가입하기"><a href="#Kakao-developers-가입하기" class="headerlink" title="Kakao developers 가입하기"></a>Kakao developers 가입하기</h3><p>카카오 API를 사용하려면 Kakao Developers에 가입하여 절차를 거쳐야합니다.<br>먼저 <a href="https://developers.kakao.com/" target="_blank" rel="noopener">Kakao Developers 홈페이지</a> 에 들어가서 회원가입을 진행합니다.<br><br></p>
-<h3 id="앱-만들기"><a href="#앱-만들기" class="headerlink" title="앱 만들기"></a>앱 만들기</h3><p><img src="/images/oauth/ka1.png" alt="kakao"> 자신의 프로젝트 명과 회사명을 작성 후 계속 진행합니다.<br><br><img src="/images/oauth/ka2.png" alt="kakao"> 계속하기를 클릭합니다.<br><br><img src="/images/oauth/ka3.png" alt="kakao"> 위 사진이 출력되는데 여기서 REST API key를 확인 및 저장하고 개발가이드를 클릭합니다.<br><br><img src="/images/oauth/ka4.png" alt="kakao"> 사용자 관리 부분의 REST API 개발가이드를 클릭합니다.<br><br><img src="/images/oauth/ka5.png" alt="kakao"> 사용자 관리 중 먼저 로그인을 구현하겠습니다<br><br><img src="/images/oauth/ka6.png" alt="kakao"> Request 부분을 보면 GET 방식으로 요청을 해야하는 코드와 요청할 HOST가 있습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://kauth.kakao.com/oauth/authorize?client_id=&#123;app_key&#125;&amp;redirect_uri=&#123;redirect_uri&#125;&amp;response_type=code</span><br></pre></td></tr></table></figure></p>
-<p>최종적으로 위와 같은 경로로 요청하면 됩니다.<br>그러면 redirect_uri를 설정해봅시다.<br><br></p>
-<h3 id="redirect-uri-설정하기"><a href="#redirect-uri-설정하기" class="headerlink" title="redirect_uri 설정하기"></a>redirect_uri 설정하기</h3><p><img src="/images/oauth/ka7.png" alt="kakao"> 자신이 설정했던 프로젝트 이름을 클릭합니다<br><br><img src="/images/oauth/ka8.png" alt="kakao"> 카카오 로그인 부분이 활성화가 안된 부분인데 ‘사용자 관리’부분을 클릭합니다<br><br><img src="/images/oauth/ka9.png" alt="kakao"> 사용자 관리를 활성화 시킵니다<br><br><img src="/images/oauth/ka10.png" alt="kakao"> 수집할 대상을 선택하고 수집 목적을 작성합니다.<br>자신의 프로젝트에 맞는 항목을 활성화 시키고 저장을 누릅니다.<br><br><img src="/images/oauth/ka11.png" alt="kakao"> 일반 탭에서 플랫폼 추가를 클릭합니다.<br><br><img src="/images/oauth/ka12.png" alt="kakao"> 현재 제가 진행하는 프로젝트는 웹이기 때문에 선택하였습니다.<br>그리고 도메인이 아직 없기 때문에 localhost로 설정하였습니다.<br><br><img src="/images/oauth/ka13.png" alt="kakao"> Redirect Path는 자신의 최상위 폴더에서 default값인 oauth를 지정하였습니다.<br><br>이렇게 Kakao Developer 설정이 끝이났습니다.<br>다음엔 설정한 정보들을 가지고 리다이렉션을 구현해보겠습니다.</p>
+    <section class="markdown-content"><h1 id="SpringBoot-생성하기"><a href="#SpringBoot-생성하기" class="headerlink" title="SpringBoot 생성하기"></a>SpringBoot 생성하기</h1><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h2 id="개발-환경"><a href="#개발-환경" class="headerlink" title="개발 환경"></a>개발 환경</h2><ul>
+<li>Mac OS</li>
+<li>IDE : IntelliJ IDEA Ultimate</li>
+<li>Maven</li>
+<li>Terminal</li>
+<li>Java 8<br><br></li>
+</ul>
+<h3 id="프로젝트-생성하기"><a href="#프로젝트-생성하기" class="headerlink" title="프로젝트 생성하기"></a>프로젝트 생성하기</h3><p><img src="/images/springboot/spring-start/start1.png" alt="start"> Maven을 사용하기 때문에 Maven을 선택하고 Next를 클릭합니다.<br><br><img src="/images/springboot/spring-start/start2.png" alt="start"> GroupId에는 패키지명, ArtifactId는 프로젝트명을 작성합니다.<br><br><img src="/images/springboot/spring-start/start3.png" alt="start"> 경로를 나타내는 곳입니다. 수정할 것이 없다면 Finish 클릭합니다.<br><br><img src="/images/springboot/spring-start/start4.png" alt="start"> 프로젝트를 생성하면 우하단에 창이 뜰텐데 <strong>Enable Auto-Import</strong>를 클릭해주면 자동으로 Import 해줍니다.<br><br><br></p>
+<h3 id="기본적인-의존성-주입하기"><a href="#기본적인-의존성-주입하기" class="headerlink" title="기본적인 의존성 주입하기"></a>기본적인 의존성 주입하기</h3><p>기본적인 의존성 주입을 하기 위해 <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-introducing-spring-boot" target="_blank" rel="noopener">스프링 레퍼런스 가이드 홈페이지</a>를 참조합니다.<br><img src="/images/springboot/spring-start/start5.png" alt="start"> pom.xml에 기본적으로 들어가는 의존성들이며 추후에 설명하도록 하겠습니다.<br>간단히 말하면 parent는 부모의 부모 느낌으로 의존성 관리를 위해 사용합니다.<br><br><img src="/images/springboot/spring-start/start6.png" alt="start"> 아래와 같이 패키지 및 클래스를 만듭니다.<br>물론 패키지명과 클래스명은 개발자가 임의로 넣어도 됩니다.<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class Application &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/spring-start/start7.png" alt="start"> 만든 클래스에 위와 같은 코드를 작성하여 부트가 실행할 수 있도록 해줍니다.<br><br><br><img src="/images/springboot/spring-start/start8.png" alt="start"> 실행이 준비되었다면 마우스 우버튼으로 Run을 합니다.<br><br><img src="/images/springboot/spring-start/start9.png" alt="start"> Tomcat 8080 포트로 구동 된 것을 확인할 수 있습니다.<br><br><img src="/images/springboot/spring-start/start10.png" alt="start"> 8080으로 접속하면 에러나 나지만 구동된 것을 확인할 수 있습니다.<br><br><br></p>
+<h3 id="jar파일-생성-및-실행시키기"><a href="#jar파일-생성-및-실행시키기" class="headerlink" title="jar파일 생성 및 실행시키기"></a>jar파일 생성 및 실행시키기</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn package</span><br></pre></td></tr></table></figure>
+<p>위 명령어로 jar 파일을 생성할 수도 있습니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar target/spring-boot-getting-started-1.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure></p>
+<p>그리고 위 명령어로 jar파일을 실행 시키면 위와 동일한 값이 출력됩니다.<br></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#OAuth">
-    <span class="tag-code">OAuth</span>
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
   </a>
 
       </div>
@@ -131,20 +140,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/03/25/project/project-05/">
+      <a class="nav-left" href="/2019/04/02/project/project-07/">
         <span class="nav-arrow">← </span>
-        
-          StudyRoom(SRoom) 프로젝트 - 05(운영 환경 설정하기)
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2019/04/02/project/project-07/">
         
           StudyRoom(SRoom) 프로젝트 - 07(Kakao Rest API를 활용한 계정 연동하기 - Redirection 설정)
         
-        <span class="nav-arrow"> →</span>
       </a>
+    
     
   </div>
 
@@ -166,7 +168,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SRoom-프로젝트"><span class="toc-nav-text">SRoom 프로젝트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Kakao-developers-가입하기"><span class="toc-nav-text">Kakao developers 가입하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#앱-만들기"><span class="toc-nav-text">앱 만들기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#redirect-uri-설정하기"><span class="toc-nav-text">redirect_uri 설정하기</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SpringBoot-생성하기"><span class="toc-nav-text">SpringBoot 생성하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#개발-환경"><span class="toc-nav-text">개발 환경</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#프로젝트-생성하기"><span class="toc-nav-text">프로젝트 생성하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#기본적인-의존성-주입하기"><span class="toc-nav-text">기본적인 의존성 주입하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#jar파일-생성-및-실행시키기"><span class="toc-nav-text">jar파일 생성 및 실행시키기</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -176,7 +178,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/04/02/project/project-06/';
+    var url = 'http://yoursite.com/2019/04/03/spring/spring-01/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
