@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      StudyRoom(SRoom) 프로젝트 - 08(Kakao Rest API를 활용한 계정 연동하기 - 사용자 토큰 받아내기) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>StudyRoom(SRoom) 프로젝트 - 08(Kakao Rest API를 활용한 계정 연동하기 - 사용자 토큰 받아내기)</h2>
+  <p class="post-date">2019-04-10</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h1 id="SRoom-프로젝트"><a href="#SRoom-프로젝트" class="headerlink" title="SRoom 프로젝트"></a>SRoom 프로젝트</h1><p><img src="/images/sroom/studyroom.jpg" alt="images"><br></p>
+<p>앞서 받아온 코드를 사용하여 사용자의 토큰을 받아와야 합니다.<br><br><br></p>
+<h2 id="Request-요청하기"><a href="#Request-요청하기" class="headerlink" title="Request 요청하기"></a>Request 요청하기</h2><p><img src="/images/oauth/tok1.png" alt="kakao"> 위 주소로 POST요청을 해야합니다.<br><br><img src="/images/oauth/tok2.png" alt="kakao"> 위 파라미터 값들을 요청해야 합니다.<br><br><br></p>
+<h2 id="Response-요청하기"><a href="#Response-요청하기" class="headerlink" title="Response 요청하기"></a>Response 요청하기</h2><p><img src="/images/oauth/tok3.png" alt="kakao"> 응답은 JSON 객체로 위 값들을 포함합니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://kauth.kakao.com/oauth/token?grant_type=authorization_code(고정값)&amp;client_id=API 주소&amp;redirect_uri=본인이 만든 URI주소&amp;code=로그인시 발급받았던 코드</span><br></pre></td></tr></table></figure></p>
+<p>얻어온 코드까지 포함하여 위 주소로 요청할 수 있습니다.<br><br><br></p>
+<h2 id="Controller-요청하기"><a href="#Controller-요청하기" class="headerlink" title="Controller 요청하기"></a>Controller 요청하기</h2><p>이제 컨트롤러에서 요청을 하기 위해 클래스를 세팅합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">package com.sroom.sroom.oauth;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.databind.JsonNode;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import org.apache.http.HttpResponse;</span><br><span class="line">import org.apache.http.NameValuePair;</span><br><span class="line">import org.apache.http.client.ClientProtocolException;</span><br><span class="line">import org.apache.http.client.HttpClient;</span><br><span class="line">import org.apache.http.client.entity.UrlEncodedFormEntity;</span><br><span class="line">import org.apache.http.client.methods.HttpPost;</span><br><span class="line">import org.apache.http.impl.client.HttpClientBuilder;</span><br><span class="line">import org.apache.http.message.BasicNameValuePair;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.UnsupportedEncodingException;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class KakaoAccessToken &#123;</span><br><span class="line"></span><br><span class="line">    public static JsonNode getKakaoAccessToken(String code) &#123;</span><br><span class="line"></span><br><span class="line">        final String RequestUrl = &quot;https://kauth.kakao.com/oauth/token&quot;; // Host</span><br><span class="line">        final List&lt;NameValuePair&gt; postParams = new ArrayList&lt;NameValuePair&gt;();</span><br><span class="line"></span><br><span class="line">        postParams.add(new BasicNameValuePair(&quot;grant_type&quot;, &quot;authorization_code&quot;));</span><br><span class="line">        postParams.add(new BasicNameValuePair(&quot;client_id&quot;, &quot;API KEY&quot;)); // REST API KEY</span><br><span class="line">        postParams.add(new BasicNameValuePair(&quot;redirect_uri&quot;, &quot;http://localhost:9000/kakaoLogin&quot;)); // 리다이렉트 URI</span><br><span class="line">        postParams.add(new BasicNameValuePair(&quot;code&quot;, code)); // 로그인 과정중 얻은 code 값</span><br><span class="line"></span><br><span class="line">        final HttpClient client = HttpClientBuilder.create().build();</span><br><span class="line">        final HttpPost post = new HttpPost(RequestUrl);</span><br><span class="line"></span><br><span class="line">        JsonNode returnNode = null;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            post.setEntity(new UrlEncodedFormEntity(postParams));</span><br><span class="line"></span><br><span class="line">            final HttpResponse response = client.execute(post);</span><br><span class="line">            final int responseCode = response.getStatusLine().getStatusCode();</span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;\nSending &apos;POST&apos; request to URL : &quot; + RequestUrl);</span><br><span class="line">            System.out.println(&quot;Post parameters : &quot; + postParams);</span><br><span class="line">            System.out.println(&quot;Response Code : &quot; + responseCode);</span><br><span class="line"></span><br><span class="line">            // JSON 형태 반환값 처리</span><br><span class="line">            ObjectMapper mapper = new ObjectMapper();</span><br><span class="line"></span><br><span class="line">            returnNode = mapper.readTree(response.getEntity().getContent());</span><br><span class="line"></span><br><span class="line">        &#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ClientProtocolException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return returnNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>REST API는 자신이 발급받은 API를 입력하면 됩니다.<br><br><br><img src="/images/oauth/tok4.png" alt="kakao"> 그리고 import하려면  위 라이브러리를 추가해야합니다.<br><br><img src="/images/oauth/tok5.png" alt="kakao"> 그리고 컨트롤러에서 access_Token을 받아옵니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;/kakaoLogin&quot;)</span><br><span class="line">    public void kakaoLogin(@RequestParam(&quot;code&quot;) String code, @RequestParam(&quot;access_token&quot;) JsonNode accessToken,</span><br><span class="line">                           RedirectAttributes re, HttpSession session, HttpServletResponse response) throws IOException &#123;</span><br><span class="line">        // code를 나타낸다.</span><br><span class="line">        System.out.println(&quot;kakao code : &quot; + code);</span><br><span class="line"></span><br><span class="line">        // JsonNode트리 형태로 토큰을 받아온다</span><br><span class="line">        JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);</span><br><span class="line">        // 여러 json객체 중 access_token을 가져온다</span><br><span class="line">        accessToken = jsonToken.get(&quot;access_token&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;access_token : &quot; + accessToken);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>코드는 위와 같습니다.<br><br>다음엔 발급받은 access_Token으로 사용자의 정보를 가져와 보겠습니다.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#OAuth">
+    <span class="tag-code">OAuth</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/03/spring/spring-01/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot 생성하기
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SRoom-프로젝트"><span class="toc-nav-text">SRoom 프로젝트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Request-요청하기"><span class="toc-nav-text">Request 요청하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Response-요청하기"><span class="toc-nav-text">Response 요청하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Controller-요청하기"><span class="toc-nav-text">Controller 요청하기</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/04/10/project/project-08/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
