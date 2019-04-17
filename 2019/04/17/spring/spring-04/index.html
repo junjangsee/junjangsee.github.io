@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - 내장 웹 서버 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - 내장 웹 서버</h2>
+  <p class="post-date">2019-04-17</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="내장-웹-서버-이해하기"><a href="#내장-웹-서버-이해하기" class="headerlink" title="내장 웹 서버 이해하기"></a>내장 웹 서버 이해하기</h1><ul>
+<li>SpringBoot는 Spring을 보다 쉽게 사용할 수 있도록 내장 웹 서버를 제공합니다.</li>
+<li>기본적으로 Tomcat이 내장되어 있지만 어떻게 사용되고 있는지 이해하기 위해 직접 구현해보며 이해합시다.<br><br><br></li>
+</ul>
+<h2 id="Tomcat-라이브러리"><a href="#Tomcat-라이브러리" class="headerlink" title="Tomcat 라이브러리"></a>Tomcat 라이브러리</h2><p><img src="/images/springboot/server/ser1.png" alt="auto"> 라이브러리에 위 세개가 내장되어있는 Tomcat입니다.<br>이 라이브러리를 사용하지 않고 직접 Tomcat을 구동시켜보겠습니다.<br><br>새로운 프로젝트를 생성하고 Application에는 SpringBoot에 관련된 어노테이션을 설정하지 않은 상태로 둔 가정하에 진행합니다.<br><br><img src="/images/springboot/server/ser2.png" alt="auto"> Tomcat을 new 연산자로 생성하고 포트 번호를 지정합니다.<br>그리고 경로를 지정한 후에 start 명령을 선언합니다.<br><br>정상적으로 구동된다면 오류 없이 Tomcat이 실행된 것을 확인할 수 있습니다.<br><br><br></p>
+<h2 id="서버-충돌시-조치방법"><a href="#서버-충돌시-조치방법" class="headerlink" title="서버 충돌시 조치방법"></a>서버 충돌시 조치방법</h2><p><strong>하지만!</strong> 서버 충돌 오류가 난다면 포트가 기존에 사용되고 있을 확률이 높습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps ax | grep tomcat</span><br><span class="line">kill -9 번호</span><br></pre></td></tr></table></figure></p>
+<p>위 명령어를 통해서 실행된 포트를 지우시고 다시 시도해봅니다.<br><br><br></p>
+<h2 id="Servlet-추가하기"><a href="#Servlet-추가하기" class="headerlink" title="Servlet 추가하기"></a>Servlet 추가하기</h2><p>이제 Servlet을 추가하여 구동된 Tomcat을 확인합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> LifecycleException </span>&#123;</span><br><span class="line">        Tomcat tomcat = <span class="keyword">new</span> Tomcat();</span><br><span class="line"></span><br><span class="line">        Context context = tomcat.addContext(<span class="string">"/"</span>,<span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line">        HttpServlet servlet = <span class="keyword">new</span> HttpServlet() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">                PrintWriter writer = resp.getWriter();</span><br><span class="line">                writer.println(<span class="string">"&lt;html&gt;&lt;head&gt;&lt;title&gt;"</span>);</span><br><span class="line">                writer.println(<span class="string">"Hey, Tomcat"</span>);</span><br><span class="line">                writer.println(<span class="string">"&lt;/title&gt;&lt;/head&gt;"</span>);</span><br><span class="line">                writer.println(<span class="string">"&lt;body&gt;&lt;h1&gt;Hello Tomcat&lt;/h1&gt;&lt;/body&gt;"</span>);</span><br><span class="line">                writer.println(<span class="string">"&lt;/html&gt;"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        String servletName = <span class="string">"helloServlet"</span>;</span><br><span class="line">        tomcat.addServlet(<span class="string">"/"</span>, servletName, servlet);</span><br><span class="line">        context.addServletMappingDecoded(<span class="string">"/hello"</span>, servletName);</span><br><span class="line"></span><br><span class="line">        tomcat.start();</span><br><span class="line">        tomcat.getServer().await();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/server/ser3.png" alt="auto"> Get메소드를 생성하여 Hello Tomcat이 정상적으로 출력되는지 확인합니다.<br><br><img src="/images/springboot/server/ser4.png" alt="auto"> 정상적으로 출력되는 것을 확인할 수 있습니다.<br><br>이처럼 자동으로 설정하지 않더라도 직접 Tomcat을 구동할 수도 있습니다. 하지만 이런 역할을 SpringBoot에서 자동으로 해주는데 우리는 <strong>@SpringBootApplication</strong>이 실행될 때  <strong>AutoConfiguration</strong>을 통해 자동으로 설정된다는 것을 인지해야합니다.<br><br><br></p>
+<h2 id="spring-factories-자동설정은"><a href="#spring-factories-자동설정은" class="headerlink" title="spring.factories 자동설정은 ?"></a>spring.factories 자동설정은 ?</h2><p><img src="/images/springboot/server/ser5.png" alt="auto"> spring.factories에서 Servlet에 관련된 것을 확인할 수 있습니다.<br>여기서 DispatcherServlet과 Servlet이 나뉜 이유는 ServletContainer는 매번 달라지지만 DispatcherServlet은 만들어진 Container에 등록만 하면 되기 때문에 별도로 나뉘게 된 것입니다.<br></p>
+<h1 id="내장-웹-서버-활용하기"><a href="#내장-웹-서버-활용하기" class="headerlink" title="내장 웹 서버 활용하기"></a>내장 웹 서버 활용하기</h1></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/16/spring/spring-03/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - 자동 설정 관리
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#내장-웹-서버-이해하기"><span class="toc-nav-text">내장 웹 서버 이해하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Tomcat-라이브러리"><span class="toc-nav-text">Tomcat 라이브러리</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#서버-충돌시-조치방법"><span class="toc-nav-text">서버 충돌시 조치방법</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Servlet-추가하기"><span class="toc-nav-text">Servlet 추가하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#spring-factories-자동설정은"><span class="toc-nav-text">spring.factories 자동설정은 ?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#내장-웹-서버-활용하기"><span class="toc-nav-text">내장 웹 서버 활용하기</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/04/17/spring/spring-04/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
