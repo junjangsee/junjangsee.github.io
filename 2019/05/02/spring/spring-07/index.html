@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - Configuration(외부설정) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - Configuration(외부설정)</h2>
+  <p class="post-date">2019-05-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="외부-설정을-할-수-있는-종류들"><a href="#외부-설정을-할-수-있는-종류들" class="headerlink" title="외부 설정을 할 수 있는 종류들"></a>외부 설정을 할 수 있는 종류들</h1><ul>
+<li>properties</li>
+<li>YAML</li>
+<li>환경변수</li>
+<li>커맨드 라인 아규먼트</li>
+</ul>
+<p>위 종류들 중에 properties를 활용하여 외부 설정을 하는 방법에 대해서 공부해보겠습니다.<br><br><br></p>
+<h2 id="properties의-우선-순위"><a href="#properties의-우선-순위" class="headerlink" title="properties의 우선 순위"></a>properties의 우선 순위</h2><ol>
+<li><strong>유저 홈 디렉토리에 있는 spring-boot-dev-tools.properties</strong></li>
+<li><strong>테스트에 있는 @TestPropertySource</strong></li>
+<li><strong>@SpringBootTest 애노테이션의 properties 애트리뷰트</strong></li>
+<li><p><strong>커맨드 라인 아규먼트</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar springinit-0.0.1-SNAPSHOT.jar --junjang.name=kimjunhyeung</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SPRING_APPLICATION_JSON (환경 변수 또는 시스템 프로티) 에 들어있는 프로퍼티 :<br><a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config" target="_blank" rel="noopener">참고</a></p>
+</li>
+<li>ServletConfig 파라미터</li>
+<li>ServletContext 파라미터</li>
+<li>java:comp/env JNDI 애트리뷰트</li>
+<li>System.getProperties() 자바 시스템 프로퍼티</li>
+<li>OS 환경 변수</li>
+<li>RandomValuePropertySource</li>
+<li>JAR 밖에 있는 특정 프로파일용 application properties</li>
+<li>JAR 안에 있는 특정 프로파일용 application properties</li>
+<li>JAR 밖에 있는 application properties</li>
+<li><strong>JAR 안에 있는 application properties</strong></li>
+<li>@PropertySource</li>
+<li>기본 프로퍼티 (SpringApplication.setDefaultProperties)</li>
+</ol>
+<p>위 순서는 전체를 외울 필요는 없지만 중요한 순서는 알아두는게 디버깅을 하는데 도움이 됩니다.<br><br><br></p>
+<h2 id="application-properties-우선-순위"><a href="#application-properties-우선-순위" class="headerlink" title="application.properties 우선 순위"></a>application.properties 우선 순위</h2><p>아래의 네가지 위치에 application.properties가 위치할 수 있는데 위치에 따라 우선순위가 달라집니다.</p>
+<ol>
+<li>file:./config/</li>
+<li>file:./</li>
+<li>classpath:/config/</li>
+<li>classpath:/<br><br><br><br></li>
+</ol>
+<h2 id="application-properties-생성-및-선언하기"><a href="#application-properties-생성-및-선언하기" class="headerlink" title="application.properties 생성 및 선언하기"></a>application.properties 생성 및 선언하기</h2><p><img src="/images/springboot/configuration/co1.png" alt="configuration"> main - resources에 application.properties를 생성하고 변수와 변수 값을 선언합니다.<br><br><br></p>
+<h2 id="선언한-변수-출력하기-15순위"><a href="#선언한-변수-출력하기-15순위" class="headerlink" title="선언한 변수 출력하기(15순위)"></a>선언한 변수 출력하기(15순위)</h2><p><img src="/images/springboot/configuration/co2.png" alt="configuration"> 그리고 선언한 변수를 출력하기 위해 ApplicationRunner에 @Value 를 사용하여 선언하고 변수를 만들어줍니다. 그리고 override한 run 메소드에 선언하고 출력합니다.<br><br><img src="/images/springboot/configuration/co3.png" alt="configuration"> 내가 선언한 외부 설정이 출력된 것을 볼 수 있습니다.<br><br><br></p>
+<h2 id="커맨드-라인-출력하기-4순위"><a href="#커맨드-라인-출력하기-4순위" class="headerlink" title="커맨드 라인 출력하기(4순위)"></a>커맨드 라인 출력하기(4순위)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br><span class="line">java -jar springinit-0.0.1-SNAPSHOT.jar --junjang.name=kimjunhyeung</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/configuration/co4.png" alt="configuration"> packaging을 한 jar를 커맨드 라인을 선언하고 출력하면 우선순위가 높기 때문에 커맨드 라인 값으로 출력됩니다.<br><br><br></p>
+<h1 id="외부-설정-테스트하기"><a href="#외부-설정-테스트하기" class="headerlink" title="외부 설정 테스트하기"></a>외부 설정 테스트하기</h1><p>테스트를 하기 위해선 test 경로에 있는 class에서 작업을 진행합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.assertj.core.api.Assertions.assertThat;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationstartedApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    Environment environment;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assertThat(environment.getProperty(<span class="string">"junjang.name"</span>))</span><br><span class="line">                .isEqualTo(<span class="string">"junjang"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/configuration/co5.png" alt="configuration"> Enviroment를 의존성 주입하여 테스트에 사용합니다.<br>그리고 비교 테스트를 위해선 assertThat 함수가 필요한데 이를 사용하기 위해서는 static으로 import해야 사용할 수 있습니다.<br>getProperty를 통해 변수를 가져오고 isEqualTo 내장함수로 값이 같은지 비교합니다.<br>이상 없이 테스트가 완료될 것입니다.<br><br><img src="/images/springboot/configuration/co6.png" alt="configuration"> 테스트를 위하여 따로 application.properties를 만들기 위해서는 resources 폴더를 생성하여 내부에 새롭게 만들어주어야 합니다.<br>intelli J 에서는 위와 같이 만들면 됩니다.<br><br><img src="/images/springboot/configuration/co7.png" alt="configuration"> 테스트 properties에 테스트와 동일한 값을 넣고 비교하면 오류 없이 출력됩니다.<br><br><br></p>
+<h2 id="SpringBootTest로-출력하기-3순위"><a href="#SpringBootTest로-출력하기-3순위" class="headerlink" title="@SpringBootTest로 출력하기(3순위)"></a>@SpringBootTest로 출력하기(3순위)</h2><p>이 어노테이션의 장점은 바로 작성하여 테스트할 수 있어 신속하게 테스트가 가능합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span>(properties = <span class="string">"junjang.name=junjang2"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/configuration/co11.png" alt="configuration"> properties를 바로 비교한 모습입니다.<br><br><br></p>
+<h2 id="TestPropertySource로-출력하기-2순위"><a href="#TestPropertySource로-출력하기-2순위" class="headerlink" title="@TestPropertySource로 출력하기(2순위)"></a>@TestPropertySource로 출력하기(2순위)</h2><p>이 어노테이션의 장점은 테스트시 순위가 가장 높아 확실한 값을 얻을 수 있어 디버깅 하기 용이합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TestPropertySource</span>(properties = &#123;<span class="string">"junjang.name=junjang3"</span>, <span class="string">"junjang.age=23"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/configuration/co12.png" alt="configuration"> 테스트가 출력된 모습입니다.<br><br>하지만 한 두개의 값이면 다행이지만 수많은 변수와 값이 있다면 사실상 main과 test의 properties를 언제나 동일하게 유지할 수 없습니다.<br>그래서 대표적으로 <strong>2개</strong>의 방법을 사용하여 테스트를 진행합니다.<br><br><br></p>
+<h2 id="테스트시-properties-편리하게-관리하기"><a href="#테스트시-properties-편리하게-관리하기" class="headerlink" title="테스트시 properties 편리하게 관리하기"></a>테스트시 properties 편리하게 관리하기</h2><h3 id="1-test-폴더에-있는-application-properties를-삭제한다"><a href="#1-test-폴더에-있는-application-properties를-삭제한다" class="headerlink" title="1. test 폴더에 있는 application.properties를 삭제한다."></a>1. test 폴더에 있는 application.properties를 삭제한다.</h3><p>이 방법을 이해하기 위해선 어플리케이션이 실행되는 <strong>원리</strong>를 알아야합니다.<br><br>test에 있는 소스들은 전부 <strong>main</strong>에 있는 소스들에 의해 <strong>오버라이딩</strong>됩니다. 그렇기 때문에 만약 main에 있는 변수가 test에 없다면 동일하게 선언해주어야 하는 것입니다.<br><br>때문에 test에 properties를 <strong>없애면</strong> main에 있는 값으로 진행되기 때문에 없어도 되는 것입니다.<br><br><br></p>
+<h3 id="2-classpath를-지정하여-따로-관리한다"><a href="#2-classpath를-지정하여-따로-관리한다" class="headerlink" title="2. classpath를 지정하여 따로 관리한다."></a>2. classpath를 지정하여 따로 관리한다.</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TestPropertySource</span>(locations = <span class="string">"classpath:/test.properties"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/configuration/co13.png" alt="configuration"> 위처럼 동일한 이름이 아닌 새로운 이름으로 생성하여 classpath를 지정하여 해당 properties만 사용하는 것입니다.<br></p>
+<h2 id="기타-기능들-활용하기"><a href="#기타-기능들-활용하기" class="headerlink" title="기타 기능들 활용하기"></a>기타 기능들 활용하기</h2><ul>
+<li>랜덤</li>
+<li>플레이스 홀더</li>
+</ul>
+<p>참고 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-random-values" target="_blank" rel="noopener">스프링공식문서</a><br><br><br></p>
+<h3 id="랜덤값-설정하기"><a href="#랜덤값-설정하기" class="headerlink" title="랜덤값 설정하기"></a>랜덤값 설정하기</h3><p>외부 설정에도 여러가지 랜덤값을 선언할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;random.*&#125;</span><br><span class="line">$&#123;random.int(0,100)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/configuration/co8.png" alt="configuration"> 숫자에 대해 랜덤값을 출력하고 싶으면 위와 같이 사용합니다.<br><br><img src="/images/springboot/configuration/co9.png" alt="configuration"> 그리고 이름과 동일하게 빈 등록을 해준 후 출력하면..<br><br><img src="/images/springboot/configuration/co10.png" alt="configuration"> 나이가 랜덤으로 출력된 것을 확인할 수 있습니다.<br><br><br></p>
+<h3 id="플레이스-홀더-활용하기"><a href="#플레이스-홀더-활용하기" class="headerlink" title="플레이스 홀더 활용하기"></a>플레이스 홀더 활용하기</h3><p>이미 선언했던 변수를 다시 재사용 할 수 있습니다.<br><br><img src="/images/springboot/configuration/co14.png" alt="configuration"> 위처럼 사용이 가능합니다.<br><br><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/30/spring/spring-06/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - SpringApplication
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#외부-설정을-할-수-있는-종류들"><span class="toc-nav-text">외부 설정을 할 수 있는 종류들</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#properties의-우선-순위"><span class="toc-nav-text">properties의 우선 순위</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#application-properties-우선-순위"><span class="toc-nav-text">application.properties 우선 순위</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#application-properties-생성-및-선언하기"><span class="toc-nav-text">application.properties 생성 및 선언하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#선언한-변수-출력하기-15순위"><span class="toc-nav-text">선언한 변수 출력하기(15순위)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#커맨드-라인-출력하기-4순위"><span class="toc-nav-text">커맨드 라인 출력하기(4순위)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#외부-설정-테스트하기"><span class="toc-nav-text">외부 설정 테스트하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SpringBootTest로-출력하기-3순위"><span class="toc-nav-text">@SpringBootTest로 출력하기(3순위)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TestPropertySource로-출력하기-2순위"><span class="toc-nav-text">@TestPropertySource로 출력하기(2순위)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#테스트시-properties-편리하게-관리하기"><span class="toc-nav-text">테스트시 properties 편리하게 관리하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-test-폴더에-있는-application-properties를-삭제한다"><span class="toc-nav-text">1. test 폴더에 있는 application.properties를 삭제한다.</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-classpath를-지정하여-따로-관리한다"><span class="toc-nav-text">2. classpath를 지정하여 따로 관리한다.</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#기타-기능들-활용하기"><span class="toc-nav-text">기타 기능들 활용하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#랜덤값-설정하기"><span class="toc-nav-text">랜덤값 설정하기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#플레이스-홀더-활용하기"><span class="toc-nav-text">플레이스 홀더 활용하기</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/02/spring/spring-07/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
