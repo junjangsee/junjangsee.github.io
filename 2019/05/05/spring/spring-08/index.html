@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - profile(프로파일) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - profile(프로파일)</h2>
+  <p class="post-date">2019-05-05</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="Profile-프로파일"><a href="#Profile-프로파일" class="headerlink" title="Profile(프로파일)"></a>Profile(프로파일)</h1><p>프로파일은 특정한 프로파일에서의 클래스의 빈을 등록하고 싶을 때 사용합니다.<br><br></p>
+<h2 id="프로파일-선언하기"><a href="#프로파일-선언하기" class="headerlink" title="프로파일 선언하기"></a>프로파일 선언하기</h2><p>프로파일을 실습하기 위해 두가지 클래스를 생성합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Profile</span>(<span class="string">"prod"</span>)</span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/profile/pro1.png" alt="profile"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Profile</span>(<span class="string">"test"</span>)</span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello test"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/profile/pro2.png" alt="profile"> 생성한 클래스를 빈으로 등록하고 @Profile(“프로파일명”)을 통해 프로파일 선언을 합니다.<br>그리고 의존성 주입을 하고 실행을 합니다.<br><br><img src="/images/springboot/profile/pro3.png" alt="profile">hello 문자열을 찾을 수 없다는 오류를 볼 수 있습니다.<br>이유는 프로파일 선언만 했지 어떤 프로파일인지 명시한 부분이 없습니다.<br><br><br></p>
+<h2 id="프로파일-등록하기"><a href="#프로파일-등록하기" class="headerlink" title="프로파일 등록하기"></a>프로파일 등록하기</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.profiles.active=prod</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/profile/pro4.png" alt="profile"> 그래서 properties에 어떤 프로파일을 등록할지 선택하여 출력할 수 있습니다.<br><br><img src="/images/springboot/profile/pro5.png" alt="profile"> prod를 등록하여 출력하면 hello가 출력됩니다.<br><br><img src="/images/springboot/profile/pro6.png" alt="profile"> 반대로 test를 등록하여 출력하면 hello test가 출력됩니다.<br><br><br></p>
+<h2 id="프로파일을-커맨드-라인으로-출력하기"><a href="#프로파일을-커맨드-라인으로-출력하기" class="headerlink" title="프로파일을 커맨드 라인으로 출력하기"></a>프로파일을 커맨드 라인으로 출력하기</h2><p>여기서도 마찬가지로 <strong>우선순위</strong>가 적용됩니다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package -DskipTests</span><br><span class="line">java -jar target/XXX.jar --spring.profiles.active=prod</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/profile/pro7.png" alt="profile"> 앞서 공부한 것처럼 우선순위가 높기 때문에 test 프로파일을 패키징 했어도 커맨드 라인에서 prod를 선언하였더니 prod 프로파일에 해당되는 값이 출력되었습니다.<br><br>이처럼 프로파일도 우선순위가 적용되는 것을 알 수 있습니다.<br><br><img src="/images/springboot/profile/pro11.png" alt="profile">그리고 program arguments에 직접 지정하여 리패키징 없이 계속 사용할 수도 있습니다.<br><br><br></p>
+<h2 id="프로파일을-별도로-관리하기"><a href="#프로파일을-별도로-관리하기" class="headerlink" title="프로파일을 별도로 관리하기"></a>프로파일을 별도로 관리하기</h2><p>프로파일을 별도로 관리함으로써 가독성 높고 유지보수가 편리해집니다.<br>spring.profiles.acive에 따라서 더 우선순위를 가지고 오버라이딩이 되는 특징을 가지고 있습니다.<br><br>application-{profile}.properties 형식으로 생성합니다.<br><br><img src="/images/springboot/profile/pro8.png" alt="profile"> 그리고 각각의 key값에 대한 value를 선언합니다.<br><br><img src="/images/springboot/profile/pro9.png" alt="profile"> 결과를 보시면 알겠지만 우선순위에 따라 기존 properties에 있는 junjang보다 active에 선언된 프로파일이 우선순위가 높은 것을 알 수 있습니다.<br><br><br></p>
+<h2 id="프로파일에-대한-파일-자체를-포함시키기"><a href="#프로파일에-대한-파일-자체를-포함시키기" class="headerlink" title="프로파일에 대한 파일 자체를 포함시키기"></a>프로파일에 대한 파일 자체를 포함시키기</h2><p>이는 프로파일 파일 자체를 포함시킴으로서 포함시킨 프로파일을 출력하면 같이 포함되어 출력되게 합니다.<br><br>동일하게 properties를 생성합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.profiles.include=proddb</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/profile/pro10.png" alt="profile"> 새롭게 생성한 파일에 key, value값을 선언하고 include하여 prod 프로파일에 포함시킵니다.<br><br><img src="/images/springboot/profile/pro12.png" alt="profile"> 출력하면 포함된 proddb 프로파일이 출력된 것을 볼 수 있습니다.<br> </p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/02/spring/spring-07/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - Configuration(외부설정)
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Profile-프로파일"><span class="toc-nav-text">Profile(프로파일)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프로파일-선언하기"><span class="toc-nav-text">프로파일 선언하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프로파일-등록하기"><span class="toc-nav-text">프로파일 등록하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프로파일을-커맨드-라인으로-출력하기"><span class="toc-nav-text">프로파일을 커맨드 라인으로 출력하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프로파일을-별도로-관리하기"><span class="toc-nav-text">프로파일을 별도로 관리하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프로파일에-대한-파일-자체를-포함시키기"><span class="toc-nav-text">프로파일에 대한 파일 자체를 포함시키기</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/05/spring/spring-08/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

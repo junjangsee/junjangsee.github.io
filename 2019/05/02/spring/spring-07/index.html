@@ -157,7 +157,7 @@
 <p><img src="/images/springboot/configuration/co12.png" alt="configuration"> 테스트가 출력된 모습입니다.<br><br>하지만 한 두개의 값이면 다행이지만 수많은 key와 value이 있다면 사실상 main과 test의 properties를 언제나 동일하게 유지할 수 없습니다.<br>그래서 대표적으로 <strong>2개</strong>의 방법을 사용하여 테스트를 진행합니다.<br><br><br></p>
 <h2 id="테스트시-properties-편리하게-관리하기"><a href="#테스트시-properties-편리하게-관리하기" class="headerlink" title="테스트시 properties 편리하게 관리하기"></a>테스트시 properties 편리하게 관리하기</h2><h3 id="1-test-폴더에-있는-application-properties를-삭제한다"><a href="#1-test-폴더에-있는-application-properties를-삭제한다" class="headerlink" title="1. test 폴더에 있는 application.properties를 삭제한다."></a>1. test 폴더에 있는 application.properties를 삭제한다.</h3><p>이 방법을 이해하기 위해선 어플리케이션이 실행되는 <strong>원리</strong>를 알아야합니다.<br><br>test에 있는 소스들은 전부 <strong>main</strong>에 있는 소스들에 의해 <strong>오버라이딩</strong>됩니다. 그렇기 때문에 만약 main에 있는 key가 test에 없다면 동일하게 선언해주어야 하는 것입니다.<br><br>때문에 test에 properties를 <strong>없애면</strong> main에 있는 값으로 진행되기 때문에 없어도 되는 것입니다.<br><br><br></p>
 <h3 id="2-classpath를-지정하여-따로-관리한다"><a href="#2-classpath를-지정하여-따로-관리한다" class="headerlink" title="2. classpath를 지정하여 따로 관리한다."></a>2. classpath를 지정하여 따로 관리한다.</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TestPropertySource</span>(locations = <span class="string">"classpath:/test.properties"</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/images/springboot/configuration/co13.png" alt="configuration"> 위처럼 동일한 이름이 아닌 새로운 이름으로 생성하여 classpath를 지정하여 해당 properties만 사용하는 것입니다.<br></p>
+<p><img src="/images/springboot/configuration/co13.png" alt="configuration"> 위처럼 동일한 이름이 아닌 새로운 이름으로 생성하여 classpath를 지정하여 해당 properties만 사용하는 것입니다.<br><br><br></p>
 <h2 id="기타-기능들-활용하기"><a href="#기타-기능들-활용하기" class="headerlink" title="기타 기능들 활용하기"></a>기타 기능들 활용하기</h2><ul>
 <li>랜덤</li>
 <li>플레이스 홀더</li>
@@ -207,6 +207,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/05/05/spring/spring-08/">
+        
+          SpringBoot - profile(프로파일)
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
