@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - logging(로깅) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - logging(로깅)</h2>
+  <p class="post-date">2019-05-05</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="logging-로깅"><a href="#logging-로깅" class="headerlink" title="logging(로깅)"></a>logging(로깅)</h1><p>로그를 출력할 때 사용하는 설정 값들을 공부해보도록 하겠습니다.<br><br><br></p>
+<h2 id="스프링-부트-기본-로거-설정하기"><a href="#스프링-부트-기본-로거-설정하기" class="headerlink" title="스프링 부트 기본 로거 설정하기"></a>스프링 부트 기본 로거 설정하기</h2><h3 id="로깅-퍼사드"><a href="#로깅-퍼사드" class="headerlink" title="로깅 퍼사드"></a>로깅 퍼사드</h3><ul>
+<li>로거를 바꿀 수 있게 해준다.</li>
+<li>종류 : Commons Logging​, SLF4j</li>
+</ul>
+<h3 id="로거"><a href="#로거" class="headerlink" title="로거"></a>로거</h3><ul>
+<li>실제로 로그를 찍는 역할을 한다.</li>
+<li>종류 : JUL, Log4J2, ​Logback<br><br></li>
+</ul>
+<p>스프링 부트는 Commons Logging을 기본적으로 사용하고 있으며<br>Commons Logging을 사용해도 SLF4j로 가고 Logback로 가게 됩니다. 결국 <strong>Logback</strong>이 최종적으로 로깅을 합니다.<br><br><br></p>
+<h3 id="Spring-5-x-Version"><a href="#Spring-5-x-Version" class="headerlink" title="Spring 5.x Version"></a>Spring 5.x Version</h3><p>스프링 5점대 버전부터 많은 변경이 있었습니다.<br>참고 : <a href="https://docs.spring.io/spring/docs/5.0.0.RC3/spring-framework-reference/overview.html#overview-logging" target="_blank" rel="noopener">스프링공식문서</a></p>
+<ul>
+<li>Spring-JCL(자카르타 커먼스 로깅)이 기본적으로 구현되어 있고 Commins Loggins이 SLF4j 혹은 Log4j2 로 자동으로 보내도록 설정해줍니다.</li>
+<li>pom.xml에 exclusion을 하지 않아도 됩니다.(2.x 부터)</li>
+<li>Log4j2가 있으면 Log4j2, SLF4j만 있으면 SLF4j를 사용합니다.<br><br><br></li>
+</ul>
+<h2 id="디버그-모드로-로깅하는-방법"><a href="#디버그-모드로-로깅하는-방법" class="headerlink" title="디버그 모드로 로깅하는 방법"></a>디버그 모드로 로깅하는 방법</h2><ul>
+<li>기본 포맷</li>
+<li>핵심 라이브러리 디버그(embeded container, Hibernate, Spring Boot)<ul>
+<li>program arguments: –debug</li>
+<li>JVM Option: -Ddebug</li>
+</ul>
+</li>
+<li>전체 디버그<ul>
+<li>program arguments: –trace</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/springboot/logger/log1.png" alt="logger"><br><br></p>
+<h2 id="로깅을-컬러로-출력하기"><a href="#로깅을-컬러로-출력하기" class="headerlink" title="로깅을 컬러로 출력하기"></a>로깅을 컬러로 출력하기</h2><p>컬러풀 하게 출력을 하고싶을 때 사용합니다.<br>참고자료 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-logging-color-coded-output" target="_blank" rel="noopener">스프링공식문서</a><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.output.ansi.enabled=always</span><br></pre></td></tr></table></figure></p>
+<p>위 코드를 properties에 선언해주면 컬러로 출력됩니다.<br><br><br></p>
+<h2 id="로깅을-파일로-출력하기"><a href="#로깅을-파일로-출력하기" class="headerlink" title="로깅을 파일로 출력하기"></a>로깅을 파일로 출력하기</h2><p>로깅을 파일로 만들어서 출력하고 싶을 때 사용합니다.<br>참고 자료 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-logging-file-output" target="_blank" rel="noopener">스프링공식문서</a><br></p>
+<ul>
+<li>properties에서 <code>logging.file</code> 또는 <code>logging.path</code>로 설정합니다.<br><br></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.path=logs</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/logger/log2.png" alt="logger"> 위 코드로 logs라는 경로에 로깅 파일을 생성하게 됩니다.<br><br><br></p>
+<h2 id="로깅-레벨을-조정하기"><a href="#로깅-레벨을-조정하기" class="headerlink" title="로깅 레벨을 조정하기"></a>로깅 레벨을 조정하기</h2><p>로그시 로그레벨을 지정하여 사용이 가능합니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.level.me.junjang.applicationstarted=DEBUG</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(SampleRunner.class);</span><br><span class="line"></span><br><span class="line">logger.info(hello);</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/logger/log4.png" alt="logger"> 디버그로 레벨을 조정하고 SLF4j를 import하여 log를 찍은 결과<br>디버그가 출력된 것을 확인할 수 있습니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/05/spring/spring-08/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - profile(프로파일)
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#logging-로깅"><span class="toc-nav-text">logging(로깅)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#스프링-부트-기본-로거-설정하기"><span class="toc-nav-text">스프링 부트 기본 로거 설정하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#로깅-퍼사드"><span class="toc-nav-text">로깅 퍼사드</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#로거"><span class="toc-nav-text">로거</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spring-5-x-Version"><span class="toc-nav-text">Spring 5.x Version</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#디버그-모드로-로깅하는-방법"><span class="toc-nav-text">디버그 모드로 로깅하는 방법</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#로깅을-컬러로-출력하기"><span class="toc-nav-text">로깅을 컬러로 출력하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#로깅을-파일로-출력하기"><span class="toc-nav-text">로깅을 파일로 출력하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#로깅-레벨을-조정하기"><span class="toc-nav-text">로깅 레벨을 조정하기</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/05/spring/spring-09/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
