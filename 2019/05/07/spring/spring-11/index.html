@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - Devtools | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - Devtools</h2>
+  <p class="post-date">2019-05-07</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="Devtools"><a href="#Devtools" class="headerlink" title="Devtools"></a>Devtools</h1><p>데브툴즈는 스프링 부트가 제공하는 하나의 옵션입니다.<br><strong>의존성을 추가만</strong> 해주면 자동으로 여러 기능들을 제공해줍니다.<br>하나하나 살펴봅시다. 참고문서 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-property-defaults" target="_blank" rel="noopener">스프링공식문서</a><br></p>
+<h2 id="의존성-추가"><a href="#의존성-추가" class="headerlink" title="의존성 추가"></a>의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>위 의존성을 pom.xml에 추가합니다.<br><br><br></p>
+<h2 id="Cache-설정"><a href="#Cache-설정" class="headerlink" title="Cache 설정"></a>Cache 설정</h2><p>웹 개발을 할 때 캐시가 적용되어있으면 바뀌지 않는 상황 때문에 개발 환경이 불편했던 적이 있을겁니다.<br>하지만 이러한 캐시 설정을 자동으로 꺼주어 개발에 더 집중할 수 있도록 해줍니다.<br>참고 자료 : <a href="https://github.com/spring-projects/spring-boot/blob/v2.1.1.RELEASE/spring-boot-project/spring-boot-devtools/src/main/java/org/springframework/boot/devtools/env/DevToolsPropertyDefaultsPostProcessor.java" target="_blank" rel="noopener">캐시삭제코드</a><br><br><br></p>
+<h2 id="Auto-Restart"><a href="#Auto-Restart" class="headerlink" title="Auto Restart"></a>Auto Restart</h2><p>개발시 수정된 코드를 build하면 자동으로 서버를 재구동시켜줍니다.<br>참고문서 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-restart" target="_blank" rel="noopener">스프링공식문서</a><br><br><br></p>
+<h2 id="Live-Reload"><a href="#Live-Reload" class="headerlink" title="Live Reload"></a>Live Reload</h2><p>Chrome같은 브라우저에서 서버가 재시작했을때 화면을 자동으로 갱신해주는 확장 프로그램입니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.devtools.liveload.enabled=false</span><br></pre></td></tr></table></figure></p>
+<p>필요가 없다면 위 코드로 자동 갱신을 비활성화 하면 됩니다.<br><br><br></p>
+<h2 id="Global-Configuration"><a href="#Global-Configuration" class="headerlink" title="Global Configuration"></a>Global Configuration</h2><p>외부 설정시 우선순위가 가장 높게 측정됩니다.<br>참고문서 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-globalsettings" target="_blank" rel="noopener">스프링공식문서</a><br><br><br></p>
+<h2 id="Remote-Application"><a href="#Remote-Application" class="headerlink" title="Remote Application"></a>Remote Application</h2><p>참고문서 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-remote" target="_blank" rel="noopener">스프링공식문서</a><br>원격에 Application을 구동하고 Local에서 실행하는 기능입니다.<br>사실장 잘 쓰이지 않는 기능이고 위험하기 때문에 권장하지는 않습니다.<br><br><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/05/spring/spring-10/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - Test(테스트)
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Devtools"><span class="toc-nav-text">Devtools</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#의존성-추가"><span class="toc-nav-text">의존성 추가</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Cache-설정"><span class="toc-nav-text">Cache 설정</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Auto-Restart"><span class="toc-nav-text">Auto Restart</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Live-Reload"><span class="toc-nav-text">Live Reload</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Global-Configuration"><span class="toc-nav-text">Global Configuration</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Remote-Application"><span class="toc-nav-text">Remote Application</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/07/spring/spring-11/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
