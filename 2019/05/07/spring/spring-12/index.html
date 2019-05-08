@@ -10,7 +10,7 @@
   
   <title>
     
-      SpringBoot - MVC | Junjangsee&#39;s Blog
+      SpringBoot - SpringBoot MVC Setting | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,7 +98,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>SpringBoot - MVC</h2>
+  <h2>SpringBoot - SpringBoot MVC Setting</h2>
   <p class="post-date">2019-05-07</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -108,7 +108,18 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
-<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1></section>
+<h1 id="SpringBoot-MVC"><a href="#SpringBoot-MVC" class="headerlink" title="SpringBoot MVC"></a>SpringBoot MVC</h1><p>스프링부트는 기존 Spring에서 MVC를 세팅할 때와는 다르게 기본 설정 덕분에 따로 세팅하지 않아도 바로 MVC 개발이 가능합니다.<br>예제를 만들어보면서 MVC 패턴이 세팅없이 바로 구현 가능한지 테스트 해보겠습니다.<br><br><br></p>
+<h2 id="MVC-Exam"><a href="#MVC-Exam" class="headerlink" title="MVC Exam"></a>MVC Exam</h2><p>전체 완성된 예제 코드는 각 주제 하단에 있으니 참고하시면 되겠습니다.<br><br></p>
+<h3 id="Test-클래스"><a href="#Test-클래스" class="headerlink" title="Test 클래스"></a>Test 클래스</h3><p><img src="/images/springboot/mvcsetting/mvcse1.png" alt="MVCSetting"> 슬라이스 테스트로 Web만 테스트 하기 위해 @WebMvcTest를 활용합니다.<br><br><img src="/images/springboot/mvcsetting/mvcse2.png" alt="MVCSetting"> 테스트할 클래스를 선언해줄 때 동일한 클래스를 만들기 번거로우므로 임의의 클래스명을 붙인 후 자동생성 기능을 이용하여 생성합니다.<br>단축키(맥 OS기준) : option + enter<br><br><img src="/images/springboot/mvcsetting/mvcse3.png" alt="MVCSetting"> main 패키지에 있는 곳에 생성해줍니다.<br><br><img src="/images/springboot/mvcsetting/mvcse4.png" alt="MVCSetting"> 다시 테스트클래스로 돌아와서 Web은 보통 MockMVC 객체로 테스트 하기 때문에 의존성을 가져옵니다.<br>그리고 hello 문자열을 200이 출력되게끔 테스트 코드를 작성합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@WebMvcTest</span>(UserController.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserControllerTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        mockMvc.perform(get(<span class="string">"/hello"</span>))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().string(<span class="string">"hello"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>테스트 클래스 예제 코드는 위와 같습니다.<br><br><br></p>
+<h3 id="main-클래스"><a href="#main-클래스" class="headerlink" title="main 클래스"></a>main 클래스</h3><p><img src="/images/springboot/mvcsetting/mvcse5.png" alt="MVCSetting"> 특별한 것 잆이 Controller가 선언된 클래스입니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>메인 클래스 예제 코드는 위와 같습니다.<br><br>그 후 테스트를 실행하면 이상없이 테스트가 완료될 것입니다.<br>이처럼 SpringBoot는 기본적으로 MVC 패턴을 바로 구현할 수 있도록 기본 세팅이 되어있으며 개발자가 개발에만 더 집중할 수 있도록 해줍니다.<br><br><br></p>
+<h2 id="기본-설정-의존성은-어디에"><a href="#기본-설정-의존성은-어디에" class="headerlink" title="기본 설정 의존성은 어디에?"></a>기본 설정 의존성은 어디에?</h2><p><img src="/images/springboot/mvcsetting/mvcse6.png" alt="MVCSetting"> 이전 의존성 파트에서 공부했던 WebMvcAutoConfiguration에 세팅이 들어가있습니다.<br>많은 세팅이 있지만 너무 깊기 때문에 따로 파고들진 않겠습니다.<br><br><br></p>
+<h2 id="MVC-확장하기"><a href="#MVC-확장하기" class="headerlink" title="MVC 확장하기"></a>MVC 확장하기</h2><p>MVC 기본 설정 말고도 추가적으로 설정을 하고 싶을 때 사용할 수 있는 방법입니다.<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/mvcsetting/mvcse7.png" alt="MVCSetting"> WebMvcConfigurer를 구현한 클래스 내부에 추가적으로 필요한 설정의 Callback 메소드를 정의하여 사용하면 됩니다.<br><br><br></p>
+<h2 id="MVC-재정의하기"><a href="#MVC-재정의하기" class="headerlink" title="MVC 재정의하기"></a>MVC 재정의하기</h2><p>아래와 같이 <code>@EnableWebMvc</code> 를 같이 사용하면 모든 스프링 MVC 설정이 다 사라지고 재정의 할 수 있습니다.<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -154,7 +165,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#MVC"><span class="toc-nav-text">MVC</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#SpringBoot-MVC"><span class="toc-nav-text">SpringBoot MVC</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#MVC-Exam"><span class="toc-nav-text">MVC Exam</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Test-클래스"><span class="toc-nav-text">Test 클래스</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#main-클래스"><span class="toc-nav-text">main 클래스</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#기본-설정-의존성은-어디에"><span class="toc-nav-text">기본 설정 의존성은 어디에?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#MVC-확장하기"><span class="toc-nav-text">MVC 확장하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#MVC-재정의하기"><span class="toc-nav-text">MVC 재정의하기</span></a></li></ol></li></ol>
     
   </div>
 </aside>
