@@ -122,7 +122,7 @@
 <h2 id="Test-클래스"><a href="#Test-클래스" class="headerlink" title="Test 클래스"></a>Test 클래스</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@WebMvcTest</span>(UserController.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserControllerTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createUser_JSON</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        String userJson = <span class="string">"&#123;\"username\":\"junjang\", \"password\":\"123\"&#125;"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//요청을 만드는 단계</span></span><br><span class="line">        mockMvc.perform(post(<span class="string">"/users/create"</span>)</span><br><span class="line">                .contentType(MediaType.APPLICATION_JSON_UTF8)</span><br><span class="line">                .accept(MediaType.APPLICATION_JSON_UTF8)</span><br><span class="line">                .content(userJson))</span><br><span class="line">                    <span class="comment">//응답 확인단계</span></span><br><span class="line">                    .andExpect(status().isOk())</span><br><span class="line">                    .andExpect(jsonPath(<span class="string">"$.username"</span>, is(equalTo(<span class="string">"junjang"</span>))))</span><br><span class="line">                    .andExpect(jsonPath(<span class="string">"$.password"</span>, is(equalTo(<span class="string">"123"</span>))));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/springboot/mvchttp/http1.png" alt="MVCHttp"> JSON 형식으로 들어오는 요청을 응답하는 테스트 코드를 작성합니다.</p>
 <ul>
-<li>accept는 생략 가능하나 써주면 확실합니다.</li>
+<li>accept는 contentType과 함께 적용되므로 현재는 생략 가능하나 써주면 확실해집니다.</li>
 <li>import는 matchers로 합니다.<br></li>
 </ul>
 <p>여기서 테스트를 실행시키면 어떻게 될까요 ?<br>바로 <strong>404에러</strong>가 뜹니다.<br>이유는 post방식으로 경로설정을 하였지만 해당 경로에 대한 <strong>Controller</strong>가 없기 때문입니다.<br>그러므로 Controller를 구현하러 갑니다.<br><br><br></p>
@@ -157,6 +157,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/05/08/spring/spring-14/">
+        
+          SpringBoot - MVC ViewResolver
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
