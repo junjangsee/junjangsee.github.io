@@ -110,7 +110,7 @@
     <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
 <h1 id="ExceptionHandler"><a href="#ExceptionHandler" class="headerlink" title="ExceptionHandler"></a>ExceptionHandler</h1><p>기본적으로 등록되어있는 ErrorHandler가 메시지를 출력해주지만 직접 커스텀하여 에러 메시지를 출력할 수도 있습니다.<br><br><img src="/images/springboot/Exceptionhandler/err1.png" alt="ExceptionHandler"> 위 사진이 기본적으로 등록된 에러 메시지입니다.<br><br><img src="/images/springboot/Exceptionhandler/err2.png" alt="ExceptionHandler"> curl 명령어로 보면 JSON 형식으로 오류가 나는 것을 확인 가능합니다.</p>
 <ul>
-<li>BasicErrorController : 기본 예외 처리를 합니다.<br>이 에러 메시지들을 커스텀 하면서 공부해보겠습니다.<br><br><br></li>
+<li>BasicErrorController : 기본 예외 처리를 합니다.<br><br><br><br></li>
 </ul>
 <h2 id="핸들러-실습-해보기"><a href="#핸들러-실습-해보기" class="headerlink" title="핸들러 실습 해보기"></a>핸들러 실습 해보기</h2><h3 id="Controller-클래스"><a href="#Controller-클래스" class="headerlink" title="Controller 클래스"></a>Controller 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> SampleException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/springboot/Exceptionhandler/err3.png" alt="ExceptionHandler"> 먼저 Hello 요청을 보낼 때 SampleException 클래스를 통해 에러메시지를 출력하기 위해 에러를 던집니다.<br><br><br></p>
@@ -155,6 +155,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/05/10/spring/spring-21/">
+        
+          SpringBoot - MVC HATEOAS(헤이토스)
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
