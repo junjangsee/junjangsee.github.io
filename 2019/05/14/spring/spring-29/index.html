@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - 데이터베이스 Migration(마이그레이션) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - 데이터베이스 Migration(마이그레이션)</h2>
+  <p class="post-date">2019-05-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="데이터베이스-Migration-마이그레이션"><a href="#데이터베이스-Migration-마이그레이션" class="headerlink" title="데이터베이스 Migration(마이그레이션)"></a>데이터베이스 Migration(마이그레이션)</h1><p>스키마 혹은 데이터를 변경할 때 버전관리 형식으로 관리가 가능합니다. 대표적으로 Flyway와 Liquibase가 있습니다. 이중에 Flyway를 대표로 삼아 공부해보겠습니다.<br><br>도중 나오는 코드들은 이전 포스트에서 그대로 가져왔습니다.<br>코드가 필요하시면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/" target="_blank" rel="noopener">JPA 연동하기</a> 포스팅을 참고하시면 됩니다.<br>참고자료 : <a href="https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup" target="_blank" rel="noopener">스프링공식홈페이지</a>, <a href="https://flywaydb.org/" target="_blank" rel="noopener">flyway홈페이지</a><br><br></p>
+<h2 id="Flyway-의존성-추가"><a href="#Flyway-의존성-추가" class="headerlink" title="Flyway 의존성 추가"></a>Flyway 의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.flywaydb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flyway-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/mygration/fly1.png" alt="JPA"> 의존성을 추가합니다.<br><br><br></p>
+<h2 id="마이그레이션"><a href="#마이그레이션" class="headerlink" title="마이그레이션"></a>마이그레이션</h2><h3 id="마이그레이션-디렉토리"><a href="#마이그레이션-디렉토리" class="headerlink" title="마이그레이션 디렉토리"></a>마이그레이션 디렉토리</h3><ul>
+<li><strong>/src/resources에 db/migration</strong> 경로를 생성합니다.</li>
+<li>spring.flyway.locations 을 활용하여도 됩니다.</li>
+</ul>
+<p><br></p>
+<h3 id="마이그레이션-파일-이름"><a href="#마이그레이션-파일-이름" class="headerlink" title="마이그레이션 파일 이름"></a>마이그레이션 파일 이름</h3><ul>
+<li>V숫자__이름.sql (언더바(_) 두개입니다.)</li>
+<li>V는 꼭 대문자로</li>
+<li>숫자는 순차적으로 (타임스탬프 권장)</li>
+<li>이름은 가능한 서술적으로 작성</li>
+</ul>
+<p><br></p>
+<h3 id="마이그레이션-사용"><a href="#마이그레이션-사용" class="headerlink" title="마이그레이션 사용"></a>마이그레이션 사용</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> <span class="keyword">account</span>;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">sequence</span> <span class="keyword">if</span> <span class="keyword">exists</span> hibernate_sequence;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> hibernate_sequence <span class="keyword">start</span> <span class="keyword">with</span> <span class="number">1</span> <span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">account</span> (<span class="keyword">id</span> <span class="built_in">bigint</span> <span class="keyword">not</span> <span class="literal">null</span>, email <span class="built_in">varchar</span>(<span class="number">255</span>), <span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">255</span>), username <span class="built_in">varchar</span>(<span class="number">255</span>), primary <span class="keyword">key</span> (<span class="keyword">id</span>));</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/mygration/fly4.png" alt="JPA"> JPA 연동시 출력됐던 스키마를 sql문 안에 선언합니다. 그리고 애플리케이션을 실행합니다.<br><br>ps. 제가 선택한 postgres는 문법이 다르기 때문에 위 코드로 수정하였습니다.<br><br><img src="/images/springboot/mygration/fly3.png" alt="JPA"> flyway가 실행되면서 테이블이 account와 함께 flyway_schema_history가 함께 생성되었습니다. 이 테이블에는 앞으로 추가할 쿼리에 대해서 순서대로 기록해줍니다.<br><br><br></p>
+<h3 id="Entity-클래스에-컬럼이-추가되면"><a href="#Entity-클래스에-컬럼이-추가되면" class="headerlink" title="Entity 클래스에 컬럼이 추가되면?"></a>Entity 클래스에 컬럼이 추가되면?</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> active;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.email = email;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isActive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> active;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setActive</span><span class="params">(<span class="keyword">boolean</span> active)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.active = active;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        Account account = (Account) o;</span><br><span class="line">        <span class="keyword">return</span> active == account.active &amp;&amp;</span><br><span class="line">                Objects.equals(id, account.id) &amp;&amp;</span><br><span class="line">                Objects.equals(username, account.username) &amp;&amp;</span><br><span class="line">                Objects.equals(password, account.password) &amp;&amp;</span><br><span class="line">                Objects.equals(email, account.email);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(id, username, password, email, active);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>기존 email까지 있었던 컬럼에서 boolean 타입인 active를 추가했습니다. 그리고 <strong>spring.jpa.hibernate.ddl-auto=validate</strong> 로 Entity 클래스와 운영 DB와 연동 되는지 확인하겠습니다.<br><br>두 번째 쿼리니 V2로 동일 경로에 만들어준 후 실행합니다.(절대 첫 번째 sql파일은 손대지 않습니다.)<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">account</span> <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> active <span class="built_in">BOOLEAN</span>;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/mygration/fly2.png" alt="JPA"> 테이블에 컬럼이 추가된 것을 알 수 있습니다.<br>만약 V2 쿼리 없이 validate 했다면 Entity와 DB와의 연동은 되지 않았을 것입니다.<br>이유는 active에 해당되는 DB 컬럼이 없기 때문입니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/14/spring/spring-28/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - 데이터베이스 초기화
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#데이터베이스-Migration-마이그레이션"><span class="toc-nav-text">데이터베이스 Migration(마이그레이션)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Flyway-의존성-추가"><span class="toc-nav-text">Flyway 의존성 추가</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#마이그레이션"><span class="toc-nav-text">마이그레이션</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#마이그레이션-디렉토리"><span class="toc-nav-text">마이그레이션 디렉토리</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#마이그레이션-파일-이름"><span class="toc-nav-text">마이그레이션 파일 이름</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#마이그레이션-사용"><span class="toc-nav-text">마이그레이션 사용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Entity-클래스에-컬럼이-추가되면"><span class="toc-nav-text">Entity 클래스에 컬럼이 추가되면?</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/14/spring/spring-29/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
