@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - 데이터베이스 초기화 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - 데이터베이스 초기화</h2>
+  <p class="post-date">2019-05-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="데이터베이스-초기화"><a href="#데이터베이스-초기화" class="headerlink" title="데이터베이스 초기화"></a>데이터베이스 초기화</h1><p>이번 주제를 실습하기 위해선 이전 포스팅의 코드가 필요합니다.<br>필요하신 분들은 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/" target="_blank" rel="noopener">JPA 연동하기</a> 를 참고해주시면 됩니다.<br><br><br></p>
+<h2 id="JPA를-사용한-데이터베이스-초기화"><a href="#JPA를-사용한-데이터베이스-초기화" class="headerlink" title="JPA를 사용한 데이터베이스 초기화"></a>JPA를 사용한 데이터베이스 초기화</h2><p>JPA를 사용한 프로젝트의 경우 해당되는 초기화 방법입니다.<br>작성해둔 Entity 정보를 바탕으로 스키마를 생성하고 생성된 스키마를 초기화 하는 방법에 대해 알아보겠습니다.<br><br><br></p>
+<h3 id="Application-properties-설정"><a href="#Application-properties-설정" class="headerlink" title="Application.properties 설정"></a>Application.properties 설정</h3><h4 id="spring-jpa-hibernate-ddl-auto"><a href="#spring-jpa-hibernate-ddl-auto" class="headerlink" title="spring.jpa.hibernate.ddl-auto"></a>spring.jpa.hibernate.ddl-auto</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.hibernate.ddl-auto=</span><br></pre></td></tr></table></figure>
+<p>위 옵션을 통해서 스키마를 운영할 수 있습니다.</p>
+<ul>
+<li>update: 기존의 스키마는 놔두고 추가된 사항만 변경합니다.</li>
+<li>create-drop: 처음에 스키마를 만들고 Application 종료시 스키마를 drop합니다.</li>
+<li>create: 처음에 스키마를 삭제하고 스키마를 새로 만듭니다.</li>
+<li>validate: 현재 Entity 매핑이 릴레이션 DB에 맵핑할 수 있는 상황인지 맵핑이 되는지를 검증합니다.(운영환경에서 사용)</li>
+<li>테스트 환경에선 필요하지 않은 옵션입니다.(주석처리)<br><br></li>
+</ul>
+<p>만약 Entity 클래스에 새로운 컬럼을 추가하고 update를 하면 어떻게 될까요?<br><img src="/images/springboot/schema/sch5.png" alt="JPA"> Email이라는 컬럼을 추가하였습니다.<br><br><img src="/images/springboot/schema/sch7.png" alt="JPA"> update를 주고 실행하였더니 기존 컬럼은 그대로 있고 컬럼이 추가된 것을 볼 수 있습니다.<br><br><br>그렇다면 Email이란 컬럼을 추가하지 않고 validate를 했다면 어떻게 됐을까요?<br><img src="/images/springboot/schema/sch6.png" alt="JPA"> Entity에만 존재하고 운영 DB에는 아직 생성되어있지 않으니 email이란 컬럼을 찾지 못했다고 하게 됩니다.<br></p>
+<h4 id="spring-jpa-generate-ddl"><a href="#spring-jpa-generate-ddl" class="headerlink" title="spring.jpa.generate-ddl"></a>spring.jpa.generate-ddl</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.generate-ddl=true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DDL 변경을 허용하기 위한 프로퍼티입니다.</li>
+<li>기본적으로 false로 되어있어 true로 설정 해줘야 동작합니다.</li>
+<li>테스트 환경에선 필요하지 않은 옵션입니다.(주석처리)</li>
+</ul>
+<h4 id="spring-jpa-show-sql"><a href="#spring-jpa-show-sql" class="headerlink" title="spring.jpa.show-sql"></a>spring.jpa.show-sql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.show-sql=true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Application 실행시 hibernate 로그(스키마)를 보여줍니다.</li>
+<li>기본적으로 false로 되어있어 true로 설정 해줘야 동작합니다.</li>
+</ul>
+<p><br><br><br></p>
+<h2 id="SQL-스크립트를-사용한-데이터베이스-초기화"><a href="#SQL-스크립트를-사용한-데이터베이스-초기화" class="headerlink" title="SQL 스크립트를 사용한 데이터베이스 초기화"></a>SQL 스크립트를 사용한 데이터베이스 초기화</h2><p>일반적인 데이터베이스를 사용할 때 사용하는 방법입니다.</p>
+<ul>
+<li>테스트, Application이 구동될 때 마다 스크립트를 통해 데이터베이스를 초기화합니다.</li>
+<li>스크립트를 만든상태에서는 ddl-auto, generate-ddl 옵션을 구동시켜도 스크립트로 먼저 스키마 초기화를 하므로 에러가 발생하지 않습니다.</li>
+<li>스크립트 실행 순서는 schema.sql –&gt; data.sql 입니다.</li>
+</ul>
+<p><br></p>
+<h3 id="schema-sql"><a href="#schema-sql" class="headerlink" title="schema.sql"></a>schema.sql</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">account</span> <span class="keyword">if</span> <span class="keyword">exists</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">sequence</span> <span class="keyword">if</span> <span class="keyword">exists</span> hibernate_sequence</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> hibernate_sequence <span class="keyword">start</span> <span class="keyword">with</span> <span class="number">1</span> <span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">account</span> (<span class="keyword">id</span> <span class="built_in">bigint</span> <span class="keyword">not</span> <span class="literal">null</span>, email <span class="built_in">varchar</span>(<span class="number">255</span>), <span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">255</span>), username <span class="built_in">varchar</span>(<span class="number">255</span>), primary <span class="keyword">key</span> (<span class="keyword">id</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/schema/sch1.png" alt="JPA"><br><img src="/images/springboot/schema/sch8.png" alt="JPA"> resource - schema.sql을 생성하여 실행시 스키마를 입력합니다.</p>
+<ul>
+<li>schema.sql 또는 schema-${platform}.sql로 생성합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="data-sql"><a href="#data-sql" class="headerlink" title="data.sql"></a>data.sql</h3><p>resource - data.sql를 생성하여 스키마를 입력합니다.</p>
+<ul>
+<li>data.sql 또는 data-${platform}.sql</li>
+</ul>
+<p><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/14/spring/spring-27/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - JPA 연동하기
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#데이터베이스-초기화"><span class="toc-nav-text">데이터베이스 초기화</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JPA를-사용한-데이터베이스-초기화"><span class="toc-nav-text">JPA를 사용한 데이터베이스 초기화</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Application-properties-설정"><span class="toc-nav-text">Application.properties 설정</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#spring-jpa-hibernate-ddl-auto"><span class="toc-nav-text">spring.jpa.hibernate.ddl-auto</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#spring-jpa-generate-ddl"><span class="toc-nav-text">spring.jpa.generate-ddl</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#spring-jpa-show-sql"><span class="toc-nav-text">spring.jpa.show-sql</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SQL-스크립트를-사용한-데이터베이스-초기화"><span class="toc-nav-text">SQL 스크립트를 사용한 데이터베이스 초기화</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#schema-sql"><span class="toc-nav-text">schema.sql</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#data-sql"><span class="toc-nav-text">data.sql</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/14/spring/spring-28/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
