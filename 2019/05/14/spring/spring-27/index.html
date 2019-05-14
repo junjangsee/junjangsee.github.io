@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - JPA | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - JPA</h2>
+  <p class="post-date">2019-05-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="JPA"><a href="#JPA" class="headerlink" title="JPA"></a>JPA</h1><p>JPA를 연동하고 테스트하는 방법을 공부해봅시다.<br>기본적인 개념에 대해 궁금하시다면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-26/" target="_blank" rel="noopener">ORM, JPA의 개념</a> 포스팅을 참고해주시면 됩니다.<br><br><br></p>
+<h2 id="JPA-연동-및-테스트"><a href="#JPA-연동-및-테스트" class="headerlink" title="JPA 연동 및 테스트"></a>JPA 연동 및 테스트</h2><h3 id="JPA-의존성-추가"><a href="#JPA-의존성-추가" class="headerlink" title="JPA 의존성 추가"></a>JPA 의존성 추가</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/jpa/jpa1.png" alt="JPA"> 위 의존성을 추가하면 다른 세팅을 건들지 않아도 바로 사용할 수 있습니다.<br><br><br></p>
+<h3 id="Entity-클래스-생성"><a href="#Entity-클래스-생성" class="headerlink" title="Entity 클래스 생성"></a>Entity 클래스 생성</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span> <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long ID;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getID</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ID;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setID</span><span class="params">(Long ID)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ID = ID;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        Account account = (Account) o;</span><br><span class="line">        <span class="keyword">return</span> Objects.equals(ID, account.ID) &amp;&amp;</span><br><span class="line">                Objects.equals(username, account.username) &amp;&amp;</span><br><span class="line">                Objects.equals(password, account.password);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(ID, username, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/jpa/jpa2.png" alt="JPA"> account 패키지를 생성 후 Account 클래스를 생성합니다. getter, setter, equals, hashcode도 생성해줍니다.</p>
+<ul>
+<li>@Entity : 엔티티 빈으로 등록하는 역할을 합니다.</li>
+<li>@ID : 엔티티의 기본 키를 나타내며 하나 이상 필요합니다.</li>
+<li>@GeneratedValue : 자동으로 생성되도록 합니다. 만약 선언하지 않으면 수동작업을 해주어야 합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="Repository-인터페이스-생성"><a href="#Repository-인터페이스-생성" class="headerlink" title="Repository 인터페이스 생성"></a>Repository 인터페이스 생성</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Account</span>, <span class="title">Long</span>&gt; </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/jpa/jpa3.png" alt="JPA"> extends를 통해 JpaRepository를 상속받고 &lt;엔티티타입, 아이디타입&gt;을 선언합니다.<br>여기까지 했다면 1차 연동은 되었습니다. 이제 테스트를 통해 연동상태를 확인해보겠습니다.<br><br><br></p>
+<h3 id="테스트-클래스-생성"><a href="#테스트-클래스-생성" class="headerlink" title="테스트 클래스 생성"></a>테스트 클래스 생성</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">di</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/jpa/jpa4.png" alt="JPA"> @DataJpaTest를 통해 슬라이스 테스트를 진행합니다.<br>jpa를 의존성 추가하였다면 JDBC를 사용한다는 개념은 알고 계실 것입니다.<br>Repository까지 3개를 의존성 주입 받고 <strong>‘비어있는 테스트’</strong>를 진행합니다.<br><br><strong>‘비어있는 테스트’</strong>를 진행하는 이유는 빈으로 등록이 잘 되어있는지, 테스트가 이상없이 실행 되는지 시험해보기 위함입니다.<br>그런데 테스트를 진행하면 오류가 뜰 것입니다.<br>이유는 슬라이스 테스트시 꼭 <strong>인메모리 데이터베이스</strong>가 필요합니다. 그렇기 때문에 H2를 추가하고 테스트를 진행하겠습니다.<br><br>인메모리 데이터베이스가 궁금하시다면 <a href="https://junjangsee.github.io/2019/05/12/spring/spring-23/" target="_blank" rel="noopener">인메모리 데이터베이스</a> 포스팅을 참고하시면 됩니다.<br><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.h2database<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>h2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/jpa/jpa6.png" alt="JPA"> H2 의존성을 test용도로 추가합니다.<br>그리고 다시 테스트를 진행합니다.<br><br><img src="/images/springboot/jpa/jpa7.png" alt="JPA"> 테스트가 성공한 것을 볼 수 있습니다.<br>그렇다면 애플리케이션에서도 성공할까요?<br>결론은 <strong>실패</strong>입니다. 그 이유는 운영환경 DB가 없기 때문입니다.<br>그렇기 때문에 운영환경 DB도 연동해야합니다. 저는 postgreSQL을 사용하여 연동하겠습니다.<br>혹시 postgreSQL이 궁금하시다면 <a href="https://junjangsee.github.io/2019/05/13/spring/spring-25/" target="_blank" rel="noopener">postgreSQL</a> 포스팅을 참고해주시면 됩니다.<br><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.postgresql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>postgresql<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/jpa/jpa8.png" alt="JPA"> postgresql 의존성을 추가합니다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start postgres_boot</span><br></pre></td></tr></table></figure></p>
+<p>그리고 Docker를 통해 실행시킵니다.<br><br><br><br></p>
+<h4 id="Application-properties"><a href="#Application-properties" class="headerlink" title="Application.properties"></a>Application.properties</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:postgresql://localhost:5432/springboot</span><br><span class="line">spring.datasource.username=junjang</span><br><span class="line">spring.datasource.password=pass</span><br></pre></td></tr></table></figure>
+<p>postgresql을 설치시 설정했던 정보를 선언하고 실행하면 아래과 같은 에러가 뜹니다.<br><br></p>
+<h4 id="org-postgresql-jdbc-PgConnection-createClob-is-not-yet-implemented-해결법"><a href="#org-postgresql-jdbc-PgConnection-createClob-is-not-yet-implemented-해결법" class="headerlink" title="org.postgresql.jdbc.PgConnection.createClob() is not yet implemented 해결법"></a>org.postgresql.jdbc.PgConnection.createClob() is not yet implemented 해결법</h4><p><img src="/images/springboot/jpa/jpa9.png" alt="JPA"> 드라이버가 createClob()라는 Method를 지원하지않아서 에러가 발생한 것입니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true</span><br></pre></td></tr></table></figure></p>
+<p>위 key, value값을 Application.properties에 추가하면 이상없이 구동될 것입니다.<br><br></p>
+<h3 id="MetaData-테스트"><a href="#MetaData-테스트" class="headerlink" title="MetaData 테스트"></a>MetaData 테스트</h3><p><img src="/images/springboot/jpa/jpa10.png" alt="JPA"> 슬라이스 테스트를 진행하면 현재 사용되는 인메모리 데이터베이스의 MetaData가 출력되는 것을 볼 수 있습니다.<br><br>여기서 슬라이스 테스트가 아닌 <strong>@SpringBootTest</strong>를 하면 어떻게 될까요?<br>바로 운영환경 DB에 대한 정보가 출력됩니다.<br>그 이유는 애플리케이션을 구동하면 <strong>전체 빈을 등록</strong>하기 때문에 Application.properties에 선언한 정보가 오버라이딩 되어 운영환경 DB로 넘어가기 때문입니다.<br><br><img src="/images/springboot/jpa/jpa11.png" alt="JPA"> 그래서 위와 같은 결과가 출력됩니다.<br><br><br></p>
+<h3 id="운영-DB-테스트"><a href="#운영-DB-테스트" class="headerlink" title="운영 DB 테스트"></a>운영 DB 테스트</h3><p>이제 최종적으로 연동이 되었는지 테스트 합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">di</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(<span class="string">"junjang"</span>);</span><br><span class="line">        account.setPassword(<span class="string">"pass"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// save 함수로 account 값을 NewAccount 변수에 저장합니다.</span></span><br><span class="line">        Account newAccount = accountRepository.save(account);</span><br><span class="line"></span><br><span class="line">        assertThat(newAccount).isNotNull();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// NewAccount에 저장된 값을 existAccount 변수에 담아 이름을 찾습니다.</span></span><br><span class="line">        Account existingAccount = accountRepository.findByUsername(newAccount.getUsername());</span><br><span class="line"></span><br><span class="line">        assertThat(existingAccount).isNotNull();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 들어가지 않은 값을 요청합니다.</span></span><br><span class="line">        Account nonExistingAccount = accountRepository.findByUsername(<span class="string">"kimjunhyeung"</span>);</span><br><span class="line"></span><br><span class="line">        assertThat(nonExistingAccount).isNull();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/jpa/jpa12.png" alt="JPA"> findByUsername()는 이름을 찾아주는 역할을 하는 메소드로 직접 만든 메소드이기 때문에 Repository에서 해당 메소드를 정의해주어야 합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Account</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">Account <span class="title">findByUsername</span><span class="params">(String username)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/jpa/jpa13.png" alt="JPA"> Account 객체를 가지는 메소드를 만들어줍니다.<br>그리고 테스트를 진행하면 이상없이 구동될 것입니다.<br><br><br></p>
+<h4 id="Optinal-사용하기"><a href="#Optinal-사용하기" class="headerlink" title="Optinal 사용하기"></a>Optinal 사용하기</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Account</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">Optional&lt;Account&gt; <span class="title">findByUsername</span><span class="params">(String username)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/jpa/jpa14.png" alt="JPA"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">di</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(<span class="string">"junjang"</span>);</span><br><span class="line">        account.setPassword(<span class="string">"pass"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// save 함수로 account 값을 NewAccount 변수에 저장합니다.</span></span><br><span class="line">        Account NewAccount = accountRepository.save(account);</span><br><span class="line"></span><br><span class="line">        assertThat(NewAccount).isNotNull();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// NewAccount에 저장된 값을 existAccount 변수에 담아 이름을 찾습니다.</span></span><br><span class="line">        Optional&lt;Account&gt; existintAccount = accountRepository.findByUsername(NewAccount.getUsername());</span><br><span class="line"></span><br><span class="line">        assertThat(existintAccount).isNotEmpty();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 들어가지 않은 값을 요청합니다.</span></span><br><span class="line">        Optional&lt;Account&gt; nonExistintAccount = accountRepository.findByUsername(<span class="string">"kimjunhyeung"</span>);</span><br><span class="line"></span><br><span class="line">        assertThat(nonExistintAccount).isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/jpa/jpa15.png" alt="JPA"> Optional을 사용하여 좀 더 명확하게 테스트를 진행할 수도 있습니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/14/spring/spring-26/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - ORM, JPA의 개념
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#JPA"><span class="toc-nav-text">JPA</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JPA-연동-및-테스트"><span class="toc-nav-text">JPA 연동 및 테스트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JPA-의존성-추가"><span class="toc-nav-text">JPA 의존성 추가</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Entity-클래스-생성"><span class="toc-nav-text">Entity 클래스 생성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Repository-인터페이스-생성"><span class="toc-nav-text">Repository 인터페이스 생성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#테스트-클래스-생성"><span class="toc-nav-text">테스트 클래스 생성</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Application-properties"><span class="toc-nav-text">Application.properties</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#org-postgresql-jdbc-PgConnection-createClob-is-not-yet-implemented-해결법"><span class="toc-nav-text">org.postgresql.jdbc.PgConnection.createClob() is not yet implemented 해결법</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MetaData-테스트"><span class="toc-nav-text">MetaData 테스트</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#운영-DB-테스트"><span class="toc-nav-text">운영 DB 테스트</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Optinal-사용하기"><span class="toc-nav-text">Optinal 사용하기</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/14/spring/spring-27/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
