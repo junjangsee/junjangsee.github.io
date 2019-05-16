@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - Security 커스터마이징 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - Security 커스터마이징</h2>
+  <p class="post-date">2019-05-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="Security-커스터마이징"><a href="#Security-커스터마이징" class="headerlink" title="Security 커스터마이징"></a>Security 커스터마이징</h1><p>시큐리티를 커스텀하여 내가 원하는 페이지에서만 로그인을 할 수 있도록 구현하는 방법을 학습하겠습니다. 이 포스팅은 이전에 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-30/" target="_blank" rel="noopener">Security의 개념과 테스트</a>에 작성된 코드의 이해와 내용이 꼭 필요하니 참고해주시면 되겠습니다.<br></p>
+<ul>
+<li>시작 전 세팅되어있어야 할 것들 : Controller 클래스, HTML , thymeleaf, security 의존성 추가</li>
+</ul>
+<p><br></p>
+<h2 id="WebSecurityConfigurerAdapter"><a href="#WebSecurityConfigurerAdapter" class="headerlink" title="WebSecurityConfigurerAdapter"></a>WebSecurityConfigurerAdapter</h2><p>Config 패키지 내에 SecurityConfig 클래스를 생성하여 <strong>WebSecurityConfigurerAdapter</strong>를 상속받습니다.<br><br><img src="/images/springboot/security/se17.png" alt="Security"> 상속받은 후 <strong>configure</strong> 메소드를 오버라이딩 합니다.<br><br><br></p>
+<h3 id="configure-메소드-구현"><a href="#configure-메소드-구현" class="headerlink" title="configure 메소드 구현"></a>configure 메소드 구현</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        http.authorizeRequests()</span><br><span class="line">                <span class="comment">// index와 hello는 인증없이 접근이 가능합니다.</span></span><br><span class="line">                .antMatchers(<span class="string">"/"</span>,<span class="string">"/hello"</span>).permitAll() </span><br><span class="line">                <span class="comment">// 이외 요청은 formLogin을 요청하고 아니면 Basic을 요청합니다.</span></span><br><span class="line">                .anyRequest().authenticated()</span><br><span class="line">                .and()</span><br><span class="line">            .formLogin()</span><br><span class="line">                .and()</span><br><span class="line">            .httpBasic();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/security/se18.png" alt="Security"> 여기까지는 My에 접속할 때 로그인을 유도하도록 한 작업입니다.<br><br><br></p>
+<h2 id="UserDetailsService"><a href="#UserDetailsService" class="headerlink" title="UserDetailsService"></a>UserDetailsService</h2><p>스프링 부트에서 자동으로 유저를 만들어주는 것이 아닌 직접 유저를 관리 할 수 있도록 하는 인터페이스 입니다.<br>참고자료 : <a href="https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#jc-authentication-userdetailsservice" target="_blank" rel="noopener">스프링공식문서</a><br><br>그렇게 하기 위해선 DB세팅과 구현할 서비스 클래스가 필요합니다.<br>먼저 데이터베이스 관련 의존성 주입을 해줍니다.<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.h2database<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>h2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>jpa를 사용하여 데이터관리를 할 것이고 임베디드 데이터가 필요하기 때문에 h2를 추가하겠습니다.<br></p>
+<h3 id="Account-클래스-생성"><a href="#Account-클래스-생성" class="headerlink" title="Account 클래스 생성"></a>Account 클래스 생성</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span> <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="AccountRepository-인터페이스-생성"><a href="#AccountRepository-인터페이스-생성" class="headerlink" title="AccountRepository 인터페이스 생성"></a>AccountRepository 인터페이스 생성</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Account</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="Service-클래스-생성"><a href="#Service-클래스-생성" class="headerlink" title="Service 클래스 생성"></a>Service 클래스 생성</h3><p>UserDetailsService를 구현하기 위해 클래스를 생성합니다.<br><br><img src="/images/springboot/security/se19.png" alt="Security"> 최종적으로 위 세가지를 생성하여야 합니다.<br><br><br></p>
+<h3 id="Service-구현"><a href="#Service-구현" class="headerlink" title="Service 구현"></a>Service 구현</h3><p>지금 구현할 것은 데이터에 입력받을 username, password를 연동한 Repository에 추가하는 기능을 구현할 것입니다.<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">createAccount</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(username);</span><br><span class="line">        account.setPassword(password);</span><br><span class="line">        <span class="keyword">return</span> accountRepository.save(account);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/security/se20.png" alt="Security"> jpa와 연동한 Repository를 주입받고 Account 타입으로 username, password를 파라미터값으로 받아옵니다. 받아온 값을 set 해주고 save로 추가한 account를 저장한 후 return 해줍니다.<br><br>현재까지는 스프링 부트가 자동으로 생성한 username, password를 가지고 로그인을 했었습니다.<br>이제 그 정보를 받지 않고 추가한 값으로 로그인 처리가 되도록 해볼 것입니다.<br>그러기 위해선 <strong>UserDetailService</strong> 를 구현해야만 합니다.<br><br><br></p>
+<h2 id="UserDetailService-구현"><a href="#UserDetailService-구현" class="headerlink" title="UserDetailService 구현"></a>UserDetailService 구현</h2><p>이전까지 UserDetailService를 구현하기 위한 세팅을 마쳤습니다. 이제 직접 구현하여 새로운 Account 정보로 로그인이 될 수 있게 구현해보겠습니다.<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountService</span> <span class="keyword">implements</span> <span class="title">UserDetailsService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">createAccount</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(username);</span><br><span class="line">        account.setPassword(password);</span><br><span class="line">        <span class="keyword">return</span> accountRepository.save(account);</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserDetails <span class="title">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/security/se21.png" alt="Security"> 먼저 implements로 UserDetailService를 구현합니다. 그리고 유저 정보를 가져오는 메소드를 오버라이딩합니다.<br><br>ps. 여기서 구현시 어디에 구현하던 상관은 없지만 꼭 <strong>빈</strong>으로 등록되어있어야 자동으로 유저가 생성되지 않습니다.<br><br><br></p>
+<h3 id="loadUserByUsername-인터페이스-구현"><a href="#loadUserByUsername-인터페이스-구현" class="headerlink" title="loadUserByUsername 인터페이스 구현"></a>loadUserByUsername 인터페이스 구현</h3><p>위 인터페이스에서는 username을 가져와 UserDetails에서 유저 정보를 확인합니다. 여기엔 password가 들어있는데 이때 입력한 password가 같은지 확인하고 그에 맞는 조치를 취하게 할 수 있습니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserDetails <span class="title">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException </span>&#123;</span><br><span class="line">        Optional&lt;Account&gt; byUsername = accountRepository.findByUsername(username);</span><br><span class="line">        Account account = byUsername.orElseThrow(() -&gt; <span class="keyword">new</span> UsernameNotFoundException(username));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(account.getUsername(), account.getPassword(), authorities());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Collection&lt;? extends GrantedAuthority&gt; authorities() &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(<span class="keyword">new</span> SimpleGrantedAuthority(<span class="string">"ROLE_USER"</span>));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/security/se23.png" alt="Security"> Repository에 저장된 username을 찾기 위해 새로운 메소드를 정의하고 찾은 username을 byUsername에 담습니다.(이 부분을 모르시겠다면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/" target="_blank" rel="noopener">JPA 연동하기 - 운영 DB 테스트</a>부분을 참고해주시면 됩니다.)<br><br>만약, username이 없다면 에러를 던지고 있으면 account에 넣게 됩니다.<br>이제 이러한 유저의 정보를 가지고 로그인 판단을 해야합니다. 그 판단은 <strong>UserDetails</strong>의 정보로 하게됩니다.<br>(현재 실습의 경우엔 Account의 정보가 되겠습니다.)<br><br><strong>UserDetails</strong>에 담고있는 유저의 정보를 User()로 가져올 수 있습니다. 그리고 이 유저가 어떤 권한을 가졌는지 알아보기 위해 authorities 메소드를 생성하여 ROLE_USER 이라는 권한을 가진 유저라고 임의 설정하고 최종적으로 return하게 됩니다.<br><br>결론적으로 말하면 로그인 한 username을 UserDetails에 있는 정보와 대조해서 맞으면 로그인, 틀릴시 에러를 출력하게 됩니다.<br><br>여기까지 왔다면 이제 자동으로 생성되는 유저의 정보가 아닌 입력한 정보로 로그인을 판별하게 됩니다.<br>하지만 아직 로그인이 통과될 유저정보가 없기 때문에 <strong>ApplicationRunner</strong>를 통해 정보를 만들도록 하겠습니다.<br><br><br></p>
+<h2 id="로그인-정보-구현"><a href="#로그인-정보-구현" class="headerlink" title="로그인 정보 구현"></a>로그인 정보 구현</h2><p><strong>ApplicationRunner</strong>는 애플리케이션이 실행될 때 함께 실행됩니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AccountService accountService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Account junjang = accountService.createAccount(<span class="string">"junjang"</span>, <span class="string">"1234"</span>);</span><br><span class="line">        System.out.println(junjang.getUsername() + <span class="string">" password : "</span> + junjang.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/security/se24.png" alt="Security"> Service에서 구현했던 유저 생성메소드를 사용하여 정보를 추가합니다.<br>그리고 애플리케이션을 재실행 하고 로그인을 해보면..?<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ava.lang.IllegalArgumentException: There is no PasswordEncoder mapped <span class="keyword">for</span> the id <span class="string">"null"</span></span><br></pre></td></tr></table></figure></p>
+<p>위의 오류가 뜨면서 로그인이 되지 않습니다.<br>내 정보도 생성했고 그 정보로 똑같이 입력했는데 왜 로그인이 안될까요?<br><br>그 이유는 <strong>PasswordEncoder</strong>의 <strong>보안</strong> 때문입니다.<br>이 보안을 설정하는 법에 대해서 알아보겠습니다.<br><br><br> </p>
+<h2 id="PasswordEncoder"><a href="#PasswordEncoder" class="headerlink" title="PasswordEncoder"></a>PasswordEncoder</h2><p>password를 바로 DB에 저장하면 큰 시큐리티이슈에 걸리기 때문에 꼭 인코딩의 작업이 필요합니다.<br>참고자료 : <a href="https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#core-services-password-encoding" target="_blank" rel="noopener">스프링공식문서</a><br><br><br></p>
+<h3 id="NoOpPasswordEncoder"><a href="#NoOpPasswordEncoder" class="headerlink" title="NoOpPasswordEncoder"></a>NoOpPasswordEncoder</h3><p>실제로는 사용하면 안되지만 예외적으로 회피할 수 있는 방법입니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PasswordEncoder <span class="title">passwordEncoder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> NoOpPasswordEncoder.getInstance();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/security/se25.png" alt="Security"> 커스텀을 구현한 SecurityConfig에 빈으로 등록하면 아무런 인코딩 절차를 거치지 않고 <strong>NoOpPasswordEncoder</strong>로 변환되어 순수한 비밀번호 그 상태가 됩니다.<br><br><br></p>
+<h3 id="PasswordEncoderFactories-createDelegatingPasswordEncoder"><a href="#PasswordEncoderFactories-createDelegatingPasswordEncoder" class="headerlink" title="PasswordEncoderFactories.createDelegatingPasswordEncoder()"></a>PasswordEncoderFactories.createDelegatingPasswordEncoder()</h3><p>위 방법을 사용하면 스프링시큐리티가 권장하는 방식으로 인코딩이 됩니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PasswordEncoder <span class="title">passwordEncoder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> PasswordEncoderFactories.createDelegatingPasswordEncoder();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/security/se26.png" alt="Security"> 커스텀을 구현한 SecurityConfig에 빈으로 등록합니다.<br>이제 이를 직접 사용하기 위해 Service로 이동합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> PasswordEncoder passwordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Account <span class="title">createAccount</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    Account account = <span class="keyword">new</span> Account();</span><br><span class="line">    account.setUsername(username);</span><br><span class="line">    account.setPassword(passwordEncoder.encode(password));</span><br><span class="line">    <span class="keyword">return</span> accountRepository.save(account);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/springboot/security/se27.png" alt="Security"> PasswordEncoder를 주입받으면 빈으로 등록한 메소드가 동작하여 password를 입력하면 인코딩이 됩니다.<br><br><br></p>
+<h3 id="passwordEncoder-인코딩-결과"><a href="#passwordEncoder-인코딩-결과" class="headerlink" title="passwordEncoder 인코딩 결과"></a>passwordEncoder 인코딩 결과</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">junjang password : &#123;bcrypt&#125;<span class="variable">$2a</span><span class="variable">$10</span><span class="variable">$Mb4Qf8Ajb6PKDHGflWDKfeWLvQjjp8Wm9TeqGIiuyetWzeM44P4Dq</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/security/se28.png" alt="Security"> 위와 같이 인코딩 된 것을 보실 수 있습니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/15/interview/interview/">
+        <span class="nav-arrow">← </span>
+        
+          백엔드 면접 질문 정리(update - 19.05.15)
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Security-커스터마이징"><span class="toc-nav-text">Security 커스터마이징</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#WebSecurityConfigurerAdapter"><span class="toc-nav-text">WebSecurityConfigurerAdapter</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#configure-메소드-구현"><span class="toc-nav-text">configure 메소드 구현</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#UserDetailsService"><span class="toc-nav-text">UserDetailsService</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Account-클래스-생성"><span class="toc-nav-text">Account 클래스 생성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#AccountRepository-인터페이스-생성"><span class="toc-nav-text">AccountRepository 인터페이스 생성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Service-클래스-생성"><span class="toc-nav-text">Service 클래스 생성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Service-구현"><span class="toc-nav-text">Service 구현</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#UserDetailService-구현"><span class="toc-nav-text">UserDetailService 구현</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#loadUserByUsername-인터페이스-구현"><span class="toc-nav-text">loadUserByUsername 인터페이스 구현</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#로그인-정보-구현"><span class="toc-nav-text">로그인 정보 구현</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#PasswordEncoder"><span class="toc-nav-text">PasswordEncoder</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#NoOpPasswordEncoder"><span class="toc-nav-text">NoOpPasswordEncoder</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#PasswordEncoderFactories-createDelegatingPasswordEncoder"><span class="toc-nav-text">PasswordEncoderFactories.createDelegatingPasswordEncoder()</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#passwordEncoder-인코딩-결과"><span class="toc-nav-text">passwordEncoder 인코딩 결과</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/16/spring/spring-31/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
