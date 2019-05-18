@@ -10,7 +10,7 @@
   
   <title>
     
-      SpringBoot - Actuator | Junjangsee&#39;s Blog
+      SpringBoot - Actuator의 개념 | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,7 +98,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>SpringBoot - Actuator</h2>
+  <h2>SpringBoot - Actuator의 개념</h2>
   <p class="post-date">2019-05-18</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -107,7 +107,46 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"></section>
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="Actuator"><a href="#Actuator" class="headerlink" title="Actuator"></a>Actuator</h1><p>Actuator을 사용하면 스프링 애플리케이션 운영중에 주시할 수 있는 여러가지 유용한 정보들을 제공합니다.<br>이렇게 얻은 정보들을 <strong>Endpoint</strong>를 통해서 제공해줍니다.<br><br><br></p>
+<h2 id="Actuator-의존성-추가"><a href="#Actuator-의존성-추가" class="headerlink" title="Actuator 의존성 추가"></a>Actuator 의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/springboot/actuator/ac1.png" alt="Actuator"> 의존성을 추가해줍니다.<br><br><br></p>
+<h2 id="Endpoints"><a href="#Endpoints" class="headerlink" title="Endpoints"></a>Endpoints</h2><p>Actuator 의존성을 추가해주면 Actuator Endpoints 정보들이 자동으로 활성화됩니다.</p>
+<ul>
+<li>다양한 Endpoints를 제공합니다.</li>
+<li>JMX또는 HTTP를 통해 접근가능합니다.</li>
+<li>shutdown을 제외한 모든 Endpoint는 기본적으로 ​활성화​ 상태입니다.</li>
+</ul>
+<p><br></p>
+<h2 id="Endpoints-정보들"><a href="#Endpoints-정보들" class="headerlink" title="Endpoints 정보들"></a>Endpoints 정보들</h2><ul>
+<li><code>auditevents</code> : 인증정보(인증정보 획득, 실패) 이벤트</li>
+<li><code>beans</code>: 등록된 빈들</li>
+<li><code>conditions</code> : 어떤 자동 설정이 어떤 조건에 의해서 적용됐는지 안됐는지 정보</li>
+<li><code>configprops</code>: 여기 보이는 것들이 application.properties에 정의가 가능한 것들</li>
+<li><code>env</code>: Spring의 Environment를 Exposes 시켜주고 Environment안에 있는 properties를 보여줌</li>
+<li><code>flyway</code>: flyway migration 정보를 보여줌</li>
+<li><code>health</code>: 이 애플리케이션이 현재 잘 구동 중인지 health 정보를 보여줌</li>
+<li><code>httptrace</code>: 최근 100개의 HTTP 요청과 응답 소요시간등을 보여줌</li>
+<li><code>info</code>: 이 애플리케이션에 관련된 임의의 정보들을 보여줌</li>
+<li><code>logger</code>: 어떤 패키지가 어떤 logging 레벨을 가지고 있는지 또는 그런 logging 레벨들을 운영중에 수정할 수도 있음</li>
+<li><code>liquibase</code>: flyway와 비슷한 데이터베이스 migration liquibase가 의존성이 있는 경우에만 보여줌</li>
+<li><code>metrics</code>: 애플리케이션에 핵심이 되는 정보들 이 애플리케이션이 사용하는 메모리,<br>CPU가 어느정도 되는지, 그런 정보들을 여러 모니터링 애플리케이션 사용할 수 있는 공통의 포멧으로 만들어서 제공해줌 다른 모니터링 툴과 연동해서 사용할 수 있어서 다른 모니터링 툴에서 알림을 받거나하는 등으로 활용가능 아주 유용한 정보를 담고있는 Endpoint 정보</li>
+<li><code>mappings</code>: 컨트롤러 맵핑정보를 보여줌</li>
+<li><code>scheduledtasks</code>: scheduled 애노테이션으로 정의해놓은 scheduled tasks 정보를 보여줌</li>
+<li><code>sessions</code>: Spring Session 관련된 Endpoint</li>
+<li><code>shutdown</code>: 애플리케이션을 끌 수 있는 Endpoint 비활성화 되어있음 하지만 공개가 되어있어 동작함</li>
+<li><code>threaddump</code>: threaddump를 뜰 수 있음</li>
+<li><code>heapdump</code>: heapdump(현재 상태 메모리에 무엇이 들어있는지)를 뜰 수 있음</li>
+<li><code>jolokia</code>: JMX beans를 HTTP View에서도 볼 수 있음<br>JMX beans는 Java Management beans이라고 하며 JMX 표준에 준하는 bean을 만들면<br>애플리케이션 밖에서 그 빈의 Operation들을 호출할 수 있음<br>기본적으로 위의 모든 Endpoints 들은 JMX <code>Mbeans</code>로 등록되므로 전부 <code>Mbeans</code>로 노출이 됨<br>그 외에도 추가로 JMX bean에 충족하는 빈에 애플리케이션을 만들어서 등록할 수 있음<br>그런 것들도 jolokia를 통해서 HTTP를 통해서 접근이 가능해짐</li>
+<li><code>logfile</code>: logfile에 해당하는 것들도 볼 수 있음</li>
+<li><code>prometheus</code>: metrics 정보를 Prometheus server에서 캡쳐해갈 수 있는 형태로 변환해줌</li>
+</ul>
+<p>참고자료 : <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints" target="_blank" rel="noopener">스프링공식문서</a><br><br><br></p>
+<h2 id="Actuator-접근"><a href="#Actuator-접근" class="headerlink" title="Actuator 접근"></a>Actuator 접근</h2><blockquote>
+<p><a href="http://localhost:8080/actuator" target="_blank" rel="noopener">http://localhost:8080/actuator</a></p>
+</blockquote>
+<p>위와같이 HTTP로 접근하면 Spring HATEOAS(Hypermedia as the Engine of Application State)를 통해 접근가능한 링크 정보를 리턴해줍니다.<br><br><img src="/images/springboot/actuator/ac3.png" alt="Actuator"> http를 통해 접근할 경우 공개된 정보는 <code>health</code>, <code>info</code> 두가지 밖에 없는데 그 이유는 Endpoint의 Web 부분은 보안이슈 문제로 위 두가지의 정보만 공개한 상태입니다.<br>때문에 추가로 보기 위해선 활성화 설정을 해야합니다.<br><br>활성화 하는 방법에 대해선 추후 포스팅에서 알아보겠습니다.<br></p>
+</section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -119,6 +158,10 @@
 
   <a href="/tags#Actuator">
     <span class="tag-code">Actuator</span>
+  </a>
+
+  <a href="/tags#Endpoints">
+    <span class="tag-code">Endpoints</span>
   </a>
 
       </div>
@@ -157,7 +200,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Actuator"><span class="toc-nav-text">Actuator</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Actuator-의존성-추가"><span class="toc-nav-text">Actuator 의존성 추가</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Endpoints"><span class="toc-nav-text">Endpoints</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Endpoints-정보들"><span class="toc-nav-text">Endpoints 정보들</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Actuator-접근"><span class="toc-nav-text">Actuator 접근</span></a></li></ol></li></ol>
     
   </div>
 </aside>
