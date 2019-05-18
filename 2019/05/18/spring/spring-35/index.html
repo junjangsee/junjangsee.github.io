@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - Actuator JMX, HTTP | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - Actuator JMX, HTTP</h2>
+  <p class="post-date">2019-05-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="Actuator"><a href="#Actuator" class="headerlink" title="Actuator"></a>Actuator</h1><p>이전 포스팅에 이어서 Actuator를 사용하는 방법에 대해 계속 학습해 보겠습니다.<br></p>
+<h2 id="JMX"><a href="#JMX" class="headerlink" title="JMX"></a>JMX</h2><h3 id="JConsole"><a href="#JConsole" class="headerlink" title="JConsole"></a>JConsole</h3><p>JConsole은 자바에서 지원하는 JMX입니다.<br>참고자료 : <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html" target="_blank" rel="noopener">공식문서</a><br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jconsole</span><br></pre></td></tr></table></figure></p>
+<p>터미널에서 jconsole을 입력합니다.<br><img src="/images/springboot/actuator/ac4.png" alt="Actuator"> jconsole을 입력하면 위와같은 창이 뜹니다.<br><br><img src="/images/springboot/actuator/ac5.png" alt="Actuator"> 현재 로컬 상태이니 해당 프로젝트를 클릭하고 Connect합니다.<br><br><img src="/images/springboot/actuator/ac6.png" alt="Actuator"> SSL을 적용하지 않은 상태이므로 Insecure connection을 클릭합니다.<br><br><img src="/images/springboot/actuator/ac7.png" alt="Actuator"><br>접속하면 여러가지 정보들을 확인 할 수 있습니다.<br><br>Endpoints를 확인하기 위해 MBeans에서 애플리케이션을 확인합니다.<br><br><img src="/images/springboot/actuator/ac8.png" alt="Actuator"> 빈을 확인하기 위해 누른 창에서 도저히 사람의 눈으로 확인할 수 없는 긴 영어가 출력됩니다.<br>전 이걸 읽느니 차라리 <strong>죽음</strong>을 택하겠습니다.<br><br>저같은 개발자가 많았는지 이를 대응하기 위해 <strong>VisualVM</strong>이라는 툴이 나왔습니다.<br><br><br></p>
+<h3 id="VisualVM"><a href="#VisualVM" class="headerlink" title="VisualVM"></a>VisualVM</h3><p>기존에는 java에서 제공을 했었는데 java10 부터 제공되지 않아서 별도로 설치해야합니다.<br><br>다운로드 : <a href="https://visualvm.github.io/download.html" target="_blank" rel="noopener">홈페이지</a><br><img src="/images/springboot/actuator/ac9.png" alt="Actuator"> 위 주로소 들어가 각 OS에 맞는 것을 설치합니다.<br><br><img src="/images/springboot/actuator/ac10.png" alt="Actuator"> 실행을 시키면 좌측에 애플리케이션과 우측에 정보들이 나와있습니다.<br>jconsole의 가독성에 비하면 많이 발전된 모습이 보입니다.<br><br>기본적으로 VisualVM은 MBean이 없기 때문에 Plugin을 설치해야합니다.<br><br><br></p>
+<h4 id="MBean-Plugin-설치"><a href="#MBean-Plugin-설치" class="headerlink" title="MBean Plugin 설치"></a>MBean Plugin 설치</h4><p><img src="/images/springboot/actuator/ac11.png" alt="Actuator"> Tools - Plugins을 클릭합니다.<br><br><img src="/images/springboot/actuator/ac12.png" alt="Actuator"> Available Plugins에서 MBeand을 검색 후 - VisualVM 클릭 - install을 클릭하여 설치합니다.<br><br><img src="/images/springboot/actuator/ac13.png" alt="Actuator"> 아까와 동일한 MBeans를 보실 수 있습니다.<br><br><br></p>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>기존 HTTP를 통해 확인했을 땐 health와 info를 제외한 대부분의 Endpoint가 ​비공개​ 상태였습니다.<br>이 비공개 상태를 공개 옵션을 설정해 모두 확인할 수 있습니다.<br><br><br></p>
+<h3 id="management-endpoints-web-exposure-include"><a href="#management-endpoints-web-exposure-include" class="headerlink" title="management.endpoints.web.exposure.include"></a>management.endpoints.web.exposure.include</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">management.endpoints.web.exposure.include=*</span><br></pre></td></tr></table></figure>
+<p>위 설정을 application.properties에 하게되면 /actuator로 접속했을 시 전부 출력하게 됩니다.<br><br><img src="/images/springboot/actuator/ac14.png" alt="Actuator"> 여기서 전체 정보 대신 특정 정보를 출력하고 싶다면 Endpoints명을 입력해서 선택 출력도 가능합니다.<br><br>하지만 이런 정보들이 노출되면 보안이슈가 있으므로 <strong>SpringSecurity</strong>를 통해서 <strong>Admin</strong>만 접근하도록 할 필요성이 있습니다.<br>그 방법은 다음 포스팅에서 이어서 학습하겠습니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+  <a href="/tags#Actuator">
+    <span class="tag-code">Actuator</span>
+  </a>
+
+  <a href="/tags#JMX">
+    <span class="tag-code">JMX</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/18/spring/spring-34/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - Actuator의 개념
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Actuator"><span class="toc-nav-text">Actuator</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JMX"><span class="toc-nav-text">JMX</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JConsole"><span class="toc-nav-text">JConsole</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#VisualVM"><span class="toc-nav-text">VisualVM</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#MBean-Plugin-설치"><span class="toc-nav-text">MBean Plugin 설치</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP"><span class="toc-nav-text">HTTP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#management-endpoints-web-exposure-include"><span class="toc-nav-text">management.endpoints.web.exposure.include</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/18/spring/spring-35/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
