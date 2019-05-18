@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      SpringBoot - RestClient | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>SpringBoot - RestClient</h2>
+  <p class="post-date">2019-05-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+<h1 id="RestClient"><a href="#RestClient" class="headerlink" title="RestClient"></a>RestClient</h1><p>Rest를 클라이언트에서 요청하였을 때 어떻게 응답할지 결정하는  방식입니다.<br>RestClient에는 두 종류가 있는데 각각의 특징과 사용법을 학습해보겠습니다.</p>
+<ul>
+<li><p><strong>RestTemplate</strong></p>
+<ul>
+<li>Blocking I/O 기반의 Synchronous(동기식) API입니다.</li>
+<li>RestTemplateAutoConfiguration에서 자동설정 됩니다.</li>
+<li>프로젝트에 <strong>spring-web</strong> 의존성이 있다면 RestTemplate​Builder​를 빈으로 등록합니다.</li>
+<li>참고자료 : <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/integration.html#rest-client-access" target="_blank" rel="noopener">스프링공식문서</a></li>
+</ul>
+</li>
+<li><p><strong>WebClient</strong></p>
+<ul>
+<li>Non-Blocking I/O 기반의 Asynchronous(비동기식) API</li>
+<li>WebClientAutoConfiguration에서 자동설정 됩니다.</li>
+<li>프로젝트에 <strong>spring-webflux</strong> 의존성이 있다면 WebClient.​Builder​를 빈으로 등록합니다.</li>
+<li>참고자료 : <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client" target="_blank" rel="noopener">스프링공식문서</a><br><br><br><br></li>
+</ul>
+<h2 id="RestTemplate-사용하기"><a href="#RestTemplate-사용하기" class="headerlink" title="RestTemplate 사용하기"></a>RestTemplate 사용하기</h2><p><strong>동기식</strong>으로 응답하는 RestTemplate을 사용해보겠습니다.<br>Web 의존성을 추가한 프로젝트를 생성합니다.<br></p>
+<h3 id="Controller-클래스"><a href="#Controller-클래스" class="headerlink" title="Controller 클래스"></a>Controller 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Thread.sleep(<span class="number">5000l</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/world"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">world</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Thread.sleep(<span class="number">3000l</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"world"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/images/springboot/resttemplate/rest1.png" alt="RestClient"> Thread를 활용하여 hello는 5초, world는 3초의 시간을 줍니다.<br>그리고 클라이언트 입장에서 값을 받기 위해 ApplicationRunner를 사용할 클래스를 생성하고 생성된 클래스에 구현합니다.<br><br><br></p>
+<h3 id="ApplicationRunner-클래스"><a href="#ApplicationRunner-클래스" class="headerlink" title="ApplicationRunner 클래스"></a>ApplicationRunner 클래스</h3><p>클라이언트의 요청을 가정하여 두 가지의 방법을 사용해보겠습니다.<br><br></p>
+<h4 id="RestTemplate"><a href="#RestTemplate" class="headerlink" title="RestTemplate"></a>RestTemplate</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplateBuilder restTemplateBuilder;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        RestTemplate restTemplate = restTemplateBuilder.build();</span><br><span class="line"></span><br><span class="line">        StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">        stopWatch.start();</span><br><span class="line"></span><br><span class="line">        String helloResult = restTemplate.getForObject(<span class="string">"http://localhost:8080/hello"</span>, String.class);</span><br><span class="line">        System.out.println(helloResult);</span><br><span class="line"></span><br><span class="line">        String worldResult = restTemplate.getForObject(<span class="string">"http://localhost:8080/world"</span>, String.class);</span><br><span class="line">        System.out.println(worldResult);</span><br><span class="line"></span><br><span class="line">        stopWatch.stop();</span><br><span class="line">        System.out.println(stopWatch.prettyPrint());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>RestTemplate를 사용할 떈 RestTemplateBuilder 의존성을 주입받습니다.<br>그리고 build()함수를 사용하여 변수에 담고 변수의 기능을 사용해서 REST 요청시 String 값을 가져오도록 하고 출력합니다.<br><img src="/images/springboot/resttemplate/rest2.png" alt="RestClient"> 위처럼 맨 처음 요청한 <strong>hello</strong>의 5초 + 다음 <strong>world</strong> 요청인 3초 = 총 8초 정도의 시간에 응답을 완료했다고 출력됩니다.<br><br>이처럼 RestTemplate은 요청이 들어오면 다음 코드로 넘어가지 않고 완료되면 넘어가는 동기식 응답을 하는 것을 볼 수 있습니다.<br><br><br></p>
+<h4 id="WebClient"><a href="#WebClient" class="headerlink" title="WebClient"></a>WebClient</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-webflux<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>webflux 의존성을 추가해야만 사용할 수 있습니다.<br><br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    WebClient.Builder builder;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        WebClient webClient = builder.build();</span><br><span class="line"></span><br><span class="line">        StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">        stopWatch.start();</span><br><span class="line"></span><br><span class="line">        Mono&lt;String&gt; helloMono = webClient.get().uri(<span class="string">"http://localhost:8080/hello"</span>) </span><br><span class="line">                .retrieve() </span><br><span class="line">                .bodyToMono(String.class);</span><br><span class="line"></span><br><span class="line">        helloMono.subscribe(s -&gt; &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(stopWatch.isRunning()) &#123; </span><br><span class="line">                stopWatch.stop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(stopWatch.prettyPrint());</span><br><span class="line">            stopWatch.start();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Mono&lt;String&gt; worldMono = webClient.get().uri(<span class="string">"http://localhost:8080/world"</span>)</span><br><span class="line">                .retrieve()</span><br><span class="line">                .bodyToMono(String.class);</span><br><span class="line"></span><br><span class="line">        worldMono.subscribe(s -&gt; &#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(stopWatch.isRunning()) &#123;</span><br><span class="line">                stopWatch.stop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(stopWatch.prettyPrint());</span><br><span class="line">            stopWatch.start();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>WebClient는 WebClient.Builder로 의존성을 주입받습니다.<br>여기선 <strong>Stream API</strong>를 사용할 것인데 Subscribe하기 전 까지 작동하지 않고 대기하다가 Callback이 오면 로직을 수행합니다.<br>현재 로직에선 Rest 요청이 들어오면 String을 Mono 타입으로 변경 후 대기하다가 subscribe를 하게되면 출력한다고 생각하면 됩니다.<br><img src="/images/springboot/resttemplate/rest3.png" alt="RestClient"> 먼저 출력된 world 3초 + hello 2초 = 총 5초가 소요되었고 비동기로 출력된 것을 볼 수 있습니다.<br><br>이처럼 동기식보다 시간적 효율성이 높고 응답 시간도 빨라 개발자들은 보통 WebClient를 선호합니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#SpringBoot">
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/16/spring/spring-31/">
+        <span class="nav-arrow">← </span>
+        
+          SpringBoot - Security 커스터마이징
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#RestClient"><span class="toc-nav-text">RestClient</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RestTemplate-사용하기"><span class="toc-nav-text">RestTemplate 사용하기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Controller-클래스"><span class="toc-nav-text">Controller 클래스</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ApplicationRunner-클래스"><span class="toc-nav-text">ApplicationRunner 클래스</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#RestTemplate"><span class="toc-nav-text">RestTemplate</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#WebClient"><span class="toc-nav-text">WebClient</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/05/16/spring/spring-32/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
