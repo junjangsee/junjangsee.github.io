@@ -108,7 +108,7 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
-<h1 id="Index-인덱스"><a href="#Index-인덱스" class="headerlink" title="Index(인덱스)"></a>Index(인덱스)</h1><p>인덱스는 <code>/</code>로 요청했을 때 호출되는 페이지를 말합니다.<br>SpringBoot에서는 Error Handler가 내장 인덱스 페이지를 보여줍니다. 이 페이지를 커스텀 시켜보겠습니다.<br><br><img src="/images/springboot/indexfavicon/in1.png" alt="IndexFavicon"> 기본 리소스 위치에 index.html이 있으면 자동으로 매핑하여 출력해줍니다.<br>혹시 기본 리소스 위치가 기억이 안난다면 <a href="https://junjangsee.github.io/2019/05/08/spring/spring-15/" target="_blank" rel="noopener">정적리소스</a>를 참고해주시면 됩니다.<br><br><img src="/images/springboot/indexfavicon/in2.png" alt="IndexFavicon"> index.html에 있는 제목이 출력된 모습입니다.<br><br><br></p>
+<h1 id="Index-인덱스"><a href="#Index-인덱스" class="headerlink" title="Index(인덱스)"></a>Index(인덱스)</h1><p>인덱스는 <code>/</code>로 요청했을 때 호출되는 페이지를 말합니다.<br>SpringBoot에서는 Error Handler가 내장 인덱스 페이지를 보여줍니다. 이 페이지를 커스텀 시켜보겠습니다.<br><br><img src="/images/springboot/indexfavicon/in1.png" alt="IndexFavicon"> 기본 리소스 위치에 index.html이 있으면 자동으로 매핑하여 출력해줍니다.<br>혹시 기본 리소스 위치가 기억이 안난다면 <a href="https://junjangsee.github.io/2019/05/08/spring/spring-15/">정적리소스</a>를 참고해주시면 됩니다.<br><br><img src="/images/springboot/indexfavicon/in2.png" alt="IndexFavicon"> index.html에 있는 제목이 출력된 모습입니다.<br><br><br></p>
 <h1 id="Favicon-파비콘"><a href="#Favicon-파비콘" class="headerlink" title="Favicon(파비콘)"></a>Favicon(파비콘)</h1><p>파비콘은 웹페이지 로드시 함께 출력되는 좌측에 이미지를 말합니다.</p>
 <ul>
 <li>파비콘 만드는 홈페이지 : <a href="https://favicon.io/" target="_blank" rel="noopener">파비콘 만들기</a></li>
@@ -170,7 +170,9 @@
     
     <!-- 二维码 END -->
     
-      <!-- No Comment -->
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
     
   </article>
   <!-- Article END -->
@@ -190,7 +192,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/05/09/spring/spring-17/';
+    var url = 'https://junjangsee.github.io/2019/05/09/spring/spring-17/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -242,6 +244,20 @@
 
 
 
+
+  <script>
+    var disqus_shortname = 'junjangsee';
+    
+    var disqus_url = 'https://junjangsee.github.io/2019/05/09/spring/spring-17/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 
 
     <div class="scroll-top">

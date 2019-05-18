@@ -151,7 +151,7 @@
 <p><img src="/images/springboot/mysql/mysql4.png" alt="MySQL"> 현재 생성한 테이블이 있는지 확인하는 명령어입니다.<br>아직은 넣은 값이 없기 때문에 테이블이 존재하지 않습니다.<br><br><br></p>
 <h2 id="MySQL-연동하기"><a href="#MySQL-연동하기" class="headerlink" title="MySQL 연동하기"></a>MySQL 연동하기</h2><p>이제 MySQL이 구동되는 것 까지 확인했으니 SpringBoot와 연동해야합니다.<br>연동은 application.properties의 Key, Value로 설정하고 <strong>url, username, password</strong> 세가지를 선언합니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/springboot</span><br><span class="line">spring.datasource.username=junjang</span><br><span class="line">spring.datasource.password=pass</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySQLRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (Connection connection = dataSource.getConnection()) &#123;</span><br><span class="line">            System.out.println(connection.getClass());</span><br><span class="line">            System.out.println(connection.getMetaData().getURL());</span><br><span class="line">            System.out.println(connection.getMetaData().getUserName());</span><br><span class="line"></span><br><span class="line">            Statement statement = connection.createStatement();</span><br><span class="line"></span><br><span class="line">            String sql = <span class="string">"CREATE TABLE USER (ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY (id))"</span>;</span><br><span class="line">            statement.executeUpdate(sql);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        jdbcTemplate.execute(<span class="string">"INSERT INTO USER VALUES(1, 'junjang')"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위 코드를 작성하고 실행하게 되면..<br><br>ps. 혹시 위 코드가 이해가 되지 않는다면 <a href="https://junjangsee.github.io/2019/05/12/spring/spring-23/" target="_blank" rel="noopener">인메모리 데이터베이스</a>를 읽어주시면 됩니다.<br><br><img src="/images/springboot/mysql/mysql5.png" alt="MySQL"> 테이블에 INSERT된 값을 보실 수 있습니다.<br><br><br></p>
+<p>위 코드를 작성하고 실행하게 되면..<br><br>ps. 혹시 위 코드가 이해가 되지 않는다면 <a href="https://junjangsee.github.io/2019/05/12/spring/spring-23/">인메모리 데이터베이스</a>를 읽어주시면 됩니다.<br><br><img src="/images/springboot/mysql/mysql5.png" alt="MySQL"> 테이블에 INSERT된 값을 보실 수 있습니다.<br><br><br></p>
 <h2 id="SSL-오류가-난다면"><a href="#SSL-오류가-난다면" class="headerlink" title="SSL 오류가 난다면?"></a>SSL 오류가 난다면?</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql:/localhost:3306/springboot?**useSSL=false**</span><br></pre></td></tr></table></figure>
 <p><strong>?useSSL=false</strong>를 추가합니다.<br><br><br><br></p>
 <h2 id="Public-Key-Retrieval-is-not-allowed-오류가-난다면"><a href="#Public-Key-Retrieval-is-not-allowed-오류가-난다면" class="headerlink" title="Public Key Retrieval is not allowed 오류가 난다면?"></a>Public Key Retrieval is not allowed 오류가 난다면?</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql:/localhost:3306/springboot?useSSL=false&amp;**allowPublicKeyRetrieval=true**</span><br></pre></td></tr></table></figure>
@@ -222,7 +222,9 @@
     
     <!-- 二维码 END -->
     
-      <!-- No Comment -->
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
     
   </article>
   <!-- Article END -->
@@ -242,7 +244,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/05/12/spring/spring-24/';
+    var url = 'https://junjangsee.github.io/2019/05/12/spring/spring-24/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -294,6 +296,20 @@
 
 
 
+
+  <script>
+    var disqus_shortname = 'junjangsee';
+    
+    var disqus_url = 'https://junjangsee.github.io/2019/05/12/spring/spring-24/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 
 
     <div class="scroll-top">

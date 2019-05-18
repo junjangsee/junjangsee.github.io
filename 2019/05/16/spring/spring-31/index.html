@@ -108,7 +108,7 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
-<h1 id="Security-커스터마이징"><a href="#Security-커스터마이징" class="headerlink" title="Security 커스터마이징"></a>Security 커스터마이징</h1><p>시큐리티를 커스텀하여 내가 원하는 페이지에서만 로그인을 할 수 있도록 구현하는 방법을 학습하겠습니다. 이 포스팅은 이전에 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-30/" target="_blank" rel="noopener">Security의 개념과 테스트</a>에 작성된 코드의 이해와 내용이 꼭 필요하니 참고해주시면 되겠습니다.<br></p>
+<h1 id="Security-커스터마이징"><a href="#Security-커스터마이징" class="headerlink" title="Security 커스터마이징"></a>Security 커스터마이징</h1><p>시큐리티를 커스텀하여 내가 원하는 페이지에서만 로그인을 할 수 있도록 구현하는 방법을 학습하겠습니다. 이 포스팅은 이전에 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-30/">Security의 개념과 테스트</a>에 작성된 코드의 이해와 내용이 꼭 필요하니 참고해주시면 되겠습니다.<br></p>
 <ul>
 <li>시작 전 세팅되어있어야 할 것들 : Controller 클래스, HTML , thymeleaf, security 의존성 추가</li>
 </ul>
@@ -130,7 +130,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountService</span> <span class="keyword">implements</span> <span class="title">UserDetailsService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Account <span class="title">createAccount</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(username);</span><br><span class="line">        account.setPassword(password);</span><br><span class="line">        <span class="keyword">return</span> accountRepository.save(account);</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserDetails <span class="title">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/springboot/security/se21.png" alt="Security"> 먼저 implements로 UserDetailService를 구현합니다. 그리고 유저 정보를 가져오는 메소드를 오버라이딩합니다.<br><br>ps. 여기서 구현시 어디에 구현하던 상관은 없지만 꼭 <strong>빈</strong>으로 등록되어있어야 자동으로 유저가 생성되지 않습니다.<br><br><br></p>
 <h3 id="loadUserByUsername-인터페이스-구현"><a href="#loadUserByUsername-인터페이스-구현" class="headerlink" title="loadUserByUsername 인터페이스 구현"></a>loadUserByUsername 인터페이스 구현</h3><p>위 인터페이스에서는 username을 가져와 UserDetails에서 유저 정보를 확인합니다. 여기엔 password가 들어있는데 이때 입력한 password가 같은지 확인하고 그에 맞는 조치를 취하게 할 수 있습니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserDetails <span class="title">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException </span>&#123;</span><br><span class="line">        Optional&lt;Account&gt; byUsername = accountRepository.findByUsername(username);</span><br><span class="line">        Account account = byUsername.orElseThrow(() -&gt; <span class="keyword">new</span> UsernameNotFoundException(username));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(account.getUsername(), account.getPassword(), authorities());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Collection&lt;? extends GrantedAuthority&gt; authorities() &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(<span class="keyword">new</span> SimpleGrantedAuthority(<span class="string">"ROLE_USER"</span>));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/springboot/security/se23.png" alt="Security"> Repository에 저장된 username을 찾기 위해 새로운 메소드를 정의하고 찾은 username을 byUsername에 담습니다.(이 부분을 모르시겠다면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/" target="_blank" rel="noopener">JPA 연동하기 - 운영 DB 테스트</a>부분을 참고해주시면 됩니다.)<br><br>만약, username이 없다면 에러를 던지고 있으면 account에 넣게 됩니다.<br>이제 이러한 유저의 정보를 가지고 로그인 판단을 해야합니다. 그 판단은 <strong>UserDetails</strong>의 정보로 하게됩니다.<br>(현재 실습의 경우엔 Account의 정보가 되겠습니다.)<br><br><strong>UserDetails</strong>에 담고있는 유저의 정보를 User()로 가져올 수 있습니다. 그리고 이 유저가 어떤 권한을 가졌는지 알아보기 위해 authorities 메소드를 생성하여 ROLE_USER 이라는 권한을 가진 유저라고 임의 설정하고 최종적으로 return하게 됩니다.<br><br>결론적으로 말하면 로그인 한 username을 UserDetails에 있는 정보와 대조해서 맞으면 로그인, 틀릴시 에러를 출력하게 됩니다.<br><br>여기까지 왔다면 이제 자동으로 생성되는 유저의 정보가 아닌 입력한 정보로 로그인을 판별하게 됩니다.<br>하지만 아직 로그인이 통과될 유저정보가 없기 때문에 <strong>ApplicationRunner</strong>를 통해 정보를 만들도록 하겠습니다.<br><br><br></p>
+<p><img src="/images/springboot/security/se23.png" alt="Security"> Repository에 저장된 username을 찾기 위해 새로운 메소드를 정의하고 찾은 username을 byUsername에 담습니다.(이 부분을 모르시겠다면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/">JPA 연동하기 - 운영 DB 테스트</a>부분을 참고해주시면 됩니다.)<br><br>만약, username이 없다면 에러를 던지고 있으면 account에 넣게 됩니다.<br>이제 이러한 유저의 정보를 가지고 로그인 판단을 해야합니다. 그 판단은 <strong>UserDetails</strong>의 정보로 하게됩니다.<br>(현재 실습의 경우엔 Account의 정보가 되겠습니다.)<br><br><strong>UserDetails</strong>에 담고있는 유저의 정보를 User()로 가져올 수 있습니다. 그리고 이 유저가 어떤 권한을 가졌는지 알아보기 위해 authorities 메소드를 생성하여 ROLE_USER 이라는 권한을 가진 유저라고 임의 설정하고 최종적으로 return하게 됩니다.<br><br>결론적으로 말하면 로그인 한 username을 UserDetails에 있는 정보와 대조해서 맞으면 로그인, 틀릴시 에러를 출력하게 됩니다.<br><br>여기까지 왔다면 이제 자동으로 생성되는 유저의 정보가 아닌 입력한 정보로 로그인을 판별하게 됩니다.<br>하지만 아직 로그인이 통과될 유저정보가 없기 때문에 <strong>ApplicationRunner</strong>를 통해 정보를 만들도록 하겠습니다.<br><br><br></p>
 <h2 id="로그인-정보-구현"><a href="#로그인-정보-구현" class="headerlink" title="로그인 정보 구현"></a>로그인 정보 구현</h2><p><strong>ApplicationRunner</strong>는 애플리케이션이 실행될 때 함께 실행됩니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AccountService accountService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Account junjang = accountService.createAccount(<span class="string">"junjang"</span>, <span class="string">"1234"</span>);</span><br><span class="line">        System.out.println(junjang.getUsername() + <span class="string">" password : "</span> + junjang.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><img src="/images/springboot/security/se24.png" alt="Security"> Service에서 구현했던 유저 생성메소드를 사용하여 정보를 추가합니다.<br>그리고 애플리케이션을 재실행 하고 로그인을 해보면..?<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ava.lang.IllegalArgumentException: There is no PasswordEncoder mapped <span class="keyword">for</span> the id <span class="string">"null"</span></span><br></pre></td></tr></table></figure></p>
 <p>위의 오류가 뜨면서 로그인이 되지 않습니다.<br>내 정보도 생성했고 그 정보로 똑같이 입력했는데 왜 로그인이 안될까요?<br><br>그 이유는 <strong>PasswordEncoder</strong>의 <strong>보안</strong> 때문입니다.<br>이 보안을 설정하는 법에 대해서 알아보겠습니다.<br><br><br> </p>
@@ -197,7 +197,9 @@
     
     <!-- 二维码 END -->
     
-      <!-- No Comment -->
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
     
   </article>
   <!-- Article END -->
@@ -217,7 +219,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/05/16/spring/spring-31/';
+    var url = 'https://junjangsee.github.io/2019/05/16/spring/spring-31/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -269,6 +271,20 @@
 
 
 
+
+  <script>
+    var disqus_shortname = 'junjangsee';
+    
+    var disqus_url = 'https://junjangsee.github.io/2019/05/16/spring/spring-31/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 
 
     <div class="scroll-top">

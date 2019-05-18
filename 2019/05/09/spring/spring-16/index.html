@@ -115,7 +115,7 @@
 <h2 id="jQuery-JAR-추가해보기"><a href="#jQuery-JAR-추가해보기" class="headerlink" title="jQuery JAR 추가해보기"></a>jQuery JAR 추가해보기</h2><p>라이브러리를 가져옵니다.<br><a href="https://mvnrepository.com/" target="_blank" rel="noopener">mvnrepository</a></p>
 <p><img src="/images/springboot/webjar/webj1.png" alt="WebJar"> jQuery의 3.3.1 버전의 jar형식의 라이브러리를 pom.xml에 추가합니다.<br><br><br></p>
 <h2 id="jQuery-사용하기"><a href="#jQuery-사용하기" class="headerlink" title="jQuery 사용하기"></a>jQuery 사용하기</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> ​<span class="attr">src</span>=<span class="string">​</span>"/<span class="attr">webjars</span>/<span class="attr">jquery</span>/<span class="attr">3.3.1</span>/<span class="attr">dist</span>/<span class="attr">jquery.min.js</span>"​&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    $(function() &#123;</span></span><br><span class="line"><span class="undefined">        console.log("ready!");</span></span><br><span class="line"><span class="undefined">    &#125;);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/springboot/webjar/webj2.png" alt="WebJar"> 그리고 HTML에 매핑경로에 맞춰 jar를 추가한 후 간단한 alert 창을 출력합니다.<br><br><img src="/images/springboot/webjar/webj3.png" alt="WebJar"> 정적 리소스 HTML경로로 들어가게 되면 jar가 인식되어 경고창이 뜨는 것을 확인할 수 있습니다.<br>혹시 정적 리소스에 대해 알고싶으시다면 <a href="https://junjangsee.github.io/2019/05/08/spring/spring-15/" target="_blank" rel="noopener">정적 리소스</a>를 참고해주시면 됩니다.<br><br>하지만 jar를 추가할 때 버전을 포함하여 추가하게 되면 버전이 업데이트 될 때마다 코드를 바꿔야하는 소요가 있습니다. 그 것을 해결할 방법은 없을까요?<br><br><br></p>
+<p><img src="/images/springboot/webjar/webj2.png" alt="WebJar"> 그리고 HTML에 매핑경로에 맞춰 jar를 추가한 후 간단한 alert 창을 출력합니다.<br><br><img src="/images/springboot/webjar/webj3.png" alt="WebJar"> 정적 리소스 HTML경로로 들어가게 되면 jar가 인식되어 경고창이 뜨는 것을 확인할 수 있습니다.<br>혹시 정적 리소스에 대해 알고싶으시다면 <a href="https://junjangsee.github.io/2019/05/08/spring/spring-15/">정적 리소스</a>를 참고해주시면 됩니다.<br><br>하지만 jar를 추가할 때 버전을 포함하여 추가하게 되면 버전이 업데이트 될 때마다 코드를 바꿔야하는 소요가 있습니다. 그 것을 해결할 방법은 없을까요?<br><br><br></p>
 <h2 id="webjars-locator-core-의존성을-추가하여-버전-생략하기"><a href="#webjars-locator-core-의존성을-추가하여-버전-생략하기" class="headerlink" title="webjars-locator-core 의존성을 추가하여 버전 생략하기"></a>webjars-locator-core 의존성을 추가하여 버전 생략하기</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.webjars<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>webjars-locator-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.36<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/springboot/webjar/webj4.png" alt="WebJar"> 위 의존성을 추가하면 버전을 생략하고 jar파일을 선언할 수 있게됩니다.<br><br><img src="/images/springboot/webjar/webj5.png" alt="WebJar"> 3.3.1 버전을 생략한 모습입니다. 물론 출력도 이상 없습니다.<br></p>
 </section>
@@ -169,7 +169,9 @@
     
     <!-- 二维码 END -->
     
-      <!-- No Comment -->
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
     
   </article>
   <!-- Article END -->
@@ -189,7 +191,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/05/09/spring/spring-16/';
+    var url = 'https://junjangsee.github.io/2019/05/09/spring/spring-16/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -241,6 +243,20 @@
 
 
 
+
+  <script>
+    var disqus_shortname = 'junjangsee';
+    
+    var disqus_url = 'https://junjangsee.github.io/2019/05/09/spring/spring-16/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 
 
     <div class="scroll-top">

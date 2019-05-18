@@ -125,7 +125,7 @@
 </ul>
 <p>실습을 통해서 시큐리티가 어떻게 작동하는지 학습해보겠습니다.<br><br><br></p>
 <h2 id="Thymeleaf-의존성-추가"><a href="#Thymeleaf-의존성-추가" class="headerlink" title="Thymeleaf 의존성 추가"></a>Thymeleaf 의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/springboot/security/se1.png" alt="Securituy"> 타임리프 의존성을 추가하여 View를 구성하겠습니다.<br>타임리프가 궁금하시다면 <a href="https://junjangsee.github.io/2019/05/09/spring/spring-18/" target="_blank" rel="noopener">타임리프 포스팅</a>을 참고해주시면 되겠습니다.<br><br><br></p>
+<p><img src="/images/springboot/security/se1.png" alt="Securituy"> 타임리프 의존성을 추가하여 View를 구성하겠습니다.<br>타임리프가 궁금하시다면 <a href="https://junjangsee.github.io/2019/05/09/spring/spring-18/">타임리프 포스팅</a>을 참고해주시면 되겠습니다.<br><br><br></p>
 <h2 id="Controller-클래스"><a href="#Controller-클래스" class="headerlink" title="Controller 클래스"></a>Controller 클래스</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/my"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">my</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"my"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/springboot/security/se4.png" alt="Securituy"><br>단순한 View로 이동하는 컨트롤러를 구현합니다.<br><br><br></p>
 <h3 id="단순-View-Controller를-커스텀으로-구현하기"><a href="#단순-View-Controller를-커스텀으로-구현하기" class="headerlink" title="단순 View Controller를 커스텀으로 구현하기"></a>단순 View Controller를 커스텀으로 구현하기</h3><p>별다른 Controller 설정없이 요청이 들어오면 View로 보내는 설정이 하고싶으면 아래와 같이 설정하는 방법도 있습니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addViewController(<span class="string">"/hello"</span>).setViewName(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -206,7 +206,9 @@
     
     <!-- 二维码 END -->
     
-      <!-- No Comment -->
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
     
   </article>
   <!-- Article END -->
@@ -226,7 +228,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/05/14/spring/spring-30/';
+    var url = 'https://junjangsee.github.io/2019/05/14/spring/spring-30/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -278,6 +280,20 @@
 
 
 
+
+  <script>
+    var disqus_shortname = 'junjangsee';
+    
+    var disqus_url = 'https://junjangsee.github.io/2019/05/14/spring/spring-30/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 
 
     <div class="scroll-top">

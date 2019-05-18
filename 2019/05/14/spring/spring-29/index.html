@@ -108,7 +108,7 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
-<h1 id="데이터베이스-Migration-마이그레이션"><a href="#데이터베이스-Migration-마이그레이션" class="headerlink" title="데이터베이스 Migration(마이그레이션)"></a>데이터베이스 Migration(마이그레이션)</h1><p>스키마 혹은 데이터를 변경할 때 버전관리 형식으로 관리가 가능합니다. 대표적으로 Flyway와 Liquibase가 있습니다. 이중에 Flyway를 대표로 삼아 공부해보겠습니다.<br><br>도중 나오는 코드들은 이전 포스트에서 그대로 가져왔습니다.<br>코드가 필요하시면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/" target="_blank" rel="noopener">JPA 연동하기</a> 포스팅을 참고하시면 됩니다.<br>참고자료 : <a href="https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup" target="_blank" rel="noopener">스프링공식홈페이지</a>, <a href="https://flywaydb.org/" target="_blank" rel="noopener">flyway홈페이지</a><br><br></p>
+<h1 id="데이터베이스-Migration-마이그레이션"><a href="#데이터베이스-Migration-마이그레이션" class="headerlink" title="데이터베이스 Migration(마이그레이션)"></a>데이터베이스 Migration(마이그레이션)</h1><p>스키마 혹은 데이터를 변경할 때 버전관리 형식으로 관리가 가능합니다. 대표적으로 Flyway와 Liquibase가 있습니다. 이중에 Flyway를 대표로 삼아 공부해보겠습니다.<br><br>도중 나오는 코드들은 이전 포스트에서 그대로 가져왔습니다.<br>코드가 필요하시면 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/">JPA 연동하기</a> 포스팅을 참고하시면 됩니다.<br>참고자료 : <a href="https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup" target="_blank" rel="noopener">스프링공식홈페이지</a>, <a href="https://flywaydb.org/" target="_blank" rel="noopener">flyway홈페이지</a><br><br></p>
 <h2 id="Flyway-의존성-추가"><a href="#Flyway-의존성-추가" class="headerlink" title="Flyway 의존성 추가"></a>Flyway 의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.flywaydb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>flyway-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/springboot/mygration/fly1.png" alt="JPA"> 의존성을 추가합니다.<br><br><br></p>
 <h2 id="마이그레이션"><a href="#마이그레이션" class="headerlink" title="마이그레이션"></a>마이그레이션</h2><h3 id="마이그레이션-디렉토리"><a href="#마이그레이션-디렉토리" class="headerlink" title="마이그레이션 디렉토리"></a>마이그레이션 디렉토리</h3><ul>
@@ -183,7 +183,9 @@
     
     <!-- 二维码 END -->
     
-      <!-- No Comment -->
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
     
   </article>
   <!-- Article END -->
@@ -203,7 +205,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/05/14/spring/spring-29/';
+    var url = 'https://junjangsee.github.io/2019/05/14/spring/spring-29/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -255,6 +257,20 @@
 
 
 
+
+  <script>
+    var disqus_shortname = 'junjangsee';
+    
+    var disqus_url = 'https://junjangsee.github.io/2019/05/14/spring/spring-29/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
 
 
     <div class="scroll-top">
