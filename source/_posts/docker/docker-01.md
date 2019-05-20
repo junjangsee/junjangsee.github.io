@@ -40,12 +40,12 @@ docker rm 컨테이너명
 docker rmi 이미지명
 ```
 <br/>
-### container 중지
+### 컨테이너 중지
 ```bash
 docker stop 컨테이너명
 ```
 <br/>
-### container 시작
+### 컨테이너 시작
 ```bash
 docker start 컨테이너명
 ```

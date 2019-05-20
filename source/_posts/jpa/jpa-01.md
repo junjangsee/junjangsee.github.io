@@ -87,8 +87,6 @@ public class Application {
             System.out.println("Connection created: "+ connection);
             String sql = "CREATE TABLE ACCOUNT (id int, username varchar(255), password varchar(255));";
 
-            sql = "INSERT INTO ACCOUNT VALUES(1, 'junjang', 'pass');";
-
             try(PreparedStatement statement = connection.prepareStatement(sql)){
                 statement.execute();
             }
