@@ -108,7 +108,29 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
-<h1 id="ORM의-개요"><a href="#ORM의-개요" class="headerlink" title="ORM의 개요"></a>ORM의 개요</h1><p><img src="/images/jpa/orm/orm1.png" alt="RDS"> </p>
+<h1 id="ORM의-개요"><a href="#ORM의-개요" class="headerlink" title="ORM의 개요"></a>ORM의 개요</h1><p>ORM(Object Relation Mapping)은 애플리케이션의 <strong>클래스</strong>와 SQL 데이터베이스의 <strong>테이블</strong> 사이의 ​<strong>맵핑 정보를 기술한 메타데이터</strong>​를 사용하여 자바 애플리케이션의 객체를 SQL데이터베이스의 테이블에 <strong>자동으로 영속화​</strong> 해주는 기술입니다.<br><strong>Hibernate</strong>나 <strong>JPA</strong>같은 ORM을 사용하는 이유는 도메인 모델을 사용하기 위해서 입니다.<br><br><br></p>
+<h2 id="DB-연동-방식"><a href="#DB-연동-방식" class="headerlink" title="DB 연동 방식"></a>DB 연동 방식</h2><h3 id="JDBC를-직접-사용하는-방식"><a href="#JDBC를-직접-사용하는-방식" class="headerlink" title="JDBC를 직접 사용하는 방식"></a>JDBC를 직접 사용하는 방식</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>(Connection connection = DriverManager.getConnection(url, username, password))&#123;</span><br><span class="line">    System.out.println(<span class="string">"Connection created: "</span>+ connection);</span><br><span class="line">    String sql = <span class="string">"CREATE TABLE ACCOUNT (id int, username varchar(255), password varchar(255));"</span>;</span><br><span class="line">    sql = <span class="string">"INSERT INTO ACCOUNT VALUES(1, 'junjang', 'pass');"</span>;</span><br><span class="line">    <span class="keyword">try</span>(PreparedStatement statement = connection.prepareStatement(sql))&#123;</span><br><span class="line">        statement.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="JPA로-도메인-모델을-사용하는-방식"><a href="#JPA로-도메인-모델을-사용하는-방식" class="headerlink" title="JPA로 도메인 모델을 사용하는 방식"></a>JPA로 도메인 모델을 사용하는 방식</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Account account = <span class="keyword">new</span> Account(junjang, “pass”);</span><br><span class="line">accountRepository.save(account);</span><br></pre></td></tr></table></figure>
+<p>위 두 코드의 차이가 확연히 느껴지시나요?<br>JDBC 방식은 비즈니스 로직과 상관없는 코드들을 많이 작성해야하는 반면 JPA를 활용하면 단순하게 연동이 가능합니다.<br><br>그러면 도메인 모델을 사용하면 좋은점에는 뭐가 있을까요? <br><br><br></p>
+<h2 id="도메인-모델을-사용하면-좋은점"><a href="#도메인-모델을-사용하면-좋은점" class="headerlink" title="도메인 모델을 사용하면 좋은점"></a>도메인 모델을 사용하면 좋은점</h2><ul>
+<li>객체지향 프로그래밍의 장점을 보여줍니다.</li>
+<li>각종 디자인 패턴의 사용이 용이합니다.</li>
+<li>코드 재사용성이 좋습니다.</li>
+<li>비즈니스 로직 구현 및 테스트가 편리합니다.</li>
+</ul>
+<p><br></p>
+<h2 id="ORM의-장점"><a href="#ORM의-장점" class="headerlink" title="ORM의 장점"></a>ORM의 장점</h2><ul>
+<li><strong>생산성</strong> : 매핑을 하면 데이터 입출력이 정말 쉬워집니다.</li>
+<li><strong>유지보수성</strong> : 코드가 굉장히 간결해지고 코드양이 줄어 유지보수성이 높아집니다.</li>
+<li><strong>성능</strong> : 객체와 테이블 사이에 <strong>캐시</strong>가 존재하여 중복 혹은 필요없는 데이터 변경 요청이 들어오면 반영하지 않고, 데이터가 변경될 여지가 있을 때만 변경되기 때문에 보다 효율적입니다.</li>
+<li><strong>벤더 독립성</strong> : Hibernate가 어떠한 데이터베이스에 맞게 SQL을 생성해야 되는지만 알려주면 됩니다. 이유는 ibernate가 데이터베이스 sync를 할때 객체를 영속화 할때 발생하는 SQL만 자동으로 바뀌기 때문입니다.</li>
+</ul>
+<p><br></p>
+<h2 id="ORM의-단점"><a href="#ORM의-단점" class="headerlink" title="ORM의 단점"></a>ORM의 단점</h2><ul>
+<li><strong>높은 학습비용</strong> : SQL, Hibernate, JPA 세가지를 전부 잘 알고 있어야 제대로 활용할 수 있기 때문에 학습하는데 높은 난이도와 많은 시간이 소요됩니다.<br><br><br></li>
+</ul>
+<p>이번 주제를 통해서 ORM을 활용한 프레임워크와 기술의 중요성을 알고 학습하여 효율적인 코드를 작성해야겠다는 생각을 가지면 좋겠습니다. :)</p>
 </section>
     <!-- Tags START -->
     
@@ -159,7 +181,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ORM의-개요"><span class="toc-nav-text">ORM의 개요</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ORM의-개요"><span class="toc-nav-text">ORM의 개요</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DB-연동-방식"><span class="toc-nav-text">DB 연동 방식</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JDBC를-직접-사용하는-방식"><span class="toc-nav-text">JDBC를 직접 사용하는 방식</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JPA로-도메인-모델을-사용하는-방식"><span class="toc-nav-text">JPA로 도메인 모델을 사용하는 방식</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#도메인-모델을-사용하면-좋은점"><span class="toc-nav-text">도메인 모델을 사용하면 좋은점</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ORM의-장점"><span class="toc-nav-text">ORM의 장점</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ORM의-단점"><span class="toc-nav-text">ORM의 단점</span></a></li></ol></li></ol>
     
   </div>
 </aside>
