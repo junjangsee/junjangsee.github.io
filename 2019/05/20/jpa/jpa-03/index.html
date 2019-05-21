@@ -10,7 +10,7 @@
   
   <title>
     
-      JPA - ORM의 패러다임 | Junjangsee&#39;s Blog
+      JPA - 프로젝트 세팅 | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,7 +98,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>JPA - ORM의 패러다임</h2>
+  <h2>JPA - 프로젝트 세팅</h2>
   <p class="post-date">2019-05-20</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -108,7 +108,48 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
-<h1 id="ORM의-패러다임"><a href="#ORM의-패러다임" class="headerlink" title="ORM의 패러다임"></a>ORM의 패러다임</h1></section>
+<h1 id="프로젝트-세팅"><a href="#프로젝트-세팅" class="headerlink" title="프로젝트 세팅"></a>프로젝트 세팅</h1><p>JPA를 활용하는 프로젝트를 만드는 방법을 알아봅시다.</p>
+<ul>
+<li>개발 환경<ul>
+<li>IntelliJ Ultimate 2019.01.02</li>
+<li>Mac OS Mojave</li>
+<li>Docker 2.0.0.3</li>
+<li>PostgreSQL</li>
+<li>SpringBoot 2.1.5</li>
+<li>Hibernate 5.3.10<br><br><br></li>
+</ul>
+</li>
+</ul>
+<h2 id="데이터베이스-실행"><a href="#데이터베이스-실행" class="headerlink" title="데이터베이스 실행"></a>데이터베이스 실행</h2><p>Docker를 활용하여 postgreSQL을 연동합니다. 혹시 Docker를 활용하지 않으셨다면 <a href="https://junjangsee.github.io/2019/05/13/spring/spring-25/">postgreSQL</a>를 참고해주시면 됩니다.<br><br><br></p>
+<h2 id="JDBC-설정"><a href="#JDBC-설정" class="headerlink" title="JDBC 설정"></a>JDBC 설정</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:postgresql://localhost:5432/springboot</span><br><span class="line">spring.datasource.username=junjang</span><br><span class="line">spring.datasource.password=pass</span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/setting/set2.png" alt="Setting"> Docker에서 설치 및 실행시 설정했던 값으로 연동합니다.<br><br><br></p>
+<h2 id="데이터관련-의존성-추가"><a href="#데이터관련-의존성-추가" class="headerlink" title="데이터관련 의존성 추가"></a>데이터관련 의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.postgresql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>postgresql<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/setting/set1.png" alt="Setting"> JPA 의존성을 추가하면 하이버네이트와 같이 의존성이 추가됩니다.<br><br><img src="/images/jpa/setting/set5.png" alt="Setting"> PostgreSQL을 사용하기 위해 드라이버 의존성을 추가합니다.<br>만약 추가하지 않으면 <strong>Driver</strong> 에러가 발생합니다.<br><br><br></p>
+<h2 id="도메인-클래스-생성"><a href="#도메인-클래스-생성" class="headerlink" title="도메인 클래스 생성"></a>도메인 클래스 생성</h2><p>JPA는 도메인객체를 활용하여 객체와 릴레이션간 연동을 합니다. 생성하고 매핑하는 법에 대해 알아보겠습니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>@Entity : 이 클래스를 JPA와 연동하기 위해 빈으로 등록합니다.</li>
+<li>@Id : Entity의 기본 키를 나타내며 하나 이상 필요합니다.</li>
+<li>@GeneratedValue : 자동으로 생성되도록 합니다. 만약 선언하지 않으면 수동작업을 해주어야 합니다.</li>
+</ul>
+<p><img src="/images/jpa/setting/set3.png" alt="Setting"> 위 세가지의 어노테이션이 JPA의 핵심 기능이라고 보면 되겠습니다.<br><br></p>
+<h2 id="spring-jpa-hibernate-ddl-auto"><a href="#spring-jpa-hibernate-ddl-auto" class="headerlink" title="spring.jpa.hibernate.ddl-auto"></a>spring.jpa.hibernate.ddl-auto</h2><p>위 설정은 이전 데이터베이스 초기화 부분에서 학습했었습니다. 현재 필요한 개념이기 때문에 다시 한 번 복습하겠습니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.hibernate.ddl-auto=</span><br></pre></td></tr></table></figure></p>
+<p>위 옵션을 통해서 스키마를 운영할 수 있습니다.</p>
+<ul>
+<li>update: 기존의 스키마는 놔두고 추가된 사항만 변경합니다.</li>
+<li>create-drop: 처음에 스키마를 만들고 Application 종료시 스키마를 drop합니다.</li>
+<li>create: 처음에 스키마를 삭제하고 스키마를 새로 만듭니다.</li>
+<li>validate: 현재 Entity 매핑이 릴레이션 DB에 맵핑할 수 있는 상황인지 맵핑이 되는지를 검증합니다.(운영환경에서 사용)</li>
+<li>테스트 환경에선 필요하지 않은 옵션입니다.(주석처리)</li>
+</ul>
+<p><br></p>
+<h2 id="JpaRunner-클래스"><a href="#JpaRunner-클래스" class="headerlink" title="JpaRunner 클래스"></a>JpaRunner 클래스</h2><p>애플리케이션이 실행시 데이터를 영속화 할 수 있도록 하기위해 만든 클래스입니다. JPA, Hibernate의 함수 두가지 종류를 이용해서 데이터를 저장시켜 보겠습니다.<br></p>
+<h3 id="JPA-함수를-활용"><a href="#JPA-함수를-활용" class="headerlink" title="JPA 함수를 활용"></a>JPA 함수를 활용</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JpaRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PersistenceContext</span></span><br><span class="line">    EntityManager entityManager;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(<span class="string">"kimjunhyeung"</span>);</span><br><span class="line">        account.setPassword(<span class="string">"1234"</span>);</span><br><span class="line"></span><br><span class="line">        entityManager.persist(account);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/setting/set4.png" alt="Setting"> 데이터를 영속적으로 저장하기 위해서는 <strong>@Transactional</strong> 어노테이션을 필수로 합니다. 그리고 <strong>@PersistenceContext</strong>를 통해서 JPA의 핵심인 <strong>EntityManager</strong>를 주입 받아 이 객체를 사용하여 데이터를 추가합니다.<br>account에 데이터를 set하고 entityManager의 persist()를 통해 데이터를 넣고 테이블 컬럼을 조회하면 데이터가 들어간 모습을 볼 수 있습니다.<br><br><br></p>
+<h3 id="hibernate-함수를-활용"><a href="#hibernate-함수를-활용" class="headerlink" title="hibernate 함수를 활용"></a>hibernate 함수를 활용</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JpaRunner</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PersistenceContext</span></span><br><span class="line">    EntityManager entityManager;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Account account = <span class="keyword">new</span> Account();</span><br><span class="line">        account.setUsername(<span class="string">"kimjunhyeung"</span>);</span><br><span class="line">        account.setPassword(<span class="string">"4321"</span>);</span><br><span class="line"></span><br><span class="line">        Session session = entityManager.unwrap(Session.class);</span><br><span class="line"></span><br><span class="line">        session.save(account);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/setting/set6.png" alt="Setting"> session을 활용하여 save()로 데이터를 저장할 수 있습니다.<br><br></p>
+<h2 id="createClob-에러가-뜬다면"><a href="#createClob-에러가-뜬다면" class="headerlink" title="createClob() 에러가 뜬다면?"></a>createClob() 에러가 뜬다면?</h2><p>이 에러는 postgresql 드라이버가 <strong>createClob()</strong> 메서드를 구현하지 않아 경고문구가 출력되는 것입니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true</span><br></pre></td></tr></table></figure></p>
+<p>application.properties에 위 설정을 추가하시면 이상없이 결과가 출력될 것입니다.<br></p>
+</section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -116,10 +157,6 @@
         
   <a href="/tags#JPA">
     <span class="tag-code">JPA</span>
-  </a>
-
-  <a href="/tags#ORM">
-    <span class="tag-code">ORM</span>
   </a>
 
       </div>
@@ -133,7 +170,7 @@
       <a class="nav-left" href="/2019/05/19/jpa/jpa-02/">
         <span class="nav-arrow">← </span>
         
-          JPA - ORM의 개요
+          JPA - ORM
         
       </a>
     
@@ -158,7 +195,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ORM의-패러다임"><span class="toc-nav-text">ORM의 패러다임</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#프로젝트-세팅"><span class="toc-nav-text">프로젝트 세팅</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이터베이스-실행"><span class="toc-nav-text">데이터베이스 실행</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JDBC-설정"><span class="toc-nav-text">JDBC 설정</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이터관련-의존성-추가"><span class="toc-nav-text">데이터관련 의존성 추가</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#도메인-클래스-생성"><span class="toc-nav-text">도메인 클래스 생성</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#spring-jpa-hibernate-ddl-auto"><span class="toc-nav-text">spring.jpa.hibernate.ddl-auto</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JpaRunner-클래스"><span class="toc-nav-text">JpaRunner 클래스</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JPA-함수를-활용"><span class="toc-nav-text">JPA 함수를 활용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hibernate-함수를-활용"><span class="toc-nav-text">hibernate 함수를 활용</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#createClob-에러가-뜬다면"><span class="toc-nav-text">createClob() 에러가 뜬다면?</span></a></li></ol></li></ol>
     
   </div>
 </aside>
