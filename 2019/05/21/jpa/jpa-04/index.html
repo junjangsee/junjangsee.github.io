@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JPA - Entity Mapping(엔티티 매핑) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JPA - Entity Mapping(엔티티 매핑)</h2>
+  <p class="post-date">2019-05-21</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+<h1 id="엔티티-매핑"><a href="#엔티티-매핑" class="headerlink" title="엔티티 매핑"></a>엔티티 매핑</h1><p>엔티티를 매핑하는 방법에는 XML, 어노테이션 총 2가지의 방식이 있지만 보통 어노테이션 방식으로 사용하게 됩니다.<br>어노테이션을 활용하여 매핑하는 법에 대해 알아보겠습니다.<br><br><br></p>
+<h2 id="Entity"><a href="#Entity" class="headerlink" title="@Entity"></a>@Entity</h2><p>엔티티 클래스를 빈으로 등록하여 JPA와 연동할 수 있도록 해줍니다. 기본적으로 <strong>@Table</strong>을 포함하고 있습니다.<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span>(name = <span class="string">"users"</span>)</span><br></pre></td></tr></table></figure>
+<p>도메인 클래스명을 다른 클래스명으로 정의하고 테이블을 만들려고 할 때 name을 선언합니다.<br><br><img src="/images/jpa/entity/en1.png" alt="Entity"> 도메인명은 <strong>User</strong>지만 <strong>users</strong>로 테이블이 생성된 모습입니다.<br><br><br></p>
+<h2 id="Id-GeneratedValue"><a href="#Id-GeneratedValue" class="headerlink" title="@Id, @GeneratedValue"></a>@Id, @GeneratedValue</h2><ul>
+<li>@Id : 엔티티와 주키를 매핑할 때 사용합니다.<ul>
+<li>자바의 모든 primitive 타입과 타입에 대한 wrapper 클래스를 사용할 수 있습니다.</li>
+</ul>
+</li>
+<li>@GeneratedValue : 주키의 생성 방법을 매핑할 때 사용합니다.<ul>
+<li>보통은 AUTO(기본값)를 사용합니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/jpa/entity/en3.png" alt="Entity"><br><br></p>
+<h2 id="Column"><a href="#Column" class="headerlink" title="@Column"></a>@Column</h2><p>컬럼에 대한 설정 값을 매핑할 때 사용합니다.</p>
+<ul>
+<li>unique : unique 사용여부를 결정합니다.</li>
+<li>nullable : null 사용여부를 결정합니다.</li>
+<li>columnDefinition : 반드시 SQL문을 작성해야할 때 사용합니다.</li>
+</ul>
+<p><img src="/images/jpa/entity/en2.png" alt="Entity"> username은 null이면 안되고 unique해야한다는 매핑을 한 예시입니다.<br><br><br></p>
+<h2 id="Temporal"><a href="#Temporal" class="headerlink" title="@Temporal"></a>@Temporal</h2><p>날짜를 매핑할 때 사용합니다.</p>
+<ul>
+<li>Java의 Date에 관련된 값을 타입에 맞게 변환해줍니다.</li>
+</ul>
+<p><br></p>
+<h2 id="Transient"><a href="#Transient" class="headerlink" title="@Transient"></a>@Transient</h2><p>도메인에는 선언하였지만 컬럼으로는 매핑되지 않도록 합니다.<br><br><br><br></p>
+<h2 id="엔티티-클래스"><a href="#엔티티-클래스" class="headerlink" title="엔티티 클래스"></a>엔티티 클래스</h2><p>지금까지 학습한 어노테이션을 적용한 엔티티 클래스를 보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>(nullable = <span class="keyword">false</span>, unique = <span class="keyword">true</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Temporal</span>(TemporalType.TIMESTAMP)</span><br><span class="line">    <span class="keyword">private</span> Date created = <span class="keyword">new</span> Date();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String yes;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transient</span></span><br><span class="line">    <span class="keyword">private</span> String no;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/entity/en4.png" alt="Entity"> 위 모든 어노테이션을 활용해 보았을때의 클래스 모습입니다.<br>결과를 보면 TIMESTAMP형식으로 날짜가 들어간 것을 확인할 수 있고 no 변수는 <strong>@Transient</strong>로 인해 컬럼에 매핑되지 않은 것을 볼 수 있습니다.<br><br><br></p>
+<h2 id="SQL을-확인하고-싶다면"><a href="#SQL을-확인하고-싶다면" class="headerlink" title="SQL을 확인하고 싶다면?"></a>SQL을 확인하고 싶다면?</h2><p>JPA에서 자동으로 생성해서 처리한 SQL을 Console에서 볼 수 있는데 <strong>application.properries</strong>에서 쉽게 설정이 가능합니다.<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.show-sql=true</span><br></pre></td></tr></table></figure>
+<p>위 설정은 SQL이 실행되는 경과를 출력하는 역할을 해줍니다.<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.properties.hibernate.format_sql=true</span><br></pre></td></tr></table></figure>
+<p>위 설정은 위에서 보여주는 SQL을 가독성 높게 출력해줍니다.<br>그래서 두 설정을 한 후 출력하게 되면..<br><br><img src="/images/jpa/entity/en5.png" alt="Entity"> 위처럼 보기 쉽게 SQL문을 확인할 수 있습니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#JPA">
+    <span class="tag-code">JPA</span>
+  </a>
+
+  <a href="/tags#Entity">
+    <span class="tag-code">Entity</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/20/jpa/jpa-03/">
+        <span class="nav-arrow">← </span>
+        
+          JPA - 프로젝트 세팅
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#엔티티-매핑"><span class="toc-nav-text">엔티티 매핑</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Entity"><span class="toc-nav-text">@Entity</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Id-GeneratedValue"><span class="toc-nav-text">@Id, @GeneratedValue</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Column"><span class="toc-nav-text">@Column</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Temporal"><span class="toc-nav-text">@Temporal</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Transient"><span class="toc-nav-text">@Transient</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#엔티티-클래스"><span class="toc-nav-text">엔티티 클래스</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SQL을-확인하고-싶다면"><span class="toc-nav-text">SQL을 확인하고 싶다면?</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/05/21/jpa/jpa-04/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
