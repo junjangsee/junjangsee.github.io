@@ -108,7 +108,7 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
-<h1 id="엔티티-매핑"><a href="#엔티티-매핑" class="headerlink" title="엔티티 매핑"></a>엔티티 매핑</h1><p>엔티티를 매핑하는 방법에는 XML, 어노테이션 총 2가지의 방식이 있지만 보통 어노테이션 방식으로 사용하게 됩니다.<br>어노테이션을 활용하여 매핑하는 법에 대해 알아보겠습니다.<br><br><br></p>
+<h1 id="엔티티-매핑"><a href="#엔티티-매핑" class="headerlink" title="엔티티 매핑"></a>엔티티 매핑</h1><p>엔티티를 매핑하는 방법에는 XML, 어노테이션 총 2가지의 방식이 있지만 보통 어노테이션 방식으로 사용하게 됩니다.<br>어노테이션을 활용하여 매핑하는 법에 대해 알아보겠습니다.<br><br>여기서 실습하는 코드는 이전에 학습했던 <a href="https://junjangsee.github.io/2019/05/20/jpa/jpa-03/">프로젝트세팅</a>에 설명되어 있습니다<br><br><br></p>
 <h2 id="Entity"><a href="#Entity" class="headerlink" title="@Entity"></a>@Entity</h2><p>엔티티 클래스를 빈으로 등록하여 JPA와 연동할 수 있도록 해줍니다. 기본적으로 <strong>@Table</strong>을 포함하고 있습니다.<br></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span>(name = <span class="string">"users"</span>)</span><br></pre></td></tr></table></figure>
 <p>도메인 클래스명을 다른 클래스명으로 정의하고 테이블을 만들려고 할 때 name을 선언합니다.<br><br><img src="/images/jpa/entity/en1.png" alt="Entity"> 도메인명은 <strong>User</strong>지만 <strong>users</strong>로 테이블이 생성된 모습입니다.<br><br><br></p>
@@ -173,6 +173,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/05/21/jpa/jpa-05/">
+        
+          JPA - Value Mapping(밸류 매핑)
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
