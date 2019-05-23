@@ -1,12 +1,12 @@
 ---
-title: JPA - ORM의 개요
+title: JPA - ORM
 date: 2019-05-19 19:15:45
 tags: [JPA, ORM]
 ---
 
 ![images](/images/jpa/jpa.jpg)<br/>
 
-# ORM의 개요
+# ORM
 ORM(Object Relation Mapping)은 애플리케이션의 **클래스**와 SQL 데이터베이스의 **테이블** 사이의 ​**맵핑 정보를 기술한 메타데이터**​를 사용하여 자바 애플리케이션의 객체를 SQL데이터베이스의 테이블에 **자동으로 영속화​** 해주는 기술입니다.
 **Hibernate**나 **JPA**같은 ORM을 사용하는 이유는 도메인 모델을 사용하기 위해서 입니다.<br/>
 <br/>
