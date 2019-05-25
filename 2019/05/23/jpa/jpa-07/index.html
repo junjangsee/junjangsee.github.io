@@ -10,7 +10,7 @@
   
   <title>
     
-      SpringBoot - ORM, JPA의 개념 | Junjangsee&#39;s Blog
+      JPA - Cascade | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,8 +98,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>SpringBoot - ORM, JPA의 개념</h2>
-  <p class="post-date">2019-05-14</p>
+  <h2>JPA - Cascade</h2>
+  <p class="post-date">2019-05-23</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -107,32 +107,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
-<h1 id="ORM-Object-Relational-Mapping"><a href="#ORM-Object-Relational-Mapping" class="headerlink" title="ORM(Object-Relational Mapping)"></a>ORM(Object-Relational Mapping)</h1><p>객체와 릴레이션을 Mapping(매핑)할 때 발생하는 개념적 불일치를 해결하는 프레임워크입니다.</p>
-<ul>
-<li>참고자료 : <a href="http://hibernate.org/orm/what-is-an-orm/" target="_blank" rel="noopener">하이버네이트 공식문서</a><br><br><br></li>
-</ul>
-<h2 id="ORM에서-다루어지는-문제들"><a href="#ORM에서-다루어지는-문제들" class="headerlink" title="ORM에서 다루어지는 문제들"></a>ORM에서 다루어지는 문제들</h2><ul>
-<li>객체는 크기가 굉장히 다양하지만 테이블은 테이블과 컬럼 밖에 없고 크기가 한정적이다.</li>
-<li>복잡한 객체의 다양한 크기들을 테이블에 맵핑을 시킬 수 있을 것인가에 대한 해결책을 제공한다.</li>
-<li>테이블은 상속이 없지만 객체들은 상속이 있음 클래스간에 상속구조를 만들 수 있는데 그런 상속구조를 테이블로는 어떻게 매핑할 것인가</li>
-<li>Relational 에서 식별자는 굉장히 단순하다.</li>
-<li>Object에서는 Identity는 Hashcode? equals Method?</li>
-<li>Object Identity가 같으면 도대체 어떤 Entity가 같아야 우리는 객체가 같다고 해야되는건가?</li>
-<li>테이블에서는 식별자만 같으면 같은건데 Object에서는 그게 아님 프로퍼티만 같다고 해서 같은건가? </li>
-<li>ID가 null이면 어떻게 되는거지?</li>
-</ul>
-<p>위와 같은 문제들이 다루어집니다.<br><br><br></p>
-<h1 id="JPA-Java-Persistence-API"><a href="#JPA-Java-Persistence-API" class="headerlink" title="JPA(Java Persistence API)"></a>JPA(Java Persistence API)</h1><p>ORM을 손쉽게 구현하도록 만들어줍니다.</p>
-<ul>
-<li>대부분의 JPA스펙이 Hibernate에 기반해서 만들어집니다.(하지만 모든 기능을 커버하진 않아서 직접 Hibernate에 설정을 다루어야 합니다.)</li>
-<li>ORM을 위한 자바(EE) 표준입니다.<br><br><br></li>
-</ul>
-<h2 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h2><p>JPA 표준 스펙을 아주쉽게 사용할 수 있도록 SpringData로 추상화 시켜놓은 것입니다.</p>
-<ul>
-<li>JPA 의존성을 추가하면 SpringDataJDBC의 기능을 모두 다 사용할 수 있으면서 부가적으로 JPA, Hibernate, SpringDataJPA 기능을 더 사용할 수 있습니다.</li>
-<li>SDJ(SpringDataJPA) -&gt; JPA -&gt; Hibernate -&gt; Datasource(JDBC) 까지 의존성이 추가됩니다.</li>
-</ul>
+    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+<h1 id="Cascade"><a href="#Cascade" class="headerlink" title="Cascade"></a>Cascade</h1><p><img src="/images/jpa/cascade/cas1.png" alt="Entity"> </p>
 </section>
     <!-- Tags START -->
     
@@ -143,16 +119,8 @@
     <span class="tag-code">JPA</span>
   </a>
 
-  <a href="/tags#ORM">
-    <span class="tag-code">ORM</span>
-  </a>
-
-  <a href="/tags#SpringBoot">
-    <span class="tag-code">SpringBoot</span>
-  </a>
-
-  <a href="/tags#DB">
-    <span class="tag-code">DB</span>
+  <a href="/tags#Cascade">
+    <span class="tag-code">Cascade</span>
   </a>
 
       </div>
@@ -163,20 +131,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/05/13/spring/spring-25/">
+      <a class="nav-left" href="/2019/05/23/jpa/jpa-06/">
         <span class="nav-arrow">← </span>
         
-          SpringBoot - PostgreSQL
+          JPA - Relation Mapping(관계 매핑)
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/05/14/spring/spring-27/">
-        
-          SpringBoot - JPA 연동하기
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -198,7 +159,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ORM-Object-Relational-Mapping"><span class="toc-nav-text">ORM(Object-Relational Mapping)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ORM에서-다루어지는-문제들"><span class="toc-nav-text">ORM에서 다루어지는 문제들</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#JPA-Java-Persistence-API"><span class="toc-nav-text">JPA(Java Persistence API)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SpringData-JPA"><span class="toc-nav-text">SpringData JPA</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Cascade"><span class="toc-nav-text">Cascade</span></a></li></ol>
     
   </div>
 </aside>
@@ -208,7 +169,7 @@
 
 <script>
   (function () {
-    var url = 'https://junjangsee.github.io/2019/05/14/spring/spring-26/';
+    var url = 'https://junjangsee.github.io/2019/05/23/jpa/jpa-07/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
