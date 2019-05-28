@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JPA - FETCH | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JPA - FETCH</h2>
+  <p class="post-date">2019-05-26</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+<h1 id="FETCH"><a href="#FETCH" class="headerlink" title="FETCH"></a>FETCH</h1><p>연관 관계의 엔티티의 정보를 지금(Eager)혹은 나중에(Lazy) 가져올지 설정하는 기능입니다.</p>
+<ul>
+<li>@OneToMany : 기본값은 <strong>Lazy</strong>입니다.<ul>
+<li>매핑한 정보가 얼마나 많을지 모르기 때문입니다.</li>
+</ul>
+</li>
+<li>@ManyToOne : 기본값은 <strong>Eager</strong>입니다.<ul>
+<li>매핑한 정보를 함께 가져옵니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Eager"><a href="#Eager" class="headerlink" title="Eager"></a>Eager</h2><p>Eager가 적용된 Entity 정보를 미리 다 가져와서 불필요한 조회를 더이상 하지 않습니다. </p>
+<h3 id="Post-클래스"><a href="#Post-클래스" class="headerlink" title="Post 클래스"></a>Post 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OneToMany</span>(mappedBy = <span class="string">"post"</span>, cascade = &#123;CascadeType.PERSIST, CascadeType.REMOVE&#125;, fetch = FetchType.EAGER)</span><br><span class="line"><span class="keyword">private</span> Set&lt;Comment&gt; comments = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/fetch/fet2.png" alt="Fetch"> 기존값은 <strong>Lazy</strong>지만 Fetch를 주어 <strong>Eager</strong>로 바꾸어줍니다. 이렇게 되면 Post의 정보를 가져올 때 Comment를 지금 함께 가져옵니다.<br><br><img src="/images/jpa/fetch/fet3.png" alt="Fetch"> Post와 함께 Comment도 함께 출력되는 것을 볼 수 있습니다.<br><br><br></p>
+<h2 id="Lazy"><a href="#Lazy" class="headerlink" title="Lazy"></a>Lazy</h2><p>Lazy가 적용된 Entity 정보를 미리 가져 오지 않습니다.</p>
+<h3 id="Post-클래스-1"><a href="#Post-클래스-1" class="headerlink" title="Post 클래스"></a>Post 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OneToMany</span>(mappedBy = <span class="string">"post"</span>, cascade = &#123;CascadeType.PERSIST, CascadeType.REMOVE&#125;)</span><br><span class="line"><span class="keyword">private</span> Set&lt;Comment&gt; comments = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<p>Fetch를 제거하면 기본적으로 Lazy상태가 됩니다.<br><br><img src="/images/jpa/fetch/fet4.png" alt="Fetch"> 결과는 Comment를 지금 가져오지 않습니다.<br><br><br></p>
+<h2 id="session-get-load"><a href="#session-get-load" class="headerlink" title="session get, load"></a>session get, load</h2><ul>
+<li>load: 가져오려 할때 없으면 <strong>예외</strong>를 던짐 Proxy로도 가져올 수 있습니다.</li>
+<li>get: 무조건 DB에서 가져옵니다. 해당하는게 없으면 예외를 던지지 않고 무조건 레퍼런스를 <strong>null</strong>로 만듭니다.</li>
+</ul>
+<p><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#JPA">
+    <span class="tag-code">JPA</span>
+  </a>
+
+  <a href="/tags#FETCH">
+    <span class="tag-code">FETCH</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/23/jpa/jpa-07/">
+        <span class="nav-arrow">← </span>
+        
+          JPA - 엔티티 상태, Cascade
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#FETCH"><span class="toc-nav-text">FETCH</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Eager"><span class="toc-nav-text">Eager</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Post-클래스"><span class="toc-nav-text">Post 클래스</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Lazy"><span class="toc-nav-text">Lazy</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Post-클래스-1"><span class="toc-nav-text">Post 클래스</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#session-get-load"><span class="toc-nav-text">session get, load</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/05/26/jpa/jpa-08/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
