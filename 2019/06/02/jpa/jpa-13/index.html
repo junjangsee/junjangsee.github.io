@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JPA - Common Null | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JPA - Common Null</h2>
+  <p class="post-date">2019-06-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+<h1 id="Null-처리"><a href="#Null-처리" class="headerlink" title="Null 처리"></a>Null 처리</h1><p>Null을 처리하는 방법에 대해서 학습해봅시다. 여기서 학습할 것은 두 방법입니다.</p>
+<ul>
+<li>자바 8, 스프링 데이터 2.0 부터 지원하는 <strong>Optioanl</strong></li>
+<li>스프링 5.0부터 지원하는 Null관련 <strong>어노테이션</strong></li>
+</ul>
+<p>이전 사용했던 코드들을 계속 사용하기 때문에 <a href="https://junjangsee.github.io/2019/05/31/jpa/jpa-12/">Common Interface</a>를 참고해주시면 되겠습니다.<br><br></p>
+<h2 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h2><p>자바 8버전 부터 지원된 기능으로 단일 값을 사용하는 경우 사용합니다. Null을 체크하는 것이 아닌 Optional 인스턴스를 체크하게 됩니다. 최신 트렌디한 방법으로 사용되고 있습니다.<br><br><br></p>
+<h3 id="Optional-기능"><a href="#Optional-기능" class="headerlink" title="Optional 기능"></a>Optional 기능</h3><ul>
+<li>isPresent() : 값이 있는지 없는지 확인합니다.</li>
+<li>orElse : 없는 경우 다른 대체적인 인스턴스를 리턴하게 할 수도 있습니다.</li>
+<li>orElseThrow : 없는 경우 예외를 던집니다.</li>
+</ul>
+<p><br></p>
+<h3 id="Optional-사용-방법"><a href="#Optional-사용-방법" class="headerlink" title="Optional 사용 방법"></a>Optional 사용 방법</h3><p>Repository에 선언할 메소드에 Optional을 붙여 사용합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NoRepositoryBean</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyRepository</span>&lt;<span class="title">T</span>, <span class="title">Id</span> <span class="keyword">extends</span> <span class="title">Serializable</span>&gt; <span class="keyword">extends</span> <span class="title">Repository</span>&lt;<span class="title">T</span>, <span class="title">Id</span>&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">    &lt;E extends T&gt; <span class="function">Optional&lt;E&gt; <span class="title">findById</span><span class="params">(Id id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Id를 찾는 메소드에 Optional을 사용하여 E 클래스에 적용합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommentRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    CommentRepository commentRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">crud</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Optional&lt;Comment&gt; byId = commentRepository.findById(<span class="number">100l</span>);</span><br><span class="line">        assertThat(byId).isEmpty();</span><br><span class="line">        <span class="comment">//Comment comment = byId.orElse(new Comment()); // Optional 객체가 비어있으면 Comment 만들어서 리턴</span></span><br><span class="line">        <span class="comment">//Comment comment = byId.orElseThrow(() -&gt; new IllegalArgumentException());</span></span><br><span class="line">        Comment comment = byId.orElseThrow(IllegalArgumentException::<span class="keyword">new</span>); <span class="comment">// lambda를 메서드 레퍼런스로 변환 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>기본적으로 <strong>isEmpty()</strong>를 통해 인스턴스가 있는지 확인하는 방법, <strong>orElse()</strong>로 객체가 비어있을 때를 확인하는 방법, <strong>orElseThrow()</strong>로 오류를 출력하는 방법이 있습니다.<br><br><br></p>
+<h4 id="Optional을-사용하지-않았다면"><a href="#Optional을-사용하지-않았다면" class="headerlink" title="Optional을 사용하지 않았다면?"></a>Optional을 사용하지 않았다면?</h4><p>만약 Optional을 사용하지 않고 구현했다면 어떻게 구현할까요?<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Comment comment = commentRepository.findById(<span class="number">100l</span>);</span><br><span class="line"><span class="keyword">if</span> (comment == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br></pre></td></tr></table></figure></p>
+<p>위 코드처럼 눈에는 익숙하지만 조건문의 사용과 정돈되지 않은 느낌을 주게 됩니다.<br><br><br></p>
+<h4 id="컬렉션의-Null-처리는"><a href="#컬렉션의-Null-처리는" class="headerlink" title="컬렉션의 Null 처리는?"></a>컬렉션의 Null 처리는?</h4><p>스프링 데이터 JPA가 지원하는 Repository의 컬렉션 타입들은 null이 되지 않고 <strong>비어있는 컬렉션 타입</strong>을 리턴해줍니다.<br>그러므로 컬렉션을 null 체크하는 코드는 <strong>필요가 없습니다.</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommentRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    CommentRepository commentRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">crud</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;Comment&gt; comments = commentRepository.findAll();</span><br><span class="line">        assertThat(comments).isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>그래서 위와 같이 인스턴스 체크를 하면 됩니다.<br><br><br></p>
+<h2 id="Null-어노테이션"><a href="#Null-어노테이션" class="headerlink" title="Null 어노테이션"></a>Null 어노테이션</h2><p>스프링 프레임워크 5.0부터 지원하여 보다 편리하게 Null을 처리할 수 있습니다.</p>
+<ul>
+<li>런타임 체크를 지원합니다.</li>
+<li>JSR 305 애노테이션을 메타 애노테이션으로 가지고 있습니다.(IDE 및 빌드 툴 지원)<br><br><br></li>
+</ul>
+<h3 id="Null-어노테이션의-종류"><a href="#Null-어노테이션의-종류" class="headerlink" title="Null 어노테이션의 종류"></a>Null 어노테이션의 종류</h3><ul>
+<li>@NonNullApi: package 레벨에 붙이는 어노테이션</li>
+<li>@NonNull: Null이 아니다.</li>
+<li>@Nullable: Null이 가능하다.</li>
+</ul>
+<p><br></p>
+<h3 id="Null-어노테이션-사용-방법"><a href="#Null-어노테이션-사용-방법" class="headerlink" title="Null 어노테이션 사용 방법"></a>Null 어노테이션 사용 방법</h3><h4 id="NonNull-Nullable"><a href="#NonNull-Nullable" class="headerlink" title="@NonNull, @Nullable"></a>@NonNull, @Nullable</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NoRepositoryBean</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyRepository</span>&lt;<span class="title">T</span>, <span class="title">Id</span> <span class="keyword">extends</span> <span class="title">Serializable</span>&gt; <span class="keyword">extends</span> <span class="title">Repository</span>&lt;<span class="title">T</span>, <span class="title">Id</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    &lt;E extends T&gt; <span class="function">E <span class="title">save</span><span class="params">(@NonNull E entity)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;T&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">count</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    &lt;E extends T&gt; <span class="function">Optional&lt;E&gt; <span class="title">findById</span><span class="params">(Id id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>파라미터 값이 Null이면 안될 경우 save 메소드처럼 활용하거나, findById 메소드처럼 메소드 자체에 Null이 가능하면 메소드에 선언합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@DataJpaTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommentRepositoryTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    CommentRepository commentRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">crud</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      commentRepository.save(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>save 메소드를 테스트시 @NonNull이기 때문에 null을 선언하게 되면 Null에러가 출력되게 됩니다.<br></p>
+<h4 id="NonNullApi"><a href="#NonNullApi" class="headerlink" title="@NonNullApi"></a>@NonNullApi</h4><p>패키지급에 해당되는 기능으로 패키지 하위 전체 메소드, 변수에 NonNull을 적용시킵니다.<br><br><img src="/images/jpa/null/null5.png" alt="Null"> Package-info에 어노테이션을 사용하여 전체 적용시키면 해당 패키지 하위 모든 적용 대상들은 일괄 적용됩니다.<br><br><br></p>
+<h2 id="IntelliJ-사용시-Null-어노테이션-사용-방법"><a href="#IntelliJ-사용시-Null-어노테이션-사용-방법" class="headerlink" title="IntelliJ 사용시 @Null 어노테이션 사용 방법"></a>IntelliJ 사용시 @Null 어노테이션 사용 방법</h2><p>IntelliJ에서는 기본적으로 @Null 어노테이션의 제 기능을 사용할 수 있도록 세팅되어 있지 않습니다. 그렇기 때문에 수동으로 어노테이션을 등록하여 사용하여야 합니다. 그 방법에 대해 알아보겠습니다.<br><br><img src="/images/jpa/null/null1.png" alt="Null"> 설정에 들어가서 <strong>runtime assertions</strong>를 입력 후 <strong>Compiler</strong>를 클릭하고 Configure annotations를 클릭합니다.<br>그러면 <code>+</code>버튼이 보이는데 위에 있는 것부터 먼저 클릭합니다.<br><br><img src="/images/jpa/null/null2.png" alt="Null"> springframework의 @Nullable를 선택 후 OK를 누릅니다.<br><br><img src="/images/jpa/null/null3.png" alt="Null"> 아래의 <code>+</code>를 누른 후 springframework의 @NonNull을 선택하고 OK를 누릅니다.<br><br><img src="/images/jpa/null/null4.png" alt="Null"> 다시 프로젝트를 재부팅 하면 @NonNull이 적용된 파라미터에 null을 넣으려고 하면 색이 적용되면서 안내창이 뜨면서 보다 편리하게 사용할 수 있습니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#JPA">
+    <span class="tag-code">JPA</span>
+  </a>
+
+  <a href="/tags#Common">
+    <span class="tag-code">Common</span>
+  </a>
+
+  <a href="/tags#Null">
+    <span class="tag-code">Null</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/31/jpa/jpa-12/">
+        <span class="nav-arrow">← </span>
+        
+          JPA - Common Interface
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Null-처리"><span class="toc-nav-text">Null 처리</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Optional"><span class="toc-nav-text">Optional</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Optional-기능"><span class="toc-nav-text">Optional 기능</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Optional-사용-방법"><span class="toc-nav-text">Optional 사용 방법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Optional을-사용하지-않았다면"><span class="toc-nav-text">Optional을 사용하지 않았다면?</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#컬렉션의-Null-처리는"><span class="toc-nav-text">컬렉션의 Null 처리는?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Null-어노테이션"><span class="toc-nav-text">Null 어노테이션</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Null-어노테이션의-종류"><span class="toc-nav-text">Null 어노테이션의 종류</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Null-어노테이션-사용-방법"><span class="toc-nav-text">Null 어노테이션 사용 방법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#NonNull-Nullable"><span class="toc-nav-text">@NonNull, @Nullable</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#NonNullApi"><span class="toc-nav-text">@NonNullApi</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#IntelliJ-사용시-Null-어노테이션-사용-방법"><span class="toc-nav-text">IntelliJ 사용시 @Null 어노테이션 사용 방법</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/06/02/jpa/jpa-13/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
