@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JPA - Common Query | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JPA - Common Query</h2>
+  <p class="post-date">2019-06-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+<h1 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h1><p>데이터를 다룰 때 사용할 쿼리를 메소드에 적용하는 방법에 대해 학습해보겠습니다. 총 3가지 방법이 있습니다.</p>
+<ul>
+<li>직접 쿼리 작성하는 방법</li>
+<li>메소드 이름 분석 </li>
+<li>위 두가지를 합친 방법</li>
+</ul>
+<p><br></p>
+<h2 id="쿼리-만드는-방법"><a href="#쿼리-만드는-방법" class="headerlink" title="쿼리 만드는 방법"></a>쿼리 만드는 방법</h2><h3 id="1-메소드-이름을-분석해서-​쿼리-만들기​-CREATE"><a href="#1-메소드-이름을-분석해서-​쿼리-만들기​-CREATE" class="headerlink" title="1. 메소드 이름을 분석해서 ​쿼리 만들기​ (CREATE)"></a>1. 메소드 이름을 분석해서 ​쿼리 만들기​ (CREATE)</h3><p>메소드 이름을 분석해서 스프링 데이터 JPA(Common)가 자동으로 쿼리를 만들어 줍니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CommentRepository</span> <span class="keyword">extends</span> <span class="title">MyRepository</span>&lt;<span class="title">Comment</span>, <span class="title">Long</span>&gt;</span>&#123;</span><br><span class="line">    <span class="comment">/* Comment title에 Keyword가 들어있는 모든 Comment를 찾아주는 메소드 */</span></span><br><span class="line">    <span class="function">List&lt;Comment&gt; <span class="title">findByCommentContains</span><span class="params">(String Keyword)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/jpa/commonquery/qu1.png" alt="Query"> 메소드 이름을 JPA가 지원하는 방식에 맞게 작성하면 자동으로 쿼리를 만들어줍니다.<br><br><br></p>
+<h3 id="2-직접-쿼리-작성하는-방법-USE-DECLARED-QUERY"><a href="#2-직접-쿼리-작성하는-방법-USE-DECLARED-QUERY" class="headerlink" title="2. 직접 쿼리 작성하는 방법(USE_DECLARED_QUERY)"></a>2. 직접 쿼리 작성하는 방법(USE_DECLARED_QUERY)</h3><p><strong>@Query</strong> 어노테이션을 사용하여 직접 쿼리를 만듭니다. JPA를 사용할 때는 <strong>JPQL</strong>을 기본값으로 받아들여서 사용합니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CommentRepository</span> <span class="keyword">extends</span> <span class="title">MyRepository</span>&lt;<span class="title">Comment</span>, <span class="title">Long</span>&gt;</span>&#123;</span><br><span class="line">    <span class="comment">/* Comment title에 Keyword가 들어있는 모든 Comment를 찾아주는 메소드 */</span></span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"SELECT c FROM Comment AS c"</span>)</span><br><span class="line">    <span class="function">List&lt;Comment&gt; <span class="title">findByCommentContains</span><span class="params">(String Keyword)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/jpa/commonquery/qu2.png" alt="Query"> Comment 도메인 객체에 keyword가 포함된 Comment를 찾는 메소드를 select하는 쿼리입니다.<br>위처럼 원하는 메소드에 <strong>@Query</strong>를 선언하여 활용합니다.<br><br>추가적으로 <strong>nativeQuery(SQL)</strong>를 사용하고 싶다면 @Query 어노테이션에 nativeQuery라고 명시(nativeQuery = true)하고 사용하면 됩니다.<br><br><br></p>
+<h3 id="3-미리-정의한-쿼리-찾아보고-없으면-만들기-CREATE-IF-NOT-FOUND"><a href="#3-미리-정의한-쿼리-찾아보고-없으면-만들기-CREATE-IF-NOT-FOUND" class="headerlink" title="3. 미리 정의한 쿼리 찾아보고 없으면 만들기(CREATE_IF_NOT_FOUND)"></a>3. 미리 정의한 쿼리 찾아보고 없으면 만들기(CREATE_IF_NOT_FOUND)</h3><p>선언이 되어있는 쿼리를 찾아보고 선언이 된 쿼리가 없는 경우 메서드 이름을 분석해서 생성하는 방법입니다.<br><br><br></p>
+<h4 id="EnableJpaRepositories"><a href="#EnableJpaRepositories" class="headerlink" title="@EnableJpaRepositories"></a>@EnableJpaRepositories</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableJpaRepositories</span>(queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemospringdataApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/jpa/commonquery/qu3.png" alt="Query"> 기본적으로 Application에 <strong>@EnableJpaRepositories</strong> 어노테이션에 기본 값으로 <strong>CREATE_IF_NOT_FOUND</strong>가 설정되어 있어 따로 설정할 필요는 없습니다. 하지만 설정은 자신이 원하는 쿼리 설정 방법에 따라서 바꿀 수 있습니다.<br><br><br></p>
+<h2 id="메소드-이름을-활용한-쿼리-생성법"><a href="#메소드-이름을-활용한-쿼리-생성법" class="headerlink" title="메소드 이름을 활용한 쿼리 생성법"></a>메소드 이름을 활용한 쿼리 생성법</h2><p>메소드 이름으로 쿼리를 작성하는 세부적인 방법에 대해서 학습해보겠습니다.</p>
+<ul>
+<li>리턴타입 {접두어}{도입부}By{프로퍼티 표현식}(조건식)[(And|Or){프로퍼티 표현식}(조건식)]{정렬 조건} (매개변수)</li>
+</ul>
+<p>위 순서대로 메소드를 작성하는 원칙으로 하며, 아래 항목에 대한 명령어를 사용하면 됩니다.<br></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>명령어</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>접두어</td>
+<td>Find, Get, Query, Count, …</td>
+</tr>
+<tr>
+<td>도입부</td>
+<td>Distinct, First(N), Top(N)</td>
+</tr>
+<tr>
+<td>프로퍼티 표현식</td>
+<td>Person.Address.ZipCode =&gt; find(Person)ByAddress_ZipCode(…)</td>
+</tr>
+<tr>
+<td>조건식</td>
+<td>IgnoreCase, Between, LessThan, GreaterThan, Like, Contains, …</td>
+</tr>
+<tr>
+<td>정렬 조건</td>
+<td>OrderBy{프로퍼티}Asc</td>
+</tr>
+<tr>
+<td>리턴 타입</td>
+<td>E, Optional<e>, List<e>, Page<e>, Slice<e>, Stream<e></e></e></e></e></e></td>
+</tr>
+<tr>
+<td>매개변수</td>
+<td>Pageable, Sort</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3 id="메소드-분석-쿼리"><a href="#메소드-분석-쿼리" class="headerlink" title="메소드 분석 쿼리"></a>메소드 분석 쿼리</h3><h4 id="Paging-페이징-쿼리"><a href="#Paging-페이징-쿼리" class="headerlink" title="Paging(페이징) 쿼리"></a>Paging(페이징) 쿼리</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 어떠한 post에 들어가 있으면서 그중에서 like(좋아요)가 몇개 이상인 Comment를 조회해오는 메서드 */</span></span><br><span class="line"><span class="function">Page&lt;Comment&gt; <span class="title">findByLikeCountGreaterThanAndPost</span><span class="params">(<span class="keyword">int</span> likeCount, Post post, Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>페이징으로 받고 싶으면 Pageable 파라미터를 주어야만 페이지에 대한 정보를 가져옵니다.<br></p>
+<h4 id="Sorting-정렬-쿼리"><a href="#Sorting-정렬-쿼리" class="headerlink" title="Sorting(정렬) 쿼리"></a>Sorting(정렬) 쿼리</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 최근 생성일 순으로 DESC 정렬해서 TOP 10개만 조회하는 Sorting 적용 예시 */</span></span><br><span class="line"><span class="function">Page&lt;Comment&gt; <span class="title">findTop10ByLikeCountGreaterThanAndPostOrderByCreatedDesc</span><span class="params">(<span class="keyword">int</span> likeCount, Post post, Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>도입부의 TopN을 사용해서 정렬된 10개를 뽑아오는 메소드입니다.<br>하지만 <strong>Pageable</strong>에 Sort(정렬) 관련된 기능이 이미 존재하기 때문에 권장하는 방법은 아닙니다.<br><br>만약 Page에 대한 정렬이 아니라면 아래 방법으로 사용하면 됩니다.<br></p>
+<h4 id="List-Sorting-정렬-쿼리"><a href="#List-Sorting-정렬-쿼리" class="headerlink" title="List Sorting(정렬) 쿼리"></a>List Sorting(정렬) 쿼리</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List&lt;Comment&gt; <span class="title">findByLikeCountGreaterThanAndPost</span><span class="params">(<span class="keyword">int</span> likeCount, Post post, Sort sort)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>List로 선언하고 Sort를 매개변수로 가져오면 됩니다.<br><br><br></p>
+<h3 id="No-property-title-found-for-type-Comment"><a href="#No-property-title-found-for-type-Comment" class="headerlink" title="No property title found for type Comment!"></a>No property title found for type Comment!</h3><p>위 오류는 메소드 이름으로 분석한 쿼리가 Comment 도메인 객체와 일치하지 않은 에러입니다.<br>에러를 분석해보면 <strong>title</strong>이라는 프로퍼티가 Comment에서 찾을 수 없다는 것이므로 title이 아닌 <strong>Comment</strong>로 수정하여 실행하면 됩니다.<br><br>자주 볼 수 있는 에러이기 떄문에 익혀두면 좋습니다.<br><br><br></p>
+<p>##</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#JPA">
+    <span class="tag-code">JPA</span>
+  </a>
+
+  <a href="/tags#Query">
+    <span class="tag-code">Query</span>
+  </a>
+
+  <a href="/tags#Common">
+    <span class="tag-code">Common</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/06/02/jpa/jpa-13/">
+        <span class="nav-arrow">← </span>
+        
+          JPA - Common Null
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Query"><span class="toc-nav-text">Query</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#쿼리-만드는-방법"><span class="toc-nav-text">쿼리 만드는 방법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-메소드-이름을-분석해서-​쿼리-만들기​-CREATE"><span class="toc-nav-text">1. 메소드 이름을 분석해서 ​쿼리 만들기​ (CREATE)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-직접-쿼리-작성하는-방법-USE-DECLARED-QUERY"><span class="toc-nav-text">2. 직접 쿼리 작성하는 방법(USE_DECLARED_QUERY)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-미리-정의한-쿼리-찾아보고-없으면-만들기-CREATE-IF-NOT-FOUND"><span class="toc-nav-text">3. 미리 정의한 쿼리 찾아보고 없으면 만들기(CREATE_IF_NOT_FOUND)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#EnableJpaRepositories"><span class="toc-nav-text">@EnableJpaRepositories</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#메소드-이름을-활용한-쿼리-생성법"><span class="toc-nav-text">메소드 이름을 활용한 쿼리 생성법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#메소드-분석-쿼리"><span class="toc-nav-text">메소드 분석 쿼리</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Paging-페이징-쿼리"><span class="toc-nav-text">Paging(페이징) 쿼리</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Sorting-정렬-쿼리"><span class="toc-nav-text">Sorting(정렬) 쿼리</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#List-Sorting-정렬-쿼리"><span class="toc-nav-text">List Sorting(정렬) 쿼리</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#No-property-title-found-for-type-Comment"><span class="toc-nav-text">No property title found for type Comment!</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/06/02/jpa/jpa-14/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
