@@ -189,7 +189,7 @@
 <p>PageRequest 객체를 사용하여 PageRequest.of()를 통해 시작할 페이지수, 총 정보 개수, 정렬 방식, 정렬할 정보를 선언할 수 있습니다.<br><br><br></p>
 <h3 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h3><p>Stream 객체를 사용할 수 있습니다.<br><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stream&lt;Comment&gt; <span class="title">findByCommentContainsIgnoreCase</span><span class="params">(String keyword, Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>Stream 객체로 받아옵니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PageRequest pageRequest = PageRequest.of(<span class="number">0</span>, <span class="number">10</span>, Sort.by(Sort.Direction.DESC, <span class="string">"LikeCount"</span>));</span><br><span class="line"><span class="keyword">try</span>(Stream&lt;Comment&gt; comments = commentRepository.findByCommentContainsIgnoreCase(<span class="string">"Spring"</span>, pageRequest)) &#123;</span><br><span class="line">    Comment firstComment = comments.findFirst().get(); <span class="comment">/* 첫번째 값 조회 */</span></span><br><span class="line">    assertThat(firstComment.getLikeCount()).isEqualTo(<span class="number">100</span>); <span class="comment">/* 첫번째 likeCount 값은 100 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Stream은 <strong>try-with-resource</strong>로 받아야 기능을 합니다.</p>
+<p>Stream은 <strong>try-with-resource</strong>로 받아야 기능을 합니다.<br></p>
 </section>
     <!-- Tags START -->
     
@@ -223,6 +223,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/06/04/jpa/jpa-15/">
+        
+          JPA - Common CustomRepository
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
