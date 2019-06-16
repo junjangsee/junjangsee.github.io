@@ -1,5 +1,5 @@
 ---
-title: 백엔드 면접 질문 정리(update - 19.06.06)
+title: 백엔드 면접 질문 정리(update - 19.06.09)
 date: 2019-05-15 22:54:00
 tags: Interview
 ---
@@ -18,6 +18,9 @@ tags: Interview
 3. 인터페이스와 추상클래스의 개념과 차이점은?
 4. 기본형 변수와 참조형 변수란?
 5. 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
+6. 추상화란?
+7. 캡슐화란?
+
 
 ## DB
 1. DML, DDL, DCL 이란?
@@ -25,6 +28,8 @@ tags: Interview
 
 ## 스프링
 1. Spring IOC Container의 역할은 무엇인가?
+2. Spring과 SpringBoot의 차이점과 SpringBoot만의 장점은?
+3. Springframework란 무엇인가?
 
 ## 네트워크
 1. 세션과 쿠키의 개념과 차이점은?
