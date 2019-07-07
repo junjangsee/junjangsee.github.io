@@ -9,3 +9,4 @@ tags: [JPA, Common, Custom, Repository]
 # CustomRepository
 
 ![CustomRepository](/images/jpa/customrepository/cus1.png)
+
