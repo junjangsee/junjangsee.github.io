@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      [JAVA - 자료구조] ArrayList 메소드 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>[JAVA - 자료구조] ArrayList 메소드</h2>
+  <p class="post-date">2019-07-25</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/java/ArrayList.png" alt="images"><br></p>
+<h1 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h1><p><code>ArrayList</code>란 자료구조의 한 종류로서 Java에서 가장 많이 사용되는 데이터 스트럭쳐입니다.<br>알고리즘에서 많이 활용되며, 실무에서 데이터를 다룰 때 입출력하는 부분에서 매우 많은 비중을 차지하고 있습니다.<br>하지만 이런 ArrayList를 다룰 때 지원하는 메소드를 숙지하고 있지 못하면 ArrayList의 성능을 제대로 활용할 수 없겠죠? 😱 <br><br>그래서 심화적인 부분은 아니지만 메소드를 활용할 수 있도록 익혀놓는다면 필요할 때 떠올려 관련 자료를 찾아보며 해결할 수 있는 능력이 생길테고, 나중엔 본인 것으로 자연스럽게 남아 언젠간 ArrayList에 통달할 수 있겠습니다!<br><br>작성자인 저 또한 공부하면서 정리하는 부분이기 때문에 틀린 정보가 있을 수 있으니 혹시 틀린점이 있다면 피드백 부탁드립니다. :)<br><br>참고자료 : <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html" target="_blank" rel="noopener">ArrayList (Java 8)</a><br><br></p>
+<h2 id="ArrayList-생성"><a href="#ArrayList-생성" class="headerlink" title="ArrayList 생성"></a>ArrayList 생성</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line">ArrayList&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<p>ArrayList를 사용하려면 객체를 생성해야합니다. import는 <code>java.util.ArrayList</code>로 하면 되겠습니다.<br>타입은 Integer로 선언하였습니다.<br><br><br></p>
+<h2 id="add-E-e"><a href="#add-E-e" class="headerlink" title="add(E e)"></a>add(E e)</h2><p>ArrayList 객체가 생성되어 있다면 값이 있어야겠죠? 만약 값이 없는 채로 출력되면 텅텅 빈 엘리먼트만 나올 것입니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">numbers.add(<span class="number">10</span>);</span><br><span class="line">numbers.add(<span class="number">20</span>);</span><br><span class="line">numbers.add(<span class="number">30</span>);</span><br><span class="line">numbers.add(<span class="number">40</span>);</span><br><span class="line">numbers.add(<span class="number">50</span>);</span><br></pre></td></tr></table></figure></p>
+<p>생성한 객체에 <code>add</code>로 Integer 타입을 넣어주면 numbers에는 총 5개의 엘리먼트가 들어가게 됩니다. <br><br>그리고 출력을 하면..<br><br></p>
+<blockquote>
+<p>[10, 20, 30, 40, 50]</p>
+</blockquote>
+<p>위 결과가 나오겠죠?<br>여기서 알 수 있는건 바로 .add() 한 <code>순서대로</code> 엘리먼트가 들어간 것을 알 수 있습니다.<br>그러면 저 사이에 값을 넣는건 불가능 할까요? 😭<br><strong>NOPE!!</strong> 다행히도 <code>index</code>를 기준으로 add가 가능합니다. 🎉<br><br><br></p>
+<h2 id="add-int-index-E-element"><a href="#add-int-index-E-element" class="headerlink" title="add(int index, E element)"></a>add(int index, E element)</h2><p>기존 총 5개의 엘리먼트 중 2번째에 15라는 값을 넣어보겠습니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numbers.add(<span class="number">1</span>, <span class="number">15</span>);</span><br></pre></td></tr></table></figure></p>
+<p>index는 0부터 시작하고 1에 15라는 엘리먼트를 넣겠다는 의미입니다.<br>그렇다면 결과는..<br><br></p>
+<blockquote>
+<p>[10, 15, 20, 30, 40, 50]</p>
+</blockquote>
+<p>위와 같이 나오게 됩니다.<br>이제 각 하나의 엘리먼트 들을 넣는 방법은 알았습니다.<br><br>그렇다면 하나의 ArrayList에 또 다른 ArrayList의 엘리먼트들을 넣고싶을 땐 어떻게 해야할까요?<br>바로 <code>addAll()</code>을 이용하는 방법입니다.<br><br><br></p>
+<h2 id="addAll-Collection-lt-extends-E-gt-c"><a href="#addAll-Collection-lt-extends-E-gt-c" class="headerlink" title="addAll(Collection&lt;? extends E&gt; c)"></a>addAll(Collection&lt;? extends E&gt; c)</h2><p>여기서 Collection은 현재 사용중인 ArrayList와 같은 자료구조를 뜻합니다.<br>이 메소드는 위에설 설명한 것과 같이 하나의 자료구조에 또 다른 자료구조의 엘리먼트를 넣는데에 사용됩니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; newNumbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    newNumbers.add(<span class="number">60</span>);</span><br><span class="line">    newNumbers.add(<span class="number">70</span>);</span><br><span class="line">    newNumbers.add(<span class="number">80</span>);</span><br><span class="line">    newNumbers.add(<span class="number">90</span>);</span><br><span class="line">    newNumbers.add(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    numbers.addAll(newNumbers);</span><br></pre></td></tr></table></figure></p>
+<p>기존 numbers에 새롭게 만든 ArrayList를 addAll() 합니다.<br><br></p>
+<blockquote>
+<p>[10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100]</p>
+</blockquote>
+<p>그럼 위 엘리먼트들을 얻을 수 있을 것입니다.<br>여기서 유추할 수 있는 것은 addAll도 마찬가지고 <code>index</code>를 기준으로 addAll()이 가능합니다.<br><br><br></p>
+<h2 id="addAll-int-index-Collection-lt-extends-E-gt-c"><a href="#addAll-int-index-Collection-lt-extends-E-gt-c" class="headerlink" title="addAll(int index, Collection&lt;? extends E&gt; c)"></a>addAll(int index, Collection&lt;? extends E&gt; c)</h2><p>index를 명시하여 해당 공간에 addAll()이 가능합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; newNumbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    newNumbers.add(<span class="number">60</span>);</span><br><span class="line">    newNumbers.add(<span class="number">70</span>);</span><br><span class="line">    newNumbers.add(<span class="number">80</span>);</span><br><span class="line">    newNumbers.add(<span class="number">90</span>);</span><br><span class="line">    newNumbers.add(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    numbers.addAll(<span class="number">2</span> , newNumbers);</span><br><span class="line"></span><br><span class="line">    numbers.addAll(newNumbers);</span><br></pre></td></tr></table></figure></p>
+<p>add()와 다른 점은 메소드 이름의 차이 뿐입니다.<br><br></p>
+<blockquote>
+<p>[10, 15, 60, 70, 80, 90, 100, 20, 30, 40, 50]</p>
+</blockquote>
+<p>2번 째 index에 addAll() 된 것을 볼 수 있습니다.<br>그렇다면 넣은 엘리먼트 들을 싹다 빼는 방법에 대해 알아보겠습니다.<br><br><br></p>
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h2><p>이 메소드는 이전에 무슨 작업을 하건 말건 상관없이 무조건 <strong>깔.끔.</strong> 하게 <code>비워</code>줍니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        numbers.add(<span class="number">10</span>);</span><br><span class="line">        numbers.add(<span class="number">20</span>);</span><br><span class="line">        numbers.add(<span class="number">30</span>);</span><br><span class="line">        numbers.add(<span class="number">40</span>);</span><br><span class="line">        numbers.add(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">        numbers.clear();</span><br></pre></td></tr></table></figure></p>
+<p>엘리먼트가 넣어진 numbers에 clear()가 선언된 모습 (곧 게워낼 예정..)<br><br></p>
+<blockquote>
+<p>[]</p>
+</blockquote>
+<p>그 전까지 부자였던 numbers가 빈털털이가 된 모습… 💀<br><br><br></p>
+<h2 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h2><p>clear()가 시원하게 게워냈다면 이 메소드는 있던걸 <strong>풍.만.</strong> 하게 <code>복제</code>합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        numbers.add(<span class="number">10</span>);</span><br><span class="line">        numbers.add(<span class="number">20</span>);</span><br><span class="line">        numbers.add(<span class="number">30</span>);</span><br><span class="line">        numbers.add(<span class="number">40</span>);</span><br><span class="line">        numbers.add(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">        numbers.add(<span class="number">1</span>, <span class="number">15</span>);</span><br><span class="line"></span><br><span class="line">ArrayList&lt;Integer&gt; newNumbers = (ArrayList&lt;Integer&gt;) numbers.clone();</span><br></pre></td></tr></table></figure></p>
+<p>clone() 하기 위해 새롭게 만든 ArrayList에 기존 ArrayList를 clone() 합니다.<br><br></p>
+<blockquote>
+<p>[10, 15, 20, 30, 40, 50]</p>
+</blockquote>
+<p>numbers에 있던 엘리먼트가 똑같이 newNumbers로 복제된 모습입니다.<br><br><br></p>
+<h2 id="contains-Object-o"><a href="#contains-Object-o" class="headerlink" title="contains(Object o)"></a>contains(Object o)</h2></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#java">
+    <span class="tag-code">java</span>
+  </a>
+
+  <a href="/tags#ArrayList">
+    <span class="tag-code">ArrayList</span>
+  </a>
+
+  <a href="/tags#List">
+    <span class="tag-code">List</span>
+  </a>
+
+  <a href="/tags#Method">
+    <span class="tag-code">Method</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/07/14/conference/toy-project/">
+        <span class="nav-arrow">← </span>
+        
+          모두의 프로젝트 - Side Project 어디까지 가봤니? 후기
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ArrayList"><span class="toc-nav-text">ArrayList</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ArrayList-생성"><span class="toc-nav-text">ArrayList 생성</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#add-E-e"><span class="toc-nav-text">add(E e)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#add-int-index-E-element"><span class="toc-nav-text">add(int index, E element)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#addAll-Collection-lt-extends-E-gt-c"><span class="toc-nav-text">addAll(Collection&lt;? extends E&gt; c)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#addAll-int-index-Collection-lt-extends-E-gt-c"><span class="toc-nav-text">addAll(int index, Collection&lt;? extends E&gt; c)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#clear"><span class="toc-nav-text">clear()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#clone"><span class="toc-nav-text">clone()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#contains-Object-o"><span class="toc-nav-text">contains(Object o)</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/07/25/java/arraylist-Method/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
