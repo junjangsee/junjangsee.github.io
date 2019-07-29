@@ -235,3 +235,5 @@ ArrayList<Integer> newNumbers = new ArrayList<>();
 
 30은 4번 째에 위치하고 있기 때문에 3이 출력됩니다.<br/>
 <br/>
+
+## isEmpty()
