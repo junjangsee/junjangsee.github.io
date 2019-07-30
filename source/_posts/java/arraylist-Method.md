@@ -237,3 +237,161 @@ ArrayList<Integer> newNumbers = new ArrayList<>();
 <br/>
 
 ## isEmpty()
+ArrayList에 엘리먼트들이 있는지 확인하는 메소드입니다. 값은 `boolean`으로 출력됩니다.
+
+```java
+    ArrayList<Integer> numbers = new ArrayList<>();
+
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        numbers.add(50);
+
+        numbers.add(1, 15);
+
+
+    ArrayList<Integer> newNumbers = new ArrayList<>();
+
+
+        newNumbers.add(60);
+        newNumbers.add(70);
+        newNumbers.add(80);
+        newNumbers.add(90);
+        newNumbers.add(100);
+
+        numbers.addAll(newNumbers);
+
+        System.out.println(numbers.isEmpty());
+```
+numbers가 비어있는지 확인합니다.
+<br/>
+
+> false 
+
+false가 뜬 이유는 numbers에 엘리먼트가 있기 때문입니다. 물론 엘리먼트가 없다면 true로 뜨겠죠?
+여기서 응용력이 빠르신 분들은 벌써 ArrayList에서는 isEmpty()로 `Null`체크가 가능하다는 것을 눈치 채셨을 것입니다.
+여기서 더 나아가 Null체크까지 해보신다면 좋을 것 같습니다. 😀<br/>
+<br/>
+
+## iterator()
+`iterator()`는 반복을 통해 순회하면서 탐색할 때 사용합니다.
+보통 객체지향시 주로 사용하게 되는 기법이며 iterator()를 사용하기 위해선 `객체`를 먼저 생성해주어야 합니다.
+기본적으로 ArrayList는 순환 중 CRUD가 불가능 하지만 Iterator를 통해서 유일하게 안전한 방법으로 순환 중 다룰 수 있습니다.
+Iterator 인터페이스는 아래와 같은 메소드를 지원합니다.
+
+- hasNext() : 다음 엘리먼트가 있는지 확인합니다. 즉, 현재 위치에서 다음 위치로 이동할 수 있는지 판단합니다.
+- next() : 다음 엘리먼트를 가져오는 역할을 합니다.
+- remove() : next()로 가져온 엘리먼트를 삭제합니다.
+
+```java
+Iterator<Integer> iterator = numbers.iterator();
+
+    while (iterator.hasNext()) {
+        Integer next = iterator.next();
+        System.out.println(next);
+
+        if (numbers.contains(10)) {
+            iterator.remove();
+        }
+    }
+
+    System.out.println("----------------");
+
+    iterator = numbers.iterator();
+
+    while (iterator.hasNext()) {
+        Integer next = iterator.next();
+        System.out.println(next);
+    }
+```
+while-loop를 하면서 ArrayList에 있는 엘리먼트들을 next 변수에 담고, 만약 10이 포함되어 있다면 remove() 한 후 다시 iterator를 선언하고 출력하는 예제입니다.
+<br/>
+
+> 10 15 20 30 40 50 60 70 80 90 100 / 15 20 30 40 50 60 70 80 90 100
+
+10이라는 엘리먼트가 존재하니 remove()를 통해 삭제를 했고 삭제된 ArrayList를 다시 담아 출력하였더니 10이 제외된 엘리먼트가 출력되었습니다.<br/>
+<br/>
+
+## lastIndexOf(Object o)
+앞전에 우리는 indexOf(Object o)를 활용하여 엘리먼트가 어디에 위치하고 있는지 알아내 보았습니다.
+`lastIndexOf()`는 엘리먼트가 존재한다면 해당 엘리먼트 중 가장 **뒤**에있는 index를 출력하고,
+만약 엘리먼트가 **없다면** `-1`을 리턴합니다.
+
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    numbers.add(1, 15);
+
+ArrayList<Integer> newNumbers = new ArrayList<>();
+
+    newNumbers.add(80);
+    newNumbers.add(70);
+    newNumbers.add(80);
+    newNumbers.add(90);
+    newNumbers.add(100);
+
+    numbers.addAll(newNumbers);
+
+    System.out.println(numbers.lastIndexOf(80));
+    System.out.println(numbers.lastIndexOf(50000));
+```
+80, 50000 두 가지의 엘리먼트를 찾아보겠습니다.
+<br/>
+
+> 8 / -1
+
+위와 같은 결과가 나오는 이유는 80은 index가 6과 8에 위치하고 있으므로 마지막 index 값인 8이 출력된 것이고
+50000은 존재하지 않기 때문에 -1이 출력된 것입니다.<br/>
+<br/>
+
+## listIterator()
+기존 iterator()는 **순방향**을 통해서만 순회가 가능했지만 `listIterator()`는 **양방향**으로 이동이 가능합니다.
+
+```java
+ListIterator<Integer> listIterator = numbers.listIterator();
+
+    while (listIterator.hasNext()) {
+        System.out.println(listIterator.next());
+    }
+
+    while (listIterator.hasPrevious()) {
+        System.out.println(listIterator.previous());
+    }
+```
+iterator()와 크게 차이는 없습니다. 
+<br/>
+> 10 15 20 30 40 50 60 70 80 90 100 / 100 90 80 70 60 50 40 30 20 15 10
+
+역순으로 반복된 것을 확인할 수 있습니다.<br/>
+<br/>
+
+## listIterator(int index)
+listIterator()가 첫 index부터 끝까지 순환했다면 listIterator(int index)는 선언한 index **이후**로 순환하게 됩니다.
+
+```java
+ListIterator<Integer> listIterator = numbers.listIterator(5);
+
+    while (listIterator.hasNext()) {
+        System.out.println(listIterator.next());
+    }
+
+    while (listIterator.hasPrevious()) {
+        System.out.println(listIterator.previous());
+    }
+```
+ListIterator 선언시 index를 포함하여 선언해주면 됩니다.
+<br/>
+
+> 50 60 70 80 90 100 / 100 90 80 70 60 50
+
+index 5번 부터 순환된 것을 알 수 있습니다.<br/>
+<br/>
+
+## remove(int index)
