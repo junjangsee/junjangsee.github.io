@@ -395,3 +395,107 @@ index 5번 부터 순환된 것을 알 수 있습니다.<br/>
 <br/>
 
 ## remove(int index)
+remove는 삭제하는 역할을 하는 메소드입니다. index를 통해서 해당 엘리먼트를 삭제합니다.
+
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    numbers.add(1, 15);
+
+ArrayList<Integer> newNumbers = new ArrayList<>();
+
+    newNumbers.add(60);
+    newNumbers.add(70);
+    newNumbers.add(80);
+    newNumbers.add(90);
+    newNumbers.add(100);
+
+    numbers.addAll(newNumbers);
+
+    numbers.remove(0);
+
+    System.out.println(numbers);
+```
+0번 째 index를 remove합니다.
+
+<br/>
+> [15, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+첫 번째 엘리먼트가 삭제된 결과입니다.<br/>
+<br/>
+
+## remove(Object o)
+index 뿐만 아니라 엘리먼트(객체) 자체를 삭제할 수도 있습니다.
+
+```java
+numbers.remove(Integer.valueOf(100));
+System.out.println(numbers);
+```
+100인 엘리먼트를 삭제하고 다시 ArrayList를 호출하였습니다.
+<br/>
+
+> [10, 15, 20, 30, 40, 50, 60, 70, 80, 90]
+
+100이 삭제된 결과를 볼 수 있습니다.<br/>
+<br/>
+
+## removeAll(Collection<?> c)
+ArrayList에서 또 다른 ArrayList에 있는 엘리먼트를 전부 제거하는 메소드입니다.
+
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+ArrayList<Integer> newNumbers = new ArrayList<>();
+
+    newNumbers.add(30);
+    newNumbers.add(40);
+
+    numbers.removeAll(newNumbers);
+
+    System.out.println(numbers);
+```
+기존 ArrayList를 조금 변형하여 동일한 엘리먼트를 add() 후 removeAll()을 하였습니다.
+<br/>
+
+> [10, 20, 50]
+
+동일한 30, 40 엘리먼트를 삭제하고 출력되었습니다.<br/>
+<br/>
+
+## removeIf(Predicate<? super E> filter)
+removeIf는 Predicate를 인자로 받습니다. 이 메소드는 삭제시 필터링을 하는 작업이 필요할 때 사용합니다.
+
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    if (numbers.removeIf(n -> n % 3 == 0)) {
+        System.out.println(numbers);
+    }
+```
+람다식을 사용하여 3으로 나누었을 때 0이 되는 엘리먼트는 삭제를 합니다.
+<br/>
+
+> [10, 20, 40, 50]
+
+3으로 나누어지는 30 엘리먼트가 없어진 것을 확인할 수 있습니다.<br/>
+<br/>
+
+## replaceAll(UnaryOperator<E> operator)
