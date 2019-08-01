@@ -395,7 +395,7 @@ index 5번 부터 순환된 것을 알 수 있습니다.<br/>
 <br/>
 
 ## remove(int index)
-remove는 삭제하는 역할을 하는 메소드입니다. index를 통해서 해당 엘리먼트를 삭제합니다.
+remove는 삭제하는 역할을 하는 메소드입니다. `index`를 통해서 해당 엘리먼트를 삭제합니다.
 
 ```java
 ArrayList<Integer> numbers = new ArrayList<>();
@@ -431,7 +431,7 @@ ArrayList<Integer> newNumbers = new ArrayList<>();
 <br/>
 
 ## remove(Object o)
-index 뿐만 아니라 엘리먼트(객체) 자체를 삭제할 수도 있습니다.
+index 뿐만 아니라 `엘리먼트(객체)` 자체를 삭제할 수도 있습니다.
 
 ```java
 numbers.remove(Integer.valueOf(100));
@@ -446,7 +446,7 @@ System.out.println(numbers);
 <br/>
 
 ## removeAll(Collection<?> c)
-ArrayList에서 또 다른 ArrayList에 있는 엘리먼트를 전부 제거하는 메소드입니다.
+ArrayList에서 또 다른 ArrayList에 있는 엘리먼트를 `전부` 제거하는 메소드입니다.
 
 ```java
 ArrayList<Integer> numbers = new ArrayList<>();
@@ -475,7 +475,7 @@ ArrayList<Integer> newNumbers = new ArrayList<>();
 <br/>
 
 ## removeIf(Predicate<? super E> filter)
-removeIf는 Predicate를 인자로 받습니다. 이 메소드는 삭제시 필터링을 하는 작업이 필요할 때 사용합니다.
+removeIf는 `Predicate`를 인자로 받습니다. 이 메소드는 삭제시 `필터링`을 하는 작업이 필요할 때 사용합니다.
 
 ```java
 ArrayList<Integer> numbers = new ArrayList<>();
@@ -499,3 +499,79 @@ ArrayList<Integer> numbers = new ArrayList<>();
 <br/>
 
 ## replaceAll(UnaryOperator<E> operator)
+replaceAll()은 두 ArrayList의 엘리먼트 중 `같은 엘리먼트`만 담을 때 사용합니다.
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+ArrayList<Integer> newNumbers = new ArrayList<>();
+
+    newNumbers.add(10);
+    newNumbers.add(20);
+    newNumbers.add(3);
+    newNumbers.add(4);
+    newNumbers.add(5);
+
+    numbers.retainAll(newNumbers);
+
+System.out.println(numbers);
+```
+10, 20 두 엘리먼트만 같고 나머지 세 개의 엘리먼트는 다릅니다.
+<br/>
+
+> [10, 20]
+
+위 결과처럼 같은 엘리먼트만 담게 되고 그 결과가 출력될 것입니다.<br/>
+<br/>
+
+## set(int index, E element)
+ArrayList에 들어있는 엘리먼트를 `교체`하고 싶을 떄 사용합니다.
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    numbers.set(0, 100);
+
+    System.out.println(numbers);
+```
+0 index를 100으로 교체하는 예제입니다.
+<br/>
+
+> [100, 20, 30, 40, 50]
+
+원래 10이었던 값이 100으로 변한 것을 볼 수 있습니다.<br/>
+<br/>
+
+## size()
+size()는 ArrayList의 `엘리먼트의 수`를 알고싶을 때 사용합니다.
+여기서 주의할 점은 length()는 `배열의 전체 크기`를 나타내므로 혼동하면 안됩니다❗
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    for (int i = 0; i < numbers.size(); i++) {
+        System.out.println(numbers.get(i));
+    }
+```
+ArrayList의 총 `엘리먼트`를 돌면서 index의 값들을 뽑아내는 예제입니다.
+<br/>
+
+> 10 20 30 40 50
+
+총 5개의 엘리먼트가 출력될 것입니다.<br/>
+<br/>
