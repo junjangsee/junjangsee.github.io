@@ -575,3 +575,100 @@ ArrayList의 총 `엘리먼트`를 돌면서 index의 값들을 뽑아내는 예
 
 총 5개의 엘리먼트가 출력될 것입니다.<br/>
 <br/>
+
+## sort(Comparator<? super E> c)
+ArrayList를 sorting 하기 위해서 `Collections`의 sort() 메소드를 사용할 수 있습니다.
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(30);
+    numbers.add(20);
+    numbers.add(50);
+    numbers.add(40);
+
+    Collections.sort(numbers);
+
+    System.out.println(numbers);
+```
+뒤죽박죽 추가된 ArrayList를 sorting하는 예제입니다.
+<br/>
+
+> [10, 20, 30, 40, 50]
+
+`오름차순`으로 정렬된 것을 확인할 수 있습니다.
+`내림차순`으로 정렬하고 싶다면 `reverse()`를 사용하면 됩니다.<br/>
+<br/>
+
+## subList(int fromIndex, int toIndex)
+subList()는 먼저 생성된 ArrayList에서 원하는 엘리먼트를 index로 가져와서 ArrayList를 구성할 때 사용합니다.
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    System.out.println(numbers);
+
+    List<Integer> newNumbers = numbers.subList(1,3);
+
+    System.out.println(newNumbers);
+```
+newNumbers라는 새로운 List에 1~2의 index를 포함하는 엘리먼트를 가지게 하는 예제입니다.
+<br/>
+
+> [10, 20, 30, 40, 50] / [20, 30]
+
+아닛? 분명 index 1부터 3까지를 생성해달라고 했는데 어째서 2까지만 생성된거지? 라는 의문을 가질 수 있습니다.
+이 메소드 파라미터의 `int toIndex`는 `미만`이라는 특징이 있습니다. 그래서 3을 주면 실질적으로는 2까지의 엘리먼트를 가져오게 됩니다.<br/>
+<br/>
+
+## toArray()
+로직을 작성하다 보면 `ArrayList`를 `array`로 변환해야 할 때가 있습니다. 그 때 사용하는 메소드입니다.
+```java
+ArrayList<Integer> numbers = new ArrayList<>();
+
+    numbers.add(10);
+    numbers.add(20);
+    numbers.add(30);
+    numbers.add(40);
+    numbers.add(50);
+
+    Integer[] array = numbers.toArray(new Integer[numbers.size()]);
+
+    for (int i = 0; i < array.length; i++) {
+        System.out.println(array[i]);
+    }
+```
+array를 생성하여 numbers에 담긴 엘리먼트를 담고 출력하는 예제입니다.
+<br/>
+
+> 10 20 30 40 50
+
+배열로 옮겨진 엘리먼트가 출력되었습니다.<br/>
+<br/>
+
+## asList()
+이전엔 ArrayList를 array로 변환했다면, 이번엔 `array`를 `ArrayList`로 만들 차례입니다.
+
+```java
+String[] array = new String[3];
+
+    array[0] = "오늘은";
+    array[1] = "즐거운";
+    array[2] = "금요일";
+
+ArrayList<String> friday = new ArrayList<>(Arrays.asList(array));
+
+    friday.forEach(f -> System.out.print(f));
+```
+생성된 array룰 ArrayList에 Array.asList로 변환시켜주었습니다.
+Java 8 문법인 람다식을 사용하여 for-loop를 사용해봤습니다.
+<br/>
+
+> 오늘은즐거운금요일
+
+옮겨진 엘리먼트가 출력된 것을 볼 수 있습니다.<br/>
