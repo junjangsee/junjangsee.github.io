@@ -613,7 +613,7 @@ ArrayList<Integer> numbers = new ArrayList<>();
 
     System.out.println(numbers);
 
-    List<Integer> newNumbers = numbers.subList(1,3);
+List<Integer> newNumbers = numbers.subList(1,3);
 
     System.out.println(newNumbers);
 ```
@@ -637,7 +637,7 @@ ArrayList<Integer> numbers = new ArrayList<>();
     numbers.add(40);
     numbers.add(50);
 
-    Integer[] array = numbers.toArray(new Integer[numbers.size()]);
+Integer[] array = numbers.toArray(new Integer[numbers.size()]);
 
     for (int i = 0; i < array.length; i++) {
         System.out.println(array[i]);
