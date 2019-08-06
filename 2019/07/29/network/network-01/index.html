@@ -10,7 +10,7 @@
   
   <title>
     
-      Network - HTTP | Junjangsee&#39;s Blog
+      Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,7 +98,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>Network - HTTP</h2>
+  <h2></h2>
   <p class="post-date">2019-07-29</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -107,11 +107,10 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
-<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p><code>HTTP(Hypertext Transfer Protocol)</code>은 <code>WWW(World Wide Web)</code>에서 통신하는데 사용하는 프로토콜 프로그램입니다.<br>즉, 전 세계의 웹 브라우저, 서버, 웹 애플리케이션은 <strong>모두</strong> <code>HTTP</code>를 통해서 대화를 하게 되어있습니다. <br><br>현재 셀 수 없이 많은 이미지, HTML 페이지, 텍스트 파일, 동영상 등 쉴틈없이 인터넷에서 움직이고 있습니다.<br>이런 상황에서 HTTP는 전 세계에 이 정보들을 <strong>빠르고, 간편하고, 정확하게</strong> 각 PC의 브라우저로 옮겨줄 수 있습니다.<br><br>정말 신기하기도 하고 의아한 점은 이러한 많은 정보들을 전송 중 <strong>꼬이거나 손상되지 않는다</strong>는 점입니다.<br>그렇기 떄문에 개발자 입장에서는 HTTP를 사용함으로써 전송에러를 걱정하지 않고 개발을 할 수 있다는 것입니다.! 👍👍<br><br>그러면 이렇게 좋은 HTTP는 어떻게 웹 트래픽을 전송하는지 알아보도록 하겠습니다.<br><br><br></p>
+    <section class="markdown-content"><h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p><code>HTTP(Hypertext Transfer Protocol)</code>은 <code>WWW(World Wide Web)</code>에서 통신하는데 사용하는 프로토콜 프로그램입니다.<br>즉, 전 세계의 웹 브라우저, 서버, 웹 애플리케이션은 <strong>모두</strong> <code>HTTP</code>를 통해서 대화를 하게 되어있습니다. <br><br>현재 셀 수 없이 많은 이미지, HTML 페이지, 텍스트 파일, 동영상 등 쉴틈없이 인터넷에서 움직이고 있습니다.<br>이런 상황에서 HTTP는 전 세계에 이 정보들을 <strong>빠르고, 간편하고, 정확하게</strong> 각 PC의 브라우저로 옮겨줄 수 있습니다.<br><br>정말 신기하기도 하고 의아한 점은 이러한 많은 정보들을 전송 중 <strong>꼬이거나 손상되지 않는다</strong>는 점입니다.<br>그렇기 떄문에 개발자 입장에서는 HTTP를 사용함으로써 전송에러를 걱정하지 않고 개발을 할 수 있다는 것입니다.! 👍👍<br><br>그러면 이렇게 좋은 HTTP는 어떻게 웹 트래픽을 전송하는지 알아보도록 하겠습니다.<br><br><br></p>
 <h1 id="웹-클라이언트와-서버"><a href="#웹-클라이언트와-서버" class="headerlink" title="웹 클라이언트와 서버"></a>웹 클라이언트와 서버</h1><p>웹 컨텐츠들이 존재하는 <code>웹 서버</code>는 HTTP로 의사소통 하기 때문에 <code>HTTP 서버</code>라고 불립니다.<br>HTTP <code>서버</code>는 데이터들을 저장하고 있다가 HTTP <code>클라이언트</code> 측에서 요청하면 그에 맞는 데이터를 보내게 됩니다.</p>
 <blockquote>
-<p>HTTP 클라이언트(웹 브라우저) : “야 네이버! index.html 페이지 내놔!!!”<br>요청 대상 - <a href="http://www.naver.com" target="_blank" rel="noopener">www.naver.com</a><br><br>HTTP 서버(Naver 서버) : “드..드리겠습니다.. 여기 HTTP 포맷, 300자로 이루어진 문서입니다..”<br>요청 결과 - <a href="http://www.naver.com/index.html" target="_blank" rel="noopener">www.naver.com/index.html</a></p>
+<p>HTTP 클라이언트(웹 브라우저) : “야 네이버! default file(ex. index.html) 페이지 내놔!!!”<br>요청 대상 - <a href="http://www.naver.com" target="_blank" rel="noopener">www.naver.com</a><br><br>HTTP 서버(Naver 서버) : “드..드리겠습니다.. 여기 HTTP 포맷, 300자로 이루어진 문서입니다..”<br>요청 결과 - <a href="http://www.naver.com/index.html" target="_blank" rel="noopener">www.naver.com/index.html</a></p>
 </blockquote>
 <p>위 예시가 WWW의 기본 구성 요소입니다.<br>현재 Chrome, Explorer 등 많은 <code>브라우저들</code>을 사용중일텐데 이 것이 바로 <code>HTTP 클라이언트</code>입니다.<br><br><br></p>
 <h1 id="리소스"><a href="#리소스" class="headerlink" title="리소스"></a>리소스</h1><p>웹 서버는 웹 리소스를 관리하고 제공하는 역할을 합니다. 여기서 <code>웹 리소스</code>는 웹 컨텐츠의 원천입니다. 즉 원조의 역할을 합니다. 😀<br>웹 리소스는 가장 단순하게는 웹 서버 파일 시스템의 <code>정적 파일</code>입니다.</p>
@@ -175,7 +174,7 @@
 <p>HTTP &gt; TCP &gt; IP</p>
 </blockquote>
 <p><br></p>
-<h2 id="접속-IP-주소-포트-번호"><a href="#접속-IP-주소-포트-번호" class="headerlink" title="접속, IP 주소, 포트 번호"></a>접속, IP 주소, 포트 번호</h2><p>먼저 HTTP 클라이언트가 서버에 메시지를 전송할 수 있도록 <strong>인터넷 프로토콜(IP) 주소</strong>와 <strong>포트번호</strong>를 사용해 클라이언트와 서버 사이에 TCP/IP 커넥션을 맺어주어야 합니다.<br>TCP는 IP 주소와 포트번호를 필요로 합니다.<br>그런데 이런 정보를 도대체 어디서 가져와야 할까요? 일일이 알아내서 입력해주어야 할까요? 🤔<br></p>
+<h2 id="접속-IP-주소-포트-번호"><a href="#접속-IP-주소-포트-번호" class="headerlink" title="접속, IP 주소, 포트 번호"></a>접속, IP 주소, 포트 번호</h2><p>먼저 HTTP 클라이언트가 서버에 메시지를 전송할 수 있도록 <strong>인터넷 프로토콜(IP) 주소</strong>와 <strong>포트번호</strong>를 사용해 클라이언트와 서버 사이에 TCP/IP 커넥션을 맺어주어야 합니다.<br>TCP는 포트번호를 필요로 합니다.<br>그런데 이런 정보를 도대체 어디서 가져와야 할까요? 일일이 알아내서 입력해주어야 할까요? 🤔<br></p>
 <p>바로 URL에서 가져올 수 있습니다. 바로 예시를 보겠습니다.</p>
 <ul>
 <li><a href="http://207.200.83.29:80/index.html" target="_blank" rel="noopener">http://207.200.83.29:80/index.html</a> : IP와 포트번호를 가진 경우</li>
@@ -210,27 +209,6 @@
 <h2 id="에이전트"><a href="#에이전트" class="headerlink" title="에이전트"></a>에이전트</h2><p>에이전트는 사용자를 위해 HTTP 요청을 만들어주는 클라이언트 프로그램입니다.<br><br><br></p>
 </section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Resource">
-    <span class="tag-code">Resource</span>
-  </a>
-
-  <a href="/tags#HTTP">
-    <span class="tag-code">HTTP</span>
-  </a>
-
-  <a href="/tags#Client">
-    <span class="tag-code">Client</span>
-  </a>
-
-  <a href="/tags#Server">
-    <span class="tag-code">Server</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
