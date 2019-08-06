@@ -1,11 +1,3 @@
----
-title: Network - HTTP
-date: 2019-07-29 22:16:04
-tags: [HTTP, Client, Server, Resource]
----
-
-![images](/images/network/network.jpg)<br/>
-
 # HTTP
 `HTTP(Hypertext Transfer Protocol)`은 `WWW(World Wide Web)`에서 통신하는데 사용하는 프로토콜 프로그램입니다.
 즉, 전 세계의 웹 브라우저, 서버, 웹 애플리케이션은 **모두** `HTTP`를 통해서 대화를 하게 되어있습니다. <br/>
@@ -19,7 +11,7 @@ tags: [HTTP, Client, Server, Resource]
 # 웹 클라이언트와 서버
 웹 컨텐츠들이 존재하는 `웹 서버`는 HTTP로 의사소통 하기 때문에 `HTTP 서버`라고 불립니다.
 HTTP `서버`는 데이터들을 저장하고 있다가 HTTP `클라이언트` 측에서 요청하면 그에 맞는 데이터를 보내게 됩니다.
-> HTTP 클라이언트(웹 브라우저) : "야 네이버! index.html 페이지 내놔!!!" 
+> HTTP 클라이언트(웹 브라우저) : "야 네이버! default file(ex. index.html) 페이지 내놔!!!" 
 요청 대상 - www.naver.com<br/>
 HTTP 서버(Naver 서버) : "드..드리겠습니다.. 여기 HTTP 포맷, 300자로 이루어진 문서입니다.." 
 요청 결과 - www.naver.com/index.html
@@ -68,7 +60,7 @@ URL(통합 자원 지시자)는 리소스 식별자의 가장 **흔한** 형태�
 <br/>
 
 > http://www.naver.com/index.html - naver홈페이지의 URL
-http://www.ROKA.com/datepick?date=190804 - 국방부 홈페이지에서 190804에 입영하는 URL
+> http://www.ROKA.com/datepick?date=190804 - 국방부 홈페이지에서 190804에 입영하는 URL
 
 위 처럼 이런 표준 포멧을 따르고 있습니다.
 - URL의 첫 부분은 **스킴(scheme)**인데, 여기선 리소스에 접근하기 위한 프로토콜을 서술합니다.(보통은 http://를 사용합니다.)
@@ -135,7 +127,7 @@ TCP/IP는 TCP, IP가 층을 이루는 패킷 교환 네트워크 프로토콜의
 
 ## 접속, IP 주소, 포트 번호
 먼저 HTTP 클라이언트가 서버에 메시지를 전송할 수 있도록 **인터넷 프로토콜(IP) 주소**와 **포트번호**를 사용해 클라이언트와 서버 사이에 TCP/IP 커넥션을 맺어주어야 합니다.
-TCP는 IP 주소와 포트번호를 필요로 합니다. 
+TCP는 포트번호를 필요로 합니다. 
 그런데 이런 정보를 도대체 어디서 가져와야 할까요? 일일이 알아내서 입력해주어야 할까요? 🤔<br/>
 
 바로 URL에서 가져올 수 있습니다. 바로 예시를 보겠습니다.
