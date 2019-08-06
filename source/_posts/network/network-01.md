@@ -1,3 +1,11 @@
+---
+title: Network - HTTP
+date: 2019-07-29 22:16:04
+tags: [HTTP, Client, Server, Resource]
+---
+
+![images](/images/network/network.jpg)<br/>
+
 # HTTP
 `HTTP(Hypertext Transfer Protocol)`은 `WWW(World Wide Web)`에서 통신하는데 사용하는 프로토콜 프로그램입니다.
 즉, 전 세계의 웹 브라우저, 서버, 웹 애플리케이션은 **모두** `HTTP`를 통해서 대화를 하게 되어있습니다. <br/>
