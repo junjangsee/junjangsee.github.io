@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Network - HTTP 메시지 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Network - HTTP 메시지</h2>
+  <p class="post-date">2019-08-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
+<p><strong>이번 장에서 살펴볼 주제</strong></p>
+<ul>
+<li>메시지가 어떻게 흘러가는가</li>
+<li>HTTP 메시지의 세 부분(시작줄, 헤더, 개체 본문)</li>
+<li>요청과 응답 메시지의 차이</li>
+<li>요청 메시지가 지원하는 여러 기능(메소드)들</li>
+<li>응답 메시지가 반환하는 여러 상태 코드들</li>
+<li>여러 HTTP 헤더들은 무슨 일을 하는가</li>
+</ul>
+<p><br></p>
+<h1 id="메시지의-흐름"><a href="#메시지의-흐름" class="headerlink" title="메시지의 흐름"></a>메시지의 흐름</h1><p>HTTP 메시지는 <code>인바운드, 아웃바운드, 업스트림, 다운스트림</code> 총 4가지 용어는 메시지의 방향을 의미합니다. 이 용어들에 대해 살펴보겠습니다.<br><br><br></p>
+<h2 id="인바운드-아웃바운드"><a href="#인바운드-아웃바운드" class="headerlink" title="인바운드, 아웃바운드"></a>인바운드, 아웃바운드</h2><p>트랜잭션 방향을 표현하기 위해 사용합니다.<br>메시지가 서버로 향하는 것이 <code>인바운드</code>이고 처리가 끝난 메시지가 사용자에게 돌아가는 것을 <code>아웃바운드</code>라고 합니다.<br><br><br></p>
+<h2 id="업스트림-다운스트림"><a href="#업스트림-다운스트림" class="headerlink" title="업스트림, 다운스트림"></a>업스트림, 다운스트림</h2><p>HTTP 메시지는 강물과 같이 흐르게 되는데 모든 메시지의 흐름은 <code>다운스트림</code>으로 흐릅니다.</p>
+<blockquote>
+<p>상류(클라이언트) –&gt; 중류(서버) –&gt; 하류(클라이언트)</p>
+</blockquote>
+<p>흐르는 과정에서 역행하는 부분을 <code>업스트림</code>이라고 합니다.<br><br><br></p>
+<h1 id="메시지의-각-부분"><a href="#메시지의-각-부분" class="headerlink" title="메시지의 각 부분"></a>메시지의 각 부분</h1><p>단순한 데이터의 구조화된 블록이며, <strong>시작줄/헤더/본문(엔티티 본문)</strong> 세 부분으로 나뉘어 집니다.<br>이 세 부분에 대해서 학습해보겠습니다.<br><img src="/images/network/http_messege.jpeg" alt="images"><br>출처 : <a href="https://kimdongwook.tistory.com" target="_blank" rel="noopener">https://kimdongwook.tistory.com</a><br><br><br></p>
+<h2 id="시작줄"><a href="#시작줄" class="headerlink" title="시작줄"></a>시작줄</h2><p>모든 HTTP 메시지는 시작줄로 시작합니다. 요청과 응답 두 가지를 살펴보겠습니다.<br></p>
+<h3 id="요청줄"><a href="#요청줄" class="headerlink" title="요청줄"></a>요청줄</h3><p>요청 메시지는 서버에게 리소스에 대해서 무언갈 해달라고 부탁합니다. 그러기 위해 메소드의 동작, 그 동작을 하는 대상인 URL을 명시합니다. 또한 HTTP 버전도 포함하게 됩니다.<br></p>
+<h3 id="응답줄"><a href="#응답줄" class="headerlink" title="응답줄"></a>응답줄</h3><p>응답 메시지는 요청한 결과에 대한 결과 데이터를 클라이언트에게 돌려줍니다. 응답줄에는 HTTP의 버전, 상태 코드, 사유 구절을 명시합니다.<br></p>
+<h3 id="메소드"><a href="#메소드" class="headerlink" title="메소드"></a>메소드</h3><p>메소드는 서버에게 <strong>무엇을 해야하는지</strong> 말해줍니다. 아래 표에는 HTTP 메소드에 대해 정리한 표입니다.</p>
+<table>
+<thead>
+<tr>
+<th>메소드</th>
+<th>설명</th>
+<th>본문 포함</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>서버에서 어떤 문서(데이터)를 가져옵니다. 가장 흔히 쓰이며 주로 서버에게 리소스를 달라고 요청하기 위해 사용합니다.</td>
+<td>X</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>서버에서 어떤 문서(데이터)에 대해 헤더만 가져옵니다. <br>HEAD 메소드를 사용하면 리소스를 받아내지 않고도 그에 대해 무엇인가를 알아낼 수 있습니다.</td>
+<td>X</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>서버가 처리해야할 데이터를 보냅니다. 실제로 HTML 폼을 지원하기 위해 흔히 사용되며 폼은 서버로 전송되어 서버는 이를 모아 필요로 하는 곳에 보냅니다.</td>
+<td>O</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>서버에 요청 메시지의 본문을 저장합니다. GET 메소드가 서버로부터 리소스를 받아내는데 반해 PUT은 서버에 문서를 씁니다.<br> 즉, 서버가 요청의 본문을 가지고 요청 URL의 이름대로 새 문서를 만들거나, 교체합니다.</td>
+<td>O</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>메시지가 프록시를 거쳐 서버에 도달하는 과정을 추적합니다. <br>클라이언트가 어떠한 요청을 하면 자신의 위치와 목적지 서버 사이에 있는 모든 HTTP 애플리케이션의 요청/응답 연쇄를 따라가면서 자신이 보낸 메시지가 망가졌거나 수정되었는지, 만약 그렇다면 어떻게 변경되었는지 확인할 수 있습니다.</td>
+<td>X</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>서버가 어떤 메소드를 수행할 수 있는지 확인합니다. <br>여러 리소스에 실제로 접근하지 않고도 그것들을 어떻게 접근하는 것이 최선인지 확인할 수 있는 수단을 애플리케이션에게 제공합니다.</td>
+<td>X</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>서버에서 문자를 제거합니다. 당연하게도 URL에 해당되는 리소스를 삭제할 것을 요청합니다.</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3 id="상태-코드"><a href="#상태-코드" class="headerlink" title="상태 코드"></a>상태 코드</h3><p>상태 코드는 클라이언트에게 <strong>무엇이 일어났는지</strong> 말해줍니다. 응답의 시작줄에 위치해있습니다. 아래 표에는 각 번호 범위 별 상태 코드 종류에 대해 정리한 표입니다.<br></p>
+<table>
+<thead>
+<tr>
+<th>전체 범위</th>
+<th>정의된 범위</th>
+<th>분류</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100-199</td>
+<td>100-101</td>
+<td>정보</td>
+</tr>
+<tr>
+<td>200-299</td>
+<td>200-206</td>
+<td>성공</td>
+</tr>
+<tr>
+<td>300-399</td>
+<td>300-305</td>
+<td>리다이렉션</td>
+</tr>
+<tr>
+<td>400-499</td>
+<td>400-415</td>
+<td>클라이언트 에러</td>
+</tr>
+<tr>
+<td>500-599</td>
+<td>500-505</td>
+<td>서버 에러</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h3 id="사유-구절"><a href="#사유-구절" class="headerlink" title="사유 구절"></a>사유 구절</h3><p>사유 구절은 응답 시작줄의 마지막 구성 요소이며 상태 코드에 대한 글로 된 설명을 제공합니다.</p>
+<blockquote>
+<p>HTTP/1.0 200 OK</p>
+</blockquote>
+<p>여기서 사유 구절은 OK 입니다.<br></p>
+<h3 id="버전-번호"><a href="#버전-번호" class="headerlink" title="버전 번호"></a>버전 번호</h3><p>버전 번호는 HTTP/x,y 형식으로 요청과 응답 메시지 모드에 기술됩니다.<br><br><br></p>
+<h2 id="헤더"><a href="#헤더" class="headerlink" title="헤더"></a>헤더</h2><p>시작줄 다음에 오는 부분으로 최소 0개, 혹은 1개 이상의 여러개의 헤더가 옵니다. 헤더의 역할은 요청과 응답 메시지의 <strong>추가 정보</strong>를 더해주는 역할을 합니다.<br></p>
+<h3 id="헤더-분류"><a href="#헤더-분류" class="headerlink" title="헤더 분류"></a>헤더 분류</h3><h4 id="일반-헤더"><a href="#일반-헤더" class="headerlink" title="일반 헤더"></a>일반 헤더</h4><p>요청과 응답 양쪽에 모두 나타날 수 있습니다. 이들은 클라이언트, 서버, 그리고 어딘가에서 메시지를 보내는 다른 애플리케이션들을 위해 다양한 목적으로 사용됩니다.<br></p>
+<h4 id="요청-헤더"><a href="#요청-헤더" class="headerlink" title="요청 헤더"></a>요청 헤더</h4><p>그들은 서버에게 클라이언트가 받고자 하는 데이터의 타입이 무엇인지와 같은 부가 정보를 제공합니다. <br></p>
+<h4 id="응답-헤더"><a href="#응답-헤더" class="headerlink" title="응답 헤더"></a>응답 헤더</h4><p>클라이언트에게 정보를 제공하기 위한 자신만의 헤더를 가지고 있습니다.<br></p>
+<h4 id="Entity-헤더"><a href="#Entity-헤더" class="headerlink" title="Entity 헤더"></a>Entity 헤더</h4><p>본문 크기와 컨텐츠, 혹은 리소스 그 자체를 서술합니다. 엔티티 헤더는 엔티티 본문에 들어있는 데이터의 타입이 무엇인지 말해줄 수 있습니다.<br></p>
+<h4 id="확장-헤더"><a href="#확장-헤더" class="headerlink" title="확장 헤더"></a>확장 헤더</h4><p>명세에 정의되지 않은 새로운 헤더입니다. 즉, 비 표준 헤더로서 아직 승인이 되지 않은 헤더입니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#HTTP">
+    <span class="tag-code">HTTP</span>
+  </a>
+
+  <a href="/tags#method">
+    <span class="tag-code">method</span>
+  </a>
+
+  <a href="/tags#header">
+    <span class="tag-code">header</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/11/network/network-02/">
+        <span class="nav-arrow">← </span>
+        
+          Network - URL과 리소스
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#메시지의-흐름"><span class="toc-nav-text">메시지의 흐름</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#인바운드-아웃바운드"><span class="toc-nav-text">인바운드, 아웃바운드</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#업스트림-다운스트림"><span class="toc-nav-text">업스트림, 다운스트림</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#메시지의-각-부분"><span class="toc-nav-text">메시지의 각 부분</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#시작줄"><span class="toc-nav-text">시작줄</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#요청줄"><span class="toc-nav-text">요청줄</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#응답줄"><span class="toc-nav-text">응답줄</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#메소드"><span class="toc-nav-text">메소드</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#상태-코드"><span class="toc-nav-text">상태 코드</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#사유-구절"><span class="toc-nav-text">사유 구절</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#버전-번호"><span class="toc-nav-text">버전 번호</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#헤더"><span class="toc-nav-text">헤더</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#헤더-분류"><span class="toc-nav-text">헤더 분류</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#일반-헤더"><span class="toc-nav-text">일반 헤더</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#요청-헤더"><span class="toc-nav-text">요청 헤더</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#응답-헤더"><span class="toc-nav-text">응답 헤더</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Entity-헤더"><span class="toc-nav-text">Entity 헤더</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#확장-헤더"><span class="toc-nav-text">확장 헤더</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/08/18/network/network-03/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
