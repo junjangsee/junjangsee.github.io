@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Network - 커넥션 관리 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Network - 커넥션 관리</h2>
+  <p class="post-date">2019-08-24</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
+<p><strong>이번 장에서 살펴볼 주제</strong></p>
+<ul>
+<li>HTTP는 어떻게 TCP 커넥션을 사용하는가</li>
+<li>TCP 커넥션의 지연, 병목, 막힘</li>
+<li>병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP 최적화</li>
+<li>커넥션 관리를 위해 따라야할 규칙들</li>
+</ul>
+<p><br></p>
+<h1 id="TCP-커넥션"><a href="#TCP-커넥션" class="headerlink" title="TCP 커넥션"></a>TCP 커넥션</h1><p>전 세계 모든 HTTP 통신은 패킷 교환 네트워크 프로토콜의 계층화된 집합인 <code>TCP/IP</code>를 통해 이루어집니다. 커넥션이 이루어지게 되면 클라이언트와 서버간에 주고받는 메시지들은 손실 혹은 손상되거나 순서가 바뀌지 않고 안전하게 전달됩니다.<br><br><strong>웹 브라우저</strong>가 <code>TCP 커넥션</code>을 통해서 <strong>웹 서버</strong>로 보내는 순서는 아래와 같습니다.</p>
+<ol>
+<li>브라우저가 <strong>호트스명</strong>을 추출합니다.</li>
+<li>브라우저가 이 호스트 명에 대한 <strong>IP 주소</strong>를 찾습니다.</li>
+<li>브라우저가 <strong>포트 번호</strong>를 얻습니다.</li>
+<li>브라우저가 IP주소의 포트로 <strong>TCP 커넥션을 생성</strong>합니다.</li>
+<li>브라우저가 서버로 <strong>HTTP 메소드</strong>를 보냅니다.</li>
+<li>브라우저가 서버에서 온 <strong>HTTP 응답 메시지를 읽습</strong>니다.</li>
+<li>브라우저가 <strong>커넥션을 끊습니다</strong>.</li>
+</ol>
+<p><br></p>
+<h2 id="신뢰-할-수-있는-데이터-전송-통로인-TCP"><a href="#신뢰-할-수-있는-데이터-전송-통로인-TCP" class="headerlink" title="신뢰 할 수 있는 데이터 전송 통로인 TCP"></a>신뢰 할 수 있는 데이터 전송 통로인 TCP</h2><p>TCP는 신뢰할 만한 통신 방식을 제공하고 있으며 안정적으로 인터넷을 연결시켜줍니다.<br><br><br></p>
+<h2 id="TCP-스트림은-세그먼트로-나뉘어-IP-패킷을-통해-전송됩니다"><a href="#TCP-스트림은-세그먼트로-나뉘어-IP-패킷을-통해-전송됩니다" class="headerlink" title="TCP 스트림은 세그먼트로 나뉘어 IP 패킷을 통해 전송됩니다."></a>TCP 스트림은 세그먼트로 나뉘어 IP 패킷을 통해 전송됩니다.</h2><p>TCP는 <code>IP 패킷</code>이라고 불리는 작은 조각을 통해 데이터를 전송합니다. HTTP가 메시지를 전송하려고 할 경우에 현재 연결된 TCP 커넥션을 통해서 메시지 데이터의 내용을 순서대로 보냅니다.<br>이 때 TCP는 <strong>세그먼트</strong>라는 단위로 스트림을 잘게 나누고 IP 패킷에 담아서 인터넷을 통해서 전달됩니다.<br>이 모든 것이 TCP/IP 소프트웨어에 의해 처리됩니다.<br>각 TCP 세그먼트는 하나의 IP 주소에서 다른 IP 주소로 IP 패킷에 담겨 전달됩니다. 그 IP 패킷들은 각각 아래의 것을 포함합니다.</p>
+<ul>
+<li>IP 패킷 헤더</li>
+<li>TCP 세그먼트 헤더</li>
+<li>TCP 데이터 조각</li>
+</ul>
+<p><br></p>
+<h2 id="TCP-커넥션-유지하기"><a href="#TCP-커넥션-유지하기" class="headerlink" title="TCP 커넥션 유지하기"></a>TCP 커넥션 유지하기</h2><p>컴퓨터는 TCP 커넥션을 여러 개 가지고 있는데 <strong>포트 번호</strong>를 통해서 유지합니다. 컴퓨터 하나에 가지고 있는 TCP 커넥션들은 각각 해당되는 애플리케이션에 연결되게 됩니다.<br>이런 TCP 커넥션은 네 가지 값으로 식별합니다.<br><br></p>
+<blockquote>
+<p>&lt;발신지 IP 주소, 발신지 포트, 수신지 IP 주소, 수신지 포트&gt;</p>
+</blockquote>
+<p>서로 다른 두 개의 커넥션은 네 가지 주소 구성요소 값이 모두 같을 수 없습니다. 하지만 일부는 같을 수 있습니다.<br><br><br></p>
+<h2 id="TCP-소켓-프로그래밍"><a href="#TCP-소켓-프로그래밍" class="headerlink" title="TCP 소켓 프로그래밍"></a>TCP 소켓 프로그래밍</h2><p>운영체제는 TCP 커넥션의 생성과 관련된 여러 <code>API</code>를 제공합니다. 소켓 API는 HTTP 프로그래머에게 TCP/IP 세부사항을 숨깁니다.<br>소켓 API를 사용하면, TCP 종단(endpoint) 데이터 구조를 생성하고, 원격 서버의 TCP 종단에 그 종단 데이터 구조를 연결하여 데이터 스트림을 읽고 쓸 수 있으며, TCP API는 기본적인 네트워크 프로토콜의 <strong>핸드셰이킹</strong>, TCP 데이터 스트림과 IP 패킷 간의 <strong>분할 및 재조립</strong>에 대한 모든 세부사항을 외부로부터 숨길 수 있습니다.<br><br><br></p>
+<h1 id="TCP-성능에-대한-고려"><a href="#TCP-성능에-대한-고려" class="headerlink" title="TCP 성능에 대한 고려"></a>TCP 성능에 대한 고려</h1><p>HTTP는 TCP 바로 위에 있는 계층이기 때문에 HTTP 트랜잭션의 성능은 그 아래 계층인 <code>TCP의 영향</code>을 받습니다. 즉, HTTP가 커넥션 최적화를 하게 되면 더 좋은 성능의 HTTP 애플리케이션을 설계하고 구현할 수 있습니다.<br><br><br></p>
+<h2 id="HTTP-트랜잭션-지연"><a href="#HTTP-트랜잭션-지연" class="headerlink" title="HTTP 트랜잭션 지연"></a>HTTP 트랜잭션 지연</h2><p>클라이언트나 서버가 너무 많은 데이터를 내려받거나 복잡하고 동적인 자원을 실행하지 않는 한, 대부분의 HTTP 지연은 <code>TCP 네트워크 지연</code> 때문에 발생합니다. 이런 원인은 여러 가지가 있습니다.</p>
+<ol>
+<li>클라이언트가 URI에서 웹 서버의 IP 주소와 포트 번호를 알아낼 때 지연됩니다.</li>
+<li>클라이언트가 TCP 커넥션 요청을 서버에게 보내고 서버가 커넥션 되는 시간이 있는데, 많은 HTTP 트랜잭션이 있다면 소요시간이 길어집니다.</li>
+</ol>
+<p><br></p>
+<h2 id="성능-관련-중요-요소"><a href="#성능-관련-중요-요소" class="headerlink" title="성능 관련 중요 요소"></a>성능 관련 중요 요소</h2><p>HTTP 프로그래머에게 영향을 주는 가장 일반적인 TCP 관련 지연 요소들입니다.</p>
+<ul>
+<li>TCP 커넥션의 핸드셰이크 설정</li>
+<li>인터넷 혼잡을 제어하기 위한 TCP의 느린 시작 (slow-start)</li>
+<li>데이터를 한데 모아 한 번에 전송하기 위한 네이글(nagle) 알고리즘</li>
+<li>TCP의 편승(piggyback) 확인응답(acknowledgment)을 위한 확인 응답 지연 알고리즘</li>
+<li>TIME_WAIT 지연과 포트 고갈</li>
+</ul>
+<p>고성능의 HTTP 소프트웨어를 개발하고 있다면, 아래 항목을 각각 이해해야 하지만 그 정도의 성능 최적화를 할 게 아니라면 건너뛰어도 무방합니다.<br><br><br></p>
+<h1 id="HTTP-커넥션-관리"><a href="#HTTP-커넥션-관리" class="headerlink" title="HTTP 커넥션 관리"></a>HTTP 커넥션 관리</h1><p>커넥션을 생성하고 최적화 하는 HTTP 기술을 알아보겠습니다.<br><br><br></p>
+<h2 id="흔히-잘못-이해하는-커넥션-헤더"><a href="#흔히-잘못-이해하는-커넥션-헤더" class="headerlink" title="흔히 잘못 이해하는 커넥션 헤더"></a>흔히 잘못 이해하는 커넥션 헤더</h2><p>HTTP는 클라이언트와 서버 사이에 <code>프락시 서버, 캐시 서버</code> 등과 같은 <code>중개 서버</code>가 놓이는 것을 허락합니다. HTTP 메시지는 클라이언트에서 서버까지 중개 서버들을 하나하나 거치면서 전달됩니다. HTTP 커넥션 헤더 필드는 커넥션 토큰을 쉼표로 구분하여 가지고 있으며, 그 값들은 다른 커넥션에 전달되지 않습니다. 커넥션 헤더는 다음 세 가지 종류의 토큰이 전달될 수 있습니다.</p>
+<ul>
+<li>HTTP 헤더 필드 명은, 이 커넥션에만 해당되는 헤더들을 나열합니다.</li>
+<li>임시적인 토큰 값은 커넥션에 대한 비표준 옵션을 의미합니다.</li>
+<li>close 값은 커넥션이 작업이 완료되면 종료되어야 함을 의미합니다.</li>
+</ul>
+<p>커넥션 토큰이 HTTP 헤더 필드 명을 가지고 있으면, 해당 필드들은 현재 커넥션만을 위한 정보이므로 다음 커넥션에 전달하면 안됩니다. 커넥션 헤더에 있는 모든 헤더 필드는 메시지를 다른 곳으로 전달하는 시점에서 삭제되어야합니다.<br><br><br></p>
+<h2 id="순차적인-트랜잭션-처리에-의한-지연"><a href="#순차적인-트랜잭션-처리에-의한-지연" class="headerlink" title="순차적인 트랜잭션 처리에 의한 지연"></a>순차적인 트랜잭션 처리에 의한 지연</h2><p>커넥션 관리가 제대로 이루어지지 않으면 TCP 성능이 매우 떨어질 수 있습니다. 순차적인 처리로 인한 지연에는 <code>물리적인 지연</code>뿐만 아니라 하나의 이미지를 내려받고 있는 중에는 웹페이지의 나머지 공간에 아무런 변화가 없어서 느껴지는 <code>심리적인 지연</code>도 있습니다.<br><br><br></p>
+<h1 id="병렬-커넥션"><a href="#병렬-커넥션" class="headerlink" title="병렬 커넥션"></a>병렬 커넥션</h1><p>병렬 커넥션은 위에서 언급했던 순차적 처리 방식의 느리다는 <strong>단점을 해결</strong>해줍니다.<br>HTTP는 클라이언트가 <code>여러 개의 커넥션</code>을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 합니다.<br><br><br></p>
+<h2 id="병렬-커넥션은-페이지를-더-빠르게-내려받습니다"><a href="#병렬-커넥션은-페이지를-더-빠르게-내려받습니다" class="headerlink" title="병렬 커넥션은 페이지를 더 빠르게 내려받습니다."></a>병렬 커넥션은 페이지를 더 빠르게 내려받습니다.</h2><p>단일 커넥션의 대역폭 제한과 커넥션이 동작하고 있지 않은 시간을 활용하면, 객체가 여러 개 있는 웹페이지를 더 빠르게 내려받을 수 있습니다. 하나의 커넥션으로 로드할 때의 소요를 줄일 수 있다면 더 빠르게 로드가 가능할 것입니다.<br><br><br></p>
+<h2 id="병렬-커넥션이-항상-더-빠르지는-않습니다"><a href="#병렬-커넥션이-항상-더-빠르지는-않습니다" class="headerlink" title="병렬 커넥션이 항상 더 빠르지는 않습니다."></a>병렬 커넥션이 항상 더 빠르지는 않습니다.</h2><p>일반적으로 병렬 커넥션이 더 빠르긴 하지만 <strong>항상 그렇지는 않습니다</strong>. 클라이언트 네트워크 대역폭이 좁을 때는 대부분 데이터를 전송할 때 사용할 것이며, 이 때 여러 객체를 병렬로 내려받는 경우 제한된 대역폭 내에서 객체를 전송받을 때 성능의 장점이 사라집니다.<br><br><br></p>
+<h2 id="병렬-커넥션은-더-빠르게-‘느껴질-수’-있습니다"><a href="#병렬-커넥션은-더-빠르게-‘느껴질-수’-있습니다" class="headerlink" title="병렬 커넥션은 더 빠르게 ‘느껴질 수’ 있습니다."></a>병렬 커넥션은 더 빠르게 ‘느껴질 수’ 있습니다.</h2><p>병렬 커넥션이 페이지를 항상 더 빠르게 로드하진 않습니다. 화면에 여러 개의 객체가 동시에 보이면서 내려가는 상황을 볼 때 사용자는 더 빠르게 내려받는 느낌을 받을 수 있습니다.<br><br><br></p>
+<h1 id="지속-커넥션"><a href="#지속-커넥션" class="headerlink" title="지속 커넥션"></a>지속 커넥션</h1><p>웹 클라이언트는 보통 같은 사이트에 여러 개의 커넥션을 맺습니다. 기존 커넥션을 맺었던 웹 페이지에 고정된 자료들이 있을 것입니다.(이미지, 하이퍼링크 등)<br>때문에 서버에 HTTP 요청을 하기 시작한 애플리케이션은 웹페이지 내의 이미지 등을 가져오기 위해서 그 서버에 또 요청을 할 것입니다. 이걸 <strong>사이트 지역성</strong>이라고 부릅니다.<br>즉, 해당 서버에 이미 맺어져 있는 <code>지속 커넥션</code>을 재사용함으로써, 커넥션을 맺기 위한 준비작업에 따른 시간을 절약하고 더 빠르게 데이터를 전송할 수 있습니다.<br><br><br></p>
+<h2 id="지속-커넥션-vs-병렬-커넥션"><a href="#지속-커넥션-vs-병렬-커넥션" class="headerlink" title="지속 커넥션 vs 병렬 커넥션"></a>지속 커넥션 vs 병렬 커넥션</h2><ul>
+<li><p>병렬 커넥션의 단점</p>
+<ul>
+<li>각 트랜잭션마다 새로운 커넥션을 맺고 끊기 때문에 시간과 대역폭이 소요됩니다.</li>
+<li>각각의 새로운 커넥션은 TCP 느린 시작으로 때문에 성능이 떨어집니다.</li>
+<li>실제로 연결할 수 있는 병렬 커넥션의 수에 제한이 있습니다.</li>
+</ul>
+</li>
+<li><p>지속 커넥션의 장점</p>
+<ul>
+<li>커넥션을 맺기 위한 사전 작업과 지연을 줄여줍니다.</li>
+<li>튜닝된 커넥션을 유지하며 커넥션의 수를 줄여줍니다.</li>
+</ul>
+</li>
+<li><p>지속 커넥션의 단점</p>
+<ul>
+<li>지속 커넥션을 잘못 관리할 경우, 계속 연결된 상태로 수많은 커넥션이 쌓이게 될 것</li>
+<li>이는 로컬의 리소스, 원격의 클라이언트와 서버의 리소스에 불필요한 소모를 발생시킴</li>
+</ul>
+</li>
+</ul>
+<p>서로의 장단점이 있기 때문에 두 커넥션을 <strong>함께</strong> 사용하는 것이 가장 효과적입니다.<br><br><br></p>
+<h2 id="HTTP-1-0-의-Keep-Alive-커넥션"><a href="#HTTP-1-0-의-Keep-Alive-커넥션" class="headerlink" title="HTTP/1.0+의 Keep-Alive 커넥션"></a>HTTP/1.0+의 Keep-Alive 커넥션</h2><p>초기에 지속 커넥션은 상호 운용과 관련된 설계에 문제가 있었지만, 아직 많은 클라이언트와 서버는 이 초기 <code>Keep-Alive 커넥션</code>을 사용하고 있습니다.<br>그리고 설계상의 문제는 HTTP/1.1에서 수정되었습니다.<br><br><br></p>
+<h2 id="Keep-Alive-동작"><a href="#Keep-Alive-동작" class="headerlink" title="Keep-Alive 동작"></a>Keep-Alive 동작</h2><p>HTTP/1.0 Keep-Alive 커넥션을 구현한 클라이언트는 커넥션을 유지하기 위해서 요청에 <code>Connection:Keep-Alive 헤더</code>를 호함시킵니다.<br>이 요청을 받은 서버는 그 다음 요청도 이 커넥션을 통해 받으려 한다면, 응답 메시지에 같은 헤더를 포함시켜 응답합니다.<br><br><br></p>
+<h2 id="Keep-Alive-옵션"><a href="#Keep-Alive-옵션" class="headerlink" title="Keep-Alive 옵션"></a>Keep-Alive 옵션</h2><p>Keep-Alive 헤더는 커넥션을 유지하기를 바라는 요청일 뿐입니다. 클라이언트나 서버가 이를 요청 받았다고 모조건 따를 필요는 없습니다. 언제든지 커넥션을 끊을 수 있으며 트랜잭션의 수를 제한할 수도 있습니다.</p>
+<ul>
+<li>timeout: Keep-Alive 응답 헤더를 통해 보내며, 커넥션이 얼마간 유지될 것인지 의미합니다. 하지만 동작 보장성은 없습니다.</li>
+<li>max: Keep-Alive 응답 헤더를 통해 보내며, 커넥션이 몇 개의 HTTP 트랜잭션을 처리할 때까지 유지될 것인가를 의미합니다.</li>
+</ul>
+<p><br></p>
+<h2 id="Keep-Alive와-멍청한-dumb-프락시"><a href="#Keep-Alive와-멍청한-dumb-프락시" class="headerlink" title="Keep-Alive와 멍청한(dumb) 프락시"></a>Keep-Alive와 멍청한(dumb) 프락시</h2><ul>
+<li>Connection 헤더의 무조건 전달<ul>
+<li>프록시는 Connection 헤더를 이해하지 못해서 해당 헤더를 삭제하지 않고 요청 그대로를 다음 프록시에 전달합니다.</li>
+<li>프록시는 keep-alive를 이해하지 못합니다.</li>
+<li>받았던 모든 데이터를 그대로 클라이언트에게 전달하고 나서 서버가 커넥션 끊기를 기다립니다. </li>
+<li>서버는 프록시가 커넥션을 유지하길 요청한 것으로 알고 있기 때문에 커넥션을 끊지 않습니다.</li>
+<li>그래서 프록시는 커넥션이 끊어지기 전까지 무작정 기다리게 됩니다.</li>
+</ul>
+</li>
+</ul>
+<p>위 과정과 같은 잘못된 통신 때문에 브라우저는 타임아웃이 나서 커넥션이 끊길 때까지 기다림 이런 종류의 잘못된 통신을 피하려면, 프락시는 <code>Connection 헤더</code>들을 절대 전달하면 안됩니다.<br><br><br></p>
+<h2 id="Proxy-Connection-살펴보기"><a href="#Proxy-Connection-살펴보기" class="headerlink" title="Proxy-Connection 살펴보기"></a>Proxy-Connection 살펴보기</h2><p><code>Proxy-Connection</code>는 멍청한 프록시를 해결하기 위해 커넥션 헤더 대신에 전달하는 헤더입니다. 프락시가 Proxy-Connection 헤더를 무조건 전달하더라도 웹 서버는 이를 무시하기 때문에 문제가 되지 않습니다. 하지만 영리한 프락시라면, 의미 없는 Proxy-Connection 헤더를 Connection 헤더로 바꿈으로써 원하던 효과를 얻게 됩니다.<br><br><br></p>
+<h2 id="HTTP-1-1의-지속-커넥션"><a href="#HTTP-1-1의-지속-커넥션" class="headerlink" title="HTTP/1.1의 지속 커넥션"></a>HTTP/1.1의 지속 커넥션</h2><p>HTTP/1.1 에서는 keep-alive 커넥션을 지원하지 않는 대신, 설계가 <strong>더 개선</strong>된 지속 커넥션을 사용합니다. 이 목적은 keep-alive 커넥션과 같지만 더 잘 작동합니다.<br>HTTP/1.0과는 달리 HTTP/1.1에서 <code>지속 커넥션</code>은 기본으로 활성화되어 있습니다. 이는 트랜잭션이 끝난 다음 커넥션을 끊으려면 <code>Connection: close 헤더</code>를 명시해야 합니다.<br><br><br></p>
+<h1 id="파이프라인-커넥션"><a href="#파이프라인-커넥션" class="headerlink" title="파이프라인 커넥션"></a>파이프라인 커넥션</h1><p>HTTP/1.1은 지속 커넥션을 통해 요청을 파이프라이닝할 수 있습니다. 여러 개의 요청은 응답이 도착하기 전까지 <strong>큐</strong>에 쌓입니다. 이는 대기 시간이 긴 네트워크 상황에서 네트워크상의 왕복으로 인한 시간을 줄여서 성능을 높여줍니다.<br><br><br></p>
+<h2 id="커넥션-끊기에-대한-미스터리"><a href="#커넥션-끊기에-대한-미스터리" class="headerlink" title="커넥션 끊기에 대한 미스터리"></a>커넥션 끊기에 대한 미스터리</h2><p>커넥션 관리에는 명확한 기준이 없습니다. 이 이슈는 수많은 개발자가 알고 있는 것보다 더 미묘하며, 그에 관한 기술 문서도 별로 없습니다.<br><br><br></p>
+<h3 id="‘마음대로’-커넥션-끊기"><a href="#‘마음대로’-커넥션-끊기" class="headerlink" title="‘마음대로’ 커넥션 끊기"></a>‘마음대로’ 커넥션 끊기</h3><p>어떠한 HTTP 클라이언트, 서버, 혹은 프락시든 언제든지 <strong>TCP 전송 커넥션</strong>을 끊을 수 있습니다. 보통 커넥션은 메시지를 다 보낸 다음 끊지만, 에러가 있는 상황에서는 헤더의 중간이나 다른 엉뚱한 곳에서 끊길 수 있습니다.<br></p>
+<h3 id="Content-Length와-Truncation"><a href="#Content-Length와-Truncation" class="headerlink" title="Content-Length와 Truncation"></a>Content-Length와 Truncation</h3><p>각 HTTP 응답은 본문의 정확한 크기 값을 가지는 <code>Content-Length 헤더</code>를 가지고 있어야 합니다. 클라이언트나 프락시가 커넥션이 끊어졌다는 HTTP 응답을 받은 후, 실제 전달 된 엔터티의 길이와 Content-Length의 값이 일치하지 않거나, 존재하지 않으면 수신자는 데이터의 정확할 길이를 서버에게 물어봐야 합니다.<br></p>
+<h3 id="커넥션-끊기의-허용-재시도-멱등성"><a href="#커넥션-끊기의-허용-재시도-멱등성" class="headerlink" title="커넥션 끊기의 허용, 재시도, 멱등성"></a>커넥션 끊기의 허용, 재시도, 멱등성</h3><p>커넥션은 에러가 없더라도 언제든 끊을 수 있습니다. 때문에 HTTP 애플리케이션은 예상치 못하게 커넥션이 끊어졌을 때 적절히 대응할 수 있는 준비가 되어있어야 합니다.<br>클라이언트는 수행 중 전송 커넥션이 끊기면 재시도를 해도 되는 지 확인 한 후 재시도를 해야합니다. 그 상황은 파이프라인 커넥션에서 좀 어렵습니다. 한 번 혹은 여러 번 실행됐는지에 상관없이 같은 결과를 반환한다면 이 트랜잭션은 <code>멱등(idempotent)</code>하다고 이해합니다. <strong>GET, HEAD, PUT, DELETE, TRACE, OPTIONS</strong> 등은 멱등하다고 보면 됩니다.<br><br><br></p>
+<h3 id="우아한-커넥션-끊기"><a href="#우아한-커넥션-끊기" class="headerlink" title="우아한 커넥션 끊기"></a>우아한 커넥션 끊기</h3><h4 id="전체-끊기와-절반-끊기"><a href="#전체-끊기와-절반-끊기" class="headerlink" title="전체 끊기와 절반 끊기"></a>전체 끊기와 절반 끊기</h4><p>애플리케이션은 TCP 입력 채널과 출력 채널 중 한 개만 끊거나 둘 다 끊을 수 있습니다. </p>
+<ul>
+<li>전체 끊기 : close()를 호출하면 TCP 커넥션의 입력 채널과 출력 채널의 커넥션은 모두 끊어집니다.</li>
+<li>절반 끊기 : 입력 채널이나 출력 채널 중 하나를 개별적으로 끊으려면 shutdown()을 호출합니다.</li>
+</ul>
+<h4 id="TCP-끊기와-리셋-에러"><a href="#TCP-끊기와-리셋-에러" class="headerlink" title="TCP 끊기와 리셋 에러"></a>TCP 끊기와 리셋 에러</h4><p>단순한 HTTP 애플리케이션은 <strong>전체 끊기</strong>만을 사용할 수 있습니다. 하지만 각기 다른 HTTP 클라이언트, 서버, 프락시와 통신할 때 기기들에 예상치 못한 쓰기 에러를 발생하는 것을 예방하기 위해 <strong>절반 끊기</strong>를 사용해야 합니다.<br>보통은 커넥션의 <code>출력 채널</code>을 끊는 것이 안전합니다. 클라이언트에서 더는 데이터를 보내지 않을 것임을 확신할 수 있는 것이 아닌 이상 입력 체널을 끊는 것은 위험합니다.<br>만약 클라이언트에서 이미 끊긴 입력 채널에 데이터를 전송하면, 서버의 운영체제는 TCP ‘connection reset by peer’ 메시지를 클라이언트에게 보내게 됩니다. 대부분 운영체제는 이를 심각한 에러로 취급하여 버퍼에 저장된, 아직 읽히지 않은 데이터를 모두 삭제합니다.<br></p>
+<h4 id="우아하게-커넥션-끊기"><a href="#우아하게-커넥션-끊기" class="headerlink" title="우아하게 커넥션 끊기"></a>우아하게 커넥션 끊기</h4><p>일반적으로 애플리케이션 자신의 출력 채널을 먼저 끊고 다른 쪽에 있는 기기의 출력 채널이 끊기는 것을 기다리는 것입니다. 양쪽에서 더는 데이터를 전송하지 않을 것이란걸 알면 안전하지만 그럴 보장이 없습니다. 따라서 애플리케이션은 출력 채널에 절반 끊기를 사용하고 난 후에도 데이터나 스트림의 끝을 식별하기 위해 지속적으로  입력 채널에 대해 상태검사를 주기적으로 해주어야 합니다.<br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#HTTP">
+    <span class="tag-code">HTTP</span>
+  </a>
+
+  <a href="/tags#TCP">
+    <span class="tag-code">TCP</span>
+  </a>
+
+  <a href="/tags#Connection">
+    <span class="tag-code">Connection</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/18/network/network-03/">
+        <span class="nav-arrow">← </span>
+        
+          Network - HTTP 메시지
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#TCP-커넥션"><span class="toc-nav-text">TCP 커넥션</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#신뢰-할-수-있는-데이터-전송-통로인-TCP"><span class="toc-nav-text">신뢰 할 수 있는 데이터 전송 통로인 TCP</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TCP-스트림은-세그먼트로-나뉘어-IP-패킷을-통해-전송됩니다"><span class="toc-nav-text">TCP 스트림은 세그먼트로 나뉘어 IP 패킷을 통해 전송됩니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TCP-커넥션-유지하기"><span class="toc-nav-text">TCP 커넥션 유지하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TCP-소켓-프로그래밍"><span class="toc-nav-text">TCP 소켓 프로그래밍</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#TCP-성능에-대한-고려"><span class="toc-nav-text">TCP 성능에 대한 고려</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP-트랜잭션-지연"><span class="toc-nav-text">HTTP 트랜잭션 지연</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#성능-관련-중요-요소"><span class="toc-nav-text">성능 관련 중요 요소</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#HTTP-커넥션-관리"><span class="toc-nav-text">HTTP 커넥션 관리</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#흔히-잘못-이해하는-커넥션-헤더"><span class="toc-nav-text">흔히 잘못 이해하는 커넥션 헤더</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#순차적인-트랜잭션-처리에-의한-지연"><span class="toc-nav-text">순차적인 트랜잭션 처리에 의한 지연</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#병렬-커넥션"><span class="toc-nav-text">병렬 커넥션</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#병렬-커넥션은-페이지를-더-빠르게-내려받습니다"><span class="toc-nav-text">병렬 커넥션은 페이지를 더 빠르게 내려받습니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#병렬-커넥션이-항상-더-빠르지는-않습니다"><span class="toc-nav-text">병렬 커넥션이 항상 더 빠르지는 않습니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#병렬-커넥션은-더-빠르게-‘느껴질-수’-있습니다"><span class="toc-nav-text">병렬 커넥션은 더 빠르게 ‘느껴질 수’ 있습니다.</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#지속-커넥션"><span class="toc-nav-text">지속 커넥션</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#지속-커넥션-vs-병렬-커넥션"><span class="toc-nav-text">지속 커넥션 vs 병렬 커넥션</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP-1-0-의-Keep-Alive-커넥션"><span class="toc-nav-text">HTTP/1.0+의 Keep-Alive 커넥션</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Keep-Alive-동작"><span class="toc-nav-text">Keep-Alive 동작</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Keep-Alive-옵션"><span class="toc-nav-text">Keep-Alive 옵션</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Keep-Alive와-멍청한-dumb-프락시"><span class="toc-nav-text">Keep-Alive와 멍청한(dumb) 프락시</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Proxy-Connection-살펴보기"><span class="toc-nav-text">Proxy-Connection 살펴보기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HTTP-1-1의-지속-커넥션"><span class="toc-nav-text">HTTP/1.1의 지속 커넥션</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#파이프라인-커넥션"><span class="toc-nav-text">파이프라인 커넥션</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#커넥션-끊기에-대한-미스터리"><span class="toc-nav-text">커넥션 끊기에 대한 미스터리</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#‘마음대로’-커넥션-끊기"><span class="toc-nav-text">‘마음대로’ 커넥션 끊기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Content-Length와-Truncation"><span class="toc-nav-text">Content-Length와 Truncation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#커넥션-끊기의-허용-재시도-멱등성"><span class="toc-nav-text">커넥션 끊기의 허용, 재시도, 멱등성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#우아한-커넥션-끊기"><span class="toc-nav-text">우아한 커넥션 끊기</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#전체-끊기와-절반-끊기"><span class="toc-nav-text">전체 끊기와 절반 끊기</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#TCP-끊기와-리셋-에러"><span class="toc-nav-text">TCP 끊기와 리셋 에러</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#우아하게-커넥션-끊기"><span class="toc-nav-text">우아하게 커넥션 끊기</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/08/24/network/network-04/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
