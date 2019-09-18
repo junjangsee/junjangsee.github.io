@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/Method/</loc>
+        <lastmod>2019-09-18T12:49:52.420Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Map/</loc>
+        <lastmod>2019-09-18T12:49:52.420Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/HashMap/</loc>
+        <lastmod>2019-09-18T12:49:52.420Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/java/</loc>
+        <lastmod>2019-09-18T12:49:52.420Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/Connection/</loc>
         <lastmod>2019-09-08T14:23:15.457Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -101,13 +129,6 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Method/</loc>
-        <lastmod>2019-08-04T10:07:58.270Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://junjangsee.github.io/tags/List/</loc>
         <lastmod>2019-08-04T10:07:58.270Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -116,13 +137,6 @@
 
     <url>
         <loc>https://junjangsee.github.io/tags/ArrayList/</loc>
-        <lastmod>2019-08-04T10:07:58.270Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/java/</loc>
         <lastmod>2019-08-04T10:07:58.270Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

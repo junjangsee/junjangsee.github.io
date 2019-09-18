@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      [JAVA - 자료구조] HashMap 메소드 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>[JAVA - 자료구조] HashMap 메소드</h2>
+  <p class="post-date">2019-09-18</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/java/hashmap.png" alt="images"><br></p>
+<h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><p><code>HashMap</code>이란 자료구조의 한 종류로서 <strong>Key</strong>와 <strong>value</strong>를 묶어 하나의 entry로 저장한다는 특징을 가집니다.<br>그리고 hashing을 사용하기 때문에 많은양의 데이터를 검색하는데 뛰어난 성능을 보입니다.<br>이전 포스팅에서는 ArrayList에 대해서 다루었었는데 이와 동등하게 중요하고 자주 사용되는 자료구조인 HashMap을 살펴보도록 하겠습니다.<br>작성자인 저 또한 공부하면서 정리하는 부분이기 때문에 틀린 정보가 있을 수 있으니 혹시 틀린점이 있다면 피드백 부탁드립니다. :)<br><br>참고자료 : <a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html" target="_blank" rel="noopener">HashMap (Java 8)</a><br><br></p>
+<h2 id="HashMap-생성"><a href="#HashMap-생성" class="headerlink" title="HashMap 생성"></a>HashMap 생성</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>HashMap을 사용하려면 <code>객체</code>를 생성해야합니다. import는 <code>java.util.HashMap</code>로 하면 되겠습니다.<br>타입은 String, Integer로 선언하였습니다.<br><br><br></p>
+<h2 id="put-K-key-V-value"><a href="#put-K-key-V-value" class="headerlink" title="put(K key, V value)"></a>put(K key, V value)</h2><p>HashMap에 Key, Value을 <code>삽입</code>하는 메소드입니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br></pre></td></tr></table></figure></p>
+<p>각 Key, Value에 대한 타입에 맞게 선헌하면 map 객체에 저장됩니다.<br><br><br></p>
+<h2 id="putAll-Map-m"><a href="#putAll-Map-m" class="headerlink" title="putAll(Map m)"></a>putAll(Map m)</h2><p>하나의 Map을 또 다른 Map에 <code>추가</code>하는데 사용됩니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">HashMap&lt;String , Integer&gt; map2 = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"천안"</span>, <span class="number">6</span>);</span><br><span class="line">    map.put(<span class="string">"양평"</span>, <span class="number">7</span>);</span><br><span class="line">    map.put(<span class="string">"장성"</span>, <span class="number">8</span>);</span><br><span class="line">    map.put(<span class="string">"파주"</span>, <span class="number">9</span>);</span><br><span class="line">    map.put(<span class="string">"부산"</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    map.putAll(map2);</span><br></pre></td></tr></table></figure></p>
+<p>map에 map2를 넣어주게 되면 map2있던 데이터가 map으로 저장되게 됩니다.<br><br><br></p>
+<h2 id="remove-Object-Key"><a href="#remove-Object-Key" class="headerlink" title="remove(Object Key)"></a>remove(Object Key)</h2><p>하나의 <code>Key</code>를 입력하여 데이터를 <code>삭제</code>합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    map.remove(<span class="string">"신논현"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>remove하게 되면 신논현 이라는 String 타입의 Key를 가진 데이터는 삭제됩니다.<br><br><br></p>
+<h2 id="size"><a href="#size" class="headerlink" title="size()"></a>size()</h2><p>HashMap에 저장된 엘리먼트의 <code>개수</code>를 반환합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.size());</span><br></pre></td></tr></table></figure></p>
+<p>size를 사용하여 총 5개인 것을 확인할 수 있습니다.<br><br><br></p>
+<h2 id="values"><a href="#values" class="headerlink" title="values()"></a>values()</h2><p>HashMap에 저장된 엘리먼트들을 전부 <code>컬렉션</code> 형태로 출력합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.values());</span><br></pre></td></tr></table></figure></p>
+<p>values를 사용하여 총 5개의 엘리먼트가 <code>[]</code> 형태로 출력되는 것을 확인할 수 있습니다.<br><br><br></p>
+<h2 id="isEmpty"><a href="#isEmpty" class="headerlink" title="isEmpty()"></a>isEmpty()</h2><p>isEmpty는 컬렉션에서 엘리먼트의 <code>유무</code>를 체크합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (map.isEmpty()) &#123;</span><br><span class="line">        System.out.println(<span class="string">"엘리먼트가 없습니다."</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"엘리먼트가 있습니다."</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>위 코드에서는 map에 엘리먼트가 있으니 else문을 탈 것입니다. 더 나아가 <code>null</code>체크도 가능하겠죠?<br><br><br></p>
+<h2 id="get-Object-Key"><a href="#get-Object-Key" class="headerlink" title="get(Object Key)"></a>get(Object Key)</h2><p>get은 <code>Key</code>값에 대한 <code>엘리먼트</code>를 가져옵니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.get(<span class="string">"강남"</span>));</span><br></pre></td></tr></table></figure></p>
+<p><strong>강남</strong>인 Key를 가져와 Value를 출력합니다.<br><br><br></p>
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h2><p>map에 있는 엘리먼트를 깔끔하게 <code>비워</code>냅니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    map.clear();</span><br></pre></td></tr></table></figure></p>
+<p>clear를 하는 순간 map에 있던 엘리먼트는 모조리 사라집니다.<br><br><br></p>
+<h2 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h2><p>clone은 해당 map의 엘리먼트드를 <code>복제</code>합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">HashMap&lt;String, Integer&gt; map2 = (HashMap&lt;String, Integer&gt;) map.clone();</span><br></pre></td></tr></table></figure></p>
+<p>map2에 기존 map을 clone하여 주었습니다. 즉, map에 있는 엘리먼트는 map2도 가지고 있게됩니다.<br><br><br></p>
+<h2 id="containsKey-Object-Key"><a href="#containsKey-Object-Key" class="headerlink" title="containsKey(Object Key)"></a>containsKey(Object Key)</h2><p>map의 엘리먼트 중 <code>Key</code>를 포함하고 있는지 여부를 확인합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.containsKey(<span class="string">"혜화"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>만약 엘리먼트 내에 Key가 포함되어있다면 <code>boolean</code> 값으로 true, 아니라면 false가 리턴됩니다.<br><br><br></p>
+<h2 id="containsValue-Object-Value"><a href="#containsValue-Object-Value" class="headerlink" title="containsValue(Object Value)"></a>containsValue(Object Value)</h2><p>map의 엘리먼트 중 <code>Value</code>를 포함하고 있는지 여부를 확인합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(map.containsValue(<span class="number">5</span>));</span><br></pre></td></tr></table></figure></p>
+<p>containsKey와 마찬가지로 엘리먼트 내에 Value가 포함되어있다면 <code>boolean</code> 값으로 true, 아니라면 false가 리턴됩니다.<br><br><br></p>
+<h2 id="Set-entrySet"><a href="#Set-entrySet" class="headerlink" title="Set entrySet()"></a>Set entrySet()</h2><p>HashMap에 저장된 Key, Value값을 엔트리(키와 값을 결합)의 형태로 <code>Set</code>에 저장하여 반환합니다.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String , Integer&gt; map = <span class="keyword">new</span> HashMap&lt;String , Integer&gt;();</span><br><span class="line"></span><br><span class="line">    map.put(<span class="string">"신논현"</span>, <span class="number">1</span>);</span><br><span class="line">    map.put(<span class="string">"강남"</span>, <span class="number">2</span>);</span><br><span class="line">    map.put(<span class="string">"혜화"</span>, <span class="number">3</span>);</span><br><span class="line">    map.put(<span class="string">"안양"</span>, <span class="number">4</span>);</span><br><span class="line">    map.put(<span class="string">"수원"</span>, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">    Set set = map.entrySet();</span><br><span class="line"></span><br><span class="line">    System.out.println(set);</span><br></pre></td></tr></table></figure></p>
+<p>Set의 형태로 <code>[]</code> 내부에 값이 출력됩니다.<br><br><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#java" >
+    <span class="tag-code">java</span>
+  </a>
+
+  <a href="/tags#HashMap" >
+    <span class="tag-code">HashMap</span>
+  </a>
+
+  <a href="/tags#Map" >
+    <span class="tag-code">Map</span>
+  </a>
+
+  <a href="/tags#Method" >
+    <span class="tag-code">Method</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/08/story/story-01/">
+        <span class="nav-arrow">← </span>
+        
+          개발자로 취직한 신입사원이 3개월 수습기간을 무사히 끝낸 후기
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#HashMap"><span class="toc-nav-text">HashMap</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HashMap-생성"><span class="toc-nav-text">HashMap 생성</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#put-K-key-V-value"><span class="toc-nav-text">put(K key, V value)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#putAll-Map-m"><span class="toc-nav-text">putAll(Map m)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#remove-Object-Key"><span class="toc-nav-text">remove(Object Key)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#size"><span class="toc-nav-text">size()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#values"><span class="toc-nav-text">values()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#isEmpty"><span class="toc-nav-text">isEmpty()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#get-Object-Key"><span class="toc-nav-text">get(Object Key)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#clear"><span class="toc-nav-text">clear()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#clone"><span class="toc-nav-text">clone()</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#containsKey-Object-Key"><span class="toc-nav-text">containsKey(Object Key)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#containsValue-Object-Value"><span class="toc-nav-text">containsValue(Object Value)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Set-entrySet"><span class="toc-nav-text">Set entrySet()</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/09/18/java/hashmap-Method/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
