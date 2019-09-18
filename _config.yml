@@ -80,3 +80,6 @@ theme: vexo
 deploy: 
   type: git
   repo: git@github.com:junjangsee/junjangsee.github.io.git
+
+# Google Analytics Tracking ID
+google_analytics: UA-147439584-1
