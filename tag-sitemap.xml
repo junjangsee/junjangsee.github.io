@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/Proxy/</loc>
+        <lastmod>2019-09-22T12:21:22.294Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%ED%94%84%EB%9D%BD%EC%8B%9C/</loc>
+        <lastmod>2019-09-22T12:21:22.294Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/HTTP/</loc>
+        <lastmod>2019-09-22T12:21:22.294Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/Method/</loc>
         <lastmod>2019-09-18T12:49:52.420Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -39,13 +60,6 @@
 
     <url>
         <loc>https://junjangsee.github.io/tags/TCP/</loc>
-        <lastmod>2019-09-08T14:23:15.457Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/HTTP/</loc>
         <lastmod>2019-09-08T14:23:15.457Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

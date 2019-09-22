@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Network - 프락시 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Network - 프락시</h2>
+  <p class="post-date">2019-09-22</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
+<p><strong>이번 장에서 살펴볼 주제</strong></p>
+<ul>
+<li>HTTP 프락시와 웹 게이트웨이를 비교하고 HTTP 프락시가 어떻게 배치되는지 알아본다.</li>
+<li>몇 가지 유용한 활용방법을 보여준다.</li>
+<li>프락시가 실제 네트워크에 어떻게 배치되어 있는지 그리고 트래픽이 어떻게 프락시 서버로 가게 되는지 설명한다.</li>
+<li>브라우저에서 프락시를 사용하려면 어떻게 설정해야 하는지 보여준다.</li>
+<li>HTTP 프락시 요청이 서버 요청과 어떻게 다른지, 그리고 프락시가 어떻게 브라우저의 동작을 미묘하게 바꾸는지 보여준다.</li>
+<li>일련의 프락시 서버들을 통과하는 메시지의 경로를, Via 헤더와 TRACE 메소드를 이용해 기록하는 방법을 설명한다.</li>
+<li>프락시에 기반한 HTTP 접근 제어를 설명한다.</li>
+<li>어떻게 프락시가 클라이언트와 서버 사이에서 각각의 다른 기능과 버전 들을 지원하면서 상호작용 할 수 있는지 설명한다.</li>
+</ul>
+<p><br></p>
+<h1 id="웹-중개자"><a href="#웹-중개자" class="headerlink" title="웹 중개자"></a>웹 중개자</h1><p>클라이언트 입장에서 프락시 서버는 트랜잭션을 수행하는 <code>중개인</code>입니다. 웹 프락시가 없다면, 클라이언트는 HTTP 서버와 <strong>직접</strong> 이야기 할 것이고, 있다면 프락시를 통해 간접으로 이야기 합니다. 또한 프락시는 서버이면서 동시에 클라이언트처럼 동작합니다.<br><br><br></p>
+<h2 id="개인-프락시와-공유-프락시"><a href="#개인-프락시와-공유-프락시" class="headerlink" title="개인 프락시와 공유 프락시"></a>개인 프락시와 공유 프락시</h2><p>하나의 클라이언트만을 위한 프락시를 개인 프락시, 여러 클라이언트가 함께 사용하는 프락시는 공용 프락시라고 부릅니다.</p>
+<ul>
+<li>공용 프락시: 대부분의 프락시는 공용이며 공유된 프락시입니다. 중앙 집중형 프락시를 관리하는게 더 비용효율이 높고 쉽습니다.</li>
+<li>개인 프락시: 개인 프락시를 사용하는 경우는 흔치 않지만, 클라이언트 컴퓨너에서 직접 실행되는 형태로 종종 사용되고있습니다.</li>
+</ul>
+<p><br></p>
+<h2 id="프락시-대-게이트웨이"><a href="#프락시-대-게이트웨이" class="headerlink" title="프락시 대 게이트웨이"></a>프락시 대 게이트웨이</h2><p><code>프락시</code>는 <strong>같은 프로토콜</strong>을 사용하는 <strong>둘 이상</strong>의 애플리케이션을 연결합니다.<br><code>게이트웨이</code>는 서로 <strong>다른 프로토콜</strong>을 사용하는 <strong>둘 이상</strong>을 연결하고 서로 다른 프로토콜로 말하더라도 트랜잭션을 완료할 수 있도록하는 프로토콜 변환기처럼 동작합니다.<br><br><br></p>
+<h2 id="왜-프락시를-사용하는가"><a href="#왜-프락시를-사용하는가" class="headerlink" title="왜 프락시를 사용하는가?"></a>왜 프락시를 사용하는가?</h2><p>프락시는 <strong>보안을 개선</strong>하고, <strong>성능 향상 및 비용을 절약</strong>하며 모든 HTTP 트래픽을 들여다보고 건드릴 수 있기 때문에 프락시는 부가적인 가치를 주는 여러 유용한 웹 서비스를 구현하기 위해 트래픽을 <strong>감시</strong>하고 <strong>수정</strong>할 수 있습니다.</p>
+<ul>
+<li>어린이 필터 : 어린이들에게 교육 사이트를 제공하면서 동시에 성인 컨텐츠를 차단하려고 필터링 프락시를 사용할 수 있습니다.</li>
+<li>문서 접근 제어자 : 많은 웹 서버들과 웹 시로르에 대한 단일한 접근 제어 전략을 구현하고 감사 추적을 하기 위해 사용됩니다.</li>
+<li>보안 방화벽 : 보안을 강화하기 위해 프락시 서버를 사용하며, 조직 안에 들어오거나 나가는 프로토콜의 흐름을 네트워크의 한 지점에서 통제합니다. 그리고 트래픽을 살펴보는 훅을 제공합니다.</li>
+<li>웹 캐시 : 인기 있는 문서의 로컬 사본을 관리하고 해당 문서에 대한 요청이 오면 빠르게 제공하여 느리고 비싼 인터넷 커뮤니케이션을 줄입니다.</li>
+<li>대리 프락시 : 어떤 프락시들은 웹 서버인 것처럼 위장하는데 이를 대리 혹은 리버스 프락시라고 불립니다. 이들은 진짜 웹 서버 요청을 받지만 웹 서버와는 달리 요청 받은 콘텐츠의 위치를 찾아내기 위해 다른 서버와 커뮤니케이션을 시작합니다. 웹 서버의 성능 개선을 위해 사용되고 콘텐츠 라우팅 기능과 결합되어 주문형 복제 콘텐츠의 분산 네트워크를 만들기 위해 사용될 수 있습니다.</li>
+<li>컨텐츠 라우터 : 사용자들에게 조건과 컨텐츠의 종류에 따라 요청을 특정 웹 서버로 유도하도록 동작하게끔 할 수 있습니다.</li>
+<li>트랜스코더 : 데이터의 표현 방식을 자연스럽게 변환합니다.</li>
+<li>익명화 프락시 : HTTP 메시지에서 신원을 식별할 수 있는 특성들 (클라이언트 IP 주소, Form 헤더, Referer 헤더, 쿠키, 세션 아이디)을 적극적으로 제거함으로써 개인 정보 보호와 익명성 보장에 기여합니다.</li>
+</ul>
+<p><br></p>
+<h1 id="프락시는-어디에-있는가"><a href="#프락시는-어디에-있는가" class="headerlink" title="프락시는 어디에 있는가 ?"></a>프락시는 어디에 있는가 ?</h1><h2 id="프락시-서버-배치"><a href="#프락시-서버-배치" class="headerlink" title="프락시 서버 배치"></a>프락시 서버 배치</h2><ul>
+<li>출구 프락시 : 로컬 네트워크와 더 큰 인터넷 사이를 오가는 트래픽을 제어하기 위해 프락시를 로컬 네트워크의 출구에 박아 넣을 수 있습니다. </li>
+<li>접근(입구) 프락시 : 모든 요청을 종합적으로 처리하기 위해 프락시는 ISP 접근 지점에 위치하기도 합니다.  </li>
+<li>대리 프락시 : 네트워크의 가장 끝에 있는 웹 서버의 바로 앞에 위치하여 웹 서버로 향하는 모든 요청을 처리하고 필요할 때만 웹 서버에게 자원을 요청 할 수 있습니다. 또한 보안 기능을 추가하거나 웹 서버 캐시를 느린 웹 서버의 앞에 놓음으로써 성능을 개선할 수도 있습니다.</li>
+<li>네트워크 교환 프락시 : 캐시를 이용해 인터넷 교차로의 혼잡을 완화하고 트래픽 흐름을 감시하기 위해, 처리 능력을 갖춘 프락시가 네트워크 사이의 인터넷 피어링 교환 지점들에 놓을 수 있습니다.</li>
+</ul>
+<p><br></p>
+<h2 id="프락시-계층"><a href="#프락시-계층" class="headerlink" title="프락시 계층"></a>프락시 계층</h2><p>프락시 계층에서 메시지는 원 서버에 도착할 때 까지 <strong>프락시와 프락시를 거쳐</strong> 이동합니다. 프락시 계층에서 프락시 서버들은 부모와 자식의 관계를 갖습니다.<br><strong>인바운드</strong> (서버와 가까운 쪽) 을 <strong>부모</strong>, <strong>아웃바운드</strong> (클라이언트 가까운 쪽) 을 <strong>자식</strong>이라고 부릅니다.<br></p>
+<h3 id="프락시-계층-콘텐츠-라우팅"><a href="#프락시-계층-콘텐츠-라우팅" class="headerlink" title="프락시 계층 콘텐츠 라우팅"></a>프락시 계층 콘텐츠 라우팅</h3><p>프락시 계층은 <strong>정적</strong>입니다. 프락시 1은 언제나 메시지를 프락시 2로, 2는 3으로 보냅니다. 그러나 계층이 <strong>반드시</strong> 정적이어야 하는 것은 아니며 <strong>동적</strong>일 수도 있습니다.</p>
+<ul>
+<li>부하 균형 : 자식 프락시는 부하를 분산하기 위해 현재 부모들의 작업략 수준에 근거하여 부모 프락시를 고릅니다.</li>
+<li>지리적 인접성에 근거한 라우팅 : 자식 프락시는 원 서버의 지역을 담당하는 부모를 선택할 수도 있습니다.</li>
+<li>프로토콜/타입 라우팅 : URI 에 근거하여 다른 부모나 원 서버로 라우팅 할 수 있습니다.</li>
+</ul>
+<p><br></p>
+<h2 id="어떻게-프락시가-트래픽을-처리하는가"><a href="#어떻게-프락시가-트래픽을-처리하는가" class="headerlink" title="어떻게 프락시가 트래픽을 처리하는가"></a>어떻게 프락시가 트래픽을 처리하는가</h2><p>클라이언트는 보통 웹 서버와 직접 대화하기 때문에 우리는 어떻게 HTTP 트래픽이 프락시로 향하는 <strong>길</strong>을 찾아내는지 설명할 필요가 있습니다. 이러한 방법에는 아래 <strong>4가지</strong> 방법이 있습니다.</p>
+<ul>
+<li>클라이언트 수정 : 많은 웹 클라이언트들은 수동 혹은 자동 프락시 설정을 지원합니다. 때문에 자동으로 프락시 설정이 되어 있다면, HTTP 요청을 원 서버가 아닌 프락시 서버로 보냅니다.</li>
+<li>네트워크 수정 : 스위칭, 라우터 장치를 이용하여 네트워크 인프라를 가로채서 웹 트래픽을 프락시로 가도록 조정할 수 있습니다.</li>
+<li>DNS 이름공간 수정 : DNS 이름 테이블을 수동으로 편집하거나 사용할 적절한 프락시나 서버를 계산해주는 특별한 동적 DNS 서버를 이용해서 조정될 수 있습니다.</li>
+<li>웹 서버 수정 : 웹 서버는 HTTP 리다이렉션 (응답 코드 305) 를 클라이언트에게 돌려줌으로써 요청을 프락시로 리다이렉트 하도록 설정할 수 있습니다.</li>
+</ul>
+<p><br></p>
+<h2 id="클라이언트-프락시-설정"><a href="#클라이언트-프락시-설정" class="headerlink" title="클라이언트 프락시 설정"></a>클라이언트 프락시 설정</h2><p>브라우저가 제공하는 프락시 설정 방법입니다.</p>
+<ul>
+<li>수동 설정 : 프락시 사용을 명시적으로 설정합니다.</li>
+<li>브라우저 기본 설정 : 브라우저를 소비자에게 전달하기 전에 프락시를 미리 설정해 놓을 수 있습니다.</li>
+<li>프락시 자동 설정 : 자바스크립트 프락시 자동 설정 파일에 대한 URI를 제공할 수 있습니다.</li>
+<li>WPAD 프락시 발견 : 자동설정 파일을 다운받을 수 있는 ‘설정 서버’를 자동으로 찾아주는 웹 프락시 자동 발견 프로토콜을 제공합니다.</li>
+</ul>
+<p><br></p>
+<h2 id="프락시-요청의-미묘한-특징들"><a href="#프락시-요청의-미묘한-특징들" class="headerlink" title="프락시 요청의 미묘한 특징들"></a>프락시 요청의 미묘한 특징들</h2><h3 id="프락시-URI-는-서버-URI-랑-다르다"><a href="#프락시-URI-는-서버-URI-랑-다르다" class="headerlink" title="프락시 URI 는 서버 URI 랑 다르다"></a>프락시 URI 는 서버 URI 랑 다르다</h3><p>웹 서버와 웹 프락시 메시지의 문법은 서로 같지만, 한 가지 <strong>예외</strong>가 있습니다. <strong>클라이언트</strong>가 프락시 대신 서버로 요청을 보내면 요청의 <strong>URI</strong>가 달라잡니다.<br><strong>클라이언트</strong>가 웹 서버로 요청을 보낼 때, 요청중은 다음의 예와 같이 스킴, 호스트, 포트번호가 없는 부분 URI를 가집니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br></pre></td></tr></table></figure>
+<p><br><br>그러나 클라이언트가 프락시로 요청을 보낼 때, 요청줄은 완전한 URI 를 가집니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET http://www.marys-antiques.com/index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowser v1.3</span><br></pre></td></tr></table></figure>
+<p><code>단일 서버</code>는 자신의 <strong>호스트 명과 포트번호</strong>를 알고 있으므로, 클라이언트는 불필요한 정보 발송을 피하기 위해 부분 URI만 사용했었습니다. <code>프락시</code>는 목적지 서버와 커넥션을 맺어야 하기 때문에 완전한 URI를 요구합니다.<br><br><br></p>
+<h3 id="가상-호스팅에서-일어나는-같은-문제"><a href="#가상-호스팅에서-일어나는-같은-문제" class="headerlink" title="가상 호스팅에서 일어나는 같은 문제"></a>가상 호스팅에서 일어나는 같은 문제</h3><ul>
+<li>명시적인 프락시는 요청 메시지가 완전한 URI 를 갖도록 함으로써 문제를 해결했습니다.</li>
+<li>가상으로 호스팅 되는 웹 서버는 호스트와 포트에 대한 정보가 담겨 있는 Host 헤더를 요구합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="인터셉트-프락시는-부분-URI를-받는다"><a href="#인터셉트-프락시는-부분-URI를-받는다" class="headerlink" title="인터셉트 프락시는 부분 URI를 받는다"></a>인터셉트 프락시는 부분 URI를 받는다</h3><p><strong>클라이언트</strong>는 자신이 프락시와 대화하고 있음을 항상 알고있는 것은 아닙니다.<br>이유로는, 몇몇 프락시는 클라이언트에게 보이지 않기 때문에 클라이언트가 프락시를 사용한다고 설정되어 있지 않더라도 여전히 대리 혹은 인터셉트 프락시를 지날 수 있습니다. 클라이언트는 자신이 웹 서버와 대화하고 있다고 생각하고 완전한 URI를 보내지 않을 수도 있습니다.<br><br><br></p>
+<h3 id="프락시는-프락시-요청과-서버-요청을-모두-다룰-수-있다"><a href="#프락시는-프락시-요청과-서버-요청을-모두-다룰-수-있다" class="headerlink" title="프락시는 프락시 요청과 서버 요청을 모두 다룰 수 있다"></a>프락시는 프락시 요청과 서버 요청을 모두 다룰 수 있다</h3><p>트래픽이 프락시 서버로 리다이렉트 될 수 있는 여러 가지 방법이 존재하기 때문에, 다목적 프락시 서버는 요청 메시지의 <strong>완전한 URI</strong>와 <strong>부분 URI</strong>를 <code>모두</code> 지원해야 합니다. 그 규칙은 아래와 같습니다.</p>
+<ul>
+<li>완전한 URI 가 주어졌다면, 프락시는 그 주소를 이용해야 합니다.</li>
+<li>부분 URI 가 주어졌고 Host 헤더가 있다면, Host 헤더를 이용해 원 서버의 이름과 포트번호를 알아내야 합니다.</li>
+<li>부분 URI 이지만 Host 헤더가 없다면?<ul>
+<li>프락시가 원 서버를 대신하는 대리 프락시라면, 프락시에 실제 서버의 주소와 포트번호가 설정되어 있을 수 있습니다.</li>
+<li>인터셉터 프락시가 원 IP주소와 포트번호를 사용할 수 있도록 해두었다면 사용할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="전송-중-URI-변경"><a href="#전송-중-URI-변경" class="headerlink" title="전송 중 URI 변경"></a>전송 중 URI 변경</h3><p>요청 URI의 변경에 매우 신경을 써야합니다. 사소한 URI 변경이라도 다운스트림 서버와 상호운용성 문제를 일으킬 수 있습니다.<br><br><br></p>
+<h3 id="URI-클라이언트-자동확장과-호스트명-분석"><a href="#URI-클라이언트-자동확장과-호스트명-분석" class="headerlink" title="URI 클라이언트 자동확장과 호스트명 분석"></a>URI 클라이언트 자동확장과 호스트명 분석</h3><p>브라우저는 프락시의 <strong>존재 여부</strong>에 따라 요청 URI를 다르게 분석합니다. 프락시가 없다면 사용자가 타이핑한 URI를 가지고 그에 대응하는 IP 주소를 찾습니다.<br>호스트가 발견되지 않는다면 짧은 약어를 타이핑한 것을 보고 자동화된 호스트 명의 ‘확장’을 제공하고자 아래와 같은 시도를 합니다.</p>
+<ul>
+<li>‘www’ 접두사와 ‘.com’ 접미사를 붙입니다.</li>
+<li>해석할 수 없는 URI는 서드파티 사이트로 넘깁니다. 이 사이트에서 오타 교정을 시도하고 사용자가 의도했을 URI를 제시합니다.</li>
+<li>DNS는 사용자가 호스트 명의 앞부분만 입력하면 자동으로 도메인을 검색하도록 설정되어 있습니다.</li>
+</ul>
+<p><br></p>
+<h3 id="프락시-없는-URI-분석"><a href="#프락시-없는-URI-분석" class="headerlink" title="프락시 없는 URI 분석"></a>프락시 없는 URI 분석</h3><ol>
+<li>사용자가 ‘junjang’을 브라우저 URI 창에 입력했을때, junjang을 호스트 명으로 사용하고 http://를 기본 스킴으로, 기본 포트를 ‘80’으로, 기본 경로를 ‘/‘로 간주합니다.</li>
+<li>브라우저는 호스트 junjang을 찾지만 실패합니다.</li>
+<li>호스트명을 자동으로 확장한 후 DNS에 <a href="http://www.junjang.com" target="_blank" rel="noopener">www.junjang.com</a> 의 주소 분해를 요청합니다.</li>
+<li>브라우저는 <a href="http://www.junjang.com" target="_blank" rel="noopener">www.junjang.com</a> 으로 연결합니다.</li>
+</ol>
+<p><br></p>
+<h3 id="명시적인-프락시를-사용할-때의-URI-분석"><a href="#명시적인-프락시를-사용할-때의-URI-분석" class="headerlink" title="명시적인 프락시를 사용할 때의 URI 분석"></a>명시적인 프락시를 사용할 때의 URI 분석</h3><p>명시적인 프락시가 있는 경우 브라우저는 편리한 확장 기능중 하나도 수행할 수 없스빈다. 브라우저창에 junjang 라고 타이핑 했을때 프락시는 ‘<a href="http://junjang/&#39;" target="_blank" rel="noopener">http://junjang/&#39;</a> 라고 보냅니다.<br><br><br></p>
+<h3 id="인터셉터-프락시를-이용한-URI-분석"><a href="#인터셉터-프락시를-이용한-URI-분석" class="headerlink" title="인터셉터 프락시를 이용한 URI 분석"></a>인터셉터 프락시를 이용한 URI 분석</h3><p>호스트명 분석은 보이지 않는 인터셉트 프락시와 함께일 때 달라지는데, 그 이유는 클라이언트의 입장에서 프락시는 존재하지 않는 것이기 때문입니다.<br>DNS가 성공할 때까지 호스트 명을 자동확장하는 브라우저를 사용할 때, 동작은 프락시가 아닌 서버의 경우 별 차이가 없습니다. 그러나 서버로의 커넥션이 만들어졌을 때는 분명한 차이가 발생합니다.<br><br><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#HTTP" >
+    <span class="tag-code">HTTP</span>
+  </a>
+
+  <a href="/tags#프락시" >
+    <span class="tag-code">프락시</span>
+  </a>
+
+  <a href="/tags#Proxy" >
+    <span class="tag-code">Proxy</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/18/java/hashmap-Method/">
+        <span class="nav-arrow">← </span>
+        
+          [JAVA - 자료구조] HashMap 메소드
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#웹-중개자"><span class="toc-nav-text">웹 중개자</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#개인-프락시와-공유-프락시"><span class="toc-nav-text">개인 프락시와 공유 프락시</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프락시-대-게이트웨이"><span class="toc-nav-text">프락시 대 게이트웨이</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#왜-프락시를-사용하는가"><span class="toc-nav-text">왜 프락시를 사용하는가?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#프락시는-어디에-있는가"><span class="toc-nav-text">프락시는 어디에 있는가 ?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프락시-서버-배치"><span class="toc-nav-text">프락시 서버 배치</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프락시-계층"><span class="toc-nav-text">프락시 계층</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#프락시-계층-콘텐츠-라우팅"><span class="toc-nav-text">프락시 계층 콘텐츠 라우팅</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#어떻게-프락시가-트래픽을-처리하는가"><span class="toc-nav-text">어떻게 프락시가 트래픽을 처리하는가</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#클라이언트-프락시-설정"><span class="toc-nav-text">클라이언트 프락시 설정</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프락시-요청의-미묘한-특징들"><span class="toc-nav-text">프락시 요청의 미묘한 특징들</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#프락시-URI-는-서버-URI-랑-다르다"><span class="toc-nav-text">프락시 URI 는 서버 URI 랑 다르다</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#가상-호스팅에서-일어나는-같은-문제"><span class="toc-nav-text">가상 호스팅에서 일어나는 같은 문제</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#인터셉트-프락시는-부분-URI를-받는다"><span class="toc-nav-text">인터셉트 프락시는 부분 URI를 받는다</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#프락시는-프락시-요청과-서버-요청을-모두-다룰-수-있다"><span class="toc-nav-text">프락시는 프락시 요청과 서버 요청을 모두 다룰 수 있다</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#전송-중-URI-변경"><span class="toc-nav-text">전송 중 URI 변경</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#URI-클라이언트-자동확장과-호스트명-분석"><span class="toc-nav-text">URI 클라이언트 자동확장과 호스트명 분석</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#프락시-없는-URI-분석"><span class="toc-nav-text">프락시 없는 URI 분석</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#명시적인-프락시를-사용할-때의-URI-분석"><span class="toc-nav-text">명시적인 프락시를 사용할 때의 URI 분석</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#인터셉터-프락시를-이용한-URI-분석"><span class="toc-nav-text">인터셉터 프락시를 이용한 URI 분석</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/09/22/network/network-06/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
