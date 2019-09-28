@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      AWS Route 53을 이용해 도메인 등록하기 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>AWS Route 53을 이용해 도메인 등록하기</h2>
+  <p class="post-date">2019-09-28</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/network/Route53.png" alt="images"><br></p>
+<h1 id="Route-53"><a href="#Route-53" class="headerlink" title="Route 53"></a>Route 53</h1><p>먼저 도메인을 등록해보기 전 <code>Route 53</code>은 무엇이며 어떤 역할을 해주는지에 대해 살펴보겠습니다.<br><br><code>Route 53</code>은 AWS에서 제공하는 <strong>관리형 DNS(Domain Name System) 서비스</strong>입니다. <code>DNS서비스</code>란 <strong>도메인</strong> 또는 <strong>호스트 명</strong>을 <code>IP</code>로 변환해주는 서비스입니다. DNS 서비스는 계층적으로 구성되어 있어, 특정 도메인을 서비스하는 DNS를 On-premise 환경에 구축을 해야하는 등 많은 학습과 시간이 필요합니다. 하지만  클라우드 환경에서는 <code>Route 53</code>같은 DNS서비스를 통해서 누구나 손쉽게 도메인을 컨트롤 할 수 있습니다.<br><br><br></p>
+<h2 id="도메인-구매하기"><a href="#도메인-구매하기" class="headerlink" title="도메인 구매하기"></a>도메인 구매하기</h2><p>먼저 AWS에 접속하여 Route 53에 접속합니다.<br><img src="/images/network/route1.png" alt="images"> 하단에 <code>도메인 등록</code>을 클릭합니다.<br><br><br></p>
+<p><img src="/images/network/route2.png" alt="images"> 아직 구매 및 등록한 내역이 없기 때문에 비어있는 상태입니다.<br>도메인 등록을 클릭해줍니다.<br><br><br></p>
+<p><img src="/images/network/route3.png" alt="images"> 이제 자신이 원하는 도메인을 입력하고 <code>확인</code> 버튼을 클릭하게 되면 가능 여부와 관련된 도메인들을 보여주게 됩니다.<br>특별한 변동사항이 없다면 해당 페이지 하단에 다음으로 가는 버튼인 <code>확인</code> 버튼을 클릭합니다.<br><br><br></p>
+<p><img src="/images/network/route5.png" alt="images"> 구매하는 도메인에 대한 <code>개인정보</code>를 입력합니다. 그리고 도메인 등록 <code>기간</code>을 얼마만큼 할 것인지 정합니다.<br>그리고 확인 버튼을 클릭합니다.<br><br><br></p>
+<p><img src="/images/network/route6.png" alt="images"> <img src="/images/network/route7.png" alt="images"> 도메인 자동 <code>갱신 여부</code>, <code>이용약관</code>을 동의합니다. 그리고 메일 인증을 한 후 완료되었다면 구매 완료 버튼을 클릭합니다.<br><br><br></p>
+<p><img src="/images/network/route8.png" alt="images"> 구매가 완료되었다고 바로 도메인을 사용할 수 있는 것이 아니라 도메인을 등록하는 시간이 걸립니다. 최대 3일이라고 안내는 해주지만 대부분 등록한지 얼마 안되어 등록이 완료됩니다.(제 경우는 약 30분 정도 소요되었습니다.)<br><br><br></p>
+<p><img src="/images/network/route9.png" alt="images"> 완료가 되면 등록된 도메인에 본인이 등록한 도메인이 있다는 것을 확인할 수 있습니다.<br><br><br></p>
+<h2 id="도메인-연결하기"><a href="#도메인-연결하기" class="headerlink" title="도메인 연결하기"></a>도메인 연결하기</h2><p><img src="/images/network/route10.png" alt="images"> Route 53에서 구매하였다면 자동으로 호스팅 영역에 등록이 되어있을 것입니다. 여기서 인스턴스에서 도메인을 연동할 수 있습니다.<br>다음으로 레코드 세트 생성을 클릭합니다.<br><br><br></p>
+<p><img src="/images/network/route11.png" alt="images"> <code>A</code> 유형을 사용하여 인스턴스를 등록했을 때 발급받았던 <code>탄력적 IP</code>를 값으로 넣으면 해당 도메인으로 들어갔을 때 IP를 불러와 접속할 수 있도록 해줍니다.<br><br>여기서 주의할 점은 등록 후 바로 적용되지 않고 짧으면 10분에서 길면 30분까지 등록되는데 시간이 걸리므로 바로 접속되지 않더라고 잠시 휴식을 취하면서 기다리면 잘 접속되는 것을 확인할 수 있습니다.<br><br><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Domain" >
+    <span class="tag-code">Domain</span>
+  </a>
+
+  <a href="/tags#AWS" >
+    <span class="tag-code">AWS</span>
+  </a>
+
+  <a href="/tags#Route 53" >
+    <span class="tag-code">Route 53</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/22/network/network-06/">
+        <span class="nav-arrow">← </span>
+        
+          Network - 프락시
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Route-53"><span class="toc-nav-text">Route 53</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#도메인-구매하기"><span class="toc-nav-text">도메인 구매하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#도메인-연결하기"><span class="toc-nav-text">도메인 연결하기</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/09/28/network/domain/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

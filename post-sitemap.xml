@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>https://junjangsee.github.io/2019/09/28/network/domain/</loc>
+        <lastmod>2019-09-28T13:13:03.200Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/03/16/project/project-01/</loc>
+        <lastmod>2019-09-28T07:13:19.490Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/2019/09/22/network/network-06/</loc>
         <lastmod>2019-09-22T12:21:22.294Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -586,14 +602,6 @@
     <url>
         <loc>https://junjangsee.github.io/2019/03/19/project/project-03/</loc>
         <lastmod>2019-03-21T10:50:41.006Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2019/03/16/project/project-01/</loc>
-        <lastmod>2019-03-21T10:01:37.263Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/Route-53/</loc>
+        <lastmod>2019-09-28T13:13:03.200Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/AWS/</loc>
+        <lastmod>2019-09-28T13:13:03.200Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Domain/</loc>
+        <lastmod>2019-09-28T13:13:03.200Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/SpringBoot/</loc>
+        <lastmod>2019-09-28T07:13:19.490Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/Proxy/</loc>
         <lastmod>2019-09-22T12:21:22.294Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -220,14 +248,14 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Custom/</loc>
+        <loc>https://junjangsee.github.io/tags/Repository/</loc>
         <lastmod>2019-07-07T12:04:40.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Repository/</loc>
+        <loc>https://junjangsee.github.io/tags/Custom/</loc>
         <lastmod>2019-07-07T12:04:40.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -361,13 +389,6 @@
 
     <url>
         <loc>https://junjangsee.github.io/tags/Actuator/</loc>
-        <lastmod>2019-05-18T11:19:14.564Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/SpringBoot/</loc>
         <lastmod>2019-05-18T11:19:14.564Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -705,13 +726,6 @@
     <url>
         <loc>https://junjangsee.github.io/tags/OAuth/</loc>
         <lastmod>2019-04-10T09:39:14.786Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/AWS/</loc>
-        <lastmod>2019-03-30T11:04:27.931Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
