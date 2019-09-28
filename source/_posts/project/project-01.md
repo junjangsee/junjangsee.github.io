@@ -33,7 +33,7 @@ SpringBoot & Gradle을 사용하여 생성을 하였습니다.
 Gradle을 사용한 이유는 4점대 이후로 대폭 상승한 빌드속도 때문
 
 ![spring](/images/sroom/start1.png) Next를 클릭<br>
-![spring](/images/sroom/start2.png) sroom으로 선정하고 Gragle 타입으로 선택 후 자바 버전은 8을 선택하였습니다.<br>
+![spring](/images/sroom/start2.png) sroom으로 선정하고 Gradle 타입으로 선택 후 자바 버전은 8을 선택하였습니다.<br>
 ![spring](/images/sroom/start3.png) Lombok, Web, H2, JPA, MySql, Actuator를 선택
 이번 프로젝트에서 JPA를 활용해볼 것이기 때문에 JPA까지 선택하였습니다.<br>
 ![spring](/images/sroom/start4.png) 마지막으로 Finish를 눌러 생성합니다.
