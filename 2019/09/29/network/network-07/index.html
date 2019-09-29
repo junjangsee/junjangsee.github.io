@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Network - 캐시 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Network - 캐시</h2>
+  <p class="post-date">2019-09-29</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
+<p><strong>이번 장에서 살펴볼 주제</strong></p>
+<ul>
+<li>캐시는 불필요한 데이터 전송을 줄여서, 네트워크 요금으로 인한 비용을 줄여준다.</li>
+<li>캐시는 네트워크 병목을 줄여준다. 대역폭을 늘리지 않고도 페이지를 빨리 불러올 수 있게 된다.</li>
+<li>캐시는 원 서버에 대한 요청을 줄여준다. 서버는 부하를 줄일 수 있으며 더 빨리 응답할 수 있게 된다.</li>
+<li>페이지를 먼 곳에서 불러올수록 시간이 많이 걸리는데 캐시는 거리로 인한 지연을 줄여준다.</li>
+</ul>
+<p><br></p>
+<h1 id="불필요한-데이터-전송"><a href="#불필요한-데이터-전송" class="headerlink" title="불필요한 데이터 전송"></a>불필요한 데이터 전송</h1><p>복수의 클라이언트가 자주 쓰이는 원 서버 페이지에 접근할 때, 서버는 같은 문서를 각각 한 번씩 전송하게 됩니다. 이 떄 똑같은 바이트들이 네트워크를 통해 반복해서 이동하는데 이 불필요한 데이터 전송은 <code>웹 서버</code>에 <strong>부하</strong>를 줍니다. 이 때 캐시를 이용하면, 서버 응답은 <code>캐시</code>에 보관되며 캐시된 사본이 뒤이은 요청들에 대한 응답으로 사용되기 때문에 낭비가 줄어듭니다.<br><br><br></p>
+<h1 id="대역폭-방목"><a href="#대역폭-방목" class="headerlink" title="대역폭 방목"></a>대역폭 방목</h1><p>캐시는 네트워크 병목을 줄여줍니다. <strong>클라이언트</strong>들이 서버에 접근할 때의 속도는, 그 경로에 있는 <strong>가장 느린</strong> 네트워크의 속도와 같습니다. 이 때 만약 <strong>클라이언트</strong>가 빠른 LAN에 있는 캐시로부터 사본을 가져온다면 성능이 대폭 향상될 것입니다.<br><br><br></p>
+<h1 id="갑작스런-요청-쇄도"><a href="#갑작스런-요청-쇄도" class="headerlink" title="갑작스런 요청 쇄도"></a>갑작스런 요청 쇄도</h1><p>캐싱은 갑작스런 요청 쇄도에 대처하기 위해 특히 중요합니다. 많은 사람들이 동시에 웹 문서에 접근할 때 이런 일이 발생합니다. 이 상황을 막기 위해 캐시를 이용합니다.<br><br><br></p>
+<h1 id="거리로-인한-지연"><a href="#거리로-인한-지연" class="headerlink" title="거리로 인한 지연"></a>거리로 인한 지연</h1><p>대역폭이 문제가 되지 않는 상황이라면, 거리가 문제가 될 수도 있습니다. 기계실 근처에 캐시를 설치해서 문서가 전송되는 거리를 줄이는 방법이 있습니다.<br><br><br></p>
+<h1 id="적중과-부적중"><a href="#적중과-부적중" class="headerlink" title="적중과 부적중"></a>적중과 부적중</h1><p>캐시가 세상 모든 문서의 사본을 저장하지는 않는데, 캐시에 요청이 들어왔을 때 해당하는 사본이 있다면 요청이 처리되어 <code>캐시 적중</code>이 되고 만약 해당되는 사본이 없다면 그냥 우너 서버로 전달되는 <code>캐시 부적중</code>이 발생합니다.<br><br><br></p>
+<h2 id="재검사"><a href="#재검사" class="headerlink" title="재검사"></a>재검사</h2><p>원 서버 컨텐츠는 변경될 수 있기 떄문에, 캐시는 반드시 그들이 갖고 있는 사본이 여전히 최신인지 서버를 통해 점검해야합니다. 이를 <code>재검사</code>라고 합니다. 대부분의 캐시는 클라이언트가 사본을 요청하였으며 그 사본이 검사를 할 필요가 있을 정도로 오래된 경우에만 재검사를 합니다. 이 때 사본이 여전히 유효하면 서버에 <code>304 Not Modified</code> 응답을 보내고 클라이언트에게 제공합니다. HTTP는 캐시된 객체를 재확인 하기 위해 몇 가지 <strong>도구</strong>를 제공하는데 그 중에서 가장 많이 쓰이는 것은 <code>If-Modified-Since</code> 헤더입니다.<br><br>서버에게 보내는 GET 요청이 이 헤더를 추가하면 캐시된 시간 이후에 <strong>변경된 경우</strong>에만 사본을 보내달라는 의미가 됩니다. 아래는 GET If-Modified-Since 요청이 서버에 도착했을 때 일어나는 세 가지 상황에 대해서 알아보겠습니다.</p>
+<ul>
+<li>재검사 적중 : 만약 서버 객체가 변경되지 않았다면, 서버는 클라이언트에게 304 Not Modified를 보냅니다.</li>
+<li>재검사 부적중 : 만약 서버 객체가 캐시된 사본과 다르다면은 서버는 컨텐츠 전체와 함께 평범한 HTTP 200 OK 응답을 클라이언트에게 보냅니다.</li>
+<li>객체 삭제 : 만약 서버 객체가 삭제되었다면, 서버는 404 Not Found 응답을 돌려보내며 캐시는 사본을 삭제합니다.<br><br><br></li>
+</ul>
+<h2 id="적중률"><a href="#적중률" class="headerlink" title="적중률"></a>적중률</h2><p>캐시가 <strong>요청을 처리하는 비율</strong>을 <code>캐시 적중률</code>, 혹은 <code>문서 적중률</code>이라고 부릅니다. 적중률은 0 ~ 1까지의 값으로 되어있지만, 흔히 퍼센트로 표현되기도 합니다. <strong>0%</strong>는 모든 요청이 캐시 부적중, <strong>100%</strong>는 모든 요청이 캐시 적중임을 의미합니다.<br><br><br></p>
+<h2 id="바이트-적중률"><a href="#바이트-적중률" class="headerlink" title="바이트 적중률"></a>바이트 적중률</h2><p>모든 문서가 같은 크기가 아니기 때문에 특정 사람들은 <code>바이트 적중률</code>을 더 선호합니다.<br><br><br></p>
+<h2 id="적중과-부적중의-구별"><a href="#적중과-부적중의-구별" class="headerlink" title="적중과 부적중의 구별"></a>적중과 부적중의 구별</h2><p>클라이언트가 응답이 캐시에서 왔는지 알아내는 한 가지 방법은 <code>Date 헤더</code>를 이용하는 것입니다. 응답의 Date 헤더값을 현재 시각과 비교하여, 응답의 생성일이 더 오래되었다면 클라이언트는 응답이 캐시된 것임을 알아낼 수 있습니다.<br><br><br></p>
+<h1 id="캐시-토폴로지"><a href="#캐시-토폴로지" class="headerlink" title="캐시 토폴로지"></a>캐시 토폴로지</h1><p>캐시는 <strong>한 명</strong>의 사용자에게만 할당될 수도 있고 반대로 <strong>수천 명</strong>의 사용자들 간에 공유될 수도 있습니다.<br><br><br></p>
+<h2 id="개인-전용-캐시"><a href="#개인-전용-캐시" class="headerlink" title="개인 전용 캐시"></a>개인 전용 캐시</h2><p><code>개인 전용 캐시</code>는 많은 에너지나 저장 공간을 필요로 하지 않으므로, <strong>작고 저렴</strong>할 수 있습니다. 웹 브라우저는 개인 전용 캐시를 내장하고 있으며 대부분의 브라우저는 자주 쓰이는 문서를 개인용 컴퓨터의 디스크나 메모리에 캐시해 놓고 사용자가 캐시 사이즈 및 설정을 수정할 수 있도록 합니다.<br><br><br></p>
+<h2 id="공용-프락시-캐시"><a href="#공용-프락시-캐시" class="headerlink" title="공용 프락시 캐시"></a>공용 프락시 캐시</h2><p>공용 캐시는 캐시 프락시 서버 혹은 더 흔히 <code>프락시 캐시</code>라고 불리는 특별한 종류의 공유된 프락시 서버입니다. 프락시 캐시는 로컬 캐시에서 문서를 제공하거나, 혹은 사용자의 입장에서 서버에 접근합니다. 공용 캐시에는 여러 사용자가 접근하기 때문에, 불필요한 트래픽을 줄일 수 있는 더 많은 기회가 있습니다.<br><br><br></p>
+<h2 id="프락시-캐시-계층들"><a href="#프락시-캐시-계층들" class="headerlink" title="프락시 캐시 계층들"></a>프락시 캐시 계층들</h2><p>작은 캐시에서 캐시 부적중이 발생했을 때 더 큰 부모 캐시가 그 ‘걸러 남겨진’ 트래픽을 처리하도록 하는 계층을 만드는 방식이 합리적입니다.<br><br><br></p>
+<h2 id="캐시망-컨텐츠-라우팅-피어링"><a href="#캐시망-컨텐츠-라우팅-피어링" class="headerlink" title="캐시망, 컨텐츠 라우팅, 피어링"></a>캐시망, 컨텐츠 라우팅, 피어링</h2><p>몇몇 네트워크 아키텍쳐는 단순한 캐시 계층 대신 복잡한 캐시망을 만들고 복잡한 방식으로 서로 대화하여 서로간의 커뮤니케이션 결정을 동적으로 내립니다. 이러한 한층 더 복잡한 캐시 사이의 관계는, 서로 다른 조직들이 상호 이득을 위해 그들의 캐시를 연결하여 서로를 찾아볼 수 있도록 해줍니다.<br><br><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#HTTP" >
+    <span class="tag-code">HTTP</span>
+  </a>
+
+  <a href="/tags#캐시" >
+    <span class="tag-code">캐시</span>
+  </a>
+
+  <a href="/tags#Cache" >
+    <span class="tag-code">Cache</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/29/network/ssl/">
+        <span class="nav-arrow">← </span>
+        
+          AWS Certificate Manager를 이용한 SSL인증서 발급받기
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#불필요한-데이터-전송"><span class="toc-nav-text">불필요한 데이터 전송</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#대역폭-방목"><span class="toc-nav-text">대역폭 방목</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#갑작스런-요청-쇄도"><span class="toc-nav-text">갑작스런 요청 쇄도</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#거리로-인한-지연"><span class="toc-nav-text">거리로 인한 지연</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#적중과-부적중"><span class="toc-nav-text">적중과 부적중</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#재검사"><span class="toc-nav-text">재검사</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#적중률"><span class="toc-nav-text">적중률</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#바이트-적중률"><span class="toc-nav-text">바이트 적중률</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#적중과-부적중의-구별"><span class="toc-nav-text">적중과 부적중의 구별</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#캐시-토폴로지"><span class="toc-nav-text">캐시 토폴로지</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#개인-전용-캐시"><span class="toc-nav-text">개인 전용 캐시</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#공용-프락시-캐시"><span class="toc-nav-text">공용 프락시 캐시</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#프락시-캐시-계층들"><span class="toc-nav-text">프락시 캐시 계층들</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#캐시망-컨텐츠-라우팅-피어링"><span class="toc-nav-text">캐시망, 컨텐츠 라우팅, 피어링</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2019/09/29/network/network-07/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
