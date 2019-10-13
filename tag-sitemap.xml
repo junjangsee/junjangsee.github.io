@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/%EB%A6%B4%EB%A0%88%EC%9D%B4/</loc>
+        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%ED%84%B0%EB%84%90/</loc>
+        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4/</loc>
+        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/HTTP/</loc>
+        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/Cache/</loc>
         <lastmod>2019-10-05T16:43:17.909Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +39,6 @@
 
     <url>
         <loc>https://junjangsee.github.io/tags/%EC%BA%90%EC%8B%9C/</loc>
-        <lastmod>2019-10-05T16:43:17.909Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/HTTP/</loc>
         <lastmod>2019-10-05T16:43:17.909Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -276,14 +297,14 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Repository/</loc>
+        <loc>https://junjangsee.github.io/tags/Custom/</loc>
         <lastmod>2019-07-07T12:04:40.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Custom/</loc>
+        <loc>https://junjangsee.github.io/tags/Repository/</loc>
         <lastmod>2019-07-07T12:04:40.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
