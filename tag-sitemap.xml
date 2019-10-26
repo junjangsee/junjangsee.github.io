@@ -3,64 +3,148 @@
 
 
     <url>
-        <loc>https://junjangsee.github.io/tags/%EC%9B%B9-%EB%A1%9C%EB%B4%87/</loc>
-        <lastmod>2019-10-20T16:55:26.603Z</lastmod>
+        <loc>https://junjangsee.github.io/tags/HTTP-2-0/</loc>
+        <lastmod>2019-10-26T16:28:10.969Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/network/</loc>
+        <lastmod>2019-10-26T16:28:10.969Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/HTTP/</loc>
-        <lastmod>2019-10-20T16:55:26.603Z</lastmod>
+        <lastmod>2019-10-26T16:28:10.969Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%EC%9B%B9-%EB%A1%9C%EB%B4%87/</loc>
+        <lastmod>2019-10-26T15:56:46.601Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/%EB%A6%B4%EB%A0%88%EC%9D%B4/</loc>
-        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <lastmod>2019-10-26T15:56:45.293Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/%ED%84%B0%EB%84%90/</loc>
-        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <lastmod>2019-10-26T15:56:45.293Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4/</loc>
-        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <lastmod>2019-10-26T15:56:45.293Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Cache/</loc>
-        <lastmod>2019-10-05T16:43:17.909Z</lastmod>
+        <loc>https://junjangsee.github.io/tags/Server/</loc>
+        <lastmod>2019-10-26T15:56:39.487Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/%EC%BA%90%EC%8B%9C/</loc>
-        <lastmod>2019-10-05T16:43:17.909Z</lastmod>
+        <loc>https://junjangsee.github.io/tags/Client/</loc>
+        <lastmod>2019-10-26T15:56:39.487Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Resource/</loc>
+        <lastmod>2019-10-26T15:56:39.487Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%EB%A6%AC%EC%86%8C%EC%8A%A4/</loc>
+        <lastmod>2019-10-26T15:56:37.590Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/URL/</loc>
+        <lastmod>2019-10-26T15:56:37.590Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/header/</loc>
+        <lastmod>2019-10-26T15:56:33.981Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/method/</loc>
+        <lastmod>2019-10-26T15:56:33.981Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Connection/</loc>
+        <lastmod>2019-10-26T15:56:31.665Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/TCP/</loc>
+        <lastmod>2019-10-26T15:56:31.665Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/server/</loc>
+        <lastmod>2019-10-26T15:56:27.932Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/Proxy/</loc>
-        <lastmod>2019-09-29T13:36:16.953Z</lastmod>
+        <lastmod>2019-10-26T15:56:25.789Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/%ED%94%84%EB%9D%BD%EC%8B%9C/</loc>
-        <lastmod>2019-09-29T13:36:16.953Z</lastmod>
+        <lastmod>2019-10-26T15:56:25.789Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Cache/</loc>
+        <lastmod>2019-10-26T15:55:42.688Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%EC%BA%90%EC%8B%9C/</loc>
+        <lastmod>2019-10-26T15:55:42.688Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -136,20 +220,6 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Connection/</loc>
-        <lastmod>2019-09-08T14:23:15.457Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/TCP/</loc>
-        <lastmod>2019-09-08T14:23:15.457Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://junjangsee.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90/</loc>
         <lastmod>2019-09-08T10:15:05.436Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -173,55 +243,6 @@
     <url>
         <loc>https://junjangsee.github.io/tags/%ED%9B%84%EA%B8%B0/</loc>
         <lastmod>2019-09-08T10:15:05.436Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/header/</loc>
-        <lastmod>2019-08-25T11:56:21.458Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/method/</loc>
-        <lastmod>2019-08-25T11:56:21.458Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/%EB%A6%AC%EC%86%8C%EC%8A%A4/</loc>
-        <lastmod>2019-08-12T16:18:52.936Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/URL/</loc>
-        <lastmod>2019-08-12T16:18:52.936Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Resource/</loc>
-        <lastmod>2019-08-12T16:18:52.936Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Server/</loc>
-        <lastmod>2019-08-06T16:14:35.047Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Client/</loc>
-        <lastmod>2019-08-06T16:14:35.047Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -535,14 +556,14 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Docker/</loc>
+        <loc>https://junjangsee.github.io/tags/PostgreSQL/</loc>
         <lastmod>2019-05-18T08:43:21.563Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/PostgreSQL/</loc>
+        <loc>https://junjangsee.github.io/tags/Docker/</loc>
         <lastmod>2019-05-18T08:43:21.563Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

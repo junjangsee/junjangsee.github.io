@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>https://junjangsee.github.io/2019/10/27/network/network-10/</loc>
+        <lastmod>2019-10-26T16:28:10.969Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/2019/10/20/network/network-09/</loc>
-        <lastmod>2019-10-20T16:55:26.603Z</lastmod>
+        <lastmod>2019-10-26T15:56:46.601Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,15 +25,47 @@
 
     <url>
         <loc>https://junjangsee.github.io/2019/10/13/network/network-08/</loc>
-        <lastmod>2019-10-13T07:29:40.530Z</lastmod>
+        <lastmod>2019-10-26T15:56:45.293Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/2019/09/29/network/network-07/</loc>
-        <lastmod>2019-10-05T16:43:17.909Z</lastmod>
+        <loc>https://junjangsee.github.io/2019/07/29/network/network-01/</loc>
+        <lastmod>2019-10-26T15:56:39.487Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/08/11/network/network-02/</loc>
+        <lastmod>2019-10-26T15:56:37.590Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/08/18/network/network-03/</loc>
+        <lastmod>2019-10-26T15:56:33.981Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/08/24/network/network-04/</loc>
+        <lastmod>2019-10-26T15:56:31.665Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/09/08/network/network-05/</loc>
+        <lastmod>2019-10-26T15:56:27.932Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -33,7 +73,15 @@
 
     <url>
         <loc>https://junjangsee.github.io/2019/09/22/network/network-06/</loc>
-        <lastmod>2019-09-29T13:36:16.953Z</lastmod>
+        <lastmod>2019-10-26T15:56:25.789Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/09/29/network/network-07/</loc>
+        <lastmod>2019-10-26T15:55:42.688Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -72,48 +120,8 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/2019/08/24/network/network-04/</loc>
-        <lastmod>2019-09-08T14:23:15.457Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://junjangsee.github.io/2019/09/08/story/story-01/</loc>
         <lastmod>2019-09-08T10:15:05.436Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2019/09/08/network/network-05/</loc>
-        <lastmod>2019-09-08T07:27:47.510Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2019/08/18/network/network-03/</loc>
-        <lastmod>2019-08-25T11:56:21.458Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2019/08/11/network/network-02/</loc>
-        <lastmod>2019-08-12T16:18:52.936Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2019/07/29/network/network-01/</loc>
-        <lastmod>2019-08-06T16:14:35.047Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
