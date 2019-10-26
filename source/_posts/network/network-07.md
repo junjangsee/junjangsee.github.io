@@ -1,7 +1,7 @@
 ---
 title: Network - 캐시
 date: 2019-09-29 21:37:31
-tags: [HTTP, 캐시, Cache]
+tags: [HTTP, 캐시, Cache, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

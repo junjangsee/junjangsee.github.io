@@ -1,7 +1,7 @@
 ---
 title: Network - 커넥션 관리
 date: 2019-08-24 23:05:51
-tags: [HTTP, TCP, Connection]
+tags: [HTTP, TCP, Connection, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

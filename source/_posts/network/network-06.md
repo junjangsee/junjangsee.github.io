@@ -1,7 +1,7 @@
 ---
 title: Network - 프락시
 date: 2019-09-22 18:58:33
-tags: [HTTP, 프락시, Proxy]
+tags: [HTTP, 프락시, Proxy, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

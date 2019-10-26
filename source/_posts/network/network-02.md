@@ -1,7 +1,7 @@
 ---
 title: Network - URL과 리소스
 date: 2019-08-11 14:09:49
-tags: [URL, Resource, 리소스]
+tags: [URL, Resource, 리소스, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

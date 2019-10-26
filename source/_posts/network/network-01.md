@@ -1,7 +1,7 @@
 ---
 title: Network - HTTP
 date: 2019-07-29 22:16:04
-tags: [HTTP, Client, Server, Resource]
+tags: [HTTP, Client, Server, Resource, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

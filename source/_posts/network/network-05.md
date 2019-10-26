@@ -1,7 +1,7 @@
 ---
 title: Network - 웹 서버
 date: 2019-09-08 01:44:55
-tags: [HTTP]
+tags: [HTTP, server, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

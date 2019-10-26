@@ -1,7 +1,7 @@
 ---
 title: Network - 게이트웨이, 터널, 릴레이
 date: 2019-10-13 14:56:00
-tags: [HTTP, 게이트웨이, 터널, 릴레이]
+tags: [HTTP, 게이트웨이, 터널, 릴레이, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>

@@ -1,7 +1,7 @@
 ---
 title: Network - HTTP 메시지
 date: 2019-08-18 01:08:26
-tags: [HTTP, method, header]
+tags: [HTTP, method, header, network]
 ---
 
 ![images](/images/network/network.jpg)<br/>
