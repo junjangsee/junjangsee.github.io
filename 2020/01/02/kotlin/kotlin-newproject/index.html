@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      intelliJ에서 Gradle을 이용한 프로젝트 생성하기 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>intelliJ에서 Gradle을 이용한 프로젝트 생성하기</h2>
+  <p class="post-date">2020-01-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/kotlin/kotlin.png" alt="kotlin"><br></p>
+<h1 id="프로젝트-생성"><a href="#프로젝트-생성" class="headerlink" title="프로젝트 생성"></a>프로젝트 생성</h1><h2 id="Gradle로-프로젝트-생성하기"><a href="#Gradle로-프로젝트-생성하기" class="headerlink" title="Gradle로 프로젝트 생성하기"></a>Gradle로 프로젝트 생성하기</h2><p><img src="/images/kotlin/gradle/gra1.png" alt="kotlin"> IntelliJ 메인 화면에서 <code>Create New Project</code>를 클릭합니다.<br><br><img src="/images/kotlin/gradle/gra2.png" alt="kotlin"> 좌측에 <code>Gradle</code>을 클릭하고 <code>Kotlin/JVM</code>을 선택 후 Next를 눌러 다음으로 이동합니다.<br><br><img src="/images/kotlin/gradle/gra3.png" alt="kotlin"> GroupId는 조직의 식별자이고 ArtifactId가 프로젝트 이름입니다.<br><br><img src="/images/kotlin/gradle/gra4.png" alt="kotlin"> Finish를 클릭해서 마무리를 해줍니다.<br><br><br></p>
+<h2 id="Kotlin-파일-생성하기"><a href="#Kotlin-파일-생성하기" class="headerlink" title="Kotlin 파일 생성하기"></a>Kotlin 파일 생성하기</h2><p><img src="/images/kotlin/gradle/gra5.png" alt="kotlin"> src 폴더 하위에 <code>kotlin</code>이라는 폴더가 생성된 것을 볼 수 있습니다.<br><br><img src="/images/kotlin/gradle/gra7.png" alt="kotlin"> 코틀린은 꼭 클래스로 생성하지 않고 파일로도 실행이 가능하기 때문에 <code>파일</code>로 생성해보겠습니다.<br><br><br></p>
+<h2 id="Hello-World-출력하기"><a href="#Hello-World-출력하기" class="headerlink" title="Hello World 출력하기"></a>Hello World 출력하기</h2><p>파일을 생성 하였다면 Hello World를 출력하는 코드를 작성하면 됩니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun main(args: Array&lt;String&gt;) &#123;</span><br><span class="line">    println(&quot;Hello World&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/kotlin/gradle/gra8.png" alt="kotlin"> 컴파일은 파일을 우클릭하거나 코드 좌측의 실행 버튼을 눌러 할 수 있습니다.<br><br><img src="/images/kotlin/gradle/gra9.png" alt="kotlin"> 컴파일이 성공적으로 완료되면 우상단에 실행된 코틀린 파일이 추가되며 Hello World가 출력된 것을 확인할 수 있습니다.<br><br><br></p>
+<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><p>이번 주제는 IntelliJ와 Gradle을 활용하여 Hello World를 출력해보았습니다.<br>간단하지만 처음 코틀린을 입문할 때 어떻게 생성해야할지 모를 때 참고하면 좋을 것 같습니다.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#intelliJ" >
+    <span class="tag-code">intelliJ</span>
+  </a>
+
+  <a href="/tags#Gradle" >
+    <span class="tag-code">Gradle</span>
+  </a>
+
+  <a href="/tags#Kotlin" >
+    <span class="tag-code">Kotlin</span>
+  </a>
+
+  <a href="/tags#코틀린" >
+    <span class="tag-code">코틀린</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/12/22/notice/remind-2019/">
+        <span class="nav-arrow">← </span>
+        
+          돌아보는 2019년 한 해
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#프로젝트-생성"><span class="toc-nav-text">프로젝트 생성</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Gradle로-프로젝트-생성하기"><span class="toc-nav-text">Gradle로 프로젝트 생성하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Kotlin-파일-생성하기"><span class="toc-nav-text">Kotlin 파일 생성하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Hello-World-출력하기"><span class="toc-nav-text">Hello World 출력하기</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#마무리"><span class="toc-nav-text">마무리</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2020/01/02/kotlin/kotlin-newproject/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
