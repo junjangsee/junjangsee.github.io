@@ -37,7 +37,7 @@ title만 포함된 **toString**을 만듭니다.<br/>
         posts.forEach(System.out::println);
     }
 ```
-![Query](/images/jpa/query/que1.png) 쿼리에 들어가는 Post는 테이블 이름이 아닌 Entity의 이름입니다. .<br/>
+![Query](/images/jpa/query/que1.png) 쿼리에 들어가는 Post는 테이블 이름이 아닌 Entity의 이름입니다.<br/>
 <br/>
 
 ## Criteria

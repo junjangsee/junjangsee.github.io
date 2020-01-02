@@ -1,5 +1,5 @@
 ---
-title: intelliJ에서 Gradle을 이용한 프로젝트 생성하기
+title: intelliJ에서 Gradle을 이용한 Kotlin 프로젝트 생성하기
 date: 2020-01-02 00:48:19
 tags: [intelliJ, Gradle, Kotlin, 코틀린]
 ---
