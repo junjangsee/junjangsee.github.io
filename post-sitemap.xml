@@ -8,8 +8,32 @@
     </url>
 
     <url>
+        <loc>https://junjangsee.github.io/2020/01/03/kotlin/kotlin-file-class/</loc>
+        <lastmod>2020-01-02T15:57:42.026Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2020/01/02/kotlin/kotlin-newproject/</loc>
+        <lastmod>2020-01-02T15:19:01.927Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2020/01/02/jpa/jpa-16/</loc>
+        <lastmod>2020-01-02T14:39:37.016Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/2020/01/02/jpa/jpa-15/</loc>
-        <lastmod>2020-01-02T13:44:39.887Z</lastmod>
+        <lastmod>2020-01-02T13:49:52.130Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,14 +42,6 @@
     <url>
         <loc>https://junjangsee.github.io/2019/05/28/jpa/jpa-09/</loc>
         <lastmod>2020-01-01T17:38:57.002Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2020/01/02/kotlin/kotlin-newproject/</loc>
-        <lastmod>2020-01-01T17:01:07.796Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

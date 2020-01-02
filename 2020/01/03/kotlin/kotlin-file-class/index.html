@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      코틀린(Kotlin) - 파일(File) | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>코틀린(Kotlin) - 파일(File)</h2>
+  <p class="post-date">2020-01-03</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/kotlin/kotlin.png" alt="kotlin"><br></p>
+<h1 id="코틀린-파일-정의"><a href="#코틀린-파일-정의" class="headerlink" title="코틀린 파일 정의"></a>코틀린 파일 정의</h1><h2 id="일반-파일과-클래스-파일"><a href="#일반-파일과-클래스-파일" class="headerlink" title="일반 파일과 클래스 파일"></a>일반 파일과 클래스 파일</h2><p>코틀린은 확장자가 kt인 파일을 작성하여 개발합니다. 코틀린 파일을 만들 때 일반 파일과 클래스 파일을 구분해서 만들기는 하지만, 둘의 차이는 없으며 규칙 또한 없습니다.<br>중요한건 이 둘의 공통점은 <strong>확장자</strong>가 <code>kt</code>라는 것입니다.<br><br><img src="/images/kotlin/file/file1.png" alt="kotlin"> 생성된 두 개를 보시면 파일, 클래스로 생성되었지만 같은 kt 확장자를 가지고 있습니다.<br>현재 저는 IntelliJ를 사용하고 있기 때문에 보기 편하게 구별되어 있을 뿐 확장자는 무조건 <code>kt</code>입니다.<br><br><img src="/images/kotlin/file/file2.png" alt="kotlin"> 파일로 생성하더라도 클래스를 선언하게 되면 클래스로 바뀌는 모습입니다.<br><br><br></p>
+<h2 id="파일의-구성요소"><a href="#파일의-구성요소" class="headerlink" title="파일의 구성요소"></a>파일의 구성요소</h2><h3 id="클래스"><a href="#클래스" class="headerlink" title="클래스"></a>클래스</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*</span><br><span class="line"></span><br><span class="line">class examClass &#123;</span><br><span class="line">    val name = &quot;junjang&quot;</span><br><span class="line"></span><br><span class="line">    fun hello() &#123;</span><br><span class="line">        val date = Date()</span><br><span class="line">        println(&quot;date&quot; + date)</span><br><span class="line">        println(&quot;hello()&quot; + name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/kotlin/file/file5.png" alt="kotlin"> 위 코드는 클래스에 변수와 함수가 선언된 모습입니다. 여기서는 <code>패키지, 임포트, 변수, 함수</code>가 포함됩니다.<br></p>
+<h3 id="파일"><a href="#파일" class="headerlink" title="파일"></a>파일</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var add = 0</span><br><span class="line"></span><br><span class="line">fun calAdd() &#123;</span><br><span class="line">    for (i in 1..10) &#123;</span><br><span class="line">        add += i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/kotlin/file/file4.png" alt="kotlin"> 클래스를 따로 선언하지 않고 파일 내에 변수와 함수를 선언할 수도 있습니다.<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*</span><br><span class="line"></span><br><span class="line">var sum = 0</span><br><span class="line"></span><br><span class="line">fun calSum() &#123;</span><br><span class="line">    for (i in 1..10) &#123;</span><br><span class="line">        sum += i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class exam &#123;</span><br><span class="line">    val name = &quot;junjang&quot;</span><br><span class="line"></span><br><span class="line">    fun hello() &#123;</span><br><span class="line">        val date = Date()</span><br><span class="line">        println(&quot;date&quot; + date)</span><br><span class="line">        println(&quot;hello() &quot; + name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun main(args: Array&lt;String&gt;) &#123;</span><br><span class="line">    calSum()</span><br><span class="line">    println(sum)</span><br><span class="line">    exam().hello()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/kotlin/file/file6.png" alt="kotlin"> 위 코드처럼 코틀린은 모든 구성요소를 꼭 클래스로 묶지 않아도 되며, 변수나 함수를클래스 외부에 선언할 수 있습니다.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Kotlin" >
+    <span class="tag-code">Kotlin</span>
+  </a>
+
+  <a href="/tags#코틀린" >
+    <span class="tag-code">코틀린</span>
+  </a>
+
+  <a href="/tags#File" >
+    <span class="tag-code">File</span>
+  </a>
+
+  <a href="/tags#Class" >
+    <span class="tag-code">Class</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/01/02/jpa/jpa-16/">
+        <span class="nav-arrow">← </span>
+        
+          JPA - Common BasicRepository
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#코틀린-파일-정의"><span class="toc-nav-text">코틀린 파일 정의</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#일반-파일과-클래스-파일"><span class="toc-nav-text">일반 파일과 클래스 파일</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#파일의-구성요소"><span class="toc-nav-text">파일의 구성요소</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#클래스"><span class="toc-nav-text">클래스</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#파일"><span class="toc-nav-text">파일</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2020/01/03/kotlin/kotlin-file-class/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
