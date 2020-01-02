@@ -3,36 +3,64 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/Repository/</loc>
+        <lastmod>2020-01-02T13:42:49.018Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Custom/</loc>
+        <lastmod>2020-01-02T13:42:49.018Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Common/</loc>
+        <lastmod>2020-01-02T13:42:49.018Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/JPA/</loc>
+        <lastmod>2020-01-02T13:42:49.018Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Query/</loc>
+        <lastmod>2020-01-01T17:38:57.002Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/%EC%BD%94%ED%8B%80%EB%A6%B0/</loc>
-        <lastmod>2020-01-01T17:00:55.013Z</lastmod>
+        <lastmod>2020-01-01T17:01:07.796Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/Kotlin/</loc>
-        <lastmod>2020-01-01T17:00:55.013Z</lastmod>
+        <lastmod>2020-01-01T17:01:07.796Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/Gradle/</loc>
-        <lastmod>2020-01-01T17:00:55.013Z</lastmod>
+        <lastmod>2020-01-01T17:01:07.796Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/intelliJ/</loc>
-        <lastmod>2020-01-01T17:00:55.013Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Blog/</loc>
-        <lastmod>2020-01-01T17:00:46.796Z</lastmod>
+        <lastmod>2020-01-01T17:01:07.796Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -60,6 +88,13 @@
 
     <url>
         <loc>https://junjangsee.github.io/tags/2019/</loc>
+        <lastmod>2020-01-01T17:00:46.796Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Blog/</loc>
         <lastmod>2020-01-01T17:00:46.796Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -381,43 +416,8 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/tags/Custom/</loc>
-        <lastmod>2019-07-07T12:04:40.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Repository/</loc>
-        <lastmod>2019-07-07T12:04:40.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Common/</loc>
-        <lastmod>2019-07-07T12:04:40.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/JPA/</loc>
-        <lastmod>2019-07-07T12:04:40.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://junjangsee.github.io/tags/Interview/</loc>
         <lastmod>2019-06-11T00:44:33.871Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Query/</loc>
-        <lastmod>2019-06-04T12:59:14.361Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
