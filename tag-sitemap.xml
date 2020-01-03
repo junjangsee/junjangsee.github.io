@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/QueryDSL/</loc>
+        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Common/</loc>
+        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/JPA/</loc>
+        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Basic/</loc>
+        <lastmod>2020-01-03T15:57:21.892Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/Repository/</loc>
+        <lastmod>2020-01-03T15:57:21.892Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/Class/</loc>
         <lastmod>2020-01-02T15:57:42.026Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -40,34 +75,6 @@
     <url>
         <loc>https://junjangsee.github.io/tags/intelliJ/</loc>
         <lastmod>2020-01-02T15:19:01.927Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Basic/</loc>
-        <lastmod>2020-01-02T14:39:37.016Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Repository/</loc>
-        <lastmod>2020-01-02T14:39:37.016Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/Common/</loc>
-        <lastmod>2020-01-02T14:39:37.016Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/JPA/</loc>
-        <lastmod>2020-01-02T14:39:37.016Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
