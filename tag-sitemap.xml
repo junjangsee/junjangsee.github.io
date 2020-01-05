@@ -3,36 +3,43 @@
 
 
     <url>
-        <loc>https://junjangsee.github.io/tags/QueryDSL/</loc>
-        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <loc>https://junjangsee.github.io/tags/DomainClassConverter/</loc>
+        <lastmod>2020-01-05T08:14:15.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/Common/</loc>
-        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <lastmod>2020-01-05T08:14:15.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/JPA/</loc>
-        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <lastmod>2020-01-05T08:14:15.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/Basic/</loc>
-        <lastmod>2020-01-03T15:57:21.892Z</lastmod>
+        <lastmod>2020-01-03T16:20:42.060Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://junjangsee.github.io/tags/Repository/</loc>
-        <lastmod>2020-01-03T15:57:21.892Z</lastmod>
+        <lastmod>2020-01-03T16:20:42.060Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/QueryDSL/</loc>
+        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

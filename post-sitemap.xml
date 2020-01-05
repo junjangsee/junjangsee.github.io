@@ -8,8 +8,8 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/2020/01/03/jpa/jpa-17/</loc>
-        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
+        <loc>https://junjangsee.github.io/2020/01/05/jpa/jpa-18/</loc>
+        <lastmod>2020-01-05T08:14:15.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +17,15 @@
 
     <url>
         <loc>https://junjangsee.github.io/2020/01/02/jpa/jpa-16/</loc>
-        <lastmod>2020-01-03T15:57:21.892Z</lastmod>
+        <lastmod>2020-01-03T16:20:42.060Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2020/01/03/jpa/jpa-17/</loc>
+        <lastmod>2020-01-03T16:15:43.741Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
