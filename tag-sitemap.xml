@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/JpaRepository/</loc>
+        <lastmod>2020-01-13T14:33:05.511Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/JPA/</loc>
+        <lastmod>2020-01-13T14:33:05.511Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/Sort/</loc>
         <lastmod>2020-01-06T13:35:39.652Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,13 +32,6 @@
 
     <url>
         <loc>https://junjangsee.github.io/tags/Common/</loc>
-        <lastmod>2020-01-06T13:35:39.652Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/tags/JPA/</loc>
         <lastmod>2020-01-06T13:35:39.652Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
