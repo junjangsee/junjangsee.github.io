@@ -32,4 +32,7 @@ tags: [HTML, Tag]
   - keywords : 주요 키워드
   - author : 문서 작성자 혹은 저작권자
 - `<title>` : 문서의 제목을 입력합니다. 만약 입력하지 않으면 HTML 파일명과 확장자가 나타납니다.
+
+![title](/images/html/htmltag/title1.png) 문서의 제목을 입력했을 때
+![title](/images/html/htmltag/title2.png) 문서의 제목을 입력하지 않았을 때<br/>
 - `<body>` : HTML 문서 본문의 시작과 끝을 알리는 태그입니다. 여기에는 웹 사이트의 텍스트와 이미 정보를 입력합니다.
