@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      자바스크립트(바닐라스크립트) 기본 이론 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>자바스크립트(바닐라스크립트) 기본 이론</h2>
+  <p class="post-date">2020-02-14</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/javascript/javscript.png" alt="images"><br></p>
+<h1 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h1><h2 id="1-CSS-추가하는-방법"><a href="#1-CSS-추가하는-방법" class="headerlink" title="1. CSS 추가하는 방법"></a>1. CSS 추가하는 방법</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Something<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"index.css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>head 태그 내부에 추가합니다.</li>
+<li>link 태그를 활용하여 href에 <code>css파일 경로</code>를 입력합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="index-css"><a href="#index-css" class="headerlink" title="index.css"></a>index.css</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: peru;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h3><p><img src="/images/javascript/hello1.png" alt="images"><br></p>
+<p><br></p>
+<h2 id="2-JS-추가하는-방법"><a href="#2-JS-추가하는-방법" class="headerlink" title="2. JS 추가하는 방법"></a>2. JS 추가하는 방법</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>This Works!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>body 태그 밑에 추가합니다.</li>
+<li>script 태그를 활용하여 src에 <code>js파일 경로</code>를 입력합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="string">"Hello World!"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="결과-1"><a href="#결과-1" class="headerlink" title="결과"></a>결과</h3><p><img src="/images/javascript/hello2.png" alt="images"><br></p>
+<p><br></p>
+<h1 id="variable-변수"><a href="#variable-변수" class="headerlink" title="variable(변수)"></a>variable(변수)</h1><h2 id="1-let"><a href="#1-let" class="headerlink" title="1. let"></a>1. let</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">100</span> - <span class="number">10</span>;</span><br><span class="line">a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b, a);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>90, 10</li>
+<li>let은 초기화한 변수값을 다시 할당하는 순간 그 값을 가진 변수가 됩니다.</li>
+</ul>
+<p><br></p>
+<h2 id="2-const"><a href="#2-const" class="headerlink" title="2. const"></a>2. const</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">100</span> - <span class="number">10</span>;</span><br><span class="line">a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b, a);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>에러 발생 : VM18:3 Uncaught TypeError: Assignment to constant variable. at <anonymous>:3:3</anonymous></li>
+<li>const는 상수로서 초기화한 값 그대로를 가지고 있습니다.</li>
+</ul>
+<p><br></p>
+<h2 id="3-var"><a href="#3-var" class="headerlink" title="3. var"></a>3. var</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">100</span> - <span class="number">10</span>;</span><br><span class="line">a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b, a);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>90, 10</li>
+<li>var는 let과 비슷하게 초기화한 변수값을 다시 할당하는 순간 그 값을 가진 변수가 됩니다.</li>
+</ul>
+<p><br></p>
+<h1 id="데이터-타입"><a href="#데이터-타입" class="headerlink" title="데이터 타입"></a>데이터 타입</h1><h2 id="1-String"><a href="#1-String" class="headerlink" title="1. String"></a>1. String</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">"junjang"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>junjang</li>
+<li>문자열을 “”안에 넣고 변수에 넣고싶을 떄 사용합니다.</li>
+</ul>
+<p><br></p>
+<h2 id="2-boolean"><a href="#2-boolean" class="headerlink" title="2. boolean"></a>2. boolean</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> what1 = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">const</span> what2 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(what1);</span><br><span class="line"><span class="built_in">console</span>.log(what2);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>true, false</li>
+<li>참, 거짓 값으로 0 혹은 1로 표현됩니다.</li>
+<li>문자열이 아닌 true, false 를 입력하여 표협합니다.</li>
+</ul>
+<p><br></p>
+<h2 id="3-number"><a href="#3-number" class="headerlink" title="3. number"></a>3. number</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> number = <span class="number">55.1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(number);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>55.1</li>
+<li>숫자를 표현할 떄 사용합니다.</li>
+</ul>
+<p><br></p>
+<h1 id="데이터-정렬"><a href="#데이터-정렬" class="headerlink" title="데이터 정렬"></a>데이터 정렬</h1><h2 id="1-Array"><a href="#1-Array" class="headerlink" title="1. Array"></a>1. Array</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> someThing = <span class="string">"someThing"</span>;</span><br><span class="line"><span class="keyword">const</span> dayOfWeek = [<span class="string">"mon"</span>, <span class="string">"tue"</span>, <span class="string">"wed"</span>, <span class="string">"thu"</span>, <span class="string">"fri"</span>, someThing];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dayOfWeek);</span><br><span class="line"><span class="built_in">console</span>.log(dayOfWeek[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>[“mon”, “tue”, “wed”, “thu”, “fri”, “someThing”]</li>
+<li>wed</li>
+<li>문자열을 “”안에 넣고 변수에 넣고싶을 떄 사용합니다.</li>
+<li>컴퓨터는 0부터 시작하기 때문에 3번 째인 값을 꺼내오고 싶다면 2를 가져옵니다.</li>
+<li>배열에는 어떤 타입이든 넣어서 출력이 가능합니다.</li>
+<li>내가 특정 값을 깅거해서 가져오는 부분이 데이터가 많아질 경우 힘들어집니다.</li>
+</ul>
+<p><br></p>
+<h2 id="2-Object"><a href="#2-Object" class="headerlink" title="2. Object"></a>2. Object</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myInfo = &#123;</span><br><span class="line">  name: <span class="string">"junjang"</span>,</span><br><span class="line">  age: <span class="number">28</span>,</span><br><span class="line">  gender: <span class="string">"Male"</span>,</span><br><span class="line">  isHandsome: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myInfo);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>{name: “junjang”, age: 28, gender: “Male”, isHandsome: true}</li>
+</ul>
+<p><br></p>
+<h3 id="값-가져오기"><a href="#값-가져오기" class="headerlink" title="값 가져오기"></a>값 가져오기</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myInfo = &#123;</span><br><span class="line">  name: <span class="string">"junjang"</span>,</span><br><span class="line">  age: <span class="number">28</span>,</span><br><span class="line">  gender: <span class="string">"Male"</span>,</span><br><span class="line">  isHandsome: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myInfo.name);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>junjang</li>
+<li>배열보다 편리하게 원하는 값을 가져올 수 있습니다.</li>
+</ul>
+<p><br></p>
+<h3 id="값-바꾸기"><a href="#값-바꾸기" class="headerlink" title="값 바꾸기"></a>값 바꾸기</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myInfo = &#123;</span><br><span class="line">  name: <span class="string">"junjang"</span>,</span><br><span class="line">  age: <span class="number">28</span>,</span><br><span class="line">  gender: <span class="string">"Male"</span>,</span><br><span class="line">  isHandsome: <span class="literal">true</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myInfo.name);</span><br><span class="line"></span><br><span class="line">myInfo.name = <span class="string">"junhyeoung"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myInfo.name);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>junjang, junhyeoung</li>
+<li>myInfo내에 있는 값은 바꿀 수 있지만 myInfo자체는 바꿀 수 없습니다.</li>
+</ul>
+<p><br></p>
+<h3 id="Array를-Oject에-넣기"><a href="#Array를-Oject에-넣기" class="headerlink" title="Array를 Oject에 넣기"></a>Array를 Oject에 넣기</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myInfo = &#123;</span><br><span class="line">  name: <span class="string">"junjang"</span>,</span><br><span class="line">  age: <span class="number">28</span>,</span><br><span class="line">  gender: <span class="string">"Male"</span>,</span><br><span class="line">  isHandsome: <span class="literal">true</span>,</span><br><span class="line">  favMovies: [<span class="string">"Shutter island"</span>, <span class="string">"Inception"</span>, <span class="string">"Old boy"</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myInfo.favMovies);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>[“Shutter island”, “Inception”, “Old boy”]</li>
+<li>Object내의 배열이 출력됩니다.</li>
+</ul>
+<p><br></p>
+<h3 id="Object에-Array에-Object넣기"><a href="#Object에-Array에-Object넣기" class="headerlink" title="Object에 Array에 Object넣기"></a>Object에 Array에 Object넣기</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myInfo = &#123;</span><br><span class="line">  name: <span class="string">"junjang"</span>,</span><br><span class="line">  age: <span class="number">28</span>,</span><br><span class="line">  gender: <span class="string">"Male"</span>,</span><br><span class="line">  isHandsome: <span class="literal">true</span>,</span><br><span class="line">  favMovies: [<span class="string">"Shutter island"</span>, <span class="string">"Inception"</span>, <span class="string">"Old boy"</span>],</span><br><span class="line">  favFoods: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">"kimchi"</span>,</span><br><span class="line">      fatty: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">"hamberger"</span>,</span><br><span class="line">      fatty: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myInfo.favFoods);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>{name: “kimchi”, fatty: false}, {name: “hamberger”, fatty: true}</li>
+<li>Array 안에 Object를 넣을 수도 있습니다.</li>
+</ul>
+<p><br></p>
+<h1 id="function-함수"><a href="#function-함수" class="headerlink" title="function(함수)"></a>function(함수)</h1><h2 id="1-Function"><a href="#1-Function" class="headerlink" title="1. Function"></a>1. Function</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"my name is"</span>, name, <span class="string">"i'm"</span>, age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(<span class="string">"junjang"</span>, <span class="number">28</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>my name is junjang i’m 28</li>
+<li>function 함수이름(인자값) { 함수 내용 } 공식을 이용하여 함수를 만듭니다.</li>
+<li>인자값에는 어떤 이름이 들어가도 무방하며 외부 값을 입력받아 사용하기 위해 사용합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="백틱-사용"><a href="#백틱-사용" class="headerlink" title="백틱 사용"></a>백틱 사용</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`my name is <span class="subst">$&#123;name&#125;</span> i'm <span class="subst">$&#123;age&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(<span class="string">"junjang"</span>, <span class="number">28</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>백틱내에 String과 \${} 문법을 통해서 스마트하게 가능합니다.</li>
+</ul>
+<p><br></p>
+<h3 id="return-사용"><a href="#return-사용" class="headerlink" title="return 사용"></a>return 사용</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`my name is <span class="subst">$&#123;name&#125;</span> i'm <span class="subst">$&#123;age&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> returnFunction = sayHello(<span class="string">"junjang"</span>, <span class="number">28</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(returnFunction);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>returnFunction은 return 값을 가지기 때문에 sayHello 함수의 return 값을 가지게 됩니다.</li>
+</ul>
+<p><br></p>
+<h3 id="Object-사용"><a href="#Object-사용" class="headerlink" title="Object 사용"></a>Object 사용</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> calculator = &#123;</span><br><span class="line">  plus: <span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> plus = calculator.plus(<span class="number">5</span>, <span class="number">5</span>);</span><br><span class="line"><span class="built_in">console</span>.log(plus);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>calculator 객체의 key값을 이용하여 함수를 만들고 return값을 받아 console.log로 출력합니다.</li>
+</ul>
+<p><br></p>
+<h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Something<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"index.css"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"title"</span>&gt;</span>This Works!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">document</span>.getElementById(<span class="string">"title"</span>);</span><br><span class="line"><span class="keyword">const</span> title = <span class="built_in">document</span>.querySelector(<span class="string">"#title"</span>);</span><br><span class="line">title.innerHTML = <span class="string">"Hi! From JS"</span>;</span><br><span class="line">title.style.color = <span class="string">"red"</span>;</span><br><span class="line"><span class="built_in">console</span>.dir(title);</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<p><img src="/images/javascript/inner.png" alt="images"><br></p>
+<ul>
+<li>h1에 id를 title로 선언해서 고유값을 줍니다.</li>
+<li>document.getElementById()를 사용해 id값을 가져옵니다.</li>
+<li>innerHTML을 사용하여 글자를 바꿀 수도 있습니다.</li>
+<li>dir함수를 활용하여 DOM에서 수정할 수 있는 것들을 찾아서 style등을 수정할 수도 있습니다.</li>
+<li>querySelector는 해당 고유값을 가진 태그를 찾아줍니다.</li>
+</ul>
+<p><br></p>
+<h1 id="event-이벤트"><a href="#event-이벤트" class="headerlink" title="event(이벤트)"></a>event(이벤트)</h1><h2 id="WINDOW"><a href="#WINDOW" class="headerlink" title="WINDOW"></a>WINDOW</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Something<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"index.css"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"title"</span>&gt;</span>This Works!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="resize"><a href="#resize" class="headerlink" title="resize"></a>resize</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">document</span>.querySelector(<span class="string">"#title"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleResize</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"I have been resized"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"resize"</span>, handleResize);</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<ul>
+<li>window 객체의 addEventListener함수를 사용하여 이벤트를 기다립니다.</li>
+<li>handleResize와 handleResize()의 차이점은 <strong>이벤트를 기다리는가</strong> 혹은 <strong>즉시 실행하는가</strong>의 차이입니다.</li>
+</ul>
+<p><br></p>
+<h3 id="click"><a href="#click" class="headerlink" title="click"></a>click</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">document</span>.querySelector(<span class="string">"#title"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleClick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  title.style.color = <span class="string">"red"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">title.addEventListener(<span class="string">"click"</span>, handleClick);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>title 객체의 addEventListener함수를 사용하여 이벤트를 기다립니다.</li>
+<li>click시 handleClick함수를 호출하여 red로 바꿉니다.</li>
+</ul>
+<p><br></p>
+<h1 id="조건문"><a href="#조건문" class="headerlink" title="조건문"></a>조건문</h1><h2 id="1-if-else"><a href="#1-if-else" class="headerlink" title="1. if / else"></a>1. if / else</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Something<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"index.css"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"title"</span>&gt;</span>This Works!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">"10"</span> === <span class="number">10</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hi"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"ho"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">"10"</span> === <span class="string">"10"</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hi"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"hello"</span> == <span class="string">"hello"</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"ho"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hu"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">20</span> &gt; <span class="number">5</span> &amp;&amp; <span class="string">"junjang"</span> === <span class="string">"junjang"</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hi"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hu"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">20</span> &gt; <span class="number">5</span> || <span class="string">"junjang"</span> === <span class="string">"junjang"</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hi"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"hu"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> age = prompt(<span class="string">"How old are you?"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (age &gt; <span class="number">18</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"you can drink"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"you can't"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<ul>
+<li>if / else를 통해 true 값이면 if문을, false 값이면 else문을 처리할 수 있습니다.</li>
+<li>&amp;&amp;(and) 와 ||(or) 을 통해 추가적인 조건을 사용할 수도 있습니다.</li>
+</ul>
+<p><br></p>
+<h2 id="2-if-else-function"><a href="#2-if-else-function" class="headerlink" title="2. if / else function"></a>2. if / else function</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">document</span>.querySelector(<span class="string">"#title"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> BASE_COLOR = <span class="string">"rgb(52, 73, 94)"</span>;</span><br><span class="line"><span class="keyword">const</span> OTHER_COLOR = <span class="string">"#7f8c8d"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// resize</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleClick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> currentColor = title.style.color;</span><br><span class="line">  <span class="built_in">console</span>.log(currentColor);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (currentColor === BASE_COLOR) &#123;</span><br><span class="line">    title.style.color = OTHER_COLOR;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    title.style.color = BASE_COLOR;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  title.style.color = BASE_COLOR;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">"click"</span>, handleClick);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>색 두가지를 변수에 담고 init 함수를 즉시실행 하여 기본 컬러를 담고 click시 handleClick이 발생하도록 합니다.</li>
+<li>만약 현재 색이 기본 컬러면 다른 컬러로 바꾸고, 다른 컬러면 기본 컬러로 바꾸는 if / else문 입니다.</li>
+</ul>
+<p><br></p>
+<h2 id="3-if-else-classList"><a href="#3-if-else-classList" class="headerlink" title="3. if / else classList"></a>3. if / else classList</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">document</span>.querySelector(<span class="string">"#title"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CLICKED_CLASS = <span class="string">"clicked"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleClick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">/* title.classList.toggle(CLICKED_CLASS); */</span></span><br><span class="line">  <span class="keyword">const</span> hasClass = title.classList.contains(CLICKED_CLASS);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!hasClass) &#123;</span><br><span class="line">    title.classList.add(CLICKED_CLASS);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    title.classList.remove(CLICKED_CLASS);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">"click"</span>, handleClick);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>classList를 통해 class를 포함할 떄 추가 혹은 제거를 할 수 있습니다.</li>
+<li>toggle은 위의 handleCheck 함수를 한 번에 처리해줍니다.</li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/API/Element" target="_blank" rel="noopener">MDN 공식문서</a></li>
+</ul>
+<p><br></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript" >
+    <span class="tag-code">javascript</span>
+  </a>
+
+  <a href="/tags#vanilaScript" >
+    <span class="tag-code">vanilaScript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/01/19/html/htmlTags/">
+        <span class="nav-arrow">← </span>
+        
+          HTML - HTML 문서의 기본 구조
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#HelloWorld"><span class="toc-nav-text">HelloWorld</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-CSS-추가하는-방법"><span class="toc-nav-text">1. CSS 추가하는 방법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#index-css"><span class="toc-nav-text">index.css</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#결과"><span class="toc-nav-text">결과</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-JS-추가하는-방법"><span class="toc-nav-text">2. JS 추가하는 방법</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#index-js"><span class="toc-nav-text">index.js</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#결과-1"><span class="toc-nav-text">결과</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#variable-변수"><span class="toc-nav-text">variable(변수)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-let"><span class="toc-nav-text">1. let</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-const"><span class="toc-nav-text">2. const</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-var"><span class="toc-nav-text">3. var</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#데이터-타입"><span class="toc-nav-text">데이터 타입</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-String"><span class="toc-nav-text">1. String</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-boolean"><span class="toc-nav-text">2. boolean</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-number"><span class="toc-nav-text">3. number</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#데이터-정렬"><span class="toc-nav-text">데이터 정렬</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Array"><span class="toc-nav-text">1. Array</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-Object"><span class="toc-nav-text">2. Object</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#값-가져오기"><span class="toc-nav-text">값 가져오기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#값-바꾸기"><span class="toc-nav-text">값 바꾸기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Array를-Oject에-넣기"><span class="toc-nav-text">Array를 Oject에 넣기</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Object에-Array에-Object넣기"><span class="toc-nav-text">Object에 Array에 Object넣기</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#function-함수"><span class="toc-nav-text">function(함수)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-Function"><span class="toc-nav-text">1. Function</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#백틱-사용"><span class="toc-nav-text">백틱 사용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#return-사용"><span class="toc-nav-text">return 사용</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Object-사용"><span class="toc-nav-text">Object 사용</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#DOM"><span class="toc-nav-text">DOM</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#event-이벤트"><span class="toc-nav-text">event(이벤트)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#WINDOW"><span class="toc-nav-text">WINDOW</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#resize"><span class="toc-nav-text">resize</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#click"><span class="toc-nav-text">click</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#조건문"><span class="toc-nav-text">조건문</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-if-else"><span class="toc-nav-text">1. if / else</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-if-else-function"><span class="toc-nav-text">2. if / else function</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-if-else-classList"><span class="toc-nav-text">3. if / else classList</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2020/02/14/javascript/vanilaGrammer/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
