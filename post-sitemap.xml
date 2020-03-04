@@ -8,8 +8,24 @@
     </url>
 
     <url>
-        <loc>https://junjangsee.github.io/2020/03/01/react/hooks/</loc>
-        <lastmod>2020-03-03T14:18:21.103Z</lastmod>
+        <loc>https://junjangsee.github.io/2020/03/04/react/useeffect/</loc>
+        <lastmod>2020-03-04T14:54:53.242Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2019/03/16/project/project-01/</loc>
+        <lastmod>2020-03-04T14:35:10.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/2020/03/01/react/usestate/</loc>
+        <lastmod>2020-03-04T14:24:02.171Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -210,14 +226,6 @@
     <url>
         <loc>https://junjangsee.github.io/2019/09/28/network/domain/</loc>
         <lastmod>2019-09-28T13:13:03.200Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://junjangsee.github.io/2019/03/16/project/project-01/</loc>
-        <lastmod>2019-09-28T07:13:19.490Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
