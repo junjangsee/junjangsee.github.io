@@ -1,7 +1,7 @@
 ---
 title: 리액트 훅(Hook) - useState
 date: 2020-03-01 20:40:35
-tags: [react, hook, useSate, javascript]
+tags: [react, hook, useState, javascript]
 ---
 
 ![images](/images/react/react.png)<br/>
