@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Back-End 기술에 대한 이야기를 나누는 블로그">
+  <meta name="keyword" content="Java, Spring">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      자바스크립트의 변수 | Junjangsee&#39;s Blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Junjangsee's Blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>자바스크립트의 변수</h2>
+  <p class="post-date">2020-03-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="/images/javascript/javscript.png" alt="images"><br></p>
+<h1 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h1><p>변수는 프로그램을 작성하는데 가장 중요한 요소입니다.<br>자바스크립트에서는 타입이 없는 변수를 <code>var</code>라는 선언자를 사용하여 선언하고, 이후 <code>변수명</code>을 입력해 최종적으로 변수를 선언하게 됩니다.<br></p>
+<h2 id="변수-선언"><a href="#변수-선언" class="headerlink" title="변수 선언"></a>변수 선언</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age; <span class="comment">// 1개의 변수 선언</span></span><br><span class="line"><span class="keyword">var</span> egg, lemon; <span class="comment">// 2개 이상의 변수 선언</span></span><br><span class="line"><span class="built_in">console</span>.log(age); <span class="comment">// undefined -&gt; 변수를 선언하기만 하면 변수 값이 없다는 뜻인 undefined를 뱉어냅니다.</span></span><br><span class="line"></span><br><span class="line">age = <span class="number">28</span>; <span class="comment">// = 연산자를 통해 age 변수에 28을 넣어줍니다.</span></span><br><span class="line"><span class="built_in">console</span>.log(age); <span class="comment">// 28 출력</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"junjang"</span>; <span class="comment">// 변수 선언과 함께 변수 값을 할당합니다.</span></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// junjang 출력</span></span><br></pre></td></tr></table></figure>
+<h2 id="변수-끌어올림-호이스팅"><a href="#변수-끌어올림-호이스팅" class="headerlink" title="변수 끌어올림(호이스팅)"></a>변수 끌어올림(호이스팅)</h2><p>프로그램은 윗줄부터 아래로 실행이 되지만 변수는 해당 원칙을 따르지 않습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(hello); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> hello;</span><br></pre></td></tr></table></figure>
+<p>hello가 밑에 선언 되어있지만 콘솔에 undefined가 출력된다는 것은 변수 끌어올림 현상인 <code>호이스팅</code>이라고 합니다. 하지만 선언과 동시에 전체를 호이스팅하지 않습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(hello); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> hello = <span class="string">"hello"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(hello); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+<p>호이스팅을 한다면 hello도 가져가야하는거 아닌가? 라는 생각을 가질 수도 있지만 <strong>var hello</strong> 부분만 호이스팅 되기 때문에 첫째 결과와 둘째 결과가 다르게 나타납니다.이는 자바스크립트만의 고유한 특징이어서 다른 언어를 다루었다면 꼭 주의깊게 봐야합니다.</p>
+<h2 id="데이터타입과-변수"><a href="#데이터타입과-변수" class="headerlink" title="데이터타입과 변수"></a>데이터타입과 변수</h2><p>타 언어(JAVA, C 등)는 변수에 타입이 있기 때문에 <code>정적 타입 언어</code>라고 부르지만, 위에서 말씀드렸듯이 자바스크립트는 타입이 없이 <code>var</code>선언자를 통하여 변수를 선언하기 때문에 <code>동적 타입 언어</code>라고 부릅니다.</p>
+<h4 id="자바-java"><a href="#자바-java" class="headerlink" title="자바(java)"></a>자바(java)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String name = <span class="string">"junjang"</span>;</span><br><span class="line"><span class="keyword">int</span> age = <span class="number">28</span></span><br><span class="line"><span class="keyword">float</span> sight = <span class="number">1.2</span></span><br><span class="line"><span class="keyword">boolean</span> isMale = <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="자바스크립트-javascript"><a href="#자바스크립트-javascript" class="headerlink" title="자바스크립트(javascript)"></a>자바스크립트(javascript)</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"junjang"</span>;</span><br><span class="line"><span class="keyword">var</span> age = <span class="number">28</span>;</span><br><span class="line"><span class="keyword">var</span> sight = <span class="number">1.2</span>;</span><br><span class="line"><span class="keyword">var</span> isMale = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p>자바와 자바스크립트를 비교한 모습입니다. 보는 것과 같이 따로 <strong>타입이 없이</strong> 변수를 선언할 수 있습니다.</p>
+<h3 id="문자열"><a href="#문자열" class="headerlink" title="문자열"></a>문자열</h3><p>문자열은 <code>&quot; &quot;</code> 혹은 <code>&#39; &#39;</code> 사이에 문자를 삽입하여 표현합니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"안녕하세요 프론트엔드 개발자를 꿈꾸는 김준형입니다."</span>;</span><br><span class="line"><span class="string">"백엔드 개발보다 재미있는 것 같아요!"</span>;</span><br><span class="line"><span class="string">""</span>;</span><br><span class="line"><span class="string">"28"</span>;</span><br></pre></td></tr></table></figure>
+<p>따옴표 안에 어떤 값이 들어가던 문자열 취급을 받게 됩니다.</p>
+<h3 id="특수값"><a href="#특수값" class="headerlink" title="특수값"></a>특수값</h3><p>자바스크립트에는 <code>undefined</code>와 <code>null</code> 두 가지의 특수값이 있습니다.<br>이 두가지의 가장 큰 차이점은 무엇일까요?</p>
+<ul>
+<li>undefined : 값이 할당되어있지 않다.(정의되어있지 않다.)</li>
+<li>null : 아무 것도 없다.</li>
+</ul>
+<p>큰 차이지만 이 두 가지가 참 헷갈립니다.<br><code>undefined</code>는 애초에 값 자체를 넣어주질 않았다고 이해하시면 편합니다. 예를 들면</p>
+<ul>
+<li>값을 아직 할당하지 않은 변수</li>
+<li>없는 배열 값을 읽으려고 했을 때</li>
+<li>반환 값이 없는 함수를 호출했을 때</li>
+</ul>
+<p>위처럼 애초에 값 자체가 없을 때 나타나는 값이라고 생각하면 됩니다.</p>
+<p>반면에 <code>null</code>은 null 자체가 값이라고 보시면 됩니다. 즉, <strong>값이 없다</strong>라는 값인 것이죠</p>
+<h3 id="템플릿-리터럴"><a href="#템플릿-리터럴" class="headerlink" title="템플릿 리터럴"></a>템플릿 리터럴</h3><p><code>템플릿 리터럴</code>은 ES6에서 추가된 문자열 표현 문법입니다. 기존에 “ “, ‘ ‘를 활용해 문자열을 만들었지만 문자열이 길어지거나, 사이에 변수 값이 들어간다면 <strong>+</strong> 연산자를 사용해야 하는 등 번거로움이 많았습니다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"junjang"</span>;</span><br><span class="line"><span class="string">"안녕하세요 제 이름은 "</span> + name + <span class="string">"입니다."</span>; <span class="comment">// 안녕하세요 제 이름은 junjang입니다.</span></span><br></pre></td></tr></table></figure>
+<p>위처럼 말이죠</p>
+<p>하지만 템플릿 리터럴 덕분에 저런 수고가 확 줄었습니다!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> todayDate = <span class="string">"Monday"</span>;</span><br><span class="line"><span class="string">`오늘의 요일은 <span class="subst">$&#123;todayDate&#125;</span> 입니다.`</span>; <span class="comment">// 오늘의 요일은 Monday 입니다.</span></span><br></pre></td></tr></table></figure>
+<p>여기서 \${}는 <code>플레이스 홀더</code>로서 선언한 변수를 안에 넣고 문자열 처럼 표현할 수 있습니다.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript" >
+    <span class="tag-code">javascript</span>
+  </a>
+
+  <a href="/tags#변수" >
+    <span class="tag-code">변수</span>
+  </a>
+
+  <a href="/tags#자바스크립트" >
+    <span class="tag-code">자바스크립트</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/03/05/db/mongoDB-setting/">
+        <span class="nav-arrow">← </span>
+        
+          MongoDB 세팅방법
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#변수"><span class="toc-nav-text">변수</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#변수-선언"><span class="toc-nav-text">변수 선언</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#변수-끌어올림-호이스팅"><span class="toc-nav-text">변수 끌어올림(호이스팅)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이터타입과-변수"><span class="toc-nav-text">데이터타입과 변수</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#자바-java"><span class="toc-nav-text">자바(java)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#자바스크립트-javascript"><span class="toc-nav-text">자바스크립트(javascript)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#문자열"><span class="toc-nav-text">문자열</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#특수값"><span class="toc-nav-text">특수값</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#템플릿-리터럴"><span class="toc-nav-text">템플릿 리터럴</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://junjangsee.github.io/2020/03/30/javascript/variable/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

@@ -3,8 +3,22 @@
 
 
     <url>
+        <loc>https://junjangsee.github.io/tags/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/</loc>
+        <lastmod>2020-03-30T14:43:41.497Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://junjangsee.github.io/tags/%EB%B3%80%EC%88%98/</loc>
+        <lastmod>2020-03-30T14:43:41.497Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://junjangsee.github.io/tags/javascript/</loc>
-        <lastmod>2020-03-07T16:25:50.042Z</lastmod>
+        <lastmod>2020-03-30T14:43:41.497Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
