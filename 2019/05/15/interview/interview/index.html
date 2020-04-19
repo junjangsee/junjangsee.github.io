@@ -10,7 +10,7 @@
   
   <title>
     
-      백엔드 면접 질문 정리(update - 19.06.09) | Junjangsee&#39;s Blog
+      백엔드 면접 질문 정리(update - 20.04.19) | Junjangsee&#39;s Blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -98,7 +98,7 @@
 </header>
 
     <div id="article-banner">
-  <h2>백엔드 면접 질문 정리(update - 19.06.09)</h2>
+  <h2>백엔드 면접 질문 정리(update - 20.04.19)</h2>
   <p class="post-date">2019-05-15</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
@@ -109,27 +109,303 @@
   <article class="post-article">
     <section class="markdown-content"><p><img src="/images/springboot/interview/interview.png" alt="images"><br></p>
 <h1 id="면접-질문-정리"><a href="#면접-질문-정리" class="headerlink" title="면접 질문 정리"></a>면접 질문 정리</h1><p>백엔드 개발자 인터뷰의 대표 질문들을 정리하여 면접 전에 확인하여 개념을 상기시키며 다시 공부할 수 있는 자료를 만들기 위해 작성하였습니다.<br><br>제가 직접 면접 때 받은 질문들과 타 개발자분들의 면접 자료를 참고하였습니다.<br>이 게시물은 지속적으로 업데이트 됩니다.<br><br></p>
-<h2 id="자바"><a href="#자바" class="headerlink" title="자바"></a>자바</h2><ol>
-<li>OOP는 어떤 것인지 설명해주세요(개념, 특징)</li>
-<li>OCP 원칙이란?</li>
-<li>인터페이스와 추상클래스의 개념과 차이점은?</li>
-<li>기본형 변수와 참조형 변수란?</li>
-<li>오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?</li>
-<li>추상화란?</li>
-<li>캡슐화란?</li>
+<h2 id="자바-Java"><a href="#자바-Java" class="headerlink" title="자바(Java)"></a>자바(Java)</h2><h3 id="OOP란"><a href="#OOP란" class="headerlink" title="OOP란"></a>OOP란</h3><p>객체지향 프로그래밍이란 인간 중심적 프로그래밍 패러다임이라고 할 수 있습니다. 즉, 현실 세계를 프로그래밍으로 옮겨와 프로그래밍하는 것을 말합니다. 현실 세계의 사물들을 객체라고 보고 그 객체로부터 개발하고자 하는 애플리케이션에 필요한 특징들을 뽑아와 프로그래밍 하는 것입니다.<br><br>대표적인 특징으로 추상화, 상속, 캡술화, 다형성이 있습니다.</p>
+<h3 id="객체-지향적-설계-원칙의-종류"><a href="#객체-지향적-설계-원칙의-종류" class="headerlink" title="객체 지향적 설계 원칙의 종류"></a>객체 지향적 설계 원칙의 종류</h3><ol>
+<li>SRP(Single Responsibility Principle) : 단일 책임 원칙<br><br>클래스는 단 하나의 책임을 가져야 하며 클래스를 변경하는 이유는 단 하나의 이유이어야 합니다.</li>
+<li>OCP(Open-Closed Principle) : 개방-폐쇄 원칙<br><br>확장에는 열려 있어야 하고 변경에는 닫혀 있어야 합니다.</li>
+<li>LSP(Liskov Substitution Principle) : 리스코프 치환 원칙<br><br>상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 합니다.</li>
+<li>ISP(Interface Segregation Principle) : 인터페이스 분리 원칙<br><br>인터페이스는 그 인터페이스를 사용하는 클라이언트를 기준으로 분리해야 합니다.</li>
+<li>DIP(Dependency Inversion Principle) : 의존 역전 원칙<br><br>고수준 모듈은 저수준 모듈의 구현에 의존해서는 안됩니다.</li>
 </ol>
-<h2 id="DB"><a href="#DB" class="headerlink" title="DB"></a>DB</h2><ol>
-<li>DML, DDL, DCL 이란?</li>
-<li>DB에서 인덱스란?</li>
+<h3 id="JVM의-구조"><a href="#JVM의-구조" class="headerlink" title="JVM의 구조"></a>JVM의 구조</h3><ol>
+<li>프로그램이 실행되면 OS로부터 프로그램이 필요로 하는 메모리를 먼저 할당 받습니다.</li>
+<li>그리고 자바 컴파일러를 통해 개발자가 작성한 코드(.java)를 바이트 코드(.class)로 변환합니다.</li>
+<li>다음 Class Loader에서 바이트 코드를 JVM에 로딩 시킵니다.</li>
+<li>로딩 된 바이트 코드를 execution engine을 통해 기계어로 해석됩니다.</li>
+<li>해석된 바이트 코드들은 runtime data areas에 배치되어 실질적인 수행이 이루어집니다.</li>
 </ol>
-<h2 id="스프링"><a href="#스프링" class="headerlink" title="스프링"></a>스프링</h2><ol>
-<li>Spring IOC Container의 역할은 무엇인가?</li>
-<li>Spring과 SpringBoot의 차이점과 SpringBoot만의 장점은?</li>
-<li>Springframework란 무엇인가?</li>
+<h3 id="직렬화-serialization-란"><a href="#직렬화-serialization-란" class="headerlink" title="직렬화(serialization)란?"></a>직렬화(serialization)란?</h3><p>자바에서 입출력을 할 때에는 <code>스트림</code>이라는 통로를 통해 데이터가 이동합니다. 하지만 <code>객체</code>는 <strong>바이트형이 아니라서</strong> 스트림을 통해 파일에 저장하거나 네트워크로 전송할 수 없습니다.<br><br>따라서 객체를 스트림을 통해 입출력하려면 <code>바이트 배열로 변환</code>하는 것이 필요한데, 이를 <code>&#39;직렬화&#39;</code> 라고 합니다. 반대로 스트림을 통해 받은 직렬화된 객체를 원래 모양으로 만드는 과정을 <code>역직렬화</code>라고 합니다.</p>
+<h3 id="박싱과-언박싱이란"><a href="#박싱과-언박싱이란" class="headerlink" title="박싱과 언박싱이란?"></a>박싱과 언박싱이란?</h3><p><strong>기본 자료형(Primitive data type)을 Wrapper class</strong>로 바꾸어 주는 것을 <code>박싱</code>, <strong>Wrapper class를 기본 자료형(Primitive data type)</strong>으로 바꿔주는 것을 <code>언박싱</code> 이라고 합니다.</p>
+<h3 id="HashMap-vs-HashTable-vs-ConcurrentHashMap"><a href="#HashMap-vs-HashTable-vs-ConcurrentHashMap" class="headerlink" title="HashMap vs HashTable vs ConcurrentHashMap"></a>HashMap vs HashTable vs ConcurrentHashMap</h3><ul>
+<li><p>HashMap</p>
+<ul>
+<li>주요 메서드에 <strong>synchronized 키워드</strong>가 <strong>없습니다</strong></li>
+<li>key, value에 null을 입력할 수 <strong>있습니다</strong>.</li>
+</ul>
+</li>
+<li><p>HashTable</p>
+<ul>
+<li>주요 메서드에 <strong>synchronized 키워드</strong>가 선언 되어 <strong>있습니다</strong>.</li>
+<li>key, value에 null을 <strong>허용하지 않습니다</strong>.</li>
+</ul>
+</li>
+<li><p>ConcurrentHashMap</p>
+<ul>
+<li><strong>HashMap</strong>을 <strong>thread-safe</strong> 하도록 만든 클래스</li>
+<li>key, value에 null을 <strong>허용하지 않습니다</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="접근-제어자"><a href="#접근-제어자" class="headerlink" title="접근 제어자"></a>접근 제어자</h3><ul>
+<li>public : 어디서든 접근이 가능합니다.</li>
+<li>protected : 동일 패키지 혹은 상속받은 외부 패키지 클래스에서 사용 가능합니다.</li>
+<li>(default) : 동일 패키지 내에서만 접근 가능합니다.</li>
+<li>private : 해당 클래스 내에서만 접근 가능합니다.</li>
+</ul>
+<h3 id="interface-vs-abstract"><a href="#interface-vs-abstract" class="headerlink" title="interface vs abstract"></a>interface vs abstract</h3><ul>
+<li><p>interface(인터페이스)</p>
+<ul>
+<li>다중 상속</li>
+<li>추상 메서드, 상수만 선언 가능</li>
+<li>생성자, 일반 변수를 가질 수 없음</li>
+<li>팀별 협업시 추상메서드를 통해 결과를 예측하고 작업이 가능함(구현 객체의 동일성 보장)</li>
+</ul>
+</li>
+<li><p>abstract(추상 클래스)</p>
+<ul>
+<li>다중 상속 불가</li>
+<li>추상 메서드 1개 이상, 일반 변수, 일반 메서드 선언 가능</li>
+<li>생성자, 일반 변수 가질 수 있음</li>
+<li>메서드의 부분 구현이 가능(부분 구현된 메서드를 상속받아 확장시키기 위함)</li>
+</ul>
+</li>
+</ul>
+<h3 id="String-vs-StringBuffer-vs-StringBuilder"><a href="#String-vs-StringBuffer-vs-StringBuilder" class="headerlink" title="String vs StringBuffer vs StringBuilder"></a>String vs StringBuffer vs StringBuilder</h3><ul>
+<li><p>String</p>
+<ul>
+<li>immutable(불변)</li>
+<li>객체를 한 번 할당할시 <strong>메모리 공간에 변동이 없습니다</strong>.(할당시 Heap String Pool영역에 생성되어 그 값을 계속 사용합니다.)</li>
+<li>동기화를 신경쓰지 않아도 됩니다.</li>
+<li>엄청나게 많은 문자열을 선언 및 연산할 시 성능저하를 고려해야합니다.</li>
+</ul>
+</li>
+<li><p>StringBuffer</p>
+<ul>
+<li>mutable(가변)</li>
+<li>각 메서드별로 Synchronized Keyword가 존재합니다.</li>
+<li>멀티스레드 환경에서도 <strong>동기화를 지원</strong>합니다.<strong>(thread-safe)</strong></li>
+</ul>
+</li>
+<li><p>StringBuilder</p>
+<ul>
+<li>mutable(가변)</li>
+<li>동기화를 지원하지 <strong>않습니다</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="try-with-resource란"><a href="#try-with-resource란" class="headerlink" title="try-with-resource란?"></a>try-with-resource란?</h3><p>try-with-resources는 <code>자동으로 자원을 해제해주는 기능</code>입니다. try에서 선언된 객체가 <code>AutoCloseable</code>을 구현하였다면 Java는 try구문이 종료될 때 객체의 <code>close()</code> 메소드를 호출해 줍니다.</p>
+<h3 id="Synchronized-동기화-란"><a href="#Synchronized-동기화-란" class="headerlink" title="Synchronized(동기화)란?"></a>Synchronized(동기화)란?</h3><p>동기화는 여러 개의 쓰레드가 하나의 자원에 접근하려 할 때 주어진 순간에는 단 <code>하나의 쓰레드</code>만이 접근 가능하도록 하는 것입니다.<br><br>둘 이상의 쓰레드가 공동의 자원(파일이나 메모리 블록)을 공유하는 경우, 순서를 잘 맞추어 다른 쓰레드가 자원을 사용하고 있는 동안 한 쓰레드가 절대 자원을 변경할 수 없도록 해야합니다. 만얃 한 쓰레드가 파일에서 레코드를 수정하는데, 다른 쓰레드가 동시에 같은 레코드를 수정하면 심각한 문제가 발생할 수 있기 때문입니다.<br><br>이런 상황을 처리할 수 있는 한 방법은 관련된 쓰레드에 대한 동기화(synchronization)를 하는 것입니다.</p>
+<h3 id="Synchronized-동기화-를-하기-위한-방법"><a href="#Synchronized-동기화-를-하기-위한-방법" class="headerlink" title="Synchronized(동기화)를 하기 위한 방법"></a>Synchronized(동기화)를 하기 위한 방법</h3><ul>
+<li>synchronized 함수(메서드)를 만들어 사용합니다.</li>
+<li>synchronized 블록(block) 사용합니다.</li>
+</ul>
+<h3 id="자바의-메모리-영역"><a href="#자바의-메모리-영역" class="headerlink" title="자바의 메모리 영역"></a>자바의 메모리 영역</h3><ul>
+<li><p>메서드 영역</p>
+<ul>
+<li>static 변수, 전역 변수, 코드에서 사용되는 Class 정보 등이 할당됩니다.</li>
+</ul>
+</li>
+<li><p>스택(Stack)</p>
+<ul>
+<li>지역 변수, 함수(메서드) 등이 할당되는 LIFO(Last In First Out) 방식의 메모리입니다.</li>
+</ul>
+</li>
+<li><p>힙(Heap)</p>
+<ul>
+<li>new 연산자를 통한 동작할당된 객체들이 저장되며, 가비지 컬렉션에 의해 메모리가 관리됩니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="컬렉션-프레임워크란"><a href="#컬렉션-프레임워크란" class="headerlink" title="컬렉션 프레임워크란?"></a>컬렉션 프레임워크란?</h3><p>컬렉션 프레임워크(collection framework)란 <strong>다수의 데이터</strong>를 쉽고 효과적으로 처리할 수 있는 <strong>표준화된 방법을</strong> 제공하는 <code>클래스의 집합</code>을 의미합니다.</p>
+<p>컬렉션 프레임워크에서는 데이터를 저장하는 자료 구조에 따라 다음과 같은 핵심이 되는 주요 인터페이스를 정의하고 있습니다.</p>
+<ol>
+<li>List 인터페이스</li>
+<li>Set 인터페이스</li>
+<li>Map 인터페이스</li>
 </ol>
-<h2 id="네트워크"><a href="#네트워크" class="headerlink" title="네트워크"></a>네트워크</h2><ol>
-<li>세션과 쿠키의 개념과 차이점은?</li>
+<p>이 중에서 <code>List와 Set</code> 인터페이스는 모두 <strong>Collection 인터페이스를</strong> 상속받지만, 구조상의 차이로 인해 <code>Map</code> 인터페이스는 별도로 정의됩니다.</p>
+<p>따라서 List 인터페이스와 Set 인터페이스의 공통된 부분을 Collection 인터페이스에서 정의하고 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>인터페이스</th>
+<th>설명</th>
+<th>구현 클래스</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List<e></e></td>
+<td>순서가 있는 데이터의 집합으로, 데이터의 중복을 허용</td>
+<td>Vector, ArrayList, LinkedList, Stack, Queue</td>
+</tr>
+<tr>
+<td>Set<e></e></td>
+<td>순서가 없는 데이터의 집합으로, 데이터의 중복을 허용하지 않음</td>
+<td>HashSet, TreeSet</td>
+</tr>
+<tr>
+<td>Map&lt;K, V&gt;</td>
+<td>키와 값의 한 쌍으로 이루어지는 데이터의 집합으로, 순서가 없음. 이때 키는 중복을 허용하지 않지만, 값은 중복될 수 있음.</td>
+<td>HashMap, TreeMap, Hashtable, Properties</td>
+</tr>
+</tbody>
+</table>
+<h3 id="제네릭이란"><a href="#제네릭이란" class="headerlink" title="제네릭이란?"></a>제네릭이란?</h3><p>제네릭은 자바에서 <code>안정성</code>을 맡고 있다고 할 수 있습니다. 객체의 타입을 컴파일 시에 체크하기 때문에 객체의 타입 안전성을 높이고 형변환의 번거로움을 덜어주어 자연스럽게 코드도 더 간결해집니다.<br><br>예를 들면, Collection에 <strong>특정 객체만 추가</strong>될 수 있도록, 또는 특정한 클래스의 특징을 갖고 있는 경우에만 추가될 수 있도록 하는 것이 제네릭입니다.<br><br>이로 인한 장점은 Collection 내부에서 들어온 값이 내가 원하는 값인지 별도의 로직처리를 구현할 필요가 없어집니다. 또한 API를 설계하는데 있어서 보다 명확한 의사전달이 가능해집니다.</p>
+<h3 id="Vector-vs-ArrayList"><a href="#Vector-vs-ArrayList" class="headerlink" title="Vector vs ArrayList"></a>Vector vs ArrayList</h3><p>동적인 배열을 다루는 컬렉션 프레임워크로서 둘의 차이점을 알아보겠습니다.</p>
+<ul>
+<li><p>Vector</p>
+<ul>
+<li>동기화된 상태입니다.(Thread safe)</li>
+<li>상대적으로 속도가 느립니다.(동기화 되어있기 떄문)</li>
+</ul>
+</li>
+<li><p>ArrayList</p>
+<ul>
+<li>동기화가 안된 상태입니다.</li>
+<li>상대적으로 속도가 빠릅니다.(동기화가 안되어있기 때문)</li>
+<li>멀티쓰레드 환경이 아닐 경우 사용 권장합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ArrayList와-LinkedList의-차이"><a href="#ArrayList와-LinkedList의-차이" class="headerlink" title="ArrayList와 LinkedList의 차이"></a>ArrayList와 LinkedList의 차이</h3><p>LinkedList와 ArrayList는 모두 Java에서 제공하는 List 인터페이스를 구현한 Collection 구현체입니다.</p>
+<ul>
+<li><p>ArrayList</p>
+<ul>
+<li>내부적으로 데이터를 배열로 관리하고 데이터 추가/삭제 시 <strong>임시 배열</strong>을 생성해 데이터를 복사합니다.</li>
+<li>데이터별 인덱스가 있어 <strong>검색에는 유리</strong></li>
+<li>임시 배열을 사용하기 때문에 <strong>데이터 추가/삭제의 경우에는 불리</strong></li>
+</ul>
+</li>
+<li><p>LinkedList</p>
+<ul>
+<li>내부적으로 <strong>노드 단위</strong>로 데이터를 관리합니다. 자신의 앞 뒤 노드만 인지하는 상태입니다.</li>
+<li>인덱스가 따로 없기 때문에 검색 시 전 노드를 순회해야하여 <strong>검색시 불리</strong></li>
+<li>데이터 추가/삭제 시 불필요한 데이터 복사가 없어 <strong>유리</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="오버로딩-Overloading-과-오버라이딩-Overriding-의-차이"><a href="#오버로딩-Overloading-과-오버라이딩-Overriding-의-차이" class="headerlink" title="오버로딩(Overloading)과 오버라이딩(Overriding)의 차이"></a>오버로딩(Overloading)과 오버라이딩(Overriding)의 차이</h3><ul>
+<li><p>오버로딩(Overloading) :<br>상위 클래스의 메소드와 이름, return 값은 동일하지만, 매개변수만 다른 메소드를 만드는 것을 의미합니다. 다양한 상황에서 메소드가 호출될 수 있도록 한다.</p>
+</li>
+<li><p>오버라이딩(Overriding) :<br>상위 클래스에 존재하는 메소드를 하위 클래스에서 필요에 맞게 재정의하는 것을 의미합니다.</p>
+</li>
+</ul>
+<h3 id="CheckedException과-UnCheckedException의-차이"><a href="#CheckedException과-UnCheckedException의-차이" class="headerlink" title="CheckedException과 UnCheckedException의 차이"></a>CheckedException과 UnCheckedException의 차이</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>CheckedException</th>
+<th>UnCheckedException</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>처리 여부</td>
+<td>반드시 예외를 처리</td>
+<td>예외 처리를 강제하지 않음</td>
+</tr>
+<tr>
+<td>확인 시점</td>
+<td>컴파일 단계</td>
+<td>실행(Runtime) 단계</td>
+</tr>
+<tr>
+<td>예외 발생시 트랜잭션 처리</td>
+<td>Roll-Back 하지 않음</td>
+<td>Roll-Back 함</td>
+</tr>
+<tr>
+<td>예외 종류</td>
+<td>Runtime Exception을 제외한 모든 예외</td>
+<td>Runtime Exception 하위 예외</td>
+</tr>
+</tbody>
+</table>
+<h3 id="final-finally-finalize-차이"><a href="#final-finally-finalize-차이" class="headerlink" title="final / finally / finalize() 차이"></a>final / finally / finalize() 차이</h3><ul>
+<li><p>final</p>
+<ul>
+<li>final class : 다른 클래스에서 상속하지 못합니다.</li>
+<li>final method : 다른 메소드에서 오버라이딩하지 못합니다.</li>
+<li>final variable : 변하지 않는 상수값이 되어 새로 할당할 수 없는 변수가 됩니다.</li>
+</ul>
+</li>
+<li><p>finally : <strong>try-catch</strong> or <strong>try-catch-resource</strong> 구문을 사용할 때, 정상적으로 작업을 한 경우와 에러가 발생했을 경우를 포함하여 마무리 해줘야하는 작업이 존재하는 경우에 해당하는 코드를 작성해주는 코드 블록입니다.</p>
+</li>
+<li><p>finalize() : <strong>GC</strong>에 의해 호출되는 함수로 <strong>절대 호출해서는 안 되는 함수</strong>입니다. 이유는 GC가 <strong>발생하는 시점이 불분명</strong>하기 때문에 해당 메소드가 실행된다는 보장이 없습니다.</p>
+</li>
+</ul>
+<h3 id="new-String-과-“”의-차이"><a href="#new-String-과-“”의-차이" class="headerlink" title="new String()과 “”의 차이"></a>new String()과 “”의 차이</h3><p>Java에서 문자열은 Heap 영역 내의 String Pool이라는 곳에서 따로 관리하게 됩니다. <code>&quot;&quot;</code> 으로 선언된 String은 <code>String Pool에 추가</code>가 되고 해당 값을 참조 값으로 가지게 됩니다.<br><br>반면 <code>new String()</code>으로 생성된 String은 String Pool이 아닌 <code>Heap 영역에 새로운 객체를 등록</code>하게 됩니다.<br><br>즉, 위 두 방법으로 객체를 생성하였을 경우 각 객체의 메모리상의 위치가 다른 것입니다.</p>
+<h2 id="데이터베이스-DataBase"><a href="#데이터베이스-DataBase" class="headerlink" title="데이터베이스(DataBase)"></a>데이터베이스(DataBase)</h2><h3 id="JDBC란"><a href="#JDBC란" class="headerlink" title="JDBC란?"></a>JDBC란?</h3><p>자바에서 <code>데이터베이스에 접속</code>할 수 있도록 하는 자바 API입니다. JDBC는 데이터베이스에서 자료를 쿼리하거나 업데이트하는 방법을 제공합니다.</p>
+<h3 id="myBatis란"><a href="#myBatis란" class="headerlink" title="myBatis란?"></a>myBatis란?</h3><p>JDBC를 좀더 편하게 사용할 수 있도록 객체를 SQL이나 저장 프로시저와 매핑 해주는 프레임워크로 SQL구문을 Java 메소드와 매핑해줍니다.</p>
+<h3 id="DCL-DDL-DML-이란"><a href="#DCL-DDL-DML-이란" class="headerlink" title="DCL, DDL, DML 이란?"></a>DCL, DDL, DML 이란?</h3><ul>
+<li><p>DCL(Data Control Language) 데이터 제어어<br>데이터베이스에 접근하거나 객체에 권한을 주는등의 역할을 하는 언어를 말합니다.(GRANT, REVOKE, COMMIT, ROLLBACK)</p>
+</li>
+<li><p>DDL(Data Definition Language) 데이터 정의어<br>데이터베이스를 정의하는 언어이며 데이터리를 생성, 수정, 삭제하는 등의 데이터의 전체의 골격을 결정하는 역할을 하는 언어 입니다.(CREATE, ALTER, DROP, TRUNCATE)</p>
+</li>
+<li><p>DML(Data Manipulation Language) 데이터 조작어<br>정의된 데이터베이스에 입력된 레코드를 조회하거나 수정하거나 삭제하는 등의 역할을 하는 언어를 말합니다.(SELECT, INSERT, UPDATE, DELETE)</p>
+</li>
+</ul>
+<h2 id="스프링-프레임워크-Spring-Framework"><a href="#스프링-프레임워크-Spring-Framework" class="headerlink" title="스프링 프레임워크(Spring Framework)"></a>스프링 프레임워크(Spring Framework)</h2><h3 id="스프링-프레임워크-Spring-Framework-란"><a href="#스프링-프레임워크-Spring-Framework-란" class="headerlink" title="스프링 프레임워크(Spring Framework)란?"></a>스프링 프레임워크(Spring Framework)란?</h3><p>자바 앤터프라이즈 개발을 편리하게 해주는 경량급 오픈소스 애플리케이션 프레임워크로 애플리케이션을 개발하는데 필요한 기능들을 포괄적으로 제공하기 때문에 개발자들은 개발에 집중할 수 있습니다.</p>
+<h3 id="Spring-MVC의-구조와-처리과정"><a href="#Spring-MVC의-구조와-처리과정" class="headerlink" title="Spring MVC의 구조와 처리과정"></a>Spring MVC의 구조와 처리과정</h3><ol>
+<li><p>DispatcherServlet : 어플리케이션으로 들어오는 모든 Request를 받는 관문입니다. <code>Request</code>를 실제로 처리할 <code>Controller에게 전달</code>하고 그 결과값을 받아서 View에게 전달하여 적절한 응답등 생성할 수 있도록 흐름을 제어한다.</p>
+</li>
+<li><p>HandlerMapping : <code>Request URL</code> 각각을 어떤 <code>Controller</code>가 실제로 처리할 것인지 <strong>찾아주는 역할</strong>을 합니다.</p>
+</li>
+<li><p>Controller : Request를 <strong>직접 처리한 후</strong> 그 결과를 다시 <strong>DispatcherServlet 에게 돌려줍니다</strong>.</p>
+</li>
+<li><p>ModelAndView : Controller가 처리한 결과와 그 결과를 보여줄 View에 관한 정보를 담고 있는 객체입니다.</p>
+</li>
+<li><p>ViewResolver : View 관련 정보를 갖고 실제 <strong>View를 찾아주는 역할</strong>을 합니다.</p>
+</li>
+<li><p>View : Controller가 처리한 결과값을 보여줄 <strong>View를 생성</strong>합니다.</p>
+</li>
 </ol>
+<h3 id="Spring-IoC의-역할"><a href="#Spring-IoC의-역할" class="headerlink" title="Spring IoC의 역할"></a>Spring IoC의 역할</h3><p><strong>객체의 생성</strong>부터 <strong>Life Cycle</strong>을 <code>관리하고 제어</code>해주는 것을 말합니다. 즉, <strong>제어권이 스프링 프레임워크</strong>로 넘어오게 되면서 DI(의존성 주입), AOP(관점 지향 프로그래밍) 등을 가능하게 합니다.</p>
+<h3 id="Spring-Container의-역할"><a href="#Spring-Container의-역할" class="headerlink" title="Spring Container의 역할"></a>Spring Container의 역할</h3><p>컨테이너는 보통 객체의 <strong>Life Cycle을 관리</strong>하며, 생성된 인스턴스에게 <strong>추가적인 기능을 제공</strong>하도록 하는 것입니다. 다시 말해, 컨테이너란 작성한 코드의 처리과정을 위임받은 독립적인 존재라고 생각하면 됩니다.<br><br>컨테이너의 종류로는 BeanFactory, ApplicationContext가 있고 ApplicationContext가 조금 더 많은 기능을 가지고 있습니다.</p>
+<h3 id="DI-의존성-주입-란"><a href="#DI-의존성-주입-란" class="headerlink" title="DI(의존성 주입)란?"></a>DI(의존성 주입)란?</h3><p>각 클래스간의 의존관계를 빈 설정 정보를 바탕으로 외부 컨테이너에서 주입하는 개념입니다.</p>
+<h3 id="Spring과-SpringBoot의-차이"><a href="#Spring과-SpringBoot의-차이" class="headerlink" title="Spring과 SpringBoot의 차이"></a>Spring과 SpringBoot의 차이</h3><p>SpringBoot는 Spring Framework에서 사용하는 프로젝트를 간편하게 셋업할 수 있는 서브 프로젝트입니다. <code>독립 컨테이너에서 동작</code>할 수 있기 때문에 embeded tomcat이 <strong>자동으로 실행</strong>됩니다.</p>
+<h3 id="SpringBoot만의-특징"><a href="#SpringBoot만의-특징" class="headerlink" title="SpringBoot만의 특징"></a>SpringBoot만의 특징</h3><ul>
+<li>애플리케이션을 신속하게 세팅할 수 있습니다.</li>
+<li>추가 WAS 설치 없이 embeded tomcat으로 실행합니다.</li>
+<li>번거로운 개발 세팅을 대신 해줍니다.</li>
+</ul>
+<h3 id="POJO란"><a href="#POJO란" class="headerlink" title="POJO란?"></a>POJO란?</h3><p>POJO(Plain Old Java Object)란 평범한 자바 객체라는 의미입니다. 어떤 자바 객체가 있는데, 이 객체를 사용하기 위해서 상속을 받아야 한다거나, 인터페이스를 구현해야 한다거나, 어노테이션을 적용해야 한다거나 하는 제약조건이 없는 객체라는 뜻입니다.</p>
+<h2 id="JPA"><a href="#JPA" class="headerlink" title="JPA"></a>JPA</h2><h3 id="JPA란"><a href="#JPA란" class="headerlink" title="JPA란?"></a>JPA란?</h3><p>JPA는 자바 <strong>ORM</strong> 기술에 대한 API 표준 명세를 의미합니다. <code>ORM</code>이란 <strong>Object Relational Mapping</strong>의 약자로 객체와 관계형 데이터베이스의 데이터를 <strong>자동으로 매핑(연결)</strong>해주는 것을 말합니다. 여기서 객체 지향 프로그래밍은 <code>클래스</code>를 사용하고, 관계형 데이터베이스는 <code>테이블</code>을 사용합니다.</p>
+<h3 id="영속성-컨텍스트란"><a href="#영속성-컨텍스트란" class="headerlink" title="영속성 컨텍스트란?"></a>영속성 컨텍스트란?</h3><p>영속성 컨텍스트는 엔티티를 영구 저장하는 환경입니다. 엔티티 매니저를 생성하면 자동으로 영속성 컨텍스트가 생성되고 엔티티를 관리 혹은 보관할 수 있습니다.</p>
+<h3 id="영속성-컨텍스트의-속성"><a href="#영속성-컨텍스트의-속성" class="headerlink" title="영속성 컨텍스트의 속성"></a>영속성 컨텍스트의 속성</h3><ul>
+<li><p>비영속 : 영속성 컨텍스트와 전혀 무관한 상태로 순수한 객체의 상태 (처음 객체가 생성되면 비영속 상태)</p>
+</li>
+<li><p>영속 : 영속성 컨텍스트에 저장된 상태</p>
+</li>
+<li><p>준영속 : 영속성 컨텍스트에서 관리하다, 영속성 컨텍스에서 분리된 상태, 준영속 상태는 영속 상태 였던 적이 있기 때문에 @Id 값을 반드시 가지고 있습니다.</p>
+</li>
+<li><p>삭제 : 삭제된 상태</p>
+</li>
+</ul>
+<h3 id="영속성-컨텍스트의-특징"><a href="#영속성-컨텍스트의-특징" class="headerlink" title="영속성 컨텍스트의 특징"></a>영속성 컨텍스트의 특징</h3><ol>
+<li><p>1차 캐시<br><br>영속성 컨택스트 내부에는 1차 캐시라고 불리는 캐시를 가지고 있습니다. <strong>영속상태의 엔티티는 모두 1차 캐시에 저장</strong>되고, 1차 캐시는 @Id를 키로 가지고 있는 Map이 존재합니다. 엔티티를 조회할 때 바로 DB에 접근하는 것이 아니고 1차 캐시에 있는 데이터를 먼저 <code>조회한 후 없는 경우</code>에만 <strong>DB에 접근</strong>하여 조회 후 <strong>다시 1차 캐시에 저장</strong> 합니다.<br>즉, 먼저 DB에 접근하는 것이 아닌 <code>1차 캐시에 먼저 접근</code>함으로서 데이터의 결과를 빠르게 가져올 수 있습니다.</p>
+</li>
+<li><p>동일성 보장<br><br>1번 특징과 연관되며 모든 엔티티의 데이터들은 1차 캐시에 저장되어지기 때문에<br>식별자가 동일한 엔티티의 경우 동일성이 보장됩니다. 여기서 동일성이란 같은 객체를 참조한다는 의미입니다.</p>
+</li>
+<li><p>트랜잭션을 지연하는 쓰기지연<br><br>트랜잭션은 DB에서 하나의 작업 단위를 나타냅니다. 영속성 컨텍스트에서 DML이 발생했을 때 바로 DB에 저장하지 않고, <strong>트랜잭션이 커밋될 때</strong> 영속성 컨텍스트의 <strong>쓰기지연 SQL 저장소</strong>에 모아둔 쿼리들을 한 번에 저장합니다. 이때 쿼리들은 영속성 컨텍스트에 따로 저장이 되며 커밋을 실행하게 되면 flush를 통해 쿼리들을 DB에 저장하게 되고 최종적으로 commit을 하여 DB에 쿼리를 반영합니다.<br>즉, DB에 접근하는 횟수가 줄어들기 때문에 성능면에서 뛰어납니다.</p>
+</li>
+<li><p>변경 감지<br><br>영속성 컨텍스트의 1차 캐시에는 스냅샷을 통해 엔티티의 변경을 감지합니다. 순서는 아래와 같습니다.</p>
+<ol>
+<li><p>트랜잭션을 커밋하면, flush가 호출되고, 엔티티와 스냅샷을 비교해서 변경된 엔티티를 찾습니다.</p>
+</li>
+<li><p>변경된 엔티티가 존재하면, 쿼리를 생성해서 쓰기지연 SQL 저장소에 저장합니다.</p>
+</li>
+<li><p>쓰기지연SQL 저장소에 생성된 쿼리들을 데이터베이스에 flush하고 commit 합니다.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>변경감지는 오직 영속 상태의 엔티티에만 적용이 됩니다.</p>
+<h3 id="즉시-로딩과-지연-로딩의-차이"><a href="#즉시-로딩과-지연-로딩의-차이" class="headerlink" title="즉시 로딩과 지연 로딩의 차이"></a>즉시 로딩과 지연 로딩의 차이</h3><ul>
+<li>즉시로딩 : 엔티티를 조회할 때, 연관된 엔티티도 함께 조회한다.<br>(Question을 조회할 때, List<answer> 도 조회)</answer></li>
+<li>지연로딩 : 연관된 엔티티를 실제 사용할 때 조회한다.<br>(Quesion을 조회할 때, List<answer>도 사용한다면 그 때만 조회)</answer></li>
+</ul>
 </section>
     <!-- Tags START -->
     
@@ -183,7 +459,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#면접-질문-정리"><span class="toc-nav-text">면접 질문 정리</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#자바"><span class="toc-nav-text">자바</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DB"><span class="toc-nav-text">DB</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#스프링"><span class="toc-nav-text">스프링</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#네트워크"><span class="toc-nav-text">네트워크</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#면접-질문-정리"><span class="toc-nav-text">면접 질문 정리</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#자바-Java"><span class="toc-nav-text">자바(Java)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#OOP란"><span class="toc-nav-text">OOP란</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#객체-지향적-설계-원칙의-종류"><span class="toc-nav-text">객체 지향적 설계 원칙의 종류</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JVM의-구조"><span class="toc-nav-text">JVM의 구조</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#직렬화-serialization-란"><span class="toc-nav-text">직렬화(serialization)란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#박싱과-언박싱이란"><span class="toc-nav-text">박싱과 언박싱이란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HashMap-vs-HashTable-vs-ConcurrentHashMap"><span class="toc-nav-text">HashMap vs HashTable vs ConcurrentHashMap</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#접근-제어자"><span class="toc-nav-text">접근 제어자</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#interface-vs-abstract"><span class="toc-nav-text">interface vs abstract</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#String-vs-StringBuffer-vs-StringBuilder"><span class="toc-nav-text">String vs StringBuffer vs StringBuilder</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#try-with-resource란"><span class="toc-nav-text">try-with-resource란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Synchronized-동기화-란"><span class="toc-nav-text">Synchronized(동기화)란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Synchronized-동기화-를-하기-위한-방법"><span class="toc-nav-text">Synchronized(동기화)를 하기 위한 방법</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#자바의-메모리-영역"><span class="toc-nav-text">자바의 메모리 영역</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#컬렉션-프레임워크란"><span class="toc-nav-text">컬렉션 프레임워크란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#제네릭이란"><span class="toc-nav-text">제네릭이란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Vector-vs-ArrayList"><span class="toc-nav-text">Vector vs ArrayList</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ArrayList와-LinkedList의-차이"><span class="toc-nav-text">ArrayList와 LinkedList의 차이</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#오버로딩-Overloading-과-오버라이딩-Overriding-의-차이"><span class="toc-nav-text">오버로딩(Overloading)과 오버라이딩(Overriding)의 차이</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#CheckedException과-UnCheckedException의-차이"><span class="toc-nav-text">CheckedException과 UnCheckedException의 차이</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#final-finally-finalize-차이"><span class="toc-nav-text">final / finally / finalize() 차이</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#new-String-과-“”의-차이"><span class="toc-nav-text">new String()과 “”의 차이</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이터베이스-DataBase"><span class="toc-nav-text">데이터베이스(DataBase)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JDBC란"><span class="toc-nav-text">JDBC란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#myBatis란"><span class="toc-nav-text">myBatis란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DCL-DDL-DML-이란"><span class="toc-nav-text">DCL, DDL, DML 이란?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#스프링-프레임워크-Spring-Framework"><span class="toc-nav-text">스프링 프레임워크(Spring Framework)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#스프링-프레임워크-Spring-Framework-란"><span class="toc-nav-text">스프링 프레임워크(Spring Framework)란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spring-MVC의-구조와-처리과정"><span class="toc-nav-text">Spring MVC의 구조와 처리과정</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spring-IoC의-역할"><span class="toc-nav-text">Spring IoC의 역할</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spring-Container의-역할"><span class="toc-nav-text">Spring Container의 역할</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DI-의존성-주입-란"><span class="toc-nav-text">DI(의존성 주입)란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spring과-SpringBoot의-차이"><span class="toc-nav-text">Spring과 SpringBoot의 차이</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SpringBoot만의-특징"><span class="toc-nav-text">SpringBoot만의 특징</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#POJO란"><span class="toc-nav-text">POJO란?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JPA"><span class="toc-nav-text">JPA</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JPA란"><span class="toc-nav-text">JPA란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#영속성-컨텍스트란"><span class="toc-nav-text">영속성 컨텍스트란?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#영속성-컨텍스트의-속성"><span class="toc-nav-text">영속성 컨텍스트의 속성</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#영속성-컨텍스트의-특징"><span class="toc-nav-text">영속성 컨텍스트의 특징</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#즉시-로딩과-지연-로딩의-차이"><span class="toc-nav-text">즉시 로딩과 지연 로딩의 차이</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
