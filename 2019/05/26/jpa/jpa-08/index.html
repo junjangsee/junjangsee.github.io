@@ -107,24 +107,20 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images//jpa/jpa.jpg" alt="images"><br></p>
 <h1 id="FETCH"><a href="#FETCH" class="headerlink" title="FETCH"></a>FETCH</h1><p>연관 관계의 엔티티의 정보를 지금(Eager)혹은 나중에(Lazy) 가져올지 설정하는 기능입니다.</p>
 <ul>
-<li>@OneToMany : 기본값은 <strong>Lazy</strong>입니다.<ul>
+<li>@OneToMany : 기본값은 <strong>Lazy</strong>입니다.</li>
 <li>매핑한 정보가 얼마나 많을지 모르기 때문입니다.</li>
-</ul>
-</li>
-<li>@ManyToOne : 기본값은 <strong>Eager</strong>입니다.<ul>
+<li>@ManyToOne : 기본값은 <strong>Eager</strong>입니다.</li>
 <li>매핑한 정보를 함께 가져옵니다.</li>
 </ul>
-</li>
-</ul>
-<h2 id="Eager"><a href="#Eager" class="headerlink" title="Eager"></a>Eager</h2><p>Eager가 적용된 Entity 정보를 미리 다 가져와서 불필요한 조회를 더이상 하지 않습니다. </p>
+<h2 id="Eager"><a href="#Eager" class="headerlink" title="Eager"></a>Eager</h2><p>Eager가 적용된 Entity 정보를 미리 다 가져와서 불필요한 조회를 더이상 하지 않습니다.</p>
 <h3 id="Post-클래스"><a href="#Post-클래스" class="headerlink" title="Post 클래스"></a>Post 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OneToMany</span>(mappedBy = <span class="string">"post"</span>, cascade = &#123;CascadeType.PERSIST, CascadeType.REMOVE&#125;, fetch = FetchType.EAGER)</span><br><span class="line"><span class="keyword">private</span> Set&lt;Comment&gt; comments = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br></pre></td></tr></table></figure>
-<p><img src="/images/jpa/fetch/fet2.png" alt="Fetch"> 기존값은 <strong>Lazy</strong>지만 Fetch를 주어 <strong>Eager</strong>로 바꾸어줍니다. 이렇게 되면 Post의 정보를 가져올 때 Comment를 지금 함께 가져옵니다.<br><br><img src="/images/jpa/fetch/fet3.png" alt="Fetch"> Post와 함께 Comment도 함께 출력되는 것을 볼 수 있습니다.<br><br><br></p>
+<p><img src="../../images//jpa/fetch/fet2.png" alt="Fetch"> 기존값은 <strong>Lazy</strong>지만 Fetch를 주어 <strong>Eager</strong>로 바꾸어줍니다. 이렇게 되면 Post의 정보를 가져올 때 Comment를 지금 함께 가져옵니다.<br><br><img src="../../images//jpa/fetch/fet3.png" alt="Fetch"> Post와 함께 Comment도 함께 출력되는 것을 볼 수 있습니다.<br><br><br></p>
 <h2 id="Lazy"><a href="#Lazy" class="headerlink" title="Lazy"></a>Lazy</h2><p>Lazy가 적용된 Entity 정보를 미리 가져 오지 않습니다.</p>
 <h3 id="Post-클래스-1"><a href="#Post-클래스-1" class="headerlink" title="Post 클래스"></a>Post 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@OneToMany</span>(mappedBy = <span class="string">"post"</span>, cascade = &#123;CascadeType.PERSIST, CascadeType.REMOVE&#125;)</span><br><span class="line"><span class="keyword">private</span> Set&lt;Comment&gt; comments = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br></pre></td></tr></table></figure>
-<p>Fetch를 제거하면 기본적으로 Lazy상태가 됩니다.<br><br><img src="/images/jpa/fetch/fet4.png" alt="Fetch"> 결과는 Comment를 지금 가져오지 않습니다.<br><br><br></p>
+<p>Fetch를 제거하면 기본적으로 Lazy상태가 됩니다.<br><br><img src="../../images//jpa/fetch/fet4.png" alt="Fetch"> 결과는 Comment를 지금 가져오지 않습니다.<br><br><br></p>
 <h2 id="session-get-load"><a href="#session-get-load" class="headerlink" title="session get, load"></a>session get, load</h2><ul>
 <li>load: 가져오려 할때 없으면 <strong>예외</strong>를 던짐 Proxy로도 가져올 수 있습니다.</li>
 <li>get: 무조건 DB에서 가져옵니다. 해당하는게 없으면 예외를 던지지 않고 무조건 레퍼런스를 <strong>null</strong>로 만듭니다.</li>

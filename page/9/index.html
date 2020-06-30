@@ -101,6 +101,40 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/05/05/spring/spring-10/">SpringBoot - Test(테스트)</a>
+      </h2>
+      <p class="article-date">May 5, 2019</p>
+      
+        
+  <a href="/tags#SpringBoot" >
+    <span class="tag-code">SpringBoot</span>
+  </a>
+
+  <a href="/tags#TDD" >
+    <span class="tag-code">TDD</span>
+  </a>
+
+  <a href="/tags#MockMVC" >
+    <span class="tag-code">MockMVC</span>
+  </a>
+
+  <a href="/tags#WebTestClient" >
+    <span class="tag-code">WebTestClient</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+Test(테스트)코드를 작성하고 해당 코드에 대해서 테스트가 필요할 때 사용하는 방법들을 공부해보겠습니다.TDD(테스트 주도형 개발)가 중요한 만큼 테스트의 중요성이 높으니 코딩시 꼭 테스트하는 습관을 길러보도록 합시다.
+테스트 환경 구성하기새로운 패키지에 C ...
+        
+      </div>
+      <a class="more" href="/2019/05/05/spring/spring-10/">더 보기</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/05/05/spring/spring-09/">SpringBoot - logging(로깅)</a>
       </h2>
       <p class="article-date">May 5, 2019</p>
@@ -159,7 +193,8 @@ logging(로깅)로그를 출력할 때 사용하는 설정 값들을 공부해�
         
           
 Profile(프로파일)프로파일은 특정한 프로파일에서의 클래스의 빈을 등록하고 싶을 때 사용합니다.
-프로파일 선언하기프로파일을 실습하기 위해 두가지 클래스를 생성합니다.123456789@Profile("prod")@Configurationpublic class ...
+프로파일 선언하기프로파일을 실습하기 위해 두가지 클래스를 생성합니다.
+123456789@Profile("prod")@Configurationpublic clas ...
         
       </div>
       <a class="more" href="/2019/05/05/spring/spring-08/">더 보기</a>
@@ -221,7 +256,8 @@ properties의 우선 순위
       <div class="article-summary">
         
           
-Application기존에 만들어지는 방법으로 실행시키면 스프링부트가 제공하는 기능을 전부 사용하기 어렵습니다.그래서 인스턴스화 하여 기능을 사용하는 방법에 대해 알아보겠습니다.참고 : 스프링공식문서1234public static void main(String ...
+Application기존에 만들어지는 방법으로 실행시키면 스프링부트가 제공하는 기능을 전부 사용하기 어렵습니다.그래서 인스턴스화 하여 기능을 사용하는 방법에 대해 알아보겠습니다.참고 : 스프링공식문서
+1234public static void main(Strin ...
         
       </div>
       <a class="more" href="/2019/04/30/spring/spring-06/">더 보기</a>
@@ -246,8 +282,9 @@ Application기존에 만들어지는 방법으로 실행시키면 스프링부�
       <div class="article-summary">
         
           
-JAR 파일 생성하기JAR를 실행하기 전에 먼저 해당 프로젝트의 JAR 파일을 생성해야합니다.1mvn package
-위 명령어를 실행하면 target폴더에 jar파일이 생성됩니다. 위 처럼 intelli J 자체 기능을 사용하여 생성할 수 있습니다. 생성하면  ...
+JAR 파일 생성하기JAR를 실행하기 전에 먼저 해당 프로젝트의 JAR 파일을 생성해야합니다.
+1mvn package
+위 명령어를 실행하면 target폴더에 jar파일이 생성됩니다. 위 처럼 intelli J 자체 기능을 사용하여 생성할 수 있습니다. 생성하면 ...
         
       </div>
       <a class="more" href="/2019/04/25/spring/spring-05/">더 보기</a>
@@ -350,38 +387,11 @@ SpringBoot 의존성 관리의 원리parent‘parent’ 라는 의존성을 넣�
           SRoom 프로젝트
 앞서 받아온 코드를 사용하여 사용자의 토큰을 받아와야 합니다.
 Request 요청하기 위 주소로 POST요청을 해야합니다. 위 파라미터 값들을 요청해야 합니다.
-Response 요청하기 응답은 JSON 객체로 위 값들을 포함합니다.1http: ...
+Response 요청하기 응답은 JSON 객체로 위 값들을 포함합니다.
+1http ...
         
       </div>
       <a class="more" href="/2019/04/10/project/project-08/">더 보기</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2019/04/03/spring/spring-01/">SpringBoot - 생성하기</a>
-      </h2>
-      <p class="article-date">April 3, 2019</p>
-      
-        
-  <a href="/tags#SpringBoot" >
-    <span class="tag-code">SpringBoot</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          
-SpringBoot 생성하기개발 환경
-Mac OS
-IDE : IntelliJ IDEA Ultimate
-Maven
-Terminal
-Java 8
-
-프로젝트 생성하기 Maven을 사용하기 때문에 Maven을 선택하고 Next를 클릭합니다. GroupId에는 패키지 ...
-        
-      </div>
-      <a class="more" href="/2019/04/03/spring/spring-01/">더 보기</a>
     </article>
   
 

@@ -107,17 +107,17 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/network/certificate_manager.png" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images/network/certificate_manager.png" alt="images"><br></p>
 <h1 id="Certificate-Manager"><a href="#Certificate-Manager" class="headerlink" title="Certificate Manager"></a>Certificate Manager</h1><p>Https를 활용하기 위해서는 SSL인증서를 등록해야합니다. 이 때 사설 인증서를 이용하거나, 대리로 발급해주고 관리해주는 기업들을 활용하는 등 여러 방법이 있습니다. 이 방법들은 비용이 발생하게 되는 큰 단점이 있습니다. AWS에서는 <code>Certificate Manager</code>를 사용하여 인증서를 <strong>무료</strong>로 발급받고 관리할 수 있습니다.<br><br><br></p>
-<h2 id="발급-과정"><a href="#발급-과정" class="headerlink" title="발급 과정"></a>발급 과정</h2><p><img src="/images/network/ssl1.png" alt="images"> AWS의 Certificate Manager에 접속하여 시작하기를 클릭합니다.<br><br><br></p>
-<p><img src="/images/network/ssl2.png" alt="images"> 공인인증서 요청을 통해 인증서를 요청하겠습니다.<br><br><br></p>
-<p><img src="/images/network/ssl3.png" alt="images"> 등록한 도메인에 추가를 해야합니다.(즉, 이미 등록된 도메인이 존재해야합니다.)<br><code>*</code>을 입력하면 해당되는 모든 경로를 포함한다는 의미입니다.<br><br><br></p>
-<p><img src="/images/network/ssl4.png" alt="images"> 인증서 발급시 검증 방법을 선택합니다. 저는 DNS를 선택하였습니다.<br><br><br></p>
-<p><img src="/images/network/ssl5.png" alt="images"> 확인 및 요청을 클릭합니다.<br><br><br></p>
-<p><img src="/images/network/ssl6.png" alt="images"> 요청이 되었다면 Route 53에 CNAME을 등록해줘야 하는데, 화살표를 클릭하여 하단을 보면 자동으로 레코드를 생성할 수 있는 버튼이 있습니다. 클릭해서 쉽게 생성해줍니다.<br><br><br></p>
-<p><img src="/images/network/ssl7.png" alt="images"> 성공하면 위와 같은 메시지가 출력됩니다.<br><br><br></p>
-<p><img src="/images/network/ssl8.png" alt="images"> SSL 인증서는 생성후 바로 등록되는 것이 아니기 때문에 현재 보류 상태인 것을 확인할 수 있습니다.<br><br><br></p>
-<p><img src="/images/network/ssl9.png" alt="images"> 일정 시간(저는 5분 정도 기다렸습니다.)이 지나면 발급이 완료되었다는 상태가 출력됩니다. 이렇게 쉽게 SSL을 발급받을 수 있습니다.<br><br><br><br>이 발급받은 SSL은 EC2의 <code>로드밸런싱</code>에서 사용이 가능합니다. 차후 기회가 된다면 적용하는 방법도 알아보는 시간을 가지겠습니다.<br></p>
+<h2 id="발급-과정"><a href="#발급-과정" class="headerlink" title="발급 과정"></a>발급 과정</h2><p><img src="../../images/network/ssl1.png" alt="images"> AWS의 Certificate Manager에 접속하여 시작하기를 클릭합니다.<br><br><br></p>
+<p><img src="../../images/network/ssl2.png" alt="images"> 공인인증서 요청을 통해 인증서를 요청하겠습니다.<br><br><br></p>
+<p><img src="../../images/network/ssl3.png" alt="images"> 등록한 도메인에 추가를 해야합니다.(즉, 이미 등록된 도메인이 존재해야합니다.)<br><code>*</code>을 입력하면 해당되는 모든 경로를 포함한다는 의미입니다.<br><br><br></p>
+<p><img src="../../images/network/ssl4.png" alt="images"> 인증서 발급시 검증 방법을 선택합니다. 저는 DNS를 선택하였습니다.<br><br><br></p>
+<p><img src="../../images/network/ssl5.png" alt="images"> 확인 및 요청을 클릭합니다.<br><br><br></p>
+<p><img src="../../images/network/ssl6.png" alt="images"> 요청이 되었다면 Route 53에 CNAME을 등록해줘야 하는데, 화살표를 클릭하여 하단을 보면 자동으로 레코드를 생성할 수 있는 버튼이 있습니다. 클릭해서 쉽게 생성해줍니다.<br><br><br></p>
+<p><img src="../../images/network/ssl7.png" alt="images"> 성공하면 위와 같은 메시지가 출력됩니다.<br><br><br></p>
+<p><img src="../../images/network/ssl8.png" alt="images"> SSL 인증서는 생성후 바로 등록되는 것이 아니기 때문에 현재 보류 상태인 것을 확인할 수 있습니다.<br><br><br></p>
+<p><img src="../../images/network/ssl9.png" alt="images"> 일정 시간(저는 5분 정도 기다렸습니다.)이 지나면 발급이 완료되었다는 상태가 출력됩니다. 이렇게 쉽게 SSL을 발급받을 수 있습니다.<br><br><br><br>이 발급받은 SSL은 EC2의 <code>로드밸런싱</code>에서 사용이 가능합니다. 차후 기회가 된다면 적용하는 방법도 알아보는 시간을 가지겠습니다.<br></p>
 </section>
     <!-- Tags START -->
     

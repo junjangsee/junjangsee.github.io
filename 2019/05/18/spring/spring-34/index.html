@@ -107,10 +107,10 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images/springboot/springboot.png" alt="images"><br></p>
 <h1 id="Actuator"><a href="#Actuator" class="headerlink" title="Actuator"></a>Actuator</h1><p>Actuator을 사용하면 스프링 애플리케이션 운영중에 주시할 수 있는 여러가지 유용한 정보들을 제공합니다.<br>이렇게 얻은 정보들을 <strong>Endpoint</strong>를 통해서 제공해줍니다.<br><br><br></p>
 <h2 id="Actuator-의존성-추가"><a href="#Actuator-의존성-추가" class="headerlink" title="Actuator 의존성 추가"></a>Actuator 의존성 추가</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/springboot/actuator/ac1.png" alt="Actuator"> 의존성을 추가해줍니다.<br><br><br></p>
+<p><img src="../../images/springboot/actuator/ac1.png" alt="Actuator"> 의존성을 추가해줍니다.<br><br><br></p>
 <h2 id="Endpoints"><a href="#Endpoints" class="headerlink" title="Endpoints"></a>Endpoints</h2><p>Actuator 의존성을 추가해주면 Actuator Endpoints 정보들이 자동으로 활성화됩니다.</p>
 <ul>
 <li>다양한 Endpoints를 제공합니다.</li>
@@ -145,7 +145,7 @@
 <h2 id="Actuator-접근"><a href="#Actuator-접근" class="headerlink" title="Actuator 접근"></a>Actuator 접근</h2><blockquote>
 <p><a href="http://localhost:8080/actuator" target="_blank" rel="noopener">http://localhost:8080/actuator</a></p>
 </blockquote>
-<p>위와같이 HTTP로 접근하면 Spring HATEOAS(Hypermedia as the Engine of Application State)를 통해 접근가능한 링크 정보를 리턴해줍니다.<br><br><img src="/images/springboot/actuator/ac3.png" alt="Actuator"> http를 통해 접근할 경우 공개된 정보는 <code>health</code>, <code>info</code> 두가지 밖에 없는데 그 이유는 Endpoint의 Web 부분은 보안이슈 문제로 위 두가지의 정보만 공개한 상태입니다.<br>때문에 추가로 보기 위해선 활성화 설정을 해야합니다.<br><br>활성화 하는 방법에 대해선 추후 포스팅에서 알아보겠습니다.<br></p>
+<p>위와같이 HTTP로 접근하면 Spring HATEOAS(Hypermedia as the Engine of Application State)를 통해 접근가능한 링크 정보를 리턴해줍니다.<br><br><img src="../../images/springboot/actuator/ac3.png" alt="Actuator"> http를 통해 접근할 경우 공개된 정보는 <code>health</code>, <code>info</code> 두가지 밖에 없는데 그 이유는 Endpoint의 Web 부분은 보안이슈 문제로 위 두가지의 정보만 공개한 상태입니다.<br>때문에 추가로 보기 위해선 활성화 설정을 해야합니다.<br><br>활성화 하는 방법에 대해선 추후 포스팅에서 알아보겠습니다.<br></p>
 </section>
     <!-- Tags START -->
     

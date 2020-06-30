@@ -107,7 +107,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/springboot/springboot.png" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images/springboot/springboot.png" alt="images"><br></p>
 <h1 id="데이터베이스-초기화"><a href="#데이터베이스-초기화" class="headerlink" title="데이터베이스 초기화"></a>데이터베이스 초기화</h1><p>이번 주제를 실습하기 위해선 이전 포스팅의 코드가 필요합니다.<br>필요하신 분들은 <a href="https://junjangsee.github.io/2019/05/14/spring/spring-27/">JPA 연동하기</a> 를 참고해주시면 됩니다.<br><br><br></p>
 <h2 id="JPA를-사용한-데이터베이스-초기화"><a href="#JPA를-사용한-데이터베이스-초기화" class="headerlink" title="JPA를 사용한 데이터베이스 초기화"></a>JPA를 사용한 데이터베이스 초기화</h2><p>JPA를 사용한 프로젝트의 경우 해당되는 초기화 방법입니다.<br>작성해둔 Entity 정보를 바탕으로 스키마를 생성하고 생성된 스키마를 초기화 하는 방법에 대해 알아보겠습니다.<br><br><br></p>
 <h3 id="Application-properties-설정"><a href="#Application-properties-설정" class="headerlink" title="Application.properties 설정"></a>Application.properties 설정</h3><h4 id="spring-jpa-hibernate-ddl-auto"><a href="#spring-jpa-hibernate-ddl-auto" class="headerlink" title="spring.jpa.hibernate.ddl-auto"></a>spring.jpa.hibernate.ddl-auto</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.hibernate.ddl-auto=</span><br></pre></td></tr></table></figure>
@@ -119,7 +119,7 @@
 <li>validate: 현재 Entity 매핑이 릴레이션 DB에 맵핑할 수 있는 상황인지 맵핑이 되는지를 검증합니다.(운영환경에서 사용)</li>
 <li>테스트 환경에선 필요하지 않은 옵션입니다.(주석처리)<br><br></li>
 </ul>
-<p>만약 Entity 클래스에 새로운 컬럼을 추가하고 update를 하면 어떻게 될까요?<br><img src="/images/springboot/schema/sch5.png" alt="JPA"> Email이라는 컬럼을 추가하였습니다.<br><br><img src="/images/springboot/schema/sch7.png" alt="JPA"> update를 주고 실행하였더니 기존 컬럼은 그대로 있고 컬럼이 추가된 것을 볼 수 있습니다.<br><br><br>그렇다면 Email이란 컬럼을 추가하지 않고 validate를 했다면 어떻게 됐을까요?<br><img src="/images/springboot/schema/sch6.png" alt="JPA"> Entity에만 존재하고 운영 DB에는 아직 생성되어있지 않으니 email이란 컬럼을 찾지 못했다고 하게 됩니다.<br></p>
+<p>만약 Entity 클래스에 새로운 컬럼을 추가하고 update를 하면 어떻게 될까요?<br><img src="../../images/springboot/schema/sch5.png" alt="JPA"> Email이라는 컬럼을 추가하였습니다.<br><br><img src="../../images/springboot/schema/sch7.png" alt="JPA"> update를 주고 실행하였더니 기존 컬럼은 그대로 있고 컬럼이 추가된 것을 볼 수 있습니다.<br><br><br>그렇다면 Email이란 컬럼을 추가하지 않고 validate를 했다면 어떻게 됐을까요?<br><img src="../../images/springboot/schema/sch6.png" alt="JPA"> Entity에만 존재하고 운영 DB에는 아직 생성되어있지 않으니 email이란 컬럼을 찾지 못했다고 하게 됩니다.<br></p>
 <h4 id="spring-jpa-generate-ddl"><a href="#spring-jpa-generate-ddl" class="headerlink" title="spring.jpa.generate-ddl"></a>spring.jpa.generate-ddl</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.generate-ddl=true</span><br></pre></td></tr></table></figure>
 <ul>
 <li>DDL 변경을 허용하기 위한 프로퍼티입니다.</li>
@@ -140,7 +140,7 @@
 </ul>
 <p><br></p>
 <h3 id="schema-sql"><a href="#schema-sql" class="headerlink" title="schema.sql"></a>schema.sql</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">account</span> <span class="keyword">if</span> <span class="keyword">exists</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">sequence</span> <span class="keyword">if</span> <span class="keyword">exists</span> hibernate_sequence</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> hibernate_sequence <span class="keyword">start</span> <span class="keyword">with</span> <span class="number">1</span> <span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">account</span> (<span class="keyword">id</span> <span class="built_in">bigint</span> <span class="keyword">not</span> <span class="literal">null</span>, email <span class="built_in">varchar</span>(<span class="number">255</span>), <span class="keyword">password</span> <span class="built_in">varchar</span>(<span class="number">255</span>), username <span class="built_in">varchar</span>(<span class="number">255</span>), primary <span class="keyword">key</span> (<span class="keyword">id</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/images/springboot/schema/sch1.png" alt="JPA"><br><img src="/images/springboot/schema/sch8.png" alt="JPA"> resource - schema.sql을 생성하여 실행시 스키마를 입력합니다.</p>
+<p><img src="../../images/springboot/schema/sch1.png" alt="JPA"><br><img src="../../images/springboot/schema/sch8.png" alt="JPA"> resource - schema.sql을 생성하여 실행시 스키마를 입력합니다.</p>
 <ul>
 <li>schema.sql 또는 schema-${platform}.sql로 생성합니다.</li>
 </ul>

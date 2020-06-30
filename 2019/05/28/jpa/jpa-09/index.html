@@ -107,7 +107,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/jpa/jpa.jpg" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images//jpa/jpa.jpg" alt="images"><br></p>
 <h1 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h1><p>JPA, Hibernate를 사용할 때는 항상 무슨 쿼리를 발생시키는지 그게 의도한 것인지 확인해야합니다. 이런 쿼리를 어떻게 적용시키는지 알아보는 시간을 가지겠습니다.<br><br><br></p>
 <h2 id="JPQL-HQL"><a href="#JPQL-HQL" class="headerlink" title="JPQL (HQL)"></a>JPQL (HQL)</h2><ul>
 <li>데이터베이스 테이블이 아닌, 엔티티 객체 모델 기반으로 쿼리를 작성합니다.</li>
@@ -118,7 +118,7 @@
 <h3 id="Post-클래스-title-toString-추가"><a href="#Post-클래스-title-toString-추가" class="headerlink" title="Post 클래스 title toString 추가"></a>Post 클래스 title toString 추가</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Post&#123;"</span> +</span><br><span class="line">            <span class="string">"title='"</span> + title + <span class="string">'\''</span> +</span><br><span class="line">            <span class="string">'&#125;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>title만 포함된 <strong>toString</strong>을 만듭니다.<br></p>
 <h3 id="JpaRunner-클래스"><a href="#JpaRunner-클래스" class="headerlink" title="JpaRunner 클래스"></a>JpaRunner 클래스</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    TypedQuery&lt;Post&gt; query = entityManager.createQuery(<span class="string">"SELECT p FROM Post AS p"</span>, Post.class);</span><br><span class="line">    List&lt;Post&gt; posts = query.getResultList();</span><br><span class="line">    posts.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/jpa/query/que1.png" alt="Query"> 쿼리에 들어가는 Post는 테이블 이름이 아닌 Entity의 이름입니다.<br><br><br></p>
+<p><img src="../../images//jpa/query/que1.png" alt="Query"> 쿼리에 들어가는 Post는 테이블 이름이 아닌 Entity의 이름입니다.<br><br><br></p>
 <h2 id="Criteria"><a href="#Criteria" class="headerlink" title="Criteria"></a>Criteria</h2><p>타입 세이프한 방법이지만 로직이 불편하여 자주 사용하지는 않습니다.</p>
 <ul>
 <li><a href="https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#criteria" target="_blank" rel="noopener">하이버네이트 공식문서</a></li>
@@ -130,7 +130,7 @@
 <li>공식문서 : <a href="https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#sql" target="_blank" rel="noopener">하이버네이트 공식문서</a></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    List&lt;Post&gt; resultList = entityManager.createNativeQuery(<span class="string">"SELECT * FROM Post"</span>, Post.class)</span><br><span class="line">            .getResultList();</span><br><span class="line">    resultList.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/jpa/query/que2.png" alt="Query"> <strong>createNativeQuery</strong>에 쿼리문, 클래스를 선언하고 List에 Post 클래스를 담습니다. 그리고 List를 가져와 출력합니다.<br></p>
+<p><img src="../../images//jpa/query/que2.png" alt="Query"> <strong>createNativeQuery</strong>에 쿼리문, 클래스를 선언하고 List에 Post 클래스를 담습니다. 그리고 List를 가져와 출력합니다.<br></p>
 </section>
     <!-- Tags START -->
     
