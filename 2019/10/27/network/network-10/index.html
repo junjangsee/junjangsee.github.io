@@ -107,7 +107,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images/network/network.jpg" alt="images"><br></p>
 <h1 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP/2.0"></a>HTTP/2.0</h1><p>HTTP/2.0에 대해서 만들기 시작한 배경, HTTP/1.1과의 주요 차이점, 현재까지 알려진 보안 이슈에 대해 다루겠습니다.<br><br><br></p>
 <h2 id="HTTP-2-0의-등장-배경"><a href="#HTTP-2-0의-등장-배경" class="headerlink" title="HTTP/2.0의 등장 배경"></a>HTTP/2.0의 등장 배경</h2><p>HTTP/1.1의 메시지 포맷은 <code>구현의 단순성</code>과 <code>접근성</code>에 주안점을 두고 최적화 되었습니다. 그러다 보니 성능은 어느 정도 희생시키지 않을 수 없었습니다. 커넥션 하나를 통해 요청 하나를 보내고 그에 대해 응답 하나만을 받는 HTTP의 메시지 교환 방식은 단순하여 좋지만, 응답을 받아야만 그 요청을 보낼 수 있기 때문에 심각한 <code>회전 지연</code>을 피할 수 없었습니다. 물론 이를 해결하기 위해 <strong>병렬 커넥션</strong>이나 <strong>파이프라인 커넥션</strong>이 도입되었지만 근본적인 해결책은 되지 못했습니다. 그래서 HTTP/2.0가 등장하게 되었습니다.<br><br><br></p>
 <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><p><code>HTTP/2.0</code>은 서버와 클라이언트 사이의 <code>TCP 커넥션</code> 위에서 동작합니다. 이때 TCP 커넥션을 초기화하는 것은 <strong>클라이언트</strong>입니다. HTTP/2.0 요청과 응답은 길이가 정의된 한 개 이상의 프레임에 담기고 HTTP 헤더는 <strong>압축</strong>되어 담깁니다. 이들은 <code>스트림</code>을 통해 보내지게 되는데 이 스트림에 대한 <strong>흐름 제어</strong>와 <strong>우선순위 부여 기능</strong>도 제공합니다.<br>또한 <code>서버 푸시</code>를 도입하여 서버는 클라이언트에게 필요하다고 생각하는 리소스라면 그에 대한 요청을 명시적으로 받지 않더라도 능동적으로 클라이언트에게 보내줄 수 있습니다. 그리고 기존 웹 애플리케이션들과 호환성을 최대한 유지하기 위해 <strong>요청과 응답 메시지</strong>의 의미를 HTTP/1.1과 같도록 유지하고 있습니다.<br><br><br></p>

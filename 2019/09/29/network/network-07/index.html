@@ -107,7 +107,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><img src="/images/network/network.jpg" alt="images"><br></p>
+    <section class="markdown-content"><p><img src="../../images/network/network.jpg" alt="images"><br></p>
 <p><strong>이번 장에서 살펴볼 주제</strong></p>
 <ul>
 <li>캐시는 불필요한 데이터 전송을 줄여서, 네트워크 요금으로 인한 비용을 줄여준다.</li>
@@ -176,12 +176,13 @@
 <h2 id="캐시-제어-설정"><a href="#캐시-제어-설정" class="headerlink" title="캐시 제어 설정"></a>캐시 제어 설정</h2><p>아파치 웹 서버가 캐시 제어를 어떻게 지원하는지 알아보겠습니다.<br></p>
 <h3 id="아파치로-HTTP-헤더-제어하기"><a href="#아파치로-HTTP-헤더-제어하기" class="headerlink" title="아파치로 HTTP 헤더 제어하기"></a>아파치로 HTTP 헤더 제어하기</h3><p>아파치의 웹 서버는 여러가지 메커니즘을 제공하지만 대부분 디폴트로 가능하지 않아서 활성화 시킬 필요가 있습니다.</p>
 <ul>
-<li>mod_headers : 개별 헤더들을 설정할 수 있게 해줍니다. </li>
+<li>mod_headers : 개별 헤더들을 설정할 수 있게 해줍니다.</li>
 <li>mod_expires : 적절한 만료 날짜가 담긴 Expires 헤더를 자동으로 생성하는 프로그램 로직을 제공합니다.</li>
 <li>mod_cern_meta : HTTP 헤더들의 파일을 특정 객체와 연결시켜줍니다.</li>
 </ul>
 <p><br></p>
-<h3 id="HTTP-EQUIV를-통한-HTML-캐시-제어"><a href="#HTTP-EQUIV를-통한-HTML-캐시-제어" class="headerlink" title="HTTP-EQUIV를 통한 HTML 캐시 제어"></a>HTTP-EQUIV를 통한 HTML 캐시 제어</h3><p>웹 서버 설정 파일과의 상호작용 없이도 쉽게 HTML 문서에 HTTP 헤더 정보를 부여할 수 있도록 하기 위해, HTML 2.0은 <code>&lt;META HTTP-EQUIV&gt;</code> 태그를 정의했습니다. 이 태그는 HTML 문서의 최상단에 위치하여 문서와 연동되어야 하는 HTTP 헤더들을 정의합니다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">HEAD</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">TITLE</span>&gt;</span>My Document<span class="tag">&lt;/<span class="name">TITLE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">META</span> <span class="attr">HTTP-EQUIV</span>=<span class="string">"Cache-Control"</span> <span class="attr">CONTENT</span>=<span class="string">"no-cache"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">HEAD</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTP-EQUIV를-통한-HTML-캐시-제어"><a href="#HTTP-EQUIV를-통한-HTML-캐시-제어" class="headerlink" title="HTTP-EQUIV를 통한 HTML 캐시 제어"></a>HTTP-EQUIV를 통한 HTML 캐시 제어</h3><p>웹 서버 설정 파일과의 상호작용 없이도 쉽게 HTML 문서에 HTTP 헤더 정보를 부여할 수 있도록 하기 위해, HTML 2.0은 <code>&lt;META HTTP-EQUIV&gt;</code> 태그를 정의했습니다. 이 태그는 HTML 문서의 최상단에 위치하여 문서와 연동되어야 하는 HTTP 헤더들을 정의합니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>My Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>위와 같이 표현이 가능합니다.</p>
 </section>
     <!-- Tags START -->
