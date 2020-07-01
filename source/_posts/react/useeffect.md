@@ -4,7 +4,7 @@ date: 2020-03-04 23:24:27
 tags: [react, hook, useEffect, javascript]
 ---
 
-![images](/images/react/react.png)<br/>
+![images](../../images/react/react.png)<br/>
 
 # useEffect
 

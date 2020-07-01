@@ -4,7 +4,7 @@ date: 2020-03-01 20:40:35
 tags: [react, hook, useState, javascript]
 ---
 
-![images](/images/react/react.png)<br/>
+![images](../../images/react/react.png)<br/>
 
 # useState
 
